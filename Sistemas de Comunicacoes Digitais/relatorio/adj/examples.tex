@@ -1,0 +1,38 @@
+%--------------------------------------------------------------------------
+% Exemplos
+\section*{Exemplos}
+
+% Place holder de texto
+% \lipsum[1]
+
+Para referenciar imagens~\ref{fig:brasao_UFC}, tabelas~\ref{tab:frequencia_tensao} e equações~\ref{eq:frequencia_ganho}.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.15\textwidth]{adj/brasao.png}
+    \caption{Exemplo de como adicionar uma imagem.}
+    \label{fig:brasao_UFC}
+\end{figure}
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+    Frequência (Hz) & Tensão Máxima (V) \\ \hline
+    0,558            & 12,11            \\ \hline
+    2,132            & 11,15            \\ \hline
+    4,822            & 8,62             \\ \hline
+    \end{tabular}
+    \caption{Frequência da onda de entrada e a tensão máxima da saída do circuito integrador.}
+    \label{tab:frequencia_tensao}
+\end{table}
+
+\begin{equation}
+    f_{gu} = A_{VD}\times f_{c}
+    \label{eq:frequencia_ganho}
+\end{equation}
+
+% Exemplo de citação usando \cite{}
+E quando tirar informação de alguma fonte, deve adicionar no formato de bibtex no arquivo refs.bib e por fim citá-los assim:~\cite{Sedra} \cite{Boylestad} \cite{Fonseca}, de modo que a seção de referência é criada e indexada diretamente com estes chamados da função.
+
+\clearpage

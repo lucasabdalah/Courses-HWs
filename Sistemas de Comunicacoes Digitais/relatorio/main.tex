@@ -1,0 +1,38 @@
+\documentclass[a4paper, 12pt]{article}
+
+\input{adj/packages}
+
+\begin{document}
+% \pagecolor{yellow!50!orange} % ``marcador'' de página feita (movimentas ou comentá-lo de acordo com o avanço do trabalho)
+
+\input{adj/default.tex}
+
+% Exemplo de citação usando \cite{}
+\input{adj/examples}
+
+\section{Introdução}
+% \clearpage
+
+\section{Objetivos}
+% \clearpage
+
+\section{Materiais}
+% \clearpage
+
+\section{Procedimentos}
+% \clearpage
+
+\section{Conclusão e Resultados}
+
+\clearpage
+
+% Bibliografia
+% LateX vai gerar as ``Referências'' automaticamente
+% usando a função \cite{nome} do pacote BibTeX é possível
+% "puxar todas as informações do arquivo 'refs.bib'
+% O nome do arquivo é o primeiro parâmetro de cada referência
+% Um exemplo esta é utilizado na primeira seção
+% \AtNextBibliography{\small}             % To set a smaller font size for bibliography
+\printbibliography[heading=bibintoc]    % Print the references
+
+\end{document}
