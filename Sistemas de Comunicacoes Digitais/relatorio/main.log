@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.3.16)  16 MAR 2021 18:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.3.24)  24 MAR 2021 10:52
 entering extended mode
 **"c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.tex"
 (c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.tex
 LaTeX2e <2020-10-01> patch level 4
-L3 programming layer <2021-02-18> xparse <2020-03-03> (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\article.cls
+L3 programming layer <2021-02-18> (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\article.cls
 Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
 (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\size12.clo
 File: size12.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
@@ -191,6 +191,7 @@ File: puenc.def 2021-02-27 v7.00k Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
+Package hyperref Info: Option `draft' set `true' on input line 4073.
 Package hyperref Info: Hyper figures OFF on input line 4192.
 Package hyperref Info: Link nesting OFF on input line 4197.
 Package hyperref Info: Hyper index ON on input line 4200.
@@ -263,6 +264,8 @@ Package caption Info: Standard document class detected.
 \c@caption@flags=\count277
 \c@continuedfloat=\count278
 Package caption Info: hyperref package is loaded.
+) (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/latex-tools\indentfirst.sty
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
 ) (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/xcolor\xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
  (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\color.cfg
@@ -278,8 +281,6 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
-) (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/latex-tools\indentfirst.sty
-Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
 ) (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/csquotes\csquotes.sty
 Package: csquotes 2021-02-22 v5.2l context-sensitive quotations (JAW)
  (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/etoolbox\etoolbox.sty
@@ -530,50 +531,36 @@ Package biblatex Info: Trying to load configuration file...
 Package biblatex Info: ... file 'biblatex.cfg' found.
  (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/biblatex\biblatex.cfg
 File: biblatex.cfg 
-))) (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pagecolor\pagecolor.sty
-Package: pagecolor 2017/05/29 v1.0i Provides thepagecolor (HMM)
- (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex\ifpdf.sty
-Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
-) (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex\ifluatex.sty
-Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
-)) (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lipsum\lipsum.sty (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3kernel\expl3.sty
-Package: expl3 2021-02-18 L3 programming layer (loader) 
- (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backend\l3backend-pdftex.def
-File: l3backend-pdftex.def 2021-03-02 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count415
-\l__pdf_internal_box=\box49
-)) (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3packages/xparse\xparse.sty
-Package: xparse 2020-10-27 L3 Experimental document command parser
- (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3packages/xparse\xparse-generic.tex))
-Package: lipsum 2021-03-03 v2.3 150 paragraphs of Lorem Ipsum dummy text
- (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lipsum\lipsum.ltd.tex
-File: lipsum.ltd.tex 2021-03-03 v2.3 The Lorem ipsum dummy text
-))
+)))
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'brazilian'.
- (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.aux)
+ (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2021-03-02 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count415
+\l__pdf_internal_box=\box49
+) (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
  (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count416
@@ -589,10 +576,21 @@ LaTeX Font Info:    ... okay on input line 5.
 \everyMPtoPDFconversion=\toks26
 ) (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/grfext\grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
 )
-Package hyperref Info: Link coloring OFF on input line 5.
- (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.sty
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
+ (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/00miktex\epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+
+Package hyperref Warning: Draft mode on.
+
+Package hyperref Info: Link coloring OFF on input line 7.
+(C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/refcount\refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
@@ -601,13 +599,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count422
 )
-LaTeX Info: Redefining \ref on input line 5.
-LaTeX Info: Redefining \pageref on input line 5.
-LaTeX Info: Redefining \nameref on input line 5.
- (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.out) (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.out)
-\@outlinefile=\write4
-\openout4 = `main.out'.
-
+LaTeX Info: Redefining \ref on input line 7.
+LaTeX Info: Redefining \pageref on input line 7.
+LaTeX Info: Redefining \nameref on input line 7.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 Package biblatex Info: Trying to load language 'brazilian'...
@@ -619,11 +613,14 @@ Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
 Package biblatex Info: Document encoding is UTF8 ....
+ (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3kernel\expl3.sty
+Package: expl3 2021-02-18 L3 programming layer (loader) 
+)
 Package biblatex Info: ... and expl3
 (biblatex)             2021-02-18 L3 programming layer (loader) 
 (biblatex)             is new enough (at least 2020/04/06),
 (biblatex)             setting 'casechanger=expl3'.
- (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/biblatex\blx-case-expl3.sty
+ (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/biblatex\blx-case-expl3.sty (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3packages/xparse\xparse.sty (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3packages/xparse\xparse-2020-10-01.sty (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3packages/xparse\xparse-generic.tex)))
 Package: blx-case-expl3 2020/12/31 v3.16 expl3 case changing code for biblatex
 )
 \openout3 = `main.bcf'.
@@ -631,14 +628,10 @@ Package: blx-case-expl3 2020/12/31 v3.16 expl3 case changing code for biblatex
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
  (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.bbl)
-Package biblatex Info: Reference section=0 on input line 5.
-Package biblatex Info: Reference segment=0 on input line 5.
+Package biblatex Info: Reference section=0 on input line 7.
+Package biblatex Info: Reference segment=0 on input line 7.
  (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\adj/default.tex
-<adj/brasao.png, id=27, 309.5565pt x 411.6981pt>
-File: adj/brasao.png Graphic file (type png)
-<use adj/brasao.png>
-Package pdftex.def Info: adj/brasao.png  used on input line 5.
-(pdftex.def)             Requested size: 56.9055pt x 75.67923pt.
+<adj/brasao.png, id=1, 309.5565pt x 411.6981pt>
 LaTeX Font Info:    Trying to load font information for U+msa on input line 21.
  (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -656,44 +649,38 @@ LaTeX Font Info:    Trying to load font information for U+esint on input line 21
 File: uesint.fd 
 ) [1
 
-{C:/Users/lukin/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/adj/brasao.png>] (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.toc)
-\tf@toc=\write5
-\openout5 = `main.toc'.
+{C:/Users/lukin/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.toc)
+\tf@toc=\write4
+\openout4 = `main.toc'.
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.48     \clearpage
-                    [1]) (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\adj/examples.tex
-File: adj/brasao.png Graphic file (type png)
-<use adj/brasao.png>
-Package pdftex.def Info: adj/brasao.png  used on input line 12.
-(pdftex.def)             Requested size: 58.49762pt x 77.79626pt.
- [2
+ [1]) (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\adj/examples.tex [2
 
-]) [3
+]) (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\text/problema1.tex
+Overfull \hbox (7.73631pt too wide) in paragraph at lines 12--13
+[]\OT1/cmr/m/n/12 Para $\OML/cmm/m/it/12 M \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 f\OT1/cmr/m/n/12 4\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 16\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 64\OMS/cmsy/m/n/12 g$\OT1/cmr/m/n/12 , im-ple-mente o de-mo-du-la-dor (ma-pe-a-mento smbolo-|
+ []
 
-] [4
+[3
+
+]) [4] [5
 
 ] (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.aux)
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: E714372DA49660F7901769A07E285CCC;647.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19715 strings out of 481035
- 337536 string characters out of 2900243
- 1152285 words of memory out of 3000000
- 36654 multiletter control sequences out of 15000+200000
- 413603 words of font info for 67 fonts, out of 3000000 for 9000
+ 19554 strings out of 481025
+ 333344 string characters out of 2899974
+ 1061056 words of memory out of 3000000
+ 36523 multiletter control sequences out of 15000+600000
+ 419055 words of font info for 91 fonts, out of 8000000 for 9000
  117 hyphenation exceptions out of 8191
- 76i,9n,78p,1161b,1695s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\lukin\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on "c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.pdf" (5 pages, 463323 bytes).
+ 76i,12n,77p,1161b,1688s stack positions out of 5000i,500n,10000p,200000b,80000s
+ <C:\Users\lukin\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\lukin\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/esint/dpi720\esint10.pk><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on "c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.pdf" (6 pages, 131043 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
- 21 named destinations out of 1000 (max. 500000)
- 54 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 77 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

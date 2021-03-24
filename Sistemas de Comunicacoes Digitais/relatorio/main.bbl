@@ -19,60 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
-    \entry{Sedra}{book}{}
-      \name{author}{2}{}{%
-        {{hash=2e23e0fcc557a324327de73827d69114}{%
-           family={Sedra},
-           familyi={S\bibinitperiod},
-           given={Adel},
-           giveni={A\bibinitperiod}}}%
-        {{hash=f8bc6cd55a66234a3418ed97ea484381}{%
-           family={Carless},
-           familyi={C\bibinitperiod},
-           given={Kenneth},
-           giveni={K\bibinitperiod}}}%
-      }
-      \strng{namehash}{4573cecbadcce22d5969446f2e1cb314}
-      \strng{fullhash}{4573cecbadcce22d5969446f2e1cb314}
-      \strng{bibnamehash}{4573cecbadcce22d5969446f2e1cb314}
-      \strng{authorbibnamehash}{4573cecbadcce22d5969446f2e1cb314}
-      \strng{authornamehash}{4573cecbadcce22d5969446f2e1cb314}
-      \strng{authorfullhash}{4573cecbadcce22d5969446f2e1cb314}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{edition}{6}
-      \field{title}{Microelectronic circuits}
-      \field{year}{2009}
-    \endentry
-    \entry{Boylestad}{book}{}
-      \name{author}{2}{}{%
-        {{hash=32dc84d9e04f6b034aaa7f5327c64078}{%
-           family={Boylestad},
-           familyi={B\bibinitperiod},
-           given={Robert},
-           giveni={R\bibinitperiod}}}%
-        {{hash=73f3ba640ee56c4e4ebc64767f679796}{%
-           family={Nashelsky},
-           familyi={N\bibinitperiod},
-           given={Louis},
-           giveni={L\bibinitperiod}}}%
-      }
-      \strng{namehash}{00ea9a0ce9ae2ca8a1c6f4d61145fc22}
-      \strng{fullhash}{00ea9a0ce9ae2ca8a1c6f4d61145fc22}
-      \strng{bibnamehash}{00ea9a0ce9ae2ca8a1c6f4d61145fc22}
-      \strng{authorbibnamehash}{00ea9a0ce9ae2ca8a1c6f4d61145fc22}
-      \strng{authornamehash}{00ea9a0ce9ae2ca8a1c6f4d61145fc22}
-      \strng{authorfullhash}{00ea9a0ce9ae2ca8a1c6f4d61145fc22}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{edition}{5}
-      \field{title}{Electronic Devices \& Circuit Theory}
-      \field{year}{1992}
-    \endentry
     \entry{Fonseca}{misc}{}
       \name{author}{2}{}{%
         {{hash=db622d388bff2f2c1f23c1efaa8ca9fb}{%
@@ -92,13 +38,62 @@
       \strng{authorbibnamehash}{bef3dbb4252b3e2b883504e09e270791}
       \strng{authornamehash}{bef3dbb4252b3e2b883504e09e270791}
       \strng{authorfullhash}{bef3dbb4252b3e2b883504e09e270791}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{http://intranet.deei.fct.ualg.pt/AC/Sebenta_Online/www.isr.uc.pt/~paulino/cse/Sebenta_Online/cap_15/ampopid.htm}}
       \field{note}{Accessed: 2021-02-16}
       \field{title}{AmpOp Ideal}
+    \endentry
+    \entry{Proakis}{book}{}
+      \name{author}{2}{}{%
+        {{hash=5fe41cc224eb8b59f5bb9f1a7ba509f2}{%
+           family={Proakis},
+           familyi={P\bibinitperiod},
+           given={John\bibnamedelima G},
+           giveni={J\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=b1e7a6c73f69c6c16233dbf5c83a00de}{%
+           family={Salehi},
+           familyi={S\bibinitperiod},
+           given={Masoud},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{fullhash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{bibnamehash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{authorbibnamehash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{authornamehash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{authorfullhash}{ab367421912bdf03ed020bffc5ad1f47}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{5}
+      \field{title}{Digital Communications}
+      \field{year}{1995}
+    \endentry
+    \entry{Cecilio}{book}{}
+      \name{author}{1}{}{%
+        {{hash=8810d76a2355d440601ac6643f7f8b81}{%
+           family={Pimentel},
+           familyi={P\bibinitperiod},
+           given={Cecílio},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{fullhash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{bibnamehash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{authorbibnamehash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{authornamehash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{authorfullhash}{8810d76a2355d440601ac6643f7f8b81}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{1}
+      \field{title}{Comunicação Digital}
+      \field{year}{2007}
     \endentry
   \enddatalist
 \endrefsection

@@ -1,0 +1,6 @@
+{
+    "files.exclude": {
+        "**/.bbl": true,
+        "**/.bcf": true
+    }
+}
