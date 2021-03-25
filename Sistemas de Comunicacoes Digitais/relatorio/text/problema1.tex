@@ -1,4 +1,4 @@
-\subsection{Problema 1 - $M$-QAM}
+\subsection{Problema 1 - \texorpdfstring{$M$}{M}-QAM}
 
 Considere a modulação $M$-QAM, em que o sinal em banda base é dado por:
 $$s_m(t) = ( A_m^{(\text{real})} + j A_m^{(\text{imag})}) g(t) ,$$
@@ -12,15 +12,8 @@ Considere $\int_{-\inf}^{\inf} |g(t)|^2 \,dt = \mathcal{E}_{g} = 1$, isto é, o 
     \item Para $M = \{ 4, 16, 64\}$, implemente o demodulador (mapeamento símbolo-bit).
 \end{enumerate}
 
-% Dica 1: Uma constelação $M$-QAM pode ser vista como um produto cartesiano de duas constelações $\sqrt{M}$-PAM.
-
-% Dica 2: Para visualizar a constelação, pode-se usar a função \textit{scatter} do MATLAB.
-
-% Dica 3: Você pode validar sua função de modulação e demodulação $M$-QAM, comparando a sequência original de bits gerada antes da modulação com aquela obtida após a demodulação. Se a implementação do modulador/demodulador estiver correta, ambas as sequências serão idênticas.
-
-% Considere a modulação ̧$M$-QAM, em que o sinal em banda base ́e dado por:
-
 % -------------------------------------------------------------------
+
 \subsubsection{Energia da Constelação} 
 
 O desenvolvimento é citado em~\cite{Proakis, Cecilio}.
@@ -29,9 +22,9 @@ O desenvolvimento é citado em~\cite{Proakis, Cecilio}.
     \centering
     \begin{tabular}{|c|c|c|c|}
     \hline
-    $E_{media}$ & $E_{media(bit)}$ & $d_{min}$ \\ \hline
+    $\mathcal{E}_{media}$ & $\mathcal{E}_{media(bit)}$ & $d$ \\ \hline
      &  &  \\ 
-     $\frac{M-1}{3} \mathcal{E}_g$ & $ \frac{M-1}{3\log_2 M} \mathcal{E}_g$ & $\sqrt{\frac{6\log_2 M}{M-1} \mathcal{E}_{media(bit)}}$ \\ 
+     $\frac{M-1}{3} \mathcal{E}_g$ & $ \frac{M-1}{3\log_2 M} \mathcal{E}_g$ & $\sqrt{\frac{3 \mathcal{E}_{media}}{2(M-1)}} $ \\ 
      &  &  \\ \hline
     \end{tabular}
     \caption{Frequência da onda de entrada e a tensão máxima da saída do circuito integrador.}
@@ -41,10 +34,28 @@ O desenvolvimento é citado em~\cite{Proakis, Cecilio}.
 % -------------------------------------------------------------------
 \subsubsection{Distância Mínima entre Símbolos}
 
+Como calcular os coeficiente para constelação $M$-QAM retangular, onde $\sqrt{M}$ assume valores inteiros. Os coeficientes em quadratura $a_i$ e $b_i$ são obtidos através da equação: $\{ (2i -\sqrt{M} - 1)d \}_{i=1}^{\sqrt{M}} $ 
+
 A distância eucliadiana entre os sinais na modulação QAM é
 $$ d_{mn} = \sqrt{|| s_m - s_n||^2}$$ 
 $$ = \sqrt{\frac{\mathcal{E}_g}{2}[(A_{mi} - A_{ni})^2 + (A_{mq} - A_{nq})^2]}$$
 \subsubsection{Modulador}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth,clip=true,trim={1.5cm 8.5cm 1.8cm 8.3cm}]{C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf}
+    \caption{Exemplo de 4-QAM plot.}
+    \label{fig:4_QAM_plot}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth,clip=true,trim={1.5cm 8.5cm 1.8cm 8.3cm}]{C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf}
+    \caption{Exemplo de 16-QAM plot.}
+    \label{fig:16_QAM_plot}
+\end{figure}
+
+
 
 % -------------------------------------------------------------------
 \subsubsection{Demodulador}

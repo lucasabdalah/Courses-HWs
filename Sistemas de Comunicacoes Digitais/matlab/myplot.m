@@ -1,4 +1,4 @@
-function XNormalized = myplot(x,y)
+function hfig = myplot(x,y)
     % Computes z-score data normalization (and standardization) of input signal(s)
     %
     % SYNTAX: XNormalized = center_scale(X);
@@ -12,7 +12,6 @@ function XNormalized = myplot(x,y)
     % 2019/04/30: - created by Lucas Abdalah.
 
 
-%% PCA Plot - 2D plan
 figure
 s1 = scatter(score(:,1),score(:,2),'filled');
 set(gca,'Color','none')

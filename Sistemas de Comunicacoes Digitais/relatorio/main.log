@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.3.24)  24 MAR 2021 10:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.3.24)  25 MAR 2021 17:30
 entering extended mode
 **"c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.tex"
 (c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.tex
@@ -191,7 +191,6 @@ File: puenc.def 2021-02-27 v7.00k Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Option `draft' set `true' on input line 4073.
 Package hyperref Info: Hyper figures OFF on input line 4192.
 Package hyperref Info: Link nesting OFF on input line 4197.
 Package hyperref Info: Hyper index ON on input line 4200.
@@ -586,11 +585,8 @@ Package grfext Info: Graphics extension search list:
  (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-
-Package hyperref Warning: Draft mode on.
-
 Package hyperref Info: Link coloring OFF on input line 7.
-(C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.sty
+ (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/refcount\refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
@@ -602,6 +598,10 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 7.
 LaTeX Info: Redefining \pageref on input line 7.
 LaTeX Info: Redefining \nameref on input line 7.
+ (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.out) (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.out)
+\@outlinefile=\write4
+\openout4 = `main.out'.
+
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 Package biblatex Info: Trying to load language 'brazilian'...
@@ -631,7 +631,11 @@ Package biblatex Info: ... file 'main.bbl' found.
 Package biblatex Info: Reference section=0 on input line 7.
 Package biblatex Info: Reference segment=0 on input line 7.
  (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\adj/default.tex
-<adj/brasao.png, id=1, 309.5565pt x 411.6981pt>
+<adj/brasao.png, id=39, 309.5565pt x 411.6981pt>
+File: adj/brasao.png Graphic file (type png)
+<use adj/brasao.png>
+Package pdftex.def Info: adj/brasao.png  used on input line 5.
+(pdftex.def)             Requested size: 56.9055pt x 75.67923pt.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 21.
  (C:\Users\lukin\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -649,38 +653,60 @@ LaTeX Font Info:    Trying to load font information for U+esint on input line 21
 File: uesint.fd 
 ) [1
 
-{C:/Users/lukin/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.toc)
-\tf@toc=\write4
-\openout4 = `main.toc'.
+{C:/Users/lukin/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/adj/brasao.png>] (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.toc)
+\tf@toc=\write5
+\openout5 = `main.toc'.
 
- [1]) (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\adj/examples.tex [2
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.48     \clearpage
+                    [1]) (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\adj/examples.tex
+File: adj/brasao.png Graphic file (type png)
+<use adj/brasao.png>
+Package pdftex.def Info: adj/brasao.png  used on input line 12.
+(pdftex.def)             Requested size: 58.49762pt x 77.79626pt.
+ [2
 
 ]) (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\text/problema1.tex
 Overfull \hbox (7.73631pt too wide) in paragraph at lines 12--13
-[]\OT1/cmr/m/n/12 Para $\OML/cmm/m/it/12 M \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 f\OT1/cmr/m/n/12 4\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 16\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 64\OMS/cmsy/m/n/12 g$\OT1/cmr/m/n/12 , im-ple-mente o de-mo-du-la-dor (ma-pe-a-mento smbolo-|
+[]\OT1/cmr/m/n/12 Para $\OML/cmm/m/it/12 M \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 f\OT1/cmr/m/n/12 4\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 16\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 64\OMS/cmsy/m/n/12 g$\OT1/cmr/m/n/12 , im-ple-mente o de-mo-du-la-dor (ma-pe-a-mento smbolo-
  []
 
 [3
 
-]) [4] [5
+]
+<C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf, id=99, 614.295pt x 794.97pt>
+File: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf Graphic file (type pdf)
+<use C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf>
+Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf  used on input line 46.
+(pdftex.def)             Requested size: 390.0pt x 237.54802pt.
+<C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf, id=101, 614.295pt x 794.97pt>
+File: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf Graphic file (type pdf)
+<use C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf>
+Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf  used on input line 53.
+(pdftex.def)             Requested size: 390.0pt x 237.54802pt.
+) [4 <C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf>] [5 <C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf>] [6
 
 ] (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.aux)
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: DF981A4AA3C9016F00B4B40773F3F7A6;1282.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19554 strings out of 481025
- 333344 string characters out of 2899974
- 1061056 words of memory out of 3000000
- 36523 multiletter control sequences out of 15000+600000
+ 19621 strings out of 481025
+ 335684 string characters out of 2899974
+ 1062679 words of memory out of 3000000
+ 36549 multiletter control sequences out of 15000+600000
  419055 words of font info for 91 fonts, out of 8000000 for 9000
  117 hyphenation exceptions out of 8191
- 76i,12n,77p,1161b,1688s stack positions out of 5000i,500n,10000p,200000b,80000s
- <C:\Users\lukin\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\lukin\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/esint/dpi720\esint10.pk><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on "c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.pdf" (6 pages, 131043 bytes).
+ 76i,12n,77p,1161b,1695s stack positions out of 5000i,500n,10000p,200000b,80000s
+ <C:\Users\lukin\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\lukin\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/esint/dpi720\esint10.pk><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on "c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.pdf" (7 pages, 526080 bytes).
 PDF statistics:
- 77 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 187 PDF objects out of 1000 (max. 8388607)
+ 33 named destinations out of 1000 (max. 500000)
+ 100 words of extra memory for PDF output out of 10000 (max. 10000000)
 

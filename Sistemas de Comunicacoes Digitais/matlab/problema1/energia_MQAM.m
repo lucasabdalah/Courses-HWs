@@ -1,7 +1,7 @@
 function E_media = energia_MQAM(M,E_g)
     % Computa a energia media da constelacao M-QAM, sabendo a quantidade de simbolo M e a energia (E_g) do sinal.
     %
-    % SYNTAX: E_media = E_media = energia_MQAM(M,E_g)
+    % SYNTAX: E_media = energia_MQAM(M,E_g)
     %
     % INPUTS: 
     %       M : Quantidade de simbolos da constelacao 
