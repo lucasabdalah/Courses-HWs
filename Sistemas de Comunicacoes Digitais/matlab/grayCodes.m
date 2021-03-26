@@ -1,38 +1,4 @@
-function symb= mapping_MQAM(M,bits)
-
-
-    switch M
-    
-    % Se estivermos trabalhando com 4-QAM
-    case 4 
-        switch bits
-            case [0000]
-                symb = 
-            
-            
-        end
-    
-    % Se estivermos trabalhando com 16-QAM
-    case 16
-    
-    % Se estivermos trabalhando com 64-QAM
-    case 64
-    
-    end
-
-    % % M-QAM mapping
-    % if bits==[0]
-    %     symb= -1;
-    % end
-    % if bits==[1]
-    %     symb= 1;
-    % end
-    
-% To get Gray-code back to binary it needs only to sort()
-
-
-https://www.mathworks.com/matlabcentral/fileexchange/62403-gray-code-for-all-base-numbers
-function Seq=grayCodes(base,nbit)
+function Seq=grayCodes(nbit)
     %% Gray Code Generation
     % 
     % # Er.Abbas Manthiri S
@@ -45,6 +11,7 @@ function Seq=grayCodes(base,nbit)
     % base=single value;
     % Output
     % Seqence
+    base = 2;
     SeqLength=base^nbit;
     Seq=zeros(SeqLength,nbit);
     for i=1:nbit

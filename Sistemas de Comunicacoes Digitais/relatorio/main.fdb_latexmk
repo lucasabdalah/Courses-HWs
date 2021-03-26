@@ -1,11 +1,11 @@
 # Fdb version 3
-["biber main"] 1616654071 "main.bcf" "main.bbl" "main" 1616705033
-  "main.bcf" 1616704252 106360 9c8eaa2547405ffadc4b3050341cd41b "pdflatex"
+["biber main"] 1616654071 "main.bcf" "main.bbl" "main" 1616712941
+  "main.bcf" 1616712939 106360 9c8eaa2547405ffadc4b3050341cd41b "pdflatex"
   "refs.bib" 1616593798 514 d6054ff21b9e5bb76e5a4dbab4c6ee30 ""
   (generated)
-  "main.bbl"
   "main.blg"
-["pdflatex"] 1616704248 "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.tex" "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.pdf" "main" 1616705033
+  "main.bbl"
+["pdflatex"] 1616712928 "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.tex" "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.pdf" "main" 1616712941
   "C:/Users/lukin/AppData/Local/MiKTeX/2.9/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1597851838 14064 707f2c85c86b7a42c80b3e65d5a4527c ""
   "C:/Users/lukin/AppData/Local/MiKTeX/2.9/fonts/pk/ljfour/public/esint/dpi720/esint10.pk" 1615940432 13864 d41568553a8be8cdfe4b73d98756d232 ""
   "C:/Users/lukin/AppData/Local/MiKTeX/2.9/fonts/tfm/public/rsfs/rsfs10.tfm" 1615929935 688 37338d6ab346c2f1466b29e195316aa4 ""
@@ -159,22 +159,22 @@
   "adj/default.tex" 1615929868 1282 141f4aaab2750c9d135e819ecdf3e250 ""
   "adj/examples.tex" 1616593920 1325 bebac996d68c89696692340ec7b6eb85 ""
   "adj/packages.tex" 1616537276 999 c60dec35a63171b03074c2da4b61ea7c ""
-  "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.aux" 1616704252 5058 324de2ac9127271089b0c8c45ae91abb ""
+  "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.aux" 1616712939 5058 324de2ac9127271089b0c8c45ae91abb ""
   "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.tex" 1616654450 1013 a97a697e188f82525b97da8afa8a081e ""
-  "main.aux" 1616704252 5058 324de2ac9127271089b0c8c45ae91abb "pdflatex"
+  "main.aux" 1616712939 5058 324de2ac9127271089b0c8c45ae91abb "pdflatex"
   "main.bbl" 1616654074 3848 6b459e2a4ce5240f482edcd1950dd38e "biber main"
-  "main.out" 1616704252 1282 df981a4aa3c9016f00b4b40773f3f7a6 "pdflatex"
-  "main.run.xml" 1616704252 2398 c063c9829c0bfdb5a05e391c44207f42 "pdflatex"
+  "main.out" 1616712939 1282 df981a4aa3c9016f00b4b40773f3f7a6 "pdflatex"
+  "main.run.xml" 1616712939 2398 c063c9829c0bfdb5a05e391c44207f42 "pdflatex"
   "main.tex" 1616654450 1013 a97a697e188f82525b97da8afa8a081e ""
-  "main.toc" 1616704252 1183 b985c52617dc95e84138c41f38d0ebe7 "pdflatex"
-  "text/problema1.tex" 1616701387 3291 304506002d9a1531fb9b478dbaa490b6 ""
+  "main.toc" 1616712939 1183 b985c52617dc95e84138c41f38d0ebe7 "pdflatex"
+  "text/problema1.tex" 1616712919 3258 f6a41c4f5ef6c48ab16c25c9d0e7884a ""
   (generated)
-  "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.log"
   "main.toc"
-  "main.out"
+  "main.bcf"
   "main.pdf"
+  "main.run.xml"
   "main.aux"
   "main.log"
+  "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.log"
+  "main.out"
   "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.pdf"
-  "main.bcf"
-  "main.run.xml"

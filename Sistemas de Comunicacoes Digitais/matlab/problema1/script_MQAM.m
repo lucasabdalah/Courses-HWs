@@ -57,13 +57,7 @@ const_64QAM = const_MQAM(M(3),distancia_QAM(3));
 
 
 %% Grey Code
-% function b = gray2bin(g)
-%     b(1) = g(1);
-%     for i = 2 : length(g);
-%         x = xor(str2num(b(i-1)), str2num(g(i)));
-%         b(i) = num2str(x);
-%     end
-%
+
 % Em_No = 30;     % - Razao sinal-ruido
 
 % for jj = 1:M(ii)
