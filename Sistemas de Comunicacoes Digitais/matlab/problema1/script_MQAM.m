@@ -39,7 +39,7 @@ if plot_figures == true
         pause;
         const_QAM = const_MQAM(M(ii),d);
         figure;
-        h = scatter_MQAM(const_QAM,true);    
+        h(ii) = scatter_MQAM(const_QAM,true);    
         % Generating Gray alphabet and constellation's plot.
         for jj = 1:M(ii)
             gray_alfabeto = gray_const(M(ii),false);
@@ -56,18 +56,59 @@ if plot_figures == true
         end
     end 
 end 
-
+% close all;
 pause
 
 %% Creating the constellation for each M-QAM
 const_4QAM = const_MQAM(M(1),d);
 const_16QAM = const_MQAM(M(2),d);
 const_64QAM = const_MQAM(M(3),d);
-
+disp('---------------------------------------')
+clc;
 % const_16QAM
-bits = [0,0,1,1];
-symb = mapping_MQAM(bits)
 
+% example = 2;
+% figure;
+% scatter_MQAM(const_16QAM,true);
+% hold on 
+
+% for jj = 1:M(example)
+%     gray_alfabeto = gray_const(M(example),false);
+%     str = {strjoin(string(gray_alfabeto(jj,:)))};
+%     text(real(const_16QAM(jj)),imag(const_16QAM(jj))+(example/6),...
+%     str,...
+%     'FontSize', 6,...
+%     'HorizontalAlignment', 'center');
+% end
+% % Draw a circle radius = d
+% % center = [real(const_4QAM(jj)) imag(const_4QAM(jj))];
+% % radii = sqrt(2)/2;
+% % viscircles(center,radii,'Color','b');
+% % axis square
+
+% for ii = 1:4
+%     % M = 16;
+%     a = randn(1)/sqrt(1);
+%     b = randn(1)/sqrt(1);
+%     r = a + 1j*b;
+%     [symb,bits]=demapping_MQAM(r,M(example),d);
+%     disp(['ii=' num2str(ii)]);
+%     bits
+%     disp('---------------------------------------')
+%     symb = mapping_MQAM(bits);
+%     scatter(real(r),imag(r), 'filled',...
+%     'MarkerEdgeColor',[1,0,0],... 
+%     'MarkerFaceColor',[1,0,0]);
+%     text(real(r),imag(r)-(example/15), num2str(ii),...
+%     'FontSize', 6,...
+%     'HorizontalAlignment', 'center');
+
+%     line([real(symb),real(r)],[imag(symb),imag(r)]);
+% end
+
+% hold off
+
+% bits = [1,1];
 %% --------------------------------------------------------------------
 pause;
 

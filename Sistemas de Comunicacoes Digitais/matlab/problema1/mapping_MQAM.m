@@ -1,3 +1,4 @@
+% Problema 1 - Parte 3
 function symb = mapping_MQAM(bits)
 % function  symb= mapping_MQAM(bits,M,E_g)
 % Computa o mapa da constelacao M-QAM (Gray) a partir de uma sequencia de bits de tamanho M e energia de pulso/modulacao E_g.
@@ -9,7 +10,8 @@ function symb = mapping_MQAM(bits)
 %       M : Quantidade de simbolos da constelacao 
 %       E_g : Energia de pulso/modulacao E_g.
 % OUTPUTS:
-%       symb : Simbolos binarios com codificao de Gray
+%       symb : Simbolo da constelacao
+%
 % EXAMPLE:
 %       bits = [1,0,1,1];
 %       symb = mapping_MQAM(bits);
@@ -27,7 +29,7 @@ d = d_MQAM(M,energia_media_QAM);
 % --------------------------------------
 %% Creating a Gray alphabet for matching the M-QAM constellation
 const_QAM = const_MQAM(M,d);        % Constellation M-QAM
-gray_alfabeto = gray_const(M,true);    % Gray alphabet
+gray_alfabeto = gray_const(M,false);    % Gray alphabet
 
 % To compare gray_alfabeto with the entry bits, we can use xor(,) and get the line where all logical elements are equal.
 % get the xor_out' and the position equal to ->size(bits) stands for the correct element
