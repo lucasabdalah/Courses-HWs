@@ -1,0 +1,101 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{Fonseca}{misc}{}
+      \name{author}{2}{}{%
+        {{hash=db622d388bff2f2c1f23c1efaa8ca9fb}{%
+           family={Fonseca},
+           familyi={F\bibinitperiod},
+           given={Pedro},
+           giveni={P\bibinitperiod}}}%
+        {{hash=4163939a0ad89e831ac3de2fb12a63ec}{%
+           family={Carreira},
+           familyi={C\bibinitperiod},
+           given={Rita},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{bef3dbb4252b3e2b883504e09e270791}
+      \strng{fullhash}{bef3dbb4252b3e2b883504e09e270791}
+      \strng{bibnamehash}{bef3dbb4252b3e2b883504e09e270791}
+      \strng{authorbibnamehash}{bef3dbb4252b3e2b883504e09e270791}
+      \strng{authornamehash}{bef3dbb4252b3e2b883504e09e270791}
+      \strng{authorfullhash}{bef3dbb4252b3e2b883504e09e270791}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{http://intranet.deei.fct.ualg.pt/AC/Sebenta_Online/www.isr.uc.pt/~paulino/cse/Sebenta_Online/cap_15/ampopid.htm}}
+      \field{note}{Accessed: 2021-02-16}
+      \field{title}{AmpOp Ideal}
+    \endentry
+    \entry{Proakis}{book}{}
+      \name{author}{2}{}{%
+        {{hash=5fe41cc224eb8b59f5bb9f1a7ba509f2}{%
+           family={Proakis},
+           familyi={P\bibinitperiod},
+           given={John\bibnamedelima G},
+           giveni={J\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=b1e7a6c73f69c6c16233dbf5c83a00de}{%
+           family={Salehi},
+           familyi={S\bibinitperiod},
+           given={Masoud},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{fullhash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{bibnamehash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{authorbibnamehash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{authornamehash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{authorfullhash}{ab367421912bdf03ed020bffc5ad1f47}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{5}
+      \field{title}{Digital Communications}
+      \field{year}{1995}
+    \endentry
+    \entry{Cecilio}{book}{}
+      \name{author}{1}{}{%
+        {{hash=8810d76a2355d440601ac6643f7f8b81}{%
+           family={Pimentel},
+           familyi={P\bibinitperiod},
+           given={Cecílio},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{fullhash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{bibnamehash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{authorbibnamehash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{authornamehash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{authorfullhash}{8810d76a2355d440601ac6643f7f8b81}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{1}
+      \field{title}{Comunicação Digital}
+      \field{year}{2007}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
