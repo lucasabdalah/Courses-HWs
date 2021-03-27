@@ -1,0 +1,15 @@
+# ignore all .asv files
+*.asv
+
+# ignore all latex aux files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc

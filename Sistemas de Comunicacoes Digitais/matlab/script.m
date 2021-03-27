@@ -15,25 +15,18 @@ N = L/K;        % - Numero de simbolos a serem transmitidos
 
 s_m = randi([0 1],L,1)';   % - Mensagem a transmitir
 
-D = de2bi([0:M-1],log2(M),'left-msb');
+% Generating a gray const.
+G = gray_const(M,true);
 
-G = zeros(M,log2(M));
+% vec2flip = 1:M;
+% Hi, I have a matrix xx which is a 6x20 matrix, and I want to flip only the even rows. Im trying this but is doesn't work:
 
-% for ii=1:M
-%     for jj=1:log2(M)        
-%         G(ii,log2(M)) = D(ii,log2(M));
-%     end
-% end
+% xx = reshape([1:12],[3,4])
+% xx_flip = xx;
+% xx_flip(2:2:end,:) = fliplr(xx(2:2:end,:))
 
-% --------------------------------
-bit_len = 4;
-b = randi([0 1],bit_len,1)';
-g = mybin2gray(b);
-disp(['b ==> ', num2str(b)])
-disp(['g ==> ', num2str(g)])
+% Funcao para flipar linha pares da matriz e mapear no codigo de Gray
+% prepare_const2gray(const)
 
-%dec2bin(str2num(sprintf('%d',x).'))
-%
-%
-% Em_No = 30;     % - Razao sinal-ruido
-%
+sqrt(M) % Cada linha apresenta sqrt(M) simbolos, entao para ordenar de modo a ter a codificao de Gray, teremos que inverter as linhas pares da constelacao
+

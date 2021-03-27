@@ -1,5 +1,5 @@
-function gray_seq = mybin2gray(bit_seq)
-% function gray_seq = mybin2gray(M)
+function hfig = scatter_QAM(const_QAM,large_size);
+% function hfig = scatter_QAM(M,const_QAM);
 % Computa a codificao de Gray a partir de uma sequencia de bits de tamanho K.
 %
 % SYNTAX: gray_seq = mybin2gray(M);
@@ -24,22 +24,25 @@ function gray_seq = mybin2gray(bit_seq)
 %HISTORY:
 % 2021/03/26: - Lucas Abdalah.
 %
-        
-K = length(bit_seq); % Tamanho da Sequencia de Bits
-g=zeros(1,K);
-b = logical(flip(bit_seq)); %Flip the vector to obtain a LSB 
-n = 0;
 
-while K > n
-    ii=K-n;
-    if ii == K
-        g(ii) = double(b(ii));
-    else
-        g(ii) = double(xor(b(ii+1),b(ii)));
-    end
-    n=n+1;
+%% Color definitions for graphics
+yellow = [0.9290 0.6940 0.1250];
+black  = [0 0 0];
+M = size(const_QAM,2);
+%% Scatter plot
+hfig = scatter(real(const_QAM),imag(const_QAM), 'filled',...
+'MarkerEdgeColor',yellow,... 
+'MarkerFaceColor',yellow);
+xlabel('In-Phase');
+ylabel('Quadrature');
+title(['Constelacao ',num2str(M),'-QAM']);
+hold on;
+ax = max(real(const_QAM))+sqrt(2)/2;
+line([0,0],[-ax,ax], 'Color', black);
+line([-ax,ax],[0,0],'Color', black);
+
+if large_size == true
+    hfig.SizeData = 200;
 end
 
-gray_seq = flip(g);
-
-end % function
+% end

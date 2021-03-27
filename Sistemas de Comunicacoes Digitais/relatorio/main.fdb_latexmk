@@ -1,11 +1,11 @@
 # Fdb version 3
-["biber main"] 1616654071 "main.bcf" "main.bbl" "main" 1616712941
+["biber main"] 1616654071 "main.bcf" "main.bbl" "main" 1616761110
   "main.bcf" 1616712939 106360 9c8eaa2547405ffadc4b3050341cd41b "pdflatex"
   "refs.bib" 1616593798 514 d6054ff21b9e5bb76e5a4dbab4c6ee30 ""
   (generated)
-  "main.blg"
   "main.bbl"
-["pdflatex"] 1616712928 "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.tex" "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.pdf" "main" 1616712941
+  "main.blg"
+["pdflatex"] 1616712928 "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.tex" "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.pdf" "main" 1616761110
   "C:/Users/lukin/AppData/Local/MiKTeX/2.9/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1597851838 14064 707f2c85c86b7a42c80b3e65d5a4527c ""
   "C:/Users/lukin/AppData/Local/MiKTeX/2.9/fonts/pk/ljfour/public/esint/dpi720/esint10.pk" 1615940432 13864 d41568553a8be8cdfe4b73d98756d232 ""
   "C:/Users/lukin/AppData/Local/MiKTeX/2.9/fonts/tfm/public/rsfs/rsfs10.tfm" 1615929935 688 37338d6ab346c2f1466b29e195316aa4 ""
@@ -169,12 +169,12 @@
   "main.toc" 1616712939 1183 b985c52617dc95e84138c41f38d0ebe7 "pdflatex"
   "text/problema1.tex" 1616712919 3258 f6a41c4f5ef6c48ab16c25c9d0e7884a ""
   (generated)
-  "main.toc"
-  "main.bcf"
-  "main.pdf"
   "main.run.xml"
+  "main.pdf"
+  "main.bcf"
   "main.aux"
+  "main.out"
+  "main.toc"
+  "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.pdf"
   "main.log"
   "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.log"
-  "main.out"
-  "c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.pdf"

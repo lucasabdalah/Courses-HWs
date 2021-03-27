@@ -8,7 +8,7 @@ function const_QAM = const_MQAM(M,d)
     %       d : Distancia entre os simbolos
     %
     % OUTPUTS:
-    %       const_QAM : Simbolos da constelacao M-QAM
+    %       const_QAM : Simbolos da constelacao M-QAM ordenados para codigo gray
     %
     % Referencia: Pagina 58 - Cecilio (1a ed.) 
     % Componentes A_i e B_i assumem valores discretos: $\{ (2i -\sqrt{M} - 1)d \}$ 
@@ -31,5 +31,11 @@ function const_QAM = const_MQAM(M,d)
             k=k+1;
         end
     end
+
+    %% test part to put preparation to display Gray code on the plot
+    mat_QAM = reshape(const_QAM,[sqrt(M),sqrt(M)])';
+    mat_QAM(2:2:end,:) = fliplr(mat_QAM(2:2:end,:));
+    test = mat_QAM.';
+    const_QAM = flip(test(:)');
 
 end % function
