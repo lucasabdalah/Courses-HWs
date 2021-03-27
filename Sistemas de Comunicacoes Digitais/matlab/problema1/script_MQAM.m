@@ -10,8 +10,8 @@ close all; clearvars; clc; % Clear the matlab ambient
 % addpath 'problema1' % Local path
 addpath 'C:\Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\matlab'
 %% General Setup
-plot_figures = true;
-save_figures = true;
+plot_figures = false;
+save_figures = false;
 
 %% Problema 1 - Calculo da energia media (E_m) e da distancia entre os simbolos
 M = [4, 16, 64];    % - Numero de simbolos da constelacao
@@ -28,18 +28,16 @@ for ii = 1:size(M,2)
     fprintf('Distancia (d) = %1d \n\n', distancia_QAM(1,ii));
 end
 fprintf('------------------------------------------------------------\n');
-% All distances are equal, let's define a standard for all cases;
+% Since the distances are equal, let's define a standard for all cases;
 d=distancia_QAM(1);
 
 %% --------------------------------------------------------------------
-
 %% Plotando Constelacoes
-
 if plot_figures == true
     for ii = 1:size(M,2)
         fprintf('>>Pressione qualquer tecla para ver a constelacao %1d-QAM \n', M(ii));
         pause;
-        const_QAM = const_MQAM(M(ii),distancia_QAM(ii));
+        const_QAM = const_MQAM(M(ii),d);
         figure;
         h = scatter_MQAM(const_QAM,true);    
         % Generating Gray alphabet and constellation's plot.
@@ -59,19 +57,18 @@ if plot_figures == true
     end 
 end 
 
-
 pause
 
 %% Creating the constellation for each M-QAM
-const_4QAM = const_MQAM(M(1),distancia_QAM(1));
-const_16QAM = const_MQAM(M(2),distancia_QAM(2));
-const_64QAM = const_MQAM(M(3),distancia_QAM(3));
+const_4QAM = const_MQAM(M(1),d);
+const_16QAM = const_MQAM(M(2),d);
+const_64QAM = const_MQAM(M(3),d);
+
+% const_16QAM
+bits = [0,0,1,1];
+symb = mapping_MQAM(bits)
 
 %% --------------------------------------------------------------------
 pause;
-% close all;
 
-%
-% scatter(real(vec(const_4QAM)), imag(vec(const_4QAM)))
-% A construcao da constelacao segue a logica da esquerda para direita (->) debaixo pra cima (^)
 % Em_No = 30;     % - Razao sinal-ruido
