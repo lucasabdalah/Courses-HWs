@@ -1,5 +1,5 @@
-function hfig = scatter_QAM(const_QAM,large_size);
-% function hfig = scatter_QAM(M,const_QAM);
+function hfig = scatter_MQAM(const_QAM,large_size);
+% function hfig = scatter_MQAM(M,const_QAM);
 % Computa a codificao de Gray a partir de uma sequencia de bits de tamanho K.
 %
 % SYNTAX: gray_seq = mybin2gray(M);

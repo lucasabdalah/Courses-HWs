@@ -32,10 +32,12 @@ function const_QAM = const_MQAM(M,d)
         end
     end
 
-    %% test part to put preparation to display Gray code on the plot
+    % This part is to display the symbol's bits
+    % To make this part work is necessary to organize the M-QAM
+    % modulation to sort the binary constellation and convert it into encoding
     mat_QAM = reshape(const_QAM,[sqrt(M),sqrt(M)])';
     mat_QAM(2:2:end,:) = fliplr(mat_QAM(2:2:end,:));
-    test = mat_QAM.';
-    const_QAM = flip(test(:)');
+    aux = mat_QAM.';
+    const_QAM = flip(aux(:)');
 
 end % function
