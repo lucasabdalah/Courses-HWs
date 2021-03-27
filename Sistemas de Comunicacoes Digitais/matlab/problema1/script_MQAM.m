@@ -65,6 +65,29 @@ const_16QAM = const_MQAM(M(2),d);
 const_64QAM = const_MQAM(M(3),d);
 disp('---------------------------------------')
 clc;
+
+
+%% Testar mapeador e demapeador
+M = 4;         % - Numero de simbolos da constelacao
+K = log2(M);    % - Numero de bits/simbolo
+L = 100*M*K;       % - Tamanho da sequencia (bits)
+N = L/K;        % - Numero de simbolos a serem transmitidos
+
+s_m = randi([0 1],L,1)';   % - Mensagem a transmitir
+y_m = zeros(1,L);
+symb_map = zeros(1,N);
+symb_demap = zeros(1,N);
+n=0;
+for ii = 1:K:L
+    n=n+1;   
+    bits = s_m(ii:ii+K-1);
+    symb_map(n) = mapping_MQAM(bits);
+    [symb_demap(n),y_m(ii:ii+K-1)]=demapping_MQAM(symb_map(n),M,d);
+end 
+disp(['message length: ', num2str(L)]);
+disp(['bit error: ', num2str(sum(xor(s_m,y_m)))]);
+
+
 % const_16QAM
 
 % example = 2;
