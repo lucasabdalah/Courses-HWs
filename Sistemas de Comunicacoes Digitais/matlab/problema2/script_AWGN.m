@@ -8,15 +8,15 @@
 close all; clearvars; clc; % Clear the matlab ambient
 
 addpath 'C:\Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\matlab'
-% addpath ''C:\Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\matlab\problema1'
 %% General Setup
-plot_figures = false;
+plot_figures = true;
 save_figures = false;
 
 %% Calculo da probabilidade do M-QAM
 M = [4,16,64];                  % Simbolos das constelacoes
 Es = [1,5,21];                  % Energia das constelacoes
 Es_N0 = [0:2:20];               % Vetor de SNR em dB
+% Es_N0 = [0:2:30];               % Vetor de SNR em dB para Erro_Teorico_MQAM_extended.pdf
 N0 = Es'.*(10.^(-Es_N0/10));    % Ruido linear para cada constelacao
 
 %% Calculo do erro teorico x Es/N0 em dB
@@ -37,12 +37,6 @@ if plot_figures == true
     grid on
     if save_figures == true
         saveas(h,['fig/Erro_Teorico_MQAM'],'pdf');
+        % saveas(h,['fig/Erro_Teorico_MQAM_extended'],'pdf');
     end
 end
-
-
-%
-% generate the noise term
-% noise= sqrt(No/2)*(randn(N,1)+1i*randn(N,1));
-% received signal with noise
-% rx_signal= symb + noise; 
