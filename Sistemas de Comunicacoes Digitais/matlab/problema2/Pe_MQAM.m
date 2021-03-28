@@ -26,4 +26,6 @@ function primeiro_termo = first_part(M,Es,N0)
 end
 function segundo_termo = second_part(M,Es,N0)
     segundo_termo = (first_part(M,Es,N0))^2;
+    %% Teste da equcao simplificada, com SNR alta
+    % segundo_termo = 0;
 end

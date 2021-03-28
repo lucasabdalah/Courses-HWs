@@ -15,6 +15,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.1.4}Demodulador}{4}{subsubsection.2.1.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Conclusão e Resultados}{6}{section.3}%
+\contentsline {subsection}{\numberline {2.2}Problema 2 - Probabilidade de Erro}{6}{subsection.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Refer\^encias}{7}{section*.10}%
+\contentsline {section}{\numberline {3}Conclusão e Resultados}{7}{section.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Refer\^encias}{8}{section*.11}%
