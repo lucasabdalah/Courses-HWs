@@ -1,13 +1,15 @@
 %% Trabalho de SCD 
 % ----------------------------
-% Problema 2 - Modulacao M-QAM em canal AWGN
-% script_AWGN.m
+% Problema 2 - Probabilidade de Erro da Modulacao M-QAM
+% script_prob.m
 % 2021/03/26 - Lucas Abdalah
 %
 
 close all; clearvars; clc; % Clear the matlab ambient
 
-addpath 'C:\Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\matlab'
+%% Add necessary folder paths
+% addpath 'C:\Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\matlab'
+
 %% General Setup
 plot_figures = true;
 save_figures = false;
