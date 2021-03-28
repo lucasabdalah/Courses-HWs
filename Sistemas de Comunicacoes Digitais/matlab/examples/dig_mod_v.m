@@ -25,12 +25,12 @@ for i=1:N
 end
 
 
-%% Conferindo a constelação transmitida
+%% Conferindo a constelaï¿½ï¿½o transmitida
 scatter(symb,zeros(size(symb,1),1),75,[0.25 0.2 0.65],'filled')
 xlabel('In-Phase')
 ylabel('Quadrature')
 title('4-PAM')
-% legend('4-PAM constelação')
+% legend('4-PAM constelaï¿½ï¿½o')
 grid on
 hold on
 % 
@@ -41,20 +41,39 @@ noise= sqrt(No/2)*(randn(N,1)+1i*randn(N,1));
 % received signal with noise
 rx_signal= symb + noise; 
 scatter(real(rx_signal),zeros(size(symb,1),1),15,[0.8 0.6 0.15],'filled')
-legend('True Signal','4-PAM constelação + Noise')
+legend('True Signal','4-PAM constelaï¿½ï¿½o + Noise')
 pause;
 %% decision (slicer)
-% -- Pre-alocação de memória
-symb_dec=zeros(N,1); % símbolo decidido no slicer
+% -- Pre-alocaï¿½ï¿½o de memï¿½ria
+symb_dec=zeros(N,1); % sï¿½mbolo decidido no slicer
 bits_dec=zeros(1,L); % bit     decidido no slicer
 
 % - Construa seu slicer
 % Aqui  rx_signal  
 % [symb_dec,bits_dec] = slicer_4_PAM()
 
-%% Cáclulo de BER e SER
-% --- Aqui serão comparados os símbolos (bits) transmitidos originalmente
+%% Cï¿½clulo de BER e SER
+% --- Aqui serï¿½o comparados os sï¿½mbolos (bits) transmitidos originalmente
 % "symb" com os decidos symb_dec. Sendo feita a contagem de erro total.
 
 % BER = minha_funcao_BER()
 % SER = minha_funcao_SER()
+
+%% Teste do plot P(erro)xEb/N0
+%% Calculo da probabilidade do M-QAM
+
+N_size=size(M,2);
+Es_N0 = [0:2:20];  % em dB
+N_dB = length(Es_N0) ;
+N0 = Es'.*(10.^(-Es_N0/10));
+
+% generate the noise term
+% noise= sqrt(No/2)*(randn(N,1)+1i*randn(N,1));
+
+erro_MQAM = zeros(N_size,N_dB);
+
+for ii=1:N_size
+    for jj=1:N_dB
+        erro_MQAM(ii,jj)= Pe_MQAM(M(ii),Es(ii),N0(ii,jj));
+    end
+end

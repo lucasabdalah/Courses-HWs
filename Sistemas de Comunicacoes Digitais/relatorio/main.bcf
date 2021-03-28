@@ -2351,6 +2351,7 @@
     <bcf:citekey order="1">Fonseca</bcf:citekey>
     <bcf:citekey order="2">Proakis</bcf:citekey>
     <bcf:citekey order="2">Cecilio</bcf:citekey>
+    <bcf:citekey order="3">Cecilio</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

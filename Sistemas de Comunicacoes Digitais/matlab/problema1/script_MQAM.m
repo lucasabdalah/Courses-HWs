@@ -109,8 +109,3 @@ if teste_map == false;
     hold off
 
 end;
-
-pause;
-%% ----------------------------------------------------------
-% Em_No = 30;     % - Razao sinal-ruido
-

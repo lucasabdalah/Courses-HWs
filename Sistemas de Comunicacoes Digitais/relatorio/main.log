@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.3.24)  27 MAR 2021 22:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.3.24)  28 MAR 2021 01:33
 entering extended mode
 **"c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.tex"
 (c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.tex
@@ -686,7 +686,14 @@ File: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digit
 <use C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf>
 Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf  used on input line 54.
 (pdftex.def)             Requested size: 390.0pt x 237.54802pt.
-) [4 <C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf>] [5 <C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf>] [6
+) [4 <C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf>] [5 <C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf>] (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\text/problema2.tex
+Overfull \hbox (3.49162pt too wide) detected at line 6
+[]\OML/cmm/m/it/12 P\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 e\OT1/cmr/m/n/12 ) = 4 [] \OML/cmm/m/it/12 Q [] \OMS/cmsy/m/n/12   \OT1/cmr/m/n/12 4 [][] \OML/cmm/m/it/12 Q[] []
+ []
+
+) [6
+
+] [7
 
 ] (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
@@ -696,17 +703,17 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19621 strings out of 481025
- 335684 string characters out of 2899974
- 1062679 words of memory out of 3000000
- 36549 multiletter control sequences out of 15000+600000
+ 19630 strings out of 481025
+ 335988 string characters out of 2899974
+ 1062753 words of memory out of 3000000
+ 36552 multiletter control sequences out of 15000+600000
  419055 words of font info for 91 fonts, out of 8000000 for 9000
  117 hyphenation exceptions out of 8191
  76i,12n,77p,1161b,1695s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\lukin\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\lukin\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/esint/dpi720\esint10.pk><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on "c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.pdf" (7 pages, 526269 bytes).
+Output written on "c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.pdf" (8 pages, 532542 bytes).
 PDF statistics:
- 187 PDF objects out of 1000 (max. 8388607)
- 33 named destinations out of 1000 (max. 500000)
+ 196 PDF objects out of 1000 (max. 8388607)
+ 36 named destinations out of 1000 (max. 500000)
  100 words of extra memory for PDF output out of 10000 (max. 10000000)
 
