@@ -4,13 +4,13 @@ Considere a modulação $M$-QAM, em que o sinal em banda base é dado por:
 $$s_m(t) = ( A_m^{(\text{real})} + j A_m^{(\text{imag})}) g(t) ,$$
 em que $g(t)$ é um pulso transmitido, $A_m^{(\text{real})}$ e $A_m^{(\text{imag})}$ são amplitudes da parte real e imaginária da forma de onda transmitida, respectivamente.
 
-Considere $\int_{-\inf}^{\inf} |g(t)|^2 \,dt = \mathcal{E}_{g} = 1$, isto é, o pulto $g(t)$ possui energia unitária. Suponha a transmissão de uma sequência de símbolo $\{s_{m}\}$ de tamanho $L = 26400 \text{bits}$
-\begin{enumerate}
-    \item A energia média $\mathcal{E}_{m}$ de cada constelação;
-    \item A distância mínima $d_{min}$ entre dois símbolos;
-    \item O modulador (mapeamento bit-símbolo) usando a codificação de Gray;
-    \item O demodulador (mapeamento símbolo-bit).
-\end{enumerate}
+% Considere $\int_{-\inf}^{\inf} |g(t)|^2 \,dt = \mathcal{E}_{g} = 1$, isto é, o pulto $g(t)$ possui energia unitária. Suponha a transmissão de uma sequência de símbolo $\{s_{m}\}$ de tamanho $L = 26400 \text{bits}$
+% \begin{enumerate}
+%     \item A energia média $\mathcal{E}_{m}$ de cada constelação;
+%     \item A distância mínima $d_{min}$ entre dois símbolos;
+%     \item O modulador (mapeamento bit-símbolo) usando a codificação de Gray;
+%     \item O demodulador (mapeamento símbolo-bit).
+% \end{enumerate}
 
 % -------------------------------------------------------------------
 
@@ -54,6 +54,8 @@ $$\sqrt{\frac{3 \mathcal{E}_{media}}{2(M-1)}} $$
     \label{tab:Resume_QAM}
 \end{table}
 
+\clearpage
+
 \subsubsection{Modulador (Codificação de Gray)}
 
 \begin{figure}[!ht]
@@ -62,6 +64,49 @@ $$\sqrt{\frac{3 \mathcal{E}_{media}}{2(M-1)}} $$
     \caption{Exemplo de 4-QAM plot.}
     \label{fig:4_QAM_plot}
 \end{figure}
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    Decimal & Binário & Gray & Decimal \\ \hline
+    0 & 00 & 00 & 0\\ \hline
+    1 & 01 & 01 & 1\\ \hline
+    2 & 10 & 11 & 3\\ \hline
+    3 & 11 & 10 & 2\\ \hline
+    \end{tabular}
+    \caption{Tabela de tradução de binário para Gray com 2 bits.}
+    \label{tab:Alfabeto_Gray}
+\end{table}
+
+Algoritmo para obter o código de Gray~\ref{alg:Gray}
+
+% global change
+\SetKwInput{KwData}{Entrada}
+\SetKwInput{KwResult}{Saída}
+
+\begin{algorithm}[!ht]
+    \SetAlgoLined
+    \KwData{Sequência de Bits $(b)$ - MSB}
+    \KwResult{Sequencia em Código Gray $(g)$ - LSB}
+    $n = 0$\;
+    $K = \text{length}(b)$\;
+    \While{$K > n$}{
+        \eIf{$K==n$}{
+            $g_{(K-n)} = b_{(K-n)}$ \;
+            }{
+            $g_{(K-n)} = b_{(K-n+1)} \otimes b_{(K-n)}$\;
+        }
+        $n=n+1$;\;
+     }
+     $g = flip(g)$\;
+     \caption{Codificação de Gray}
+     \label{alg:Gray}
+\end{algorithm}
+
+\clearpage
+
+
 
 \begin{figure}[!ht]
     \centering

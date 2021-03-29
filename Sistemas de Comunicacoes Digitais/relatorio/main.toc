@@ -11,18 +11,18 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.1.2}Distância Mínima entre Símbolos}{2}{subsubsection.2.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.3}Modulador (Codificação de Gray)}{3}{subsubsection.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.1.3}Modulador (Codificação de Gray)}{4}{subsubsection.2.1.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.4}Demodulador}{6}{subsubsection.2.1.4}%
+\contentsline {subsubsection}{\numberline {2.1.4}Demodulador}{7}{subsubsection.2.1.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2}Problema 2 - Probabilidade de Erro}{7}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.2}Problema 2 - Probabilidade de Erro: $M$-QAM}{8}{subsection.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3}Problema 3 - Canal RAGB}{8}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.3}Problema 3 - Canal RAGB: $M$-QAM}{9}{subsection.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4}Problema 4 - Modulação $M$-PSK}{10}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.4}Problema 4 - Modulação $M$-PSK}{11}{subsection.2.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5}Problema 5 - Comparativo $M$-QAM x $M$-PSK}{13}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.5}Problema 5 - Comparativo $M$-QAM x $M$-PSK}{15}{subsection.2.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Conclusão e Resultados}{15}{section.3}%
+\contentsline {section}{\numberline {3}Conclusão e Resultados}{17}{section.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Refer\^encias}{16}{section*.20}%
+\contentsline {section}{Refer\^encias}{18}{section*.27}%
