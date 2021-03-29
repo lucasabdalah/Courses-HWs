@@ -60,8 +60,8 @@
       \strng{authorbibnamehash}{ab367421912bdf03ed020bffc5ad1f47}
       \strng{authornamehash}{ab367421912bdf03ed020bffc5ad1f47}
       \strng{authorfullhash}{ab367421912bdf03ed020bffc5ad1f47}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{5}
@@ -82,8 +82,8 @@
       \strng{authorbibnamehash}{6eebd2539ce95517a67e1a9dd175e3d6}
       \strng{authornamehash}{6eebd2539ce95517a67e1a9dd175e3d6}
       \strng{authorfullhash}{6eebd2539ce95517a67e1a9dd175e3d6}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.tutorialspoint.com/conversion-of-binary-to-gray-code}}
