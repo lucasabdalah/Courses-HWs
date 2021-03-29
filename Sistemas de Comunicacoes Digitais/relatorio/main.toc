@@ -15,6 +15,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3}Problema 3 - Canal RAGB: $M$-QAM}{9}{section.3}%
 \defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1}Modelo}{9}{subsection.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2}Experimento de Transmissão}{11}{subsection.3.2}%
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4}Problema 4 - Modulação $M$-PSK}{12}{section.4}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.1}Energia da Constelação}{12}{subsection.4.1}%
