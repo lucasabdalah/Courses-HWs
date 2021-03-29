@@ -19,6 +19,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3}Problema 3 - Canal RAGB}{9}{subsection.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Conclusão e Resultados}{10}{section.3}%
+\contentsline {subsection}{\numberline {2.4}Problema 4 - Modulação $M$-PSK}{11}{subsection.2.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Refer\^encias}{11}{section*.15}%
+\contentsline {section}{\numberline {3}Conclusão e Resultados}{12}{section.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Refer\^encias}{13}{section*.16}%
