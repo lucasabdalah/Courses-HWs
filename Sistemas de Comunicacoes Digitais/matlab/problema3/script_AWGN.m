@@ -1,7 +1,7 @@
 %% Trabalho de SCD 
 % ----------------------------
 % Problema 3 - Canal AWGN da Modulacao M-QAM
-% script_prob.m
+% script_AWGN.m
 % 2021/03/27 - Lucas Abdalah
 %
 

@@ -17,7 +17,6 @@ function erro = Pe_MPSK(M,Es,N0)
     % 2021/03/27: - Lucas Abdalah.
     %
     
-    erro = 2* qfunc(sqrt((2*log2(M)*Es)/N0) *sin(pi/M));
-    
+    erro = 2*qfunc(sqrt((2*Es)/N0) *sin(pi/M));
+
     end
-    

@@ -1,13 +1,8 @@
-function hfig = semilogy_erro(Es_N0,erro_MQAM, str)
-    % function hfig = scatter_MQAM(M,r);
+function hfig = semilogy_erro(Es_N0,erro, str)
+    % function hfig = semilogy_erro(Es_N0,erro, str);
     % Computa a codificao de Gray a partir de uma sequencia de bits de tamanho K.
     %
-    % SYNTAX: hfig = scatter_MQAM(r,large_size,received_symbol);
-    %
-    % INPUTS: 
-    %       r : complex number symbol
-    %       large_size : to enlarge the circle in the plot
-    %       received_symbol : to plot a received symbol
+    % SYNTAX: hfig = semilogy_erro(Es_N0,erro, str)
     % 
     % OUTPUTS:
     %       hfig : saved figure properties
@@ -16,7 +11,7 @@ function hfig = semilogy_erro(Es_N0,erro_MQAM, str)
     % 2021/03/26: - Lucas Abdalah.
     %
 
-hfig = semilogy(Es_N0, erro_MQAM,...
+hfig = semilogy(Es_N0, erro,...
                 'Marker','square',...
                 'LineWidth', 1.5,...
                 'LineStyle', ':');
