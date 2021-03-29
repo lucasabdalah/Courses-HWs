@@ -21,6 +21,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.4}Problema 4 - Modulação $M$-PSK}{10}{subsection.2.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Conclusão e Resultados}{13}{section.3}%
+\contentsline {subsection}{\numberline {2.5}Problema 5 - Comparativo $M$-QAM x $M$-PSK}{13}{subsection.2.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Refer\^encias}{14}{section*.18}%
+\contentsline {section}{\numberline {3}Conclusão e Resultados}{15}{section.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Refer\^encias}{16}{section*.20}%
