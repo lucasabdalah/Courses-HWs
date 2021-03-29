@@ -17,6 +17,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2}Problema 2 - Probabilidade de Erro}{6}{subsection.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Conclusão e Resultados}{7}{section.3}%
+\contentsline {subsection}{\numberline {2.3}Problema 3 - Canal RAGB}{7}{subsection.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Refer\^encias}{8}{section*.11}%
+\contentsline {section}{\numberline {3}Conclusão e Resultados}{8}{section.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Refer\^encias}{9}{section*.14}%

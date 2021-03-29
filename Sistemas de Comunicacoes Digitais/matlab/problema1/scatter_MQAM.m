@@ -30,21 +30,23 @@ if received_symbol == false
     title(['Constelacao ',num2str(M),'-QAM']);
     hold on;
     ax = max(real(r))+sqrt(2)/2;
-    line([0,0],[-ax,ax], 'Color', black);
-    line([-ax,ax],[0,0],'Color', black);
+    line([0,0],[-ax,ax], 'Color', black,...
+    'HandleVisibility','off');
+    line([-ax,ax],[0,0],'Color', black, ...
+    'HandleVisibility','off');
 end
 
 if received_symbol == true
-    symbol_color=[0.3010 0.7450 0.9330];
+    symbol_color=[204 51 0]./255;
     hfig = scatter(real(r),imag(r), 'filled',...
-    'Marker','square',...
+    'Marker','x',...
     'MarkerEdgeColor',symbol_color,... 
     'MarkerFaceColor',symbol_color);
     hfig.SizeData = 20;
 end
 
 if large_size == true
-    hfig.SizeData = 50;
+    hfig.SizeData = 200;
 end
 
 if write_bits == true
@@ -60,11 +62,7 @@ if write_bits == true
 
 end
 
-
 end
-
-
-
 
 %% Desenhar o limite da distancia euclidiana
 % Draw a circle radius = d

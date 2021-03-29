@@ -10,9 +10,9 @@ close all; clearvars; clc; % Clear the matlab ambient
 % addpath 'problema1' % Local path
 addpath 'C:\Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\matlab'
 %% General Setup
-plot_figures = true;
-save_figures = false;
-teste_map = false;
+plot_figures = true;    % - Plotr ou nao
+save_figures = false;   % - Salvar o plot ou nao
+teste_map = false;      % - Entrar ou nao no teste das funcoes map e demap
 
 %% Problema 1 - Calculo da energia media (E_m) e da distancia entre os simbolos
 M = [4, 16, 64];    % - Numero de simbolos da constelacao
