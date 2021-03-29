@@ -1,18 +1,13 @@
 \subsection{Problema 1 - \texorpdfstring{$M$}{M}-QAM}
 
-Considere a modulação $M$-QAM, em que o sinal em banda base é dado por:
+Considerando a modulação $M$-QAM, em que o sinal em banda base é dado por:
 $$s_m(t) = ( A_m^{(\text{real})} + j A_m^{(\text{imag})}) g(t) ,$$
 em que $g(t)$ é um pulso transmitido, $A_m^{(\text{real})}$ e $A_m^{(\text{imag})}$ são amplitudes da parte real e imaginária da forma de onda transmitida, respectivamente.
 
-% Considere $\int_{-\inf}^{\inf} |g(t)|^2 \,dt = \mathcal{E}_{g} = 1$, isto é, o pulto $g(t)$ possui energia unitária. Suponha a transmissão de uma sequência de símbolo $\{s_{m}\}$ de tamanho $L = 26400 \text{bits}$
-% \begin{enumerate}
-%     \item A energia média $\mathcal{E}_{m}$ de cada constelação;
-%     \item A distância mínima $d_{min}$ entre dois símbolos;
-%     \item O modulador (mapeamento bit-símbolo) usando a codificação de Gray;
-%     \item O demodulador (mapeamento símbolo-bit).
-% \end{enumerate}
+% Na modulação ,\textit{quadrature amplitude modulation} (QAM) os símbolos de informação são mapeados nas amplitudes das portadoras em fase e quadratura. O sinal é transmitido como na equação~\ref{eq:QAM_coef}
 
-% -------------------------------------------------------------------
+% No caso especial em que amplitudes A; e B; assumem valores discretos no conjunto {(2i – \sqrt{M} – 1)d) a constelação é denominada QAM retangular, conforme ilustra a Figura 2.13, pe M = 16.
+
 
 \subsubsection{Energia da Constelação} 
 
@@ -27,7 +22,6 @@ $$ \mathcal{E}_{media(bit)} = \frac{M-1}{3\log_2 M} \mathcal{E}_g $$
 Como calcular os coeficiente para constelação $M$-QAM retangular, onde $\sqrt{M}$ assume valores inteiros. Os coeficientes em quadratura $a_i$ e $b_i$ são obtidos através da equação: $\{ (2i -\sqrt{M} - 1)d \}_{i=1}^{\sqrt{M}} $ 
 
 A distância eucliadiana entre os sinais na modulação QAM é
-$$ d_{mn} = \sqrt{|| s_m - s_n||^2}$$ 
 $$ = \sqrt{\frac{\mathcal{E}_g}{2}[(A_{mi} - A_{ni})^2 + (A_{mq} - A_{nq})^2]}$$
 
 $$\sqrt{\frac{3 \mathcal{E}_{media}}{2(M-1)}} $$
@@ -35,20 +29,20 @@ $$\sqrt{\frac{3 \mathcal{E}_{media}}{2(M-1)}} $$
 \begin{table}[!ht]
     \centering
     \begin{tabular}{|c|c|c|c|}
-    \hline
-    $M$-QAM & $\mathcal{E}_{media}$ & $\mathcal{E}_{media(bit)}$ & $d$ \\ \hline
-    & &  &  \\ 
-    $M$ & $\frac{M-1}{3} \mathcal{E}_g$ & $ \frac{M-1}{3\log_2 M} \mathcal{E}_g$ & $\sqrt{\frac{3 \mathcal{E}_{media}}{2(M-1)}} $ \\ 
-    & &  &  \\ \hline
-    & &  &  \\ 
-    $4$     & 1 & $1.67\times 10^{-1}$ & $\frac{\sqrt{2}}{2}$ \\ 
-    & &  &  \\ \hline
-    & &  &  \\ 
-    $16$    & 5 & $4.67\times 10^{-1}$ & $\frac{\sqrt{2}}{2}$ \\ 
-    & &  &  \\ \hline
-    & &  &  \\ 
-    $64$    & 21 & $1.17\times 10^{0}$ & $\frac{\sqrt{2}}{2}$ \\
-    & &  &  \\ \hline
+        \hline
+        $M$-QAM & $\mathcal{E}_{media}$ & $\mathcal{E}_{media(bit)}$ & $d$ \\ \hline
+        & &  &  \\ 
+        $M$ & $\frac{M-1}{3} \mathcal{E}_g$ & $ \frac{M-1}{3\log_2 M} \mathcal{E}_g$ & $\sqrt{\frac{3 \mathcal{E}_{media}}{2(M-1)}} $ \\ 
+        & &  &  \\ \hline
+        & &  &  \\ 
+        $4$     & 1 & $1.67\times 10^{-1}$ & $\frac{\sqrt{2}}{2}$ \\ 
+        & &  &  \\ \hline
+        & &  &  \\ 
+        $16$    & 5 & $4.67\times 10^{-1}$ & $\frac{\sqrt{2}}{2}$ \\ 
+        & &  &  \\ \hline
+        & &  &  \\ 
+        $64$    & 21 & $1.17\times 10^{0}$ & $\frac{\sqrt{2}}{2}$ \\
+        & &  &  \\ \hline
     \end{tabular}
     \caption{Informações gerais calculadas para a modulação $M$-QAM.}
     \label{tab:Resume_QAM}
@@ -58,28 +52,9 @@ $$\sqrt{\frac{3 \mathcal{E}_{media}}{2(M-1)}} $$
 
 \subsubsection{Modulador (Codificação de Gray)}
 
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=1.0\textwidth,clip=true,trim={1.5cm 8.5cm 1.8cm 8.3cm}]{C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf}
-    \caption{Exemplo de 4-QAM plot.}
-    \label{fig:4_QAM_plot}
-\end{figure}
+O mapeador da constelação $M$-QAM consiste em uma função que recebe uma sequência de bits
 
-\begin{table}[!ht]
-    \centering
-    \begin{tabular}{|c|c|c|c|}
-    \hline
-    Decimal & Binário & Gray & Decimal \\ \hline
-    0 & 00 & 00 & 0\\ \hline
-    1 & 01 & 01 & 1\\ \hline
-    2 & 10 & 11 & 3\\ \hline
-    3 & 11 & 10 & 2\\ \hline
-    \end{tabular}
-    \caption{Tabela de tradução de binário para Gray com 2 bits.}
-    \label{tab:Alfabeto_Gray}
-\end{table}
-
-Algoritmo para obter o código de Gray~\ref{alg:Gray}
+A codificação de binário para Gray é baseada em um algoritmo recursivo~\ref{alg:Gray}, cujo recebe uma sequência de bits orientadas pelo bit mais importante (MSB). A recursão está na operação ``ou exlusivo'' (\textit{xor}), denotada pelo símbolo $\otimes$.
 
 % global change
 \SetKwInput{KwData}{Entrada}
@@ -92,21 +67,39 @@ Algoritmo para obter o código de Gray~\ref{alg:Gray}
     $n = 0$\;
     $K = \text{length}(b)$\;
     \While{$K > n$}{
-        \eIf{$K==n$}{
-            $g_{(K-n)} = b_{(K-n)}$ \;
-            }{
-            $g_{(K-n)} = b_{(K-n+1)} \otimes b_{(K-n)}$\;
-        }
-        $n=n+1$;\;
-     }
-     $g = flip(g)$\;
-     \caption{Codificação de Gray}
-     \label{alg:Gray}
+        \eIf{$K==n$}
+        {$g_{(K-n)} = b_{(K-n)}$ \;}
+        {$g_{(K-n)} = b_{(K-n+1)} \otimes b_{(K-n)}$\;}
+        $n=n+1$;\;}
+    $g = flip(g)$\;
+    \caption{Codificação de Gray}
+    \label{alg:Gray}
 \end{algorithm}
 
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Decimal & Binário & Gray & Decimal \\ \hline
+        0 & 00 & 00 & 0\\ \hline
+        1 & 01 & 01 & 1\\ \hline
+        2 & 10 & 11 & 3\\ \hline
+        3 & 11 & 10 & 2\\ \hline
+    \end{tabular}
+    \caption{Tabela de tradução de binário para Gray com 2 bits.}
+    \label{tab:Alfabeto_Gray}
+\end{table}
+
+A função \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/mybin2gray.m}{mybin2gray.m}.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth,clip=true,trim={1.5cm 8.5cm 1.8cm 8.3cm}]{C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf}
+    \caption{Exemplo de 4-QAM plot.}
+    \label{fig:4_QAM_plot}
+\end{figure}
+
 \clearpage
-
-
 
 \begin{figure}[!ht]
     \centering
@@ -127,9 +120,24 @@ Algoritmo para obter o código de Gray~\ref{alg:Gray}
 % -------------------------------------------------------------------
 \subsubsection{Demodulador}
 
-Considerando $\mathcal{E}_g = \int_{-\infty}^{\infty} |g(t)|^2 \,dt = 1$, a energia média da constelação pode ser calculada por $\epsilon$
 
+A função que decodifica o símbolo recebido é 
 
+A função \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/demapping_MQAM.m}{demapping\_MQAM.m}.
 
-%%
-% Please add the following required packages to your document preamble:
+constelação $M$-QAM consiste em uma função que recebe uma sequência de bits
+
+com ~\ref{eq:dist_eucliadiana}
+
+\begin{equation}
+    d_{mn} = \sqrt{|| s_m - s_n||^2}
+    \label{eq:dist_eucliadiana}
+\end{equation}
+
+Uma vez definidos os símbolos da constelação, a área de decisão é definida também. De forma prática,  ao símbolo selecionado é aquele que minimiza a distância euclidiana entre o símbolo do alfabeto. Essa região de decisão é definida pelo parâmetro, formado regiões com os símbolos do alfabeto no centro, altura e comprimento $d$.
+
+Dado essa distância $d$, é possível calcular a energia média da constelação com a função ....
+
+Que computa a equação
+
+% Considerando $\mathcal{E}_g = \int_{-\infty}^{\infty} |g(t)|^2 \,dt = 1$, a energia média da constelação pode ser calculada por $\epsilon$
