@@ -42,3 +42,7 @@ if plot_figures == true
         % saveas(h,['fig/Erro_Teorico_MQAM_extended'],'pdf');
     end
 end
+
+%% Salvando dados de SER e BER
+filename = ['Problema2_M_QAM'];
+save([filename,'.mat']);

@@ -25,8 +25,9 @@ for ii = 1:size(M,2)
     energia_media_QAM(1,ii) = energia_MQAM(M(ii),E_g);
     distancia_QAM(1,ii) = d_MQAM(M(ii),energia_media_QAM(1,ii));
     fprintf('--------------------- Modulacao %1d-QAM --------------------- \n', M(ii));
-    fprintf('Energia (E_media) = %1d \n', energia_media_QAM(1,ii));    
-    fprintf('Distancia (d) = %1d \n\n', distancia_QAM(1,ii));
+    fprintf('Energia (E_media) = %1d \n', energia_media_QAM(1,ii));
+    fprintf('Energia de bit (E_media_bit) = %1.2d \n', (energia_media_QAM(1,ii))/(3*log2(M(ii))));    
+    fprintf('Distancia (d) = %1.2d \n\n', distancia_QAM(1,ii));
 end
 fprintf('------------------------------------------------------------\n');
 % Since the distances are equal, let's define a standard for all cases;

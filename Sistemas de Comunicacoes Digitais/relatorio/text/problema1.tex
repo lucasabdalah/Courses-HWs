@@ -6,10 +6,10 @@ em que $g(t)$ é um pulso transmitido, $A_m^{(\text{real})}$ e $A_m^{(\text{imag
 
 Considere $\int_{-\inf}^{\inf} |g(t)|^2 \,dt = \mathcal{E}_{g} = 1$, isto é, o pulto $g(t)$ possui energia unitária. Suponha a transmissão de uma sequência de símbolo $\{s_{m}\}$ de tamanho $L = 26400 \text{bits}$
 \begin{enumerate}
-    \item Para $M = \{ 4, 16, 64\}$, determine a energia média $\mathcal{E}_{m}$ de cada constelação;
-    \item Para $M = \{ 4, 16, 64\}$, determine a distância mínima $d_{min}$ entre dois símbolos;
-    \item Para $M = \{ 4, 16, 64\}$, implemente o modulador (mapeamento bit-símbolo) usando a codificação de Gray;
-    \item Para $M = \{ 4, 16, 64\}$, implemente o demodulador (mapeamento símbolo-bit).
+    \item A energia média $\mathcal{E}_{m}$ de cada constelação;
+    \item A distância mínima $d_{min}$ entre dois símbolos;
+    \item O modulador (mapeamento bit-símbolo) usando a codificação de Gray;
+    \item O demodulador (mapeamento símbolo-bit).
 \end{enumerate}
 
 % -------------------------------------------------------------------
@@ -18,19 +18,9 @@ Considere $\int_{-\inf}^{\inf} |g(t)|^2 \,dt = \mathcal{E}_{g} = 1$, isto é, o 
 
 O desenvolvimento é citado em~\cite{Proakis, Cecilio}.
 
-\begin{table}[!ht]
-    \centering
-    \begin{tabular}{|c|c|c|c|}
-    \hline
-    $\mathcal{E}_{media}$ & $\mathcal{E}_{media(bit)}$ & $d$ \\ \hline
-     &  &  \\ 
-     $\frac{M-1}{3} \mathcal{E}_g$ & $ \frac{M-1}{3\log_2 M} \mathcal{E}_g$ & $\sqrt{\frac{3 \mathcal{E}_{media}}{2(M-1)}} $ \\ 
-     &  &  \\ \hline
-    \end{tabular}
-    \caption{Frequência da onda de entrada e a tensão máxima da saída do circuito integrador.}
-    \label{tab:QAM}
-\end{table}
+$$ \mathcal{E}_{media} = \frac{M-1}{3} \mathcal{E}_g$$
 
+$$ \mathcal{E}_{media(bit)} = \frac{M-1}{3\log_2 M} \mathcal{E}_g $$
 % -------------------------------------------------------------------
 \subsubsection{Distância Mínima entre Símbolos}
 
@@ -40,7 +30,31 @@ A distância eucliadiana entre os sinais na modulação QAM é
 $$ d_{mn} = \sqrt{|| s_m - s_n||^2}$$ 
 $$ = \sqrt{\frac{\mathcal{E}_g}{2}[(A_{mi} - A_{ni})^2 + (A_{mq} - A_{nq})^2]}$$
 
-\subsubsection{Modulador}
+$$\sqrt{\frac{3 \mathcal{E}_{media}}{2(M-1)}} $$
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    $M$-QAM & $\mathcal{E}_{media}$ & $\mathcal{E}_{media(bit)}$ & $d$ \\ \hline
+    & &  &  \\ 
+    $M$ & $\frac{M-1}{3} \mathcal{E}_g$ & $ \frac{M-1}{3\log_2 M} \mathcal{E}_g$ & $\sqrt{\frac{3 \mathcal{E}_{media}}{2(M-1)}} $ \\ 
+    & &  &  \\ \hline
+    & &  &  \\ 
+    $4$     & 1 & $1.67\times 10^{-1}$ & $\frac{\sqrt{2}}{2}$ \\ 
+    & &  &  \\ \hline
+    & &  &  \\ 
+    $16$    & 5 & $4.67\times 10^{-1}$ & $\frac{\sqrt{2}}{2}$ \\ 
+    & &  &  \\ \hline
+    & &  &  \\ 
+    $64$    & 21 & $1.17\times 10^{0}$ & $\frac{\sqrt{2}}{2}$ \\
+    & &  &  \\ \hline
+    \end{tabular}
+    \caption{Informações gerais calculadas para a modulação $M$-QAM.}
+    \label{tab:Resume_QAM}
+\end{table}
+
+\subsubsection{Modulador (Codificação de Gray)}
 
 \begin{figure}[!ht]
     \centering
@@ -56,7 +70,14 @@ $$ = \sqrt{\frac{\mathcal{E}_g}{2}[(A_{mi} - A_{ni})^2 + (A_{mq} - A_{nq})^2]}$$
     \label{fig:16_QAM_plot}
 \end{figure}
 
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth,clip=true,trim={1.5cm 8.5cm 1.8cm 8.3cm}]{C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/64_QAM_plot.pdf}
+    \caption{Exemplo de 64-QAM plot.}
+    \label{fig:64_QAM_plot}
+\end{figure}
 
+\clearpage
 
 % -------------------------------------------------------------------
 \subsubsection{Demodulador}
