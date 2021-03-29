@@ -1,17 +1,15 @@
 \section{Problema 2 - Probabilidade de Erro: \texorpdfstring{$M$}{M}-QAM}
-Para calcular a probabilidade de erro $P(e)$ de cada constelação~\ref{eq:Pe_M_QAM} desenvolvida em~\cite{Cecilio}.
+Para calcular a probabilidade de erro $P(e)$ de cada constelação~\ref{eq:Pe_M_QAM} é necessário computar a energia da cosnstelação e do ruído, respectivamente, $E_s$ e $N_o$, que é desenvolvida em~\cite{Cecilio}. A função~\href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema2/Pe_MQAM.m}{Pe\_MQAM.m} é utlizada para calcular a probabilidade de erro.
 \begin{equation}
     P(e) = 4 \left(1-\frac{1}{\sqrt{M}}\right) Q\left(\sqrt{\frac{3}{M-1}\frac{E_s}{N_0}}\right) - 4\left(1-\frac{1}{\sqrt{M}}\right)^2 Q^2\left(\sqrt{\frac{3}{M-1}\frac{E_s}{N_0}}\right)
     \label{eq:Pe_M_QAM}
 \end{equation}
 
-Para valores mais elevados de \textit{SNR}, a equação da probabilidade do $M$-QAM pode ser reduzida para~\ref{eq:Pe_reduzida_M_QAM}, pois o segundo termo ao quadrado passa a ser irrelevante.
+Para valores mais elevados de relação sinal-ruído(\textit{SNR}), a equação~\ref{eq:Pe_M_QAM} pode ser reduzida para~\ref{eq:Pe_reduzida_M_QAM}, pois o segundo termo ao quadrado se torna irrelevante.
 \begin{equation}
     P(e) = 4 \left(1-\frac{1}{\sqrt{M}}\right) Q\left(\sqrt{\frac{3}{M-1}\frac{E_s}{N_0}}\right)
     \label{eq:Pe_reduzida_M_QAM}
 \end{equation}
-
-Nas simulações realizadas, as curvas utilizando ambas as equações são bem semelhantes, principalmente para constelação 4-QAM, além de reduzir o custo computacional. Entretanto, para manter a fidedignidade do gráfico mostrado na~\ref{fig:Erro_Teorico_MQAM}, a probabilidade $P(e)$ é caculada a partir da equação completa~\ref{eq:Pe_M_QAM}.
 
 \begin{figure}[!ht]
     \centering
@@ -19,3 +17,7 @@ Nas simulações realizadas, as curvas utilizando ambas as equações são bem s
     \caption{Probabilidade de erro $(P(e))$ teórico $M$-QAM.}
     \label{fig:Erro_Teorico_MQAM}
 \end{figure}
+
+Nas simulações realizadas, os resultados são semelhantes, além de reduzir o custo computacional.
+
+Entretanto, para manter uma fidedignidade dos resultados o gráfico mostrado na figura~\ref{fig:Erro_Teorico_MQAM} a probabilidade $P(e)$ é caculada a partir da equação completa~\ref{eq:Pe_M_QAM}, variando a \textit{SNR} de 0:2:20 dB.

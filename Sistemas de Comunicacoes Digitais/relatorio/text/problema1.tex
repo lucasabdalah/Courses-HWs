@@ -1,16 +1,20 @@
 \section{Problema 1 - \texorpdfstring{$M$}{M}-QAM}
 
-Na modulação ,\textit{quadrature amplitude modulation} (QAM) os símbolos de informação são mapeados nas amplitudes das portadoras em fase e quadratura. Um modelo simplificado do sinal transmitido é visto como a equação~\ref{eq:QAM_coef}.
+Na modulação,\textit{quadrature amplitude modulation} (QAM) os símbolos de informação são mapeados nas amplitudes das portadoras em fase e quadratura. Um modelo simplificado do sinal transmitido é visto como a equação~\ref{eq:QAM_coef}.
 \begin{equation}
     s_m(t) = ( A_m^{(\text{real})} + j A_m^{(\text{imag})}) g(t)
     \label{eq:QAM_coef}
 \end{equation}
 
-No caso especial em que amplitudes $A_m^{(\text{real})}$ e $A_m^{(\text{imag})}$ assumem valores discretos no conjunto da equação~\ref{eq:QAM_retangular}, a constelação é chamada QAM retangular. O QAM retangular se aplica ao caso estudado a seguir, pois a quantidade de símbolos utilizados ($M = \{4, 16, 64\}$) se encaixam na condição e é utilizado para construção do alfabeto da modulação~\cite{Cecilio}. A função \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/const_MQAM.m}{const\_MQAM.m} foi desenvolvida de modo a construir o alfabeto como uma matriz para ordenar os símbolos da esquerda para direita em linhas de símbolos ímpares e, da direita para esquerda em linhas pares.
+% No caso especial em que amplitudes $A_m^{(\text{real})}$ e $A_m^{(\text{imag})}$ assumem valores discretos no conjunto da equação~\ref{eq:QAM_retangular}, a constelação é chamada QAM retangular. O QAM retangular se aplica ao caso estudado a seguir, pois a quantidade de símbolos utilizados ($M = \{4, 16, 64\}$) se encaixam na condição e é utilizado para construção do alfabeto da modulação~\cite{Cecilio}.
+%  A função \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/const_MQAM.m}{const\_MQAM.m} foi
+
+desenvolvida de modo a construir o alfabeto como uma matriz para ordenar os símbolos da esquerda para direita em linhas de símbolos ímpares e, da direita para esquerda em linhas pares.
 \begin{equation}
     A_m = \{(2m -\sqrt{M} - 1)d \}_{m=1}^{\sqrt{M}}
     \label{eq:QAM_retangular}
 \end{equation}
+
 
 % -------------------------------------------------------------------
 \subsection{Energia da Constelação} 

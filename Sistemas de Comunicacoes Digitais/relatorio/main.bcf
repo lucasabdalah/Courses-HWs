@@ -2349,11 +2349,10 @@
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="1">Cecilio</bcf:citekey>
-    <bcf:citekey order="2">Cecilio</bcf:citekey>
-    <bcf:citekey order="2">Proakis</bcf:citekey>
-    <bcf:citekey order="3">Gray</bcf:citekey>
+    <bcf:citekey order="1">Proakis</bcf:citekey>
+    <bcf:citekey order="2">Gray</bcf:citekey>
+    <bcf:citekey order="3">Cecilio</bcf:citekey>
     <bcf:citekey order="4">Cecilio</bcf:citekey>
-    <bcf:citekey order="5">Cecilio</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

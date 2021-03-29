@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.3.24)  29 MAR 2021 14:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.3.24)  29 MAR 2021 15:58
 entering extended mode
 **"c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.tex"
 (c:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/relatorio/main.tex
@@ -710,39 +710,39 @@ l.48     \clearpage
                     [1]) (c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\text/problema1.tex [2
 
 ] [3]
-<C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf, id=145, 614.295pt x 794.97pt>
+<C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf, id=142, 614.295pt x 794.97pt>
 File: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf Graphic file (type pdf)
 <use C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf>
-Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf  used on input line 108.
+Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf  used on input line 112.
 (pdftex.def)             Requested size: 390.0pt x 237.54802pt.
  [4
 
  <C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4_QAM_plot.pdf>]
-<C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf, id=159, 614.295pt x 794.97pt>
+<C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf, id=156, 614.295pt x 794.97pt>
 File: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf Graphic file (type pdf)
 <use C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf>
-Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf  used on input line 117.
+Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf  used on input line 121.
 (pdftex.def)             Requested size: 390.0pt x 237.54802pt.
-<C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/64_QAM_plot.pdf, id=161, 614.295pt x 794.97pt>
+<C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/64_QAM_plot.pdf, id=158, 614.295pt x 794.97pt>
 File: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/64_QAM_plot.pdf Graphic file (type pdf)
 <use C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/64_QAM_plot.pdf>
-Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/64_QAM_plot.pdf  used on input line 124.
+Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/64_QAM_plot.pdf  used on input line 128.
 (pdftex.def)             Requested size: 390.0pt x 237.54802pt.
  [5
 
  <C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16_QAM_plot.pdf> <C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/64_QAM_plot.pdf>]
-<C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4example_QAM_plot.pdf, id=179, 614.295pt x 794.97pt>
+<C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4example_QAM_plot.pdf, id=176, 614.295pt x 794.97pt>
 File: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4example_QAM_plot.pdf Graphic file (type pdf)
 <use C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4example_QAM_plot.pdf>
-Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4example_QAM_plot.pdf  used on input line 148.
+Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4example_QAM_plot.pdf  used on input line 152.
 (pdftex.def)             Requested size: 390.0pt x 237.54802pt.
  [6
 
  <C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/4example_QAM_plot.pdf>]
-<C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16example_QAM_plot.pdf, id=193, 614.295pt x 794.97pt>
+<C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16example_QAM_plot.pdf, id=190, 614.295pt x 794.97pt>
 File: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16example_QAM_plot.pdf Graphic file (type pdf)
 <use C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16example_QAM_plot.pdf>
-Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16example_QAM_plot.pdf  used on input line 157.
+Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema1/fig/16example_QAM_plot.pdf  used on input line 161.
 (pdftex.def)             Requested size: 390.0pt x 237.54802pt.
 ) [7
 
@@ -751,10 +751,10 @@ Overfull \hbox (3.49162pt too wide) detected at line 6
 []\OML/cmm/m/it/12 P\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 e\OT1/cmr/m/n/12 ) = 4 [] \OML/cmm/m/it/12 Q [] \OMS/cmsy/m/n/12   \OT1/cmr/m/n/12 4 [][] \OML/cmm/m/it/12 Q[] []
  []
 
-<C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema2/fig/Erro_Teorico_MQAM.pdf, id=208, 614.295pt x 794.97pt>
+<C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema2/fig/Erro_Teorico_MQAM.pdf, id=205, 614.295pt x 794.97pt>
 File: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema2/fig/Erro_Teorico_MQAM.pdf Graphic file (type pdf)
 <use C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema2/fig/Erro_Teorico_MQAM.pdf>
-Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema2/fig/Erro_Teorico_MQAM.pdf  used on input line 18.
+Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema2/fig/Erro_Teorico_MQAM.pdf  used on input line 16.
 (pdftex.def)             Requested size: 390.0pt x 237.54802pt.
 ) [8
 
@@ -762,22 +762,22 @@ Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de
 <C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/4QAM_25dB.pdf, id=287, 614.295pt x 794.97pt>
 File: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/4QAM_25dB.pdf Graphic file (type pdf)
 <use C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/4QAM_25dB.pdf>
-Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/4QAM_25dB.pdf  used on input line 5.
+Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/4QAM_25dB.pdf  used on input line 7.
 (pdftex.def)             Requested size: 390.0pt x 237.54802pt.
 <C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/16QAM_25dB.pdf, id=289, 614.295pt x 794.97pt>
 File: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/16QAM_25dB.pdf Graphic file (type pdf)
 <use C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/16QAM_25dB.pdf>
-Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/16QAM_25dB.pdf  used on input line 13.
+Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/16QAM_25dB.pdf  used on input line 16.
 (pdftex.def)             Requested size: 390.0pt x 237.54802pt.
 <C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/64QAM_25dB.pdf, id=291, 614.295pt x 794.97pt>
 File: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/64QAM_25dB.pdf Graphic file (type pdf)
 <use C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/64QAM_25dB.pdf>
-Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/64QAM_25dB.pdf  used on input line 20.
+Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/64QAM_25dB.pdf  used on input line 23.
 (pdftex.def)             Requested size: 390.0pt x 237.54802pt.
 <C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/Erro_teoricaxAWGN_MQAM.pdf, id=293, 614.295pt x 794.97pt>
 File: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/Erro_teoricaxAWGN_MQAM.pdf Graphic file (type pdf)
 <use C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/Erro_teoricaxAWGN_MQAM.pdf>
-Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/Erro_teoricaxAWGN_MQAM.pdf  used on input line 28.
+Package pdftex.def Info: C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema3/fig/Erro_teoricaxAWGN_MQAM.pdf  used on input line 31.
 (pdftex.def)             Requested size: 390.0pt x 237.54802pt.
 ) [9
 
@@ -843,13 +843,13 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 Here is how much of TeX's memory you used:
  20687 strings out of 481025
  362910 string characters out of 2899974
- 1091634 words of memory out of 3000000
+ 1092634 words of memory out of 3000000
  37538 multiletter control sequences out of 15000+600000
  417256 words of font info for 83 fonts, out of 8000000 for 9000
  117 hyphenation exceptions out of 8191
  76i,17n,77p,1161b,1695s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\lukin\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/lukin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on "c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.pdf" (20 pages, 966414 bytes).
+Output written on "c:/Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\relatorio\main.pdf" (20 pages, 966589 bytes).
 PDF statistics:
  812 PDF objects out of 1000 (max. 8388607)
  74 named destinations out of 1000 (max. 500000)
