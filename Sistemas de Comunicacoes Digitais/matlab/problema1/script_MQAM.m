@@ -10,8 +10,8 @@ close all; clearvars; clc; % Clear the matlab ambient
 % addpath 'problema1' % Local path
 addpath 'C:\Users\lukin\Documents\GitHub\Courses-HWs\Sistemas de Comunicacoes Digitais\matlab'
 %% General Setup
-plot_figures = true;    % - Plotr ou nao
-save_figures = false;   % - Salvar o plot ou nao
+plot_figures = false;    % - Plotr ou nao
+save_figures = true;   % - Salvar o plot ou nao
 teste_map = false;      % - Entrar ou nao no teste das funcoes map e demap
 
 %% Problema 1 - Calculo da energia media (E_m) e da distancia entre os simbolos
@@ -86,15 +86,15 @@ end
 %% Exemplo com constelacao 16-QAM
 if teste_map == false;
     example = 2;
-    Nsymbols = 100;
-    figure;
+    Nsymbols = 50;
+    h = figure;
     scatter_MQAM(const_MQAM(M(example),d),true,false,true);
     hold on 
 
     for ii = 1:Nsymbols
         %% Signal coef
-        a = randn(1)/sqrt(1);
-        b = randn(1)/sqrt(1);
+        a = randn(1)/sqrt(2);
+        b = randn(1)/sqrt(2);
         r = a + 1j*b;
         %% Demapping 
         [symb,bits]=demapping_MQAM(r,M(example),d);
@@ -107,6 +107,18 @@ if teste_map == false;
         'Color','black',...
         'LineStyle','--');
     end
+    ax = example*d+0.5;
+    ay = example*d+0.5;
+    xlim([-ax-d,ax+d]);
+    ylim([-ay-d,ay+log2(M(example))*d/2]);
+    title(['Constelacao ',num2str(M(example)),'-QAM: Euclidean Distance']);
+    str = {[num2str(M(example)),'QAM constellation'], 'Symbol', 'Euclidean Distance'};
+    legend(str,'Location','north', 'Orientation','Horizontal');
+    
+    if save_figures == true
+        saveas(h,['fig/',num2str(M(example)),'example_QAM_plot'],'pdf');
+    end
+
     hold off
 
 end;
