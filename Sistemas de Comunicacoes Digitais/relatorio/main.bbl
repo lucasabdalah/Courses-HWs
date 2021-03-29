@@ -19,33 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
-    \entry{Proakis}{book}{}
-      \name{author}{2}{}{%
-        {{hash=5fe41cc224eb8b59f5bb9f1a7ba509f2}{%
-           family={Proakis},
-           familyi={P\bibinitperiod},
-           given={John\bibnamedelima G},
-           giveni={J\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
-        {{hash=b1e7a6c73f69c6c16233dbf5c83a00de}{%
-           family={Salehi},
-           familyi={S\bibinitperiod},
-           given={Masoud},
-           giveni={M\bibinitperiod}}}%
-      }
-      \strng{namehash}{ab367421912bdf03ed020bffc5ad1f47}
-      \strng{fullhash}{ab367421912bdf03ed020bffc5ad1f47}
-      \strng{bibnamehash}{ab367421912bdf03ed020bffc5ad1f47}
-      \strng{authorbibnamehash}{ab367421912bdf03ed020bffc5ad1f47}
-      \strng{authornamehash}{ab367421912bdf03ed020bffc5ad1f47}
-      \strng{authorfullhash}{ab367421912bdf03ed020bffc5ad1f47}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{edition}{5}
-      \field{title}{Digital Communications}
-      \field{year}{1995}
-    \endentry
     \entry{Cecilio}{book}{}
       \name{author}{1}{}{%
         {{hash=8810d76a2355d440601ac6643f7f8b81}{%
@@ -67,6 +40,55 @@
       \field{edition}{1}
       \field{title}{Comunicação Digital}
       \field{year}{2007}
+    \endentry
+    \entry{Proakis}{book}{}
+      \name{author}{2}{}{%
+        {{hash=5fe41cc224eb8b59f5bb9f1a7ba509f2}{%
+           family={Proakis},
+           familyi={P\bibinitperiod},
+           given={John\bibnamedelima G},
+           giveni={J\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=b1e7a6c73f69c6c16233dbf5c83a00de}{%
+           family={Salehi},
+           familyi={S\bibinitperiod},
+           given={Masoud},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{fullhash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{bibnamehash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{authorbibnamehash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{authornamehash}{ab367421912bdf03ed020bffc5ad1f47}
+      \strng{authorfullhash}{ab367421912bdf03ed020bffc5ad1f47}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{5}
+      \field{title}{Digital Communications}
+      \field{year}{1995}
+    \endentry
+    \entry{Gray}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=6eebd2539ce95517a67e1a9dd175e3d6}{%
+           family={Reddy},
+           familyi={R\bibinitperiod},
+           given={Ankith},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{6eebd2539ce95517a67e1a9dd175e3d6}
+      \strng{fullhash}{6eebd2539ce95517a67e1a9dd175e3d6}
+      \strng{bibnamehash}{6eebd2539ce95517a67e1a9dd175e3d6}
+      \strng{authorbibnamehash}{6eebd2539ce95517a67e1a9dd175e3d6}
+      \strng{authornamehash}{6eebd2539ce95517a67e1a9dd175e3d6}
+      \strng{authorfullhash}{6eebd2539ce95517a67e1a9dd175e3d6}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.tutorialspoint.com/conversion-of-binary-to-gray-code}}
+      \field{note}{Accessed: 2021-03-26}
+      \field{title}{Conversion of Binary to Gray Code}
     \endentry
   \enddatalist
 \endrefsection
