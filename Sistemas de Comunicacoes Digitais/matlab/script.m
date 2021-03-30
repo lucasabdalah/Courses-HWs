@@ -8,8 +8,6 @@ close all; clearvars; clc; % Clear the matlab ambient
 addpath 'problema1' % Local path
 addpath 'problema2' % Local path
 addpath 'problema3' % Local path
-addpath 'problema4' % Local path
-addpath 'problema5' % Local path
 
 script_MQAM;
 disp('>> pressione qualquer botao para continuar para questao 2');
@@ -47,6 +45,13 @@ script_prob;
 disp('>> pressione qualquer botao para continuar para questao 4 - parte 3');
 pause;
 close all; clearvars; clc; % Clear the matlab ambient
+
+addpath 'problema1' % Local path
+addpath 'problema2' % Local path
+addpath 'problema3' % Local path
+addpath 'problema4\parte1' % Local path
+addpath 'problema4\parte2' % Local path
+addpath 'problema4\parte3' % Local path
 
 script_teoricaxAWGN;
 disp('>> pressione qualquer botao para continuar para questao 5');
