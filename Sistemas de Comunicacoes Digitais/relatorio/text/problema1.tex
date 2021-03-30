@@ -7,7 +7,7 @@ Na modulação,\textit{quadrature amplitude modulation} (QAM) os símbolos de in
     \label{eq:QAM_coef}
 \end{equation}
 
-No caso especial em que amplitudes $A_m^{(\text{real})}$ e $A_m^{(\text{imag})}$ assumem valores discretos no conjunto da equação~\ref{eq:QAM_retangular}, a constelação é chamada QAM retangular. O QAM retangular se aplica ao caso estudado a seguir, pois a quantidade de símbolos utilizados ($M = \{4, 16, 64\}$) se encaixam na condição e é utilizado para construção do alfabeto da modulação~\cite{Cecilio}. A função \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/const_MQAM.m}{\colorbox{gray!10}{\color{red}const\_MQAM.m}} foi
+No caso especial em que amplitudes $A_m^{(\text{real})}$ e $A_m^{(\text{imag})}$ assumem valores discretos no conjunto da equação~\ref{eq:QAM_retangular}, a constelação é chamada QAM retangular. O QAM retangular se aplica ao caso estudado a seguir, pois a quantidade de símbolos utilizados ($M = \{4, 16, 64\}$) se encaixam na condição e é utilizado para construção do alfabeto da modulação~\cite{Cecilio}. A função \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/const_MQAM.m}{\colorbox{gray!20}{\color{red}const\_MQAM.m}} foi
 
 desenvolvida de modo a construir o alfabeto como uma matriz para ordenar os símbolos da esquerda para direita em linhas de símbolos ímpares e, da direita para esquerda em linhas pares.
 \begin{equation}
@@ -23,7 +23,7 @@ Para calcular a energia média, é suficiente de calcular a equação~\ref{eq:E_
     \mathcal{E}_{media} = \frac{M-1}{3} \mathcal{E}_g
     \label{eq:E_media}
 \end{equation}
-Sendo $g(t)$ o pulso de energia unitária, $\mathcal{E}_g = 1$. O resultado é computado pela função função \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/energia_MQAM.m}{\colorbox{gray!10}{\color{red}energia\_MQAM.m}} para cada constelação QAM e é registrado na Tabela~\ref{tab:Resume_QAM}.
+Sendo $g(t)$ o pulso de energia unitária, $\mathcal{E}_g = 1$. O resultado é computado pela função função \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/energia_MQAM.m}{\colorbox{gray!20}{\color{red}energia\_MQAM.m}} para cada constelação QAM e é registrado na Tabela~\ref{tab:Resume_QAM}.
 
 A relação entre $\mathcal{E}_{media} = \mathcal{E}_b \log_2{M}$ permite calcular diretamente a energia média de bit ($\mathcal{E}_b$), resultando na equação~\ref{eq:E_b}
 \begin{equation}
@@ -40,7 +40,7 @@ O parâmetro $d$ é a distância entre os símbolos adjacentes, e pode ser obtid
     \end{split}
     \label{eq:parametro_d}
 \end{equation}
-Essa distância é computada pela função \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/d_MQAM.m}{\colorbox{gray!10}{\color{red}d\_MQAM.m}} e registrada na Tabela~\ref{tab:Resume_QAM}.
+Essa distância é computada pela função \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/d_MQAM.m}{\colorbox{gray!20}{\color{red}d\_MQAM.m}} e registrada na Tabela~\ref{tab:Resume_QAM}.
 
 \begin{table}[!ht]
     \centering
@@ -60,9 +60,9 @@ Essa distância é computada pela função \href{https://raw.githubusercontent.c
 \clearpage
 % --------------------------------------------------------------
 \subsection{Modulador (Codificação de Gray)}
-O mapeador da constelação $M$-QAM consiste em uma função  que recebe uma sequência de bits e retorna o símbolo equivalente: \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/mapping_MQAM.m}{\colorbox{gray!10}{\color{red}mapping\_MQAM.m}}. Dentro desta função, é criado um alfabeto de código binário e na sequência ele é convertido convertido em Gray com \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/gray_const.m}{\colorbox{gray!10}{\color{red}gray\_const.m}}. 
+O mapeador da constelação $M$-QAM consiste em uma função  que recebe uma sequência de bits e retorna o símbolo equivalente: \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/mapping_MQAM.m}{\colorbox{gray!20}{\color{red}mapping\_MQAM.m}}. Dentro desta função, é criado um alfabeto de código binário e na sequência ele é convertido convertido em Gray com \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/gray_const.m}{\colorbox{gray!20}{\color{red}gray\_const.m}}. 
 
-Esta codificação é baseada em um algoritmo recursivo~\ref{alg:Gray}, cujo recebe uma sequência de bits orientadas pelo bit mais importante (MSB)~\cite{Gray}. A recursão está na operação ``ou exlusivo'' (\textit{xor}), denotada pelo símbolo $(\otimes)$. Este cálculo é executado na função \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/mybin2gray.m}{\colorbox{gray!10}{\color{red}mybin2gray.m}}.
+Esta codificação é baseada em um algoritmo recursivo~\ref{alg:Gray}, cujo recebe uma sequência de bits orientadas pelo bit mais importante (MSB)~\cite{Gray}. A recursão está na operação ``ou exlusivo'' (\textit{xor}), denotada pelo símbolo $(\otimes)$. Este cálculo é executado na função \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/mybin2gray.m}{\colorbox{gray!20}{\color{red}mybin2gray.m}}.
 
 % \clearpage
 
@@ -139,7 +139,7 @@ O alfabeto da constelação $M$-QAM é gerada e uma vez estes definidos, a área
     \label{eq:dist_eucliadiana}
 \end{equation}
 
-A função que executa estes comando é a \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/demapping_MQAM.m}{\colorbox{gray!10}{\color{red}demapping\_MQAM.m}} e ela retorna o símbolo decodificado e os bits equivalente do alfabeto de Gray. 
+A função que executa estes comando é a \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/demapping_MQAM.m}{\colorbox{gray!20}{\color{red}demapping\_MQAM.m}} e ela retorna o símbolo decodificado e os bits equivalente do alfabeto de Gray. 
 
 As figuras~\ref{fig:4_QAM_d_E} e \ref{fig:16_QAM_d_E} mostram uma geração de sequência de 50 símbolos aleatórios (\textit{i.i.d}) passando pelo demodulador com o traçado da distância euclidiana entre o símbolo recebido e o equivalente escolhido na constelação.
 
