@@ -1,5 +1,5 @@
-\section{Problema 2 - Probabilidade de Erro: \texorpdfstring{$M$}{M}-QAM}
-Para calcular a probabilidade de erro $P(e)$ de cada constelação~\ref{eq:Pe_M_QAM} é necessário computar a energia da cosnstelação e do ruído, respectivamente, $E_s$ e $N_o$, que é desenvolvida em~\cite{Cecilio}. A função~\href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema2/Pe_MQAM.m}{\colorbox{cyan!10}{Pe\_MQAM.m}} é utlizada para calcular a probabilidade de erro.
+\section{Probabilidade de Erro: \texorpdfstring{$M$}{M}-QAM}
+Para calcular a probabilidade de erro $P(e)$ de cada constelação~\ref{eq:Pe_M_QAM} é necessário computar a energia da cosnstelação e do ruído, respectivamente, $E_s$ e $N_o$, que é desenvolvida em~\cite{Cecilio}. A função~\href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema2/Pe_MQAM.m}{\colorbox{gray!10}{\color{red}Pe\_MQAM.m}} é utlizada para calcular a probabilidade de erro.
 \begin{equation}
     P(e) = 4 \left(1-\frac{1}{\sqrt{M}}\right) Q\left(\sqrt{\frac{3}{M-1}\frac{E_s}{N_0}}\right) - 4\left(1-\frac{1}{\sqrt{M}}\right)^2 Q^2\left(\sqrt{\frac{3}{M-1}\frac{E_s}{N_0}}\right)
     \label{eq:Pe_M_QAM}

@@ -1,4 +1,4 @@
-\section{Problema 4 - Modulação \texorpdfstring{$M$}{M}-PSK}
+\section{Modulação \texorpdfstring{$M$}{M}-PSK}
 
 \subsection{Introdução}
 O esquema de modulação \textit{phase-shift keying} (PSK) tem os símbolos de seu alfabeto com mesma amplitude, mas com fases diferentes para cada mensagem, podendo ser escrito para $M > 2$ de acordo com a equação~\ref{eq:PSK_si}
@@ -94,7 +94,7 @@ A função que decodifica um símbolo tem como entrada o próprio símbolo: $A_n
 
 O alfabeto da constelação $M$-PSK é gerado e uma vez que estes símbolos são definidos, a área de decisão é desenhada em função de $M$ e $\mathcal{E}_{media}$. Basicamente, o símbolo selecionado é aquele que minimiza a distância euclidiana entre o símbolo recebido e o do alfabeto, como mostra a equação~\ref{eq:dist_eucliadiana} discutida nas seções anteriores.
 
-A função que executa estes comando é a \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/demapping_MQAM.m}{\colorbox{cyan!10}{demapping\_MQAM.m}} e ela retorna o símbolo decodificado e os bits equivalente do alfabeto de Gray. 
+A função que executa estes comando é a \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema1/demapping_MQAM.m}{\colorbox{gray!20}{\color{red}demapping\_MQAM.m}} e ela retorna o símbolo decodificado e os bits equivalente do alfabeto de Gray. 
 
 % \clearpage 
 %----------------------------------------------------------
@@ -106,7 +106,7 @@ Para calcular a probabilidade de erro $P(e)$ de cada constelação~\ref{eq:Pe_M_
     \label{eq:Pe_M_PSK}
 \end{equation}
 
-A função~\href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema4/parte2/Pe_MPSK.m}{\colorbox{cyan!10}{Pe\_MPSK.m}} é utlizada para calcular a probabilidade de erro. O gráfico mostrado na figura~\ref{fig:Erro_Teorico_MPSK} mostra a probabilidade $P(e)$ caculada a partir da equação ~\ref{eq:Pe_M_PSK}, variando a \textit{SNR} de 0:2:20 dB.
+A função~\href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema4/parte2/Pe_MPSK.m}{\colorbox{gray!20}{\color{red}Pe\_MPSK.m}} é utlizada para calcular a probabilidade de erro. O gráfico mostrado na figura~\ref{fig:Erro_Teorico_MPSK} mostra a probabilidade $P(e)$ caculada a partir da equação ~\ref{eq:Pe_M_PSK}, variando a \textit{SNR} de 0:2:20 dB.
 
 \begin{figure}[!ht]
     \centering
@@ -130,6 +130,15 @@ Seguindo o mesmo modelo utilizado para o caso $M$-QAM da equação~\ref{eq:AWGM_
     \label{fig:4PSK_25dB}
 \end{figure}
 
+\subsubsection{Experimento de Transmissão}
+
+ O experimento consiste em realizar uma transmissão de uma sequência $s_m$ de tamanho $L = 264000 \text{bits}$ pelo modelo do canal RAGB com as constelações $M$-PSK, variando a \textit{SNR} de 0 a 20 dB com passo 2.
+
+Ao traçar as curvas teóricas de probabilidade de erro de símbolo $P(e)$ e a taxa de erro de símbolo \textit{SER} na figura~\ref{fig:Erro_teoricaxAWGN_MPSK} é possível observar que os valores teóricos e simulados são idênticos, corroborando o embasamento desenvolvido nas seções anteriores.
+
+Estes resultados são gerados com a rotina \href{https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/SCD/Sistemas%20de%20Comunicacoes%20Digitais/matlab/problema4/parte3/script_teoricaxAWGN.m}{\colorbox{gray!10}{\color{red} script\_teoricaxAWGN.m}}, que chama os dados já computados nas seções anteriores e traça as curvas em um mesmo gráfico.
+
+\clearpage
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth,clip=true,trim={1.5cm 8.5cm 1.8cm 8.3cm}]{C:/Users/lukin/Documents/GitHub/Courses-HWs/Sistemas de Comunicacoes Digitais/matlab/problema4/parte3/fig/Erro_teoricaxAWGN_MPSK.pdf}

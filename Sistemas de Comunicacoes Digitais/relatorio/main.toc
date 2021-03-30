@@ -1,7 +1,7 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \babel@toc {brazilian}{}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1}Problema 1 - $M$-QAM}{2}{section.1}%
+\contentsline {section}{\numberline {1}Modulação $M$-QAM}{2}{section.1}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.1}Introdução}{2}{subsection.1.1}%
 \defcounter {refsection}{0}\relax 
@@ -13,15 +13,15 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.5}Demodulador}{6}{subsection.1.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2}Problema 2 - Probabilidade de Erro: $M$-QAM}{8}{section.2}%
+\contentsline {section}{\numberline {2}Probabilidade de Erro: $M$-QAM}{8}{section.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Problema 3 - Canal RAGB: $M$-QAM}{9}{section.3}%
+\contentsline {section}{\numberline {3}Canal RAGB: $M$-QAM}{9}{section.3}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.1}Modelo}{9}{subsection.3.1}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.2}Experimento de Transmissão}{11}{subsection.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Problema 4 - Modulação $M$-PSK}{12}{section.4}%
+\contentsline {section}{\numberline {4}Modulação $M$-PSK}{12}{section.4}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.1}Introdução}{12}{subsection.4.1}%
 \defcounter {refsection}{0}\relax 
@@ -39,8 +39,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {4.3.1}Modelo}{16}{subsubsection.4.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Problema 5 - Comparativo $M$-QAM x $M$-PSK}{18}{section.5}%
+\contentsline {subsubsection}{\numberline {4.3.2}Experimento de Transmissão}{16}{subsubsection.4.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Conclusão e Resultados}{20}{section.6}%
+\contentsline {section}{\numberline {5}Comparativo $M$-QAM vs. $M$-PSK}{18}{section.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Refer\^encias}{21}{section*.25}%
+\contentsline {section}{Refer\^encias}{20}{section*.25}%
