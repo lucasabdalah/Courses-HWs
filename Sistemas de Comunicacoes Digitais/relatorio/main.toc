@@ -1,20 +1,46 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \babel@toc {brazilian}{}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1}Introdução}{3}{section.1}%
+\contentsline {section}{\numberline {1}Modulação $M$-QAM}{2}{section.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2}Simulações}{3}{section.2}%
+\contentsline {subsection}{\numberline {1.1}Introdução}{2}{subsection.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1}Problema 1 - $M$-QAM}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {1.2}Energia da Constelação}{2}{subsection.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.1}Energia da Constelação}{3}{subsubsection.2.1.1}%
+\contentsline {subsection}{\numberline {1.3}Distância Mínima entre Símbolos}{3}{subsection.1.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.2}Distância Mínima entre Símbolos}{4}{subsubsection.2.1.2}%
+\contentsline {subsection}{\numberline {1.4}Modulador (Codificação de Gray)}{4}{subsection.1.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.3}Modulador}{4}{subsubsection.2.1.3}%
+\contentsline {subsection}{\numberline {1.5}Demodulador}{6}{subsection.1.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.4}Demodulador}{4}{subsubsection.2.1.4}%
+\contentsline {section}{\numberline {2}Probabilidade de Erro: $M$-QAM}{8}{section.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Conclusão e Resultados}{4}{section.3}%
+\contentsline {section}{\numberline {3}Canal RAGB: $M$-QAM}{9}{section.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Refer\^encias}{6}{section*.10}%
+\contentsline {subsection}{\numberline {3.1}Modelo}{9}{subsection.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2}Experimento de Transmissão}{11}{subsection.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}Modulação $M$-PSK}{12}{section.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1}Introdução}{12}{subsection.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.1.1}Energia da Constelação}{12}{subsubsection.4.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.1.2}Distância Mínima entre Símbolos}{12}{subsubsection.4.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.1.3}Modulador (Codificação de Gray)}{13}{subsubsection.4.1.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.1.4}Demodulador}{13}{subsubsection.4.1.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2}Probabilidade de Erro: $M$-PSK}{15}{subsection.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3}Canal RAGB: $M$-PSK}{16}{subsection.4.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.3.1}Modelo}{16}{subsubsection.4.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.3.2}Experimento de Transmissão}{16}{subsubsection.4.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}Comparativo $M$-QAM vs. $M$-PSK}{18}{section.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Refer\^encias}{20}{section*.25}%

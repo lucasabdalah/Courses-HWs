@@ -19,32 +19,27 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
-    \entry{Fonseca}{misc}{}
-      \name{author}{2}{}{%
-        {{hash=db622d388bff2f2c1f23c1efaa8ca9fb}{%
-           family={Fonseca},
-           familyi={F\bibinitperiod},
-           given={Pedro},
-           giveni={P\bibinitperiod}}}%
-        {{hash=4163939a0ad89e831ac3de2fb12a63ec}{%
-           family={Carreira},
-           familyi={C\bibinitperiod},
-           given={Rita},
-           giveni={R\bibinitperiod}}}%
+    \entry{Cecilio}{book}{}
+      \name{author}{1}{}{%
+        {{hash=8810d76a2355d440601ac6643f7f8b81}{%
+           family={Pimentel},
+           familyi={P\bibinitperiod},
+           given={Cecílio},
+           giveni={C\bibinitperiod}}}%
       }
-      \strng{namehash}{bef3dbb4252b3e2b883504e09e270791}
-      \strng{fullhash}{bef3dbb4252b3e2b883504e09e270791}
-      \strng{bibnamehash}{bef3dbb4252b3e2b883504e09e270791}
-      \strng{authorbibnamehash}{bef3dbb4252b3e2b883504e09e270791}
-      \strng{authornamehash}{bef3dbb4252b3e2b883504e09e270791}
-      \strng{authorfullhash}{bef3dbb4252b3e2b883504e09e270791}
+      \strng{namehash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{fullhash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{bibnamehash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{authorbibnamehash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{authornamehash}{8810d76a2355d440601ac6643f7f8b81}
+      \strng{authorfullhash}{8810d76a2355d440601ac6643f7f8b81}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{howpublished}{\url{http://intranet.deei.fct.ualg.pt/AC/Sebenta_Online/www.isr.uc.pt/~paulino/cse/Sebenta_Online/cap_15/ampopid.htm}}
-      \field{note}{Accessed: 2021-02-16}
-      \field{title}{AmpOp Ideal}
+      \field{edition}{1}
+      \field{title}{Comunicação Digital}
+      \field{year}{2007}
     \endentry
     \entry{Proakis}{book}{}
       \name{author}{2}{}{%
@@ -73,27 +68,27 @@
       \field{title}{Digital Communications}
       \field{year}{1995}
     \endentry
-    \entry{Cecilio}{book}{}
+    \entry{Gray}{misc}{}
       \name{author}{1}{}{%
-        {{hash=8810d76a2355d440601ac6643f7f8b81}{%
-           family={Pimentel},
-           familyi={P\bibinitperiod},
-           given={Cecílio},
-           giveni={C\bibinitperiod}}}%
+        {{hash=6eebd2539ce95517a67e1a9dd175e3d6}{%
+           family={Reddy},
+           familyi={R\bibinitperiod},
+           given={Ankith},
+           giveni={A\bibinitperiod}}}%
       }
-      \strng{namehash}{8810d76a2355d440601ac6643f7f8b81}
-      \strng{fullhash}{8810d76a2355d440601ac6643f7f8b81}
-      \strng{bibnamehash}{8810d76a2355d440601ac6643f7f8b81}
-      \strng{authorbibnamehash}{8810d76a2355d440601ac6643f7f8b81}
-      \strng{authornamehash}{8810d76a2355d440601ac6643f7f8b81}
-      \strng{authorfullhash}{8810d76a2355d440601ac6643f7f8b81}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \strng{namehash}{6eebd2539ce95517a67e1a9dd175e3d6}
+      \strng{fullhash}{6eebd2539ce95517a67e1a9dd175e3d6}
+      \strng{bibnamehash}{6eebd2539ce95517a67e1a9dd175e3d6}
+      \strng{authorbibnamehash}{6eebd2539ce95517a67e1a9dd175e3d6}
+      \strng{authornamehash}{6eebd2539ce95517a67e1a9dd175e3d6}
+      \strng{authorfullhash}{6eebd2539ce95517a67e1a9dd175e3d6}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{edition}{1}
-      \field{title}{Comunicação Digital}
-      \field{year}{2007}
+      \field{howpublished}{\url{https://www.tutorialspoint.com/conversion-of-binary-to-gray-code}}
+      \field{note}{Accessed: 2021-03-26}
+      \field{title}{Conversion of Binary to Gray Code}
     \endentry
   \enddatalist
 \endrefsection

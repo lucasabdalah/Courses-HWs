@@ -28,7 +28,7 @@ E_g = 1; energia_media_QAM = energia_MQAM(M,E_g);
 d = d_MQAM(M,energia_media_QAM);
 % --------------------------------------
 %% Creating a Gray alphabet for matching the M-QAM constellation
-const_QAM = const_MQAM(M,d);        % Constellation M-QAM
+const_QAM = const_MQAM(M,d);            % Constellation M-QAM
 gray_alfabeto = gray_const(M,false);    % Gray alphabet
 
 % To compare gray_alfabeto with the entry bits, we can use xor(,) and get the line where all logical elements are equal.

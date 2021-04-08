@@ -2348,9 +2348,16 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">refs.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1">Fonseca</bcf:citekey>
-    <bcf:citekey order="2">Proakis</bcf:citekey>
+    <bcf:citekey order="1">Cecilio</bcf:citekey>
     <bcf:citekey order="2">Cecilio</bcf:citekey>
+    <bcf:citekey order="2">Proakis</bcf:citekey>
+    <bcf:citekey order="3">Gray</bcf:citekey>
+    <bcf:citekey order="4">Cecilio</bcf:citekey>
+    <bcf:citekey order="5">Proakis</bcf:citekey>
+    <bcf:citekey order="6">Cecilio</bcf:citekey>
+    <bcf:citekey order="7">Cecilio</bcf:citekey>
+    <bcf:citekey order="7">Proakis</bcf:citekey>
+    <bcf:citekey order="8">Cecilio</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
