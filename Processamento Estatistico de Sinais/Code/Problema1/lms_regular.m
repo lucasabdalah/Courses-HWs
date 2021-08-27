@@ -1,50 +1,29 @@
-function [y,e,w] = lms_regular(input)
+function [y,e,w] = lms_regular(x, L, mu, start_state)
 % lms_regular - Compute the classical LMS algorithm
 %
-% Syntax: [y,e,w] = lms_regular(input)
+% Syntax: [y,e,w] = lms_regular(x, L, mu, start_state)
 %
-% Long description
-    
+% 2021/08/26 - Lucas Abdalah
+
+N = length(x); 
+
+if isequal(start_state, 'zeros')
+    w = zeros(N - L, L);    
 end
 
-%% 
-equalizer_length = 35;
-mu = 0.4;
-
-% Equalizer initialization
-w  = zeros(equalizer_length,1); % equalizer coefficients (column) 
-u  = zeros(1,equalizer_length); 
-e = zeros(1,N); % error vector
-num_errors=0;
-
-%  Adaptive Equalization
-
-% Training mode
-for i = 1:training+Delta
-   u  = [r(i) u(1:equalizer_length-1)];
-   hat_s(i) = u*w;
-   d(i) = train_data(i); % training
-   e(i) = d(i)- hat_s(i);
-   w = w + mu*e(i)*u';
+if isequal(start_state, 'random')
+    w = randn(N - L, L);
 end
 
+d = x(L + 1:end);
+e = zeros(N - L, 1);
+y = zeros(N - L, 1);
 
-def lmsPred(x,l,u,N):
+% LMS - Update the weights 
+for ii = 1:1:(N - L - 1)
+    y(ii) = w(ii,:) * x(ii:ii+L-1).';
+    e(ii) = d(ii) - y(ii); 
+    w(ii + 1, :) = w(ii, :) + 2 * mu * e(ii) * x(ii:ii+L-1);
+end 
 
-    xd= np.block([np.zeros((1,l)), x]).T
-    y=np.zeros((len(xd),1))
-    xn=np.zeros((N+1,1))
-    xn = np.matrix(xn)
-    wn=np.random.rand(N+1,1)/10
-    M=len(xd)
-
-    for n in range(0,M):
-        xn = np.block([[xd[n]], [xn[0:N]]]);
-        y[n]= np.matmul(wn.T, xn);
-        if(n>M-l-1):
-            e =0;
-        else:
-            e=int(x[n]-y[n]);
-        wn = wn + 2*u*e*xn;
-        
-    return y,wn;
+end

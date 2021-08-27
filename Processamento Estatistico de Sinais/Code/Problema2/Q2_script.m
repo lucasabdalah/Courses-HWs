@@ -1,5 +1,5 @@
 %% AP2 de PES
-% Questao 2.
+% Questao 2
 %
 % Q2_script.m
 %

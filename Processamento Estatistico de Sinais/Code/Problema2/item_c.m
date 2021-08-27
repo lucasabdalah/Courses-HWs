@@ -37,5 +37,5 @@ xticks(0:.1:1);
 [M_R I_R] = max(R);
 x_arrow = [0.53,0.53];
 y_arrow = [0.8, 0.9];
-a_arrow = annotation('textarrow',x_arrow,y_arrow,'String',['a = ',num2str(a(I_R))])
-% saveas(h,'item_c_Minimax.png');
+a_arrow = annotation('textarrow',x_arrow,y_arrow,'String',['a = ',num2str(a(I_R))]);
+% saveas(h,'item_c_Minimax.svg');
