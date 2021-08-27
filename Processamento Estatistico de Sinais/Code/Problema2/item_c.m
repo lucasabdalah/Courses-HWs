@@ -1,6 +1,8 @@
 %% AP2 de PES
 % Questao 2. c)
 %
+% item_c.m
+%
 % 2021/08/23 - Lucas Abdalah
 
 close all; clearvars; clc; % Clear the matlab ambient
