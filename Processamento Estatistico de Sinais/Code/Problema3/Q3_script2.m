@@ -11,7 +11,7 @@ close all; clearvars; clc; % Clear the matlab ambient
 rng('default');
 
 %% General setup
-L = 20; % Filter Length (Number of coefficients)
+L = 15; % Filter Length (Number of coefficients)
 delta = 15; % Delay
 qam = 16; % 16-QAM
 mu = 0.4;
@@ -121,6 +121,7 @@ plot(mean(abs(e)) .* ones(size(abs(e))),...
 'LineWidth', 2.0,...
 'LineStyle', '--');
 set(gca, 'YScale', 'log');
-str = ['Squared Error  $(e^2)$: Mean = ', num2str(mean(abs(e)))]; title(str,'interpreter','latex');str = {'$e^2(n)$','Mean'}; legend(str,'interpreter','latex')
+str = ['Squared Error  $(e^2)$: Mean = ', num2str(mean(abs(e)))]; title(str,'interpreter','latex');
+str = {'$e^2(n)$','Mean'}; legend(str,'interpreter','latex')
 str = ['$e^2(n)$']; ylabel(str,'interpreter','latex');
 grid on
