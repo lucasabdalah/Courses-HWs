@@ -1,0 +1,109 @@
+% ---------------------------------------------------------------
+% Preamble
+% ---------------------------------------------------------------
+\documentclass[a4paper,11pt]{book}
+% ---------------------------------------------------------------
+% Includes arcticle-specific preamble configurations
+\input{theme/thesis_preamble.tex}
+
+\addbibresource{MscThesis_Aluno123456.bib}   % <~ Bibliography resources
+
+% == Uncomment/change to toggle ABNT formatting ==
+% \geometry{reset, inner=3cm, top=3cm, bottom=2cm, outer=2cm, a4paper, pdftex}                       
+
+\titlespacing*{\chapter}{0pt}{-50pt}{0.5em}
+\titlespacing*{\section}{0pt}{1em}{0.5em}
+% == ==
+
+\def\abntindent{0cm}  % <~ Change to 1.5cm for ABNT formatting
+\def\abntstretch{1}   % <~ Change to 1.6 for ABNT formatting
+
+% ---------------------------------------------------------------
+% Metadata
+% ---------------------------------------------------------------
+% Title, authorship and affiliations
+\title{Título título título}
+
+\author{Aluno Aluno da Silva}
+\def\institute{Universidade Federal do Ceará}
+\def\department{Departamento de Engenharia de Teleinformática}
+
+% Program name, title bestowed and research field
+\def\program{Programa de Pós-graduação em Engenharia de Teleinformática}
+\def\mstitle{Mestre em Engenharia de Teleinformática}
+\def\msfield{Reconhecimento de Padrões e Sistemas Dinâmicos}
+
+% Advisor and Co-Advisors (plus affiliations)
+\def\advisor{Prof. Dr. Fulano Fulano}
+\def\advisorinstitute{{\institute} (UFC)}
+\def\advisordepartment{\department}
+
+\def\coadvisor{Profa. Dra. Fulana Fulana}
+\def\coadvisorinstitute{{\institute} (UFC)}
+\def\coadvisordepartment{\department}
+
+% Size and members of the defense board (and affiliations)
+\def\boardsize{2}
+\def\boardmembers{{{"Prof. Dr. XXXX", "Departamento de Coisas",  "Universidade ABC (UA)"}, 
+                   {"Prof. Dr. YYYY", "Departamento de Negócio", "Universidade DEF (UD)"}}}
+
+
+% ---------------------------------------------------------------
+% Begin document
+% ---------------------------------------------------------------
+\begin{document}
+
+% ==============================================================
+% EXTERNAL COVER AND FRONT MATTER
+% ==============================================================
+\maketitle
+\input{chapters/frontmatter.tex} % <~ Edit this for Dedicatórias, Resumos, ...
+
+% ==============================================================
+% 1 - Introduction
+\setstretch{\abntstretch}\setlength{\parindent}{\abntindent}%\setlength{\parskip}{0pt}
+
+\clearpage\mainmatter\setcounter{page}{1}
+% \part{Introduction} \label{part: Introduction}
+\input{chapters/part1/introduction.tex}
+
+% ==============================================================
+% 2 - Technical Background
+% \part{Theoretical Preliminaries} \label{part: Theoretical_Background}
+\input{chapters/part2/preliminaries.tex}
+
+% ==============================================================
+% 4 - Dynamical Properties of ASPs
+% \part{Results and Discussions} \label{part: Results}
+\input{chapters/part3/results.tex}
+
+% ==============================================================
+% 5 - Conclusion
+% \part{Conclusion} \label{part: Conclusion}
+\input{chapters/part4/conclusion.tex}
+
+% ==============================================================
+% Bibliography
+% ==============================================================
+\clearpage
+\addcontentsline{toc}{chapter}{References}
+
+\begin{center}\bfseries\Large
+    REFERENCES
+\end{center}
+\vskip1em
+
+{\justifying\setlength{\bibitemsep}{0.5em}\setstretch{1}
+% \printbibliography[heading=none]}  % <------------------
+
+% ==============================================================
+% X - Apendices
+% ==============================================================
+\clearpage\appendix
+% \part*{Appendix} \label{part: Appendix}
+\input{chapters/appendix/appendix.tex}
+
+% ==============================================================
+% End document
+% ==============================================================
+\end{document}
