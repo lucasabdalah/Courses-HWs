@@ -1,0 +1,21 @@
+[0] Config.pm:311> INFO - This is Biber 2.16
+[0] Config.pm:314> INFO - Logfile is 'MScThesis_Aluno123456.blg'
+[168] biber-MSWIN64:340> INFO - === 
+[219] Biber.pm:415> INFO - Reading 'MScThesis_Aluno123456.bcf'
+[370] Biber.pm:952> INFO - Found 1 citekeys in bib section 0
+[395] Biber.pm:4340> INFO - Processing section 0
+[414] Biber.pm:4531> INFO - Looking for bibtex format file 'MscThesis_Aluno123456.bib' for section 0
+[514] bibtex.pm:1689> INFO - LaTeX decoding ...
+[704] bibtex.pm:1494> INFO - Found BibTeX data source 'MscThesis_Aluno123456.bib'
+[752] Utils.pm:395> WARN - BibTeX subsystem: C:\Users\LUCASA~1\AppData\Local\Temp\biber_tmp_URuh\ceeecc30940e18c1cd784ab7cb769c6a_10428.utf8, line 4, warning: 92 characters of junk seen at toplevel
+[752] Utils.pm:395> WARN - BibTeX subsystem: C:\Users\LUCASA~1\AppData\Local\Temp\biber_tmp_URuh\ceeecc30940e18c1cd784ab7cb769c6a_10428.utf8, line 46, warning: 106 characters of junk seen at toplevel
+[752] Utils.pm:395> WARN - BibTeX subsystem: C:\Users\LUCASA~1\AppData\Local\Temp\biber_tmp_URuh\ceeecc30940e18c1cd784ab7cb769c6a_10428.utf8, line 205, warning: 102 characters of junk seen at toplevel
+[752] Utils.pm:395> WARN - BibTeX subsystem: C:\Users\LUCASA~1\AppData\Local\Temp\biber_tmp_URuh\ceeecc30940e18c1cd784ab7cb769c6a_10428.utf8, line 295, warning: 103 characters of junk seen at toplevel
+[752] Utils.pm:395> WARN - BibTeX subsystem: C:\Users\LUCASA~1\AppData\Local\Temp\biber_tmp_URuh\ceeecc30940e18c1cd784ab7cb769c6a_10428.utf8, line 498, warning: 33 characters of junk seen at toplevel
+[763] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[763] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[764] Biber.pm:4168> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[764] Biber.pm:4174> INFO - No sort tailoring available for locale 'en-US'
+[766] bbl.pm:654> INFO - Writing 'MScThesis_Aluno123456.bbl' with encoding 'UTF-8'
+[767] bbl.pm:757> INFO - Output to MScThesis_Aluno123456.bbl
+[767] Biber.pm:128> INFO - WARNINGS: 5

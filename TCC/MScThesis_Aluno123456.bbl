@@ -1,0 +1,53 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{Hautus1970}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=94f7a76af7db305596743866380c0f97}{%
+           family={{Hautus}},
+           familyi={H\bibinitperiod},
+           given={M.\bibnamedelimi L.\bibnamedelimi J.},
+           giveni={M\bibinitperiod\bibinitdelim L\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{94f7a76af7db305596743866380c0f97}
+      \strng{fullhash}{94f7a76af7db305596743866380c0f97}
+      \strng{bibnamehash}{94f7a76af7db305596743866380c0f97}
+      \strng{authorbibnamehash}{94f7a76af7db305596743866380c0f97}
+      \strng{authornamehash}{94f7a76af7db305596743866380c0f97}
+      \strng{authorfullhash}{94f7a76af7db305596743866380c0f97}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Indagationes Mathematicae (Proceedings)}
+      \field{title}{Stabilization, controllability and observability of linear autonomous systems}
+      \field{volume}{73}
+      \field{year}{1970}
+      \field{pages}{448\bibrangedash 455}
+      \range{pages}{8}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
