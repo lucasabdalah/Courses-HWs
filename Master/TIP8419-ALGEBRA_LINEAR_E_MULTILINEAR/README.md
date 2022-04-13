@@ -3,7 +3,7 @@ Progresso no estudos e/ou trabalhos da disciplina de Algebra Linear e Multilinea
 
 Implementações Pendentes:
 
-[] SVD (Revisão)
-[] Operador Kronecker
-[] Operador Hadamard
-[] Operador Kathri-Rao
+- [ ] SVD (Revisão)
+- [ ] Operador Kronecker
+- [ ] Operador Hadamard
+- [ ] Operador Kathri-Rao
