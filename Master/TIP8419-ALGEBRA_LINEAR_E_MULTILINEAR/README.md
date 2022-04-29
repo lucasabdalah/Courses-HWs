@@ -13,9 +13,12 @@ Implementações Pendentes:
   - [ ] Kathri-Rao Product $(\diamond)$ 
 - [ ] Homework 3
   - [ ] Least-Squares Khatri-Rao Factorization (LSKRF): $(\mathbf{\hat{A}},\mathbf{\hat{B}})=\min_{(\mathbf{A},\mathbf{B})} ||\mathbf{X} - \mathbf{A}\diamond\mathbf{B} ||$
-- [ ] Homework 
-- [ ] Homework 
-- [ ] Homework 
+- [ ] Homework 4
+- [ ] Homework 5
+- [ ] Homework 6
+- [ ] Homework 7
+- [ ] Homework 8
+
 
 - - -
 ## Quick Review
