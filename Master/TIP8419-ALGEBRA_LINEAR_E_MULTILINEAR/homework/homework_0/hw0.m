@@ -16,14 +16,14 @@
 % disp('Saved sucessfully')
 
 %  Compute the mean for each method
-% load('newstruct.mat')
+load('newstruct.mat')
 
 %% plot results
 close all
 clc;
 t1 = mean(time_method1, 1);
 t2 = mean(time_method2, 1);
-figure();
+h = figure();
 semilogy(N,t1);
 hold on
 semilogy(N,t2);
@@ -32,7 +32,8 @@ xticks(N);
 xlabel('Matrix Dimension, N')
 ylabel('Time (s)')
 legend("Method 1", "Method 2")
-
+axis tight;
+savefig_tight(h, "hw0-problem1-a")
 
 % item (b) 
 
