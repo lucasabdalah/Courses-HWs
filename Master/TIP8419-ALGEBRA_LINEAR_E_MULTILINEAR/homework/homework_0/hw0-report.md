@@ -12,7 +12,7 @@ See the section on [`Problem 1`](#Method1)
 ## Problem 1
 ### Item (a) 
 
-> Method 1
+- Method 1
   
 $$ (\mathbf{A}_{N \times N} \otimes \mathbf{B}_{N \times N} )^{-1}$$
 
@@ -22,9 +22,12 @@ $$ (\mathbf{A}_{N \times N})^{-1} \otimes (\mathbf{B}_{N \times N})^{-1}$$
 
 for $n \in \{2,4,6,8,16,32,64\}$
 
-- - -
+<p align="center">
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/homework_0/hw0-problem1-a.png" alt="alt text" title="image Title" width="512" />
+</p>
 
 ## Problem 2
+
 
 ### (a) Method 1
 $$ (\mathbf{A}_{N \times N} \otimes \mathbf{B}_{N \times N} )^{-1}$$

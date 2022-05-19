@@ -4,29 +4,27 @@
 % script: hw0.m
 % 2022/04/18 - v1
 
-%% Problem 1 ------------------------------------------------------------------
+%% Clear Ambient
+close all; % clc;
 
-%% generate data
 
-% item (a) 
-% data = problem_1;
+%% Problem 1 - item (a) ------------------------------------------------------------------
+% hw0_problem1 % generate data
 % disp('Saving data...')
-% % save('hw0_problem1_data.mat', data)
-% save('newstruct.mat','-struct','data');
+% save('hw0_data.mat','-struct','data');
 % disp('Saved sucessfully')
+data = load('hw0_data.mat');
 
-%  Compute the mean for each method
-load('newstruct.mat')
 
-%% plot results
-close all
-clc;
-t1 = mean(time_method1, 1);
-t2 = mean(time_method2, 1);
+%% Plot results
+N = data.N;
+t1 = mean(data.time_a_method1, 1);
+t2 = mean(data.time_a_method2, 1);
+
 h = figure();
 semilogy(N,t1,...
     'Color', 'blue',...        
-    'LineStyle', '-',...
+    'LineStyle', '--',...
     'LineWidth', 1.0,...
     'Marker', 'o',...
     'MarkerFaceColor', 'blue',...
@@ -35,7 +33,7 @@ semilogy(N,t1,...
 hold on
 semilogy(N,t2,...
     'Color', 'red',...        
-    'LineStyle', '--',...
+    'LineStyle', '-',...
     'LineWidth', 1.0,...
     'Marker', 'square',...
     'MarkerFaceColor', 'red',...
@@ -48,11 +46,9 @@ ylabel('Time (s)')
 legend(["Method 1", "Method 2"], 'Location', 'Best') % legend(leg, 'Location', 'Northeastoutside')
 legend boxoff
 grid on
-
 axis tight
+
 savefig_tight(h, "hw0-problem1-a", "both")
 
-% item (b) 
 
-%% Problem 2 ------------------------------------------------------------------
-
+%% Problem 1 - item (b) ------------------------------------------------------------------
