@@ -1,14 +1,11 @@
 %% [TIP8419 - Algebra Linear e Multilinear] - Homework 0 
 % by Lucas Abdalah
 % ----------------------------
-% Problema 1 - Item a: Kronecker Product and Matrix Inversion Cost
-% hw0_problem1.m
+% Problema 1 - Item (a): Kronecker Product and Matrix Inversion Cost 
+% hw0_problem1_a.m
 % Author: Lucas Abdalah
 %
 
-log_write("start")
-
-%% item (a)
 
 %% General Setup
 data1.MC = 100;
@@ -19,6 +16,7 @@ A = cell(data1.MC, length(data1.N));
 B = cell(data1.MC, length(data1.N)); 
 
 tStart = tic;
+
 
 %% Matrix Computation
 for ii = 1:1:length(data1.N)
@@ -44,6 +42,9 @@ end
 data1.tEnd = toc(tStart); % pair 2: toc
 fprintf('.\n.\n.\nTotal Time: %2.1fs \n', data1.tEnd)
 
+disp('Saving data...')
+save('hw0_data1.mat','-struct','data1');
+disp('Saved sucessfully')
 
 %% (a) Method 1
 function [time] = a_method1(A, B)

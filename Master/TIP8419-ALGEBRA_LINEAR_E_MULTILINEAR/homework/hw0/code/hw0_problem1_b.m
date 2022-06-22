@@ -1,62 +1,51 @@
 %% [TIP8419 - Algebra Linear e Multilinear] - Homework 0 
 % by Lucas Abdalah
 % ----------------------------
-% Problema 1 - Item b: Kronecker Product and Matrix Inversion Cost
-% draft.m
+% Problema 1 - Item (b): Kronecker Product and Matrix Inversion Cost
+% hw0_problem1_b.m
 % Author: Lucas Abdalah
 %
 
 
 %% General Setup
-data2.MC = 100; 
+data2.MC = 200; 
 data2.N = 2;
 data2.K = 2:2:10;
 data2.time_b_method1 = zeros(data2.MC, length(data2.K));
 data2.time_b_method2 = zeros(data2.MC, length(data2.K));
 
+tStart = tic;
+
+
+%% Matrix Computation
+fprintf('Matrix Dimension: %2.0f \n.\n', data2.N)
 for RMC = 1:1:data2.MC
-    fprintf('Matrix Dimension: %2.0f --- RMC Step: %2.0f \n', data2.N, RMC)
+    fprintf('Monte Carlo Step: %2.0f \n- - - - - - - - - - -\n', RMC)
+
     for ii = 1:1:length(data2.K)
-        fprintf('Number of kron products: %2.0f \n', data2.K(ii))
+        % fprintf('Number of kron products: %2.0f \n', data2.K(ii))
         [data2.time_b_method1(RMC,ii)] = b_method1(data2.N, data2.K(ii));
         [data2.time_b_method2(RMC,ii)] = b_method2(data2.N, data2.K(ii));
     end
+    
+    fprintf('\n Elapsed Time: %2.1fs \n', sum([ ... 
+        data2.time_b_method1(:); data2.time_b_method2(:)], 1))
 end
+
+fprintf('.\n.\n.\n Method 1 (Elapsed Time): %2.1fs \n', sum(...
+    data2.time_b_method1(:), 1) )
+
+fprintf('.\n.\n.\n Method 2 (Elapsed Time): %2.1fs \n', sum(... 
+    data2.time_b_method2(:), 1))
+
+data2.tEnd = toc(tStart); % pair 2: toc
+fprintf('.\n.\n.\nTotal Time: %2.1fs \n.\n.\n', data2.tEnd)
 
 
 %% Save Data
-% disp('Saving data...')
-% save('hw0_data.mat','-struct','data1');
-% save('hw0_data.mat','-struct','data2');
-% disp('Saved sucessfully')
-
-
-%% Gen Figure
-close all;
-figure()
-semilogy(data2.K, mean(data2.time_b_method1, 1), ...
-    'Color', 'blue',...        
-    'LineStyle', '--',...
-    'LineWidth', 1.0,...
-    'Marker', 'o',...
-    'MarkerFaceColor', 'blue',...
-    'MarkerSize', 5);
-hold on 
-semilogy(data2.K, mean(data2.time_b_method2, 1), ...
-    'Color', 'red',...        
-    'LineStyle', '-',...
-    'LineWidth', 1.0,...
-    'Marker', 's',...
-    'MarkerFaceColor', 'red',...
-    'MarkerSize', 5);
-hold off
-xticks(data2.K);
-xlabel('Matrix Dimension, K')
-ylabel('Time (s)')
-legend(["Method 1", "Method 2"], 'Location', 'Best') % legend(leg, 'Location', 'Northeastoutside')
-legend boxoff
-grid on
-axis tight
+disp('Saving data...')
+save('hw0_data2.mat','-struct','data2');
+disp('Saved sucessfully')
 
 
 %% (b) Method 1
