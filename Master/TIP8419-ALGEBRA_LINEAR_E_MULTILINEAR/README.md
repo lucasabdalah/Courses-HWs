@@ -1,28 +1,17 @@
 # TIP8419 - Algebra Linear e Multilinear
 Progresso no estudos e/ou trabalhos da disciplina de Algebra Linear e Multilinear
 
-Implementações Pendentes:
+Implementações:
 
-- [ ] SVD (Revisão)
-- [ ] Homework 0: 
-  - [ ] Evaluate the computational performance for matrix inversion formulas
-  - [ ] Linear operator properties demonstration
+- [X] SVD (Revisão)
+- [X] Homework 0: [Report HW0](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw0/hw0-report.pdf)
 - [ ] Homework 1:
-  - [ ] Hadamard Product $(\odot)$
-  - [ ] Kronecker Product $(\otimes)$
-  - [ ] Kathri-Rao Product $(\diamond)$ 
 - [ ] Homework 3
-  - [ ] Least-Squares Khatri-Rao Factorization (LSKRF): $(\mathbf{\hat{A}},\mathbf{\hat{B}})=\min_{(\mathbf{A},\mathbf{B})} ||\mathbf{X} - \mathbf{A}\diamond\mathbf{B} ||$
 - [ ] Homework 4
 - [ ] Homework 5
 - [ ] Homework 6
 - [ ] Homework 7
 - [ ] Homework 8
-
-
-- - -
-## Quick Review
-
 
 - - -
 
@@ -35,10 +24,6 @@ Implementações Pendentes:
 - Kronecker Product Singular Value Decomposition (KPSVD)
 ### Tensor Overview (16hs)
 - Matricization: Transforming a Tensor into a Matrix
-
-| Alerta de Nível: Conteúdo lecionado para aqui! (13/04/2022) |
-| --- |
-
 - Tensor Multiplication: The n-mode Product
 - Tensor Networks
 - Higher-Order Singular Value Decomposition (HOSVD)
@@ -55,3 +40,5 @@ Implementações Pendentes:
 - Higher Order Power Iteration Method
 ### Tensor Completion (6hs)
 ### Applications of Tensor Decomposition
+| Alerta de Nível: Conteúdo lecionado para aqui! (24/06/2022) |
+| --- |
