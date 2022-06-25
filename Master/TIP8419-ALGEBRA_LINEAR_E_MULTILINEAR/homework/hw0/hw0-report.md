@@ -59,7 +59,7 @@ We can see that for all values of $N$, the second method outperforms the first. 
 
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw0/code/hw0-problem1-a.png" alt="Kronecker Product and Matrix Inversion Cost Figure" title="Kronecker Product and Matrix Inversion Cost" width="512" />
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw0/code/figures/hw0-problem1-a.png" alt="Kronecker Product and Matrix Inversion Cost Figure" title="Kronecker Product and Matrix Inversion Cost" width="512" />
 </p>
 
 - - -
@@ -138,7 +138,7 @@ Both results support the hypothesis that the inversion of smaller matrices in Ma
 
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw0/code/hw0-problem1-b.png" alt="Kronecker Product and Matrix Inversion Cost Figure" title="Kronecker Product and Matrix Inversion Cost" width="512" />
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw0/code/figures/hw0-problem1-b.png" alt="Kronecker Product and Matrix Inversion Cost Figure" title="Kronecker Product and Matrix Inversion Cost" width="512" />
 </p>
 
 - - -
