@@ -39,9 +39,9 @@ For randomly generated $\mathbf{A}$ and $\mathbf{B}$ $\in \mathbb{C}^{N\times N}
 </p>
 </div>
 
-<!-- <p align="center">
-<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw0/code/hw0-problem1-a.png" alt="Kronecker Product and Matrix Inversion Cost Figure" title="Kronecker Product and Matrix Inversion Cost" width="512" />
-</p> -->
+<p align="center">
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/code/figures/hw1-problem1.png" alt="Hadamard Product Cost Figure" title="Hadamard Product Cost Figure" width="512" />
+</p>
 
 <!-- ------------------------------------------------------------------------->
 
