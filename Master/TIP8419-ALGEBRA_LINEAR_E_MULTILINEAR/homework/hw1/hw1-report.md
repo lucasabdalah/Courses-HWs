@@ -28,13 +28,13 @@ For randomly generated $\mathbf{A}$ and $\mathbf{B}$ $\in \mathbb{C}^{N\times N}
 
 **Simulation setup**
 
-<!-- - 100 Monte Carlo Runs;
+- 500 Monte Carlo Runs;
 - Each Monte Carlo iteration uses a new matrix initialization from a Normal distribution $\mathcal{N}(0,\,1)\,$;
-- Compute the mean for each value, for $N = 2,4,6,8,16,32,64$. -->
+- Compute the mean for each value, for $N = \{2,4,6,8,16,32,64, 128\}$.
 
 **Discussion**
 
-<!-- We can see that for all values of $N$, the second method outperforms the first. For small values of $N$, the difference is more subtle, ten times faster. However as the $N$ increases, the performance gap increases up to a hundred times faster. -->
+We can see that for all values of $N$, Matlab's method outperforms the Author's. For small values of $N$, the gap between them, $6 \times 10^{-5}$s vs $6 \times 10^{-6}$s, approximately ten times faster. However as the $N$ increases, that performance gap becomes more subtle, up to XX times faster.
 
 </p>
 </div>
