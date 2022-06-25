@@ -12,7 +12,7 @@ clearvars; close all;
 %% hw1_problem1
 problem1 = load('hw1_problem1_data.mat');
 
-%% Plot results
+% Plot results
 h1 = figure();
 loglog(problem1.N, mean(problem1.time_method_mine, 1),...
     'Color', 'blue',...        
