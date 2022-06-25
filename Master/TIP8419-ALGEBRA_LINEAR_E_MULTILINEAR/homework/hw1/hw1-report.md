@@ -11,7 +11,7 @@ Professors: André Lima e Henrique Goulart
 
 - - - 
 
-## Table of Contents
+# Table of Contents
 - [Problem 1](#problem-1)
 - [Problem 2](#problem-2)
 - [Problem 3](#problem-3)
@@ -110,7 +110,6 @@ The method developed by the author present similar behavior to Kronnecker produc
 
 <!---------------------------------------------------------------------------->
 
-<!-- [1]: <https://github.com/lucasabdalah/Courses-HWs/blob/fb35eebe0fa1b72d40bc9eee37274e523bec40c0/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/code/hw1_problem1.m#L5> (Problem 1 script) -->
-<!-- [2]: <https://github.com/lucasabdalah/Courses-HWs/blob/fb35eebe0fa1b72d40bc9eee37274e523bec40c0/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/code/hw1_problem2.m#L5> (Problem 2 script) -->
-<!-- [3]: <https://github.com/lucasabdalah/Courses-HWs/blob/fb35eebe0fa1b72d40bc9eee37274e523bec40c0/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/code/hw1_problem3.m#L5> (Problem 3 script) -->
-<!-- [3]: <https://github.com/lucasabdalah/Courses-HWs/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/code/hw1_problem3.m> (Problem 3 script) -->
+[1]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/code/hw1_problem1.m> (Problem 1 script)
+[2]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/code/hw1_problem2.m> (Problem 2 script)
+[3]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/code/hw1_problem3.m> (Problem 3 script)
