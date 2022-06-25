@@ -40,7 +40,7 @@ legend boxoff
 grid on
 axis tight
 
-savefig_tight(h1, "hw1-problem1", "both")
+savefig_tight(h1, "figures/hw1-problem1", "both")
 
 %% hw1_problem2
 % data = load('hw1_problem2_data.mat');
