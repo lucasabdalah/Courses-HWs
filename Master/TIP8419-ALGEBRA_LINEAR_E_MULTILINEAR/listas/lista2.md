@@ -107,76 +107,125 @@ $$\begin{equation*} \mathcal{S} = \sum_{r=1}^{R} \mathbf{s}_{r}^{(1)} \circ \dot
 
 2.2) Também é possível reorganizar a equação em função $\mathcal{S}$ de acordo com as equações (11) e (17) das notas de aula, utilizando as propriedades do operador transposto $\left(^{\top}\right)$, caso $\mathbf{A}^{(n)} \in \mathbb{R}$, e operador hermitiano/autoadjunto $\left(^{H}\right)$
 
----
-
 $$\begin{equation*}\mathcal{S} = \mathcal{X} \times_{1} {\mathbf{A}^{(1)}}^{H} \dots \times_{N} {\mathbf{A}^{(N)}}^H \end{equation*}$$
 
 
-$$\begin{equation*}\mathcal{X} = \mathcal{S} \times_{1} \mathbf{A}^{(1)} \dots \times_{N} \mathbf{A}^{(N)} \end{equation*}$$
+2.3) Desenvolvendo $\mathcal{X}$
+
+$$\begin{equation*}\mathcal{X} =  \left(\sum_{r=1}^{R} \mathbf{s}_{r}^{(1)} \circ \dots \circ \mathbf{s}_{r}^{(N)} \right) \times_{1} \mathbf{A}^{(1)} \dots \times_{N} \mathbf{A}^{(N)} \end{equation*}$$
+
+$$\begin{equation*}\mathcal{X} = \sum_{r=1}^{R} \mathbf{A}^{(1)} \mathbf{s}_{r}^{(1)} \circ \dots \circ \mathbf{A}^{(N)} \mathbf{s}_{r}^{(N)} \end{equation*}$$
+
+    2.4) Desenvolvendo $\mathcal{S}$
+
+$$\begin{equation*}\mathcal{S} = \mathcal{X} \times_{1} {\mathbf{A}^{(1)}}^{H} \dots \times_{N} {\mathbf{A}^{(N)}}^H \end{equation*}$$
+
+$$\begin{equation*}\mathcal{S} = \left(\sum_{r=1}^{R} \mathbf{A}^{(1)} \mathbf{s}_{r}^{(1)} \circ \dots \circ \mathbf{A}^{(N)} \mathbf{s}_{r}^{(N)} \right) \times_{1} {\mathbf{A}^{(1)}}^{H} \dots \times_{N} {\mathbf{A}^{(N)}}^H \end{equation*}$$
+
+$$\begin{equation*}\mathcal{S} = \sum_{r=1}^{R} {\mathbf{A}^{(1)}}^{H} \mathbf{A}^{(1)} \mathbf{s}_{r}^{(1)} \circ \dots \circ {\mathbf{A}^{(N)}}^{H} \mathbf{A}^{(N)} \mathbf{s}_{r}^{(N)} \end{equation*}$$
+
+${\mathbf{A}^{(n)}}^{H} \mathbf{A}^{(n)} = \mathbf{I}$
+
+$$\begin{equation*} \mathcal{S} = \sum_{r=1}^{R} \mathbf{s}_{r}^{(1)} \circ \dots \circ \mathbf{s}_{r}^{(N)} \end{equation*}$$
+
+$$\begin{equation*} rank(\mathcal{X}) = rank(\mathcal{S}). \end{equation*}$$
 
 
+2.) Ao assumir que as matrizes  $\mathbf{A}^{(n)} \in \mathbb{R}$
+
+Pseudo inversa
+${\mathbf{A}^{(n)}}^{\dagger} \mathbf{A}^{(n)} = \mathbf{I}$
 
 
 <!---------------------------------------------------------------------------->
 
 # Problem 3
 
-Let X P CI1ˆI2ˆI3 be given by
-X “ a1  ̋ b1  ̋ c1 ` a2  ̋ b2  ̋ c1 ` a1  ̋ b2  ̋ c2, (1)
+<div style="background-color:rgb(100, 100, 100, 0.15); text-align:left; padding:20px">
+<p>
+
+Let $\mathcal{X} \in {\mathbb{C}}^{I_{1} \times I_{2} \times I_{3}}$ be given by
+
+$$\begin{equation*}\mathcal{X} = \mathbf{a}_{1} \circ \mathbf{b}_{1} \circ \mathbf{c}_{1} + \mathbf{a}_{2} \circ \mathbf{b}_{2} \circ \mathbf{c}_{1} + \mathbf{a}_{1} \circ \mathbf{b}_{2} \circ \mathbf{c}_{2} \end{equation*}$$
+
 where the vectors are assumed to satisfy the following:
-• a1 is not collinear with a2;
-• b1 is not collinear with b2;
-• c1 is not collinear with c2.
+- a1 is not collinear with a2;
+- b1 is not collinear with b2;
+- c1 is not collinear with c2.
+
 The goal of this exercise is to show that any such tensor has rank three, that is,
 it cannot be expressed as a sum of fewer terms. We will proceed by steps.
-1
-(i) First, show that
-X “ S ˆ1 A ˆ2 B ˆ3 C,
+
+(i) First, show that 
+
+$$\begin{equation*}\mathcal{X} = \mathcal{S} \times_{1} \mathbf{A} \times_{2} \mathbf{B} \times_{3} \mathbf{C} \end{equation*}$$
+
 where
-A “ “a1 a2
-‰ , B “ “b1 b2
-‰ , C “ “c1 c2
-‰ ,
+
+$$\begin{equation*} \mathbf{A} = [\mathbf{a}_{1} \quad \mathbf{a}_{2}], \quad \mathbf{B} = [\mathbf{b}_{1} \quad \mathbf{b}_{2}], \quad \mathbf{C} = [\mathbf{c}_{1} \quad \mathbf{c}_{2}], \end{equation*}$$
+
 and
-S ̈ ̈1 “ I2 “
-„1 0
-0 1
-
-, S ̈ ̈2 “
-„0 1
-0 0
-
-.
-Then, using the result of Exercise 2), conclude that X and S have the
+
+$$\begin{equation*} \mathbf{S}_{..1} = \mathbf{I}_{2} = 
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}, \quad \mathbf{S}_{..2} = 
+\begin{bmatrix}
+0 & 1 \\
+0 & 0 \\
+\end{bmatrix}.
+\end{equation*}$$
+
+Then, using the result of Exercise 2), conclude that $\mathcal{X}$ and $\mathcal{S}$ have the
 same rank.
-(ii) Hence, it suffices to show that rankpSq “ 3. Suppose, for a contradiction,
-that rankpSq “ 2. Using the properties of the PARAFAC decomposition,
-show that this imples the existence of matrices U, V, D1, D2 P C2ˆ2 such
-that D1, D2 are diagonal and
-S ̈ ̈1 “ UD1VT, S ̈ ̈2 “ UD2VT. (2)
-(iii) Now, use the fact that X ̈ ̈1 “ I to show that (2) implies that S ̈ ̈2 can be
-diagonalized by U, that is, there exists a diagonal matrix D P C2ˆ2 such
-that
-S “ UDU ́1.
-(iv) Conclude that this leads to a contradiction, by taking into account the
-Jordan form of S ̈ ̈2.
+
+(ii) Hence, it suffices to show that $\text{rank}(\mathcal{S}) = 3$. Suppose, for a contradiction, that $\text{rank}(\mathcal{S}) = 2$. Using the properties of the PARAFAC decomposition, show that this imples the existence of matrices $\mathbf{U}, \mathbf{V}, \mathbf{D}_{1}, \mathbf{D}_{2} \in \mathbb{C}^{2 \times 2}$ such
+that $\mathbf{D}_{1}$, $\mathbf{D}_{2}$ are diagonal and
+
+$$\begin{equation*} \mathbf{S}_{..1} = \mathbf{U} \mathbf{D}_{1} \mathbf{V}^{\top}, \quad \mathbf{S}_{..2} =  \mathbf{U} \mathbf{D}_{2} \mathbf{V}^{\top}
+\end{equation*}$$
+
+(iii) Now, use the fact that $\mathbf{X}_{..1} = \mathbf{I}$ to show that (2) implies that $\mathbf{S}_{..2}$ can be diagonalized by $\mathbf{U}$ , that is, there exists a diagonal matrix $\mathbf{D} such that
+
+$$\begin{equation*} \mathbf{S} = \mathbf{U} \mathbf{D} \mathbf{U}^{-1} . \end{equation*}$$
+
+(iv) Conclude that this leads to a contradiction, by taking into account the Jordan form of $\mathbf{S}_{..2}$.
+
+</p> 
+</div>
+
+---
+
+
+
 
 <!---------------------------------------------------------------------------->
 
 
 # Problem 4
 
-n this last exercise, we will show that, although the tensors of the form
-considered in the last exercise have rank 3, they are limits of sequences of rank-
-2 tensors. Thus, unlike happens for matrices, a sequence of rank-R tensors can
-converge to a rank-S tensor with S ą R.
-(i) First, show that the rank-1 tensor
-Ym “ mpa1 ` m ́1b2q  ̋ pb2 ` m ́1b1q  ̋ pc1 ` m ́1c2q
-is equal to X (as given by (1)) plus an Opmq term Zm and an Op1{mq
-term.
-(ii) Subtract the Opmq term to get:
-Xm “ Ym  ́ Zm.
-What is the rank of Xm?
-(iii) Use the expression obtained for Xm to conclude that
-lim
-mÑ8 Xm “ X .
+<div style="background-color:rgb(100, 100, 100, 0.15); text-align:left; padding:20px">
+<p>
+
+In this last exercise, we will show that, although the tensors of the form considered in the last exercise have rank $3$, they are limits of sequences of rank-$2$ tensors. Thus, unlike happens for matrices, a sequence of rank-$R$ tensors can converge to a rank-$S$ tensor with $S > R$.
+
+(i) First, show that the rank-$1$ tensor
+
+$$\begin{equation*}\mathcal{Y}_{m} = m(\mathbf{a}_{1} + m^{-1} \mathbf{b}_{2}) \circ (\mathbf{b}_{2} + m^{-1} \mathbf{b}_{1}) \circ (\mathbf{c}_{1} \circ m^{-1}\mathbf{c}_{2}) \end{equation*}$$
+
+is equal to $\mathcal{X}$ (as given by (1)) plus an $O(m)$ term $\mathcal{Z}_m$ and an $O(1/m)$ term.
+
+(ii) Subtract the $O(m)$ term to get:
+
+$$\begin{equation*}\mathcal{X}_{m} = \mathcal{Y}_m - \mathcal{Z}_m . \end{equation*}$$
+
+What is the rank of $\mathcal{X}_m$?
+
+(iii) Use the expression obtained for $\mathcal{X}_m$ to conclude that
+$\underset{m \rightarrow \infty}{\lim} \mathcal{X}_m = \mathcal{X}.$ 
+
+</p> 
+</div>
+
+---
