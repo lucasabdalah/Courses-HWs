@@ -140,7 +140,7 @@ ${\mathbf{A}^{(n)}}^{\dagger} \mathbf{A}^{(n)} = \mathbf{I}$
 
 # Problem 3
 
-<!-- <div style="background-color:rgb(100, 100, 100, 0.15); text-align:left; padding:20px">
+<div style="background-color:rgb(100, 100, 100, 0.15); text-align:left; padding:20px">
 <p>
 
 Let $\mathcal{X} \in {\mathbb{C}}^{I_{1} \times I_{2} \times I_{3}}$ be given by
@@ -192,7 +192,7 @@ $$\begin{equation*} \mathbf{S} = \mathbf{U} \mathbf{D} \mathbf{U}^{-1} . \end{eq
 (iv) Conclude that this leads to a contradiction, by taking into account the Jordan form of $\mathbf{S}_{..2}$.
 
 </p> 
-</div> -->
+</div>
 
 ---
 
@@ -304,7 +304,7 @@ $$\begin{equation*} \mathcal{S}_{..2} = \begin{bmatrix}
 \mathbf{s}_{21} & 0\\
 0 & \mathbf{s}_{22}\\ \end{bmatrix} \end{equation*}$$
 
-    <!-- 3.) and thus it is possible to diagonalized the second frontal slice S...2 with matrix S(1). However,
+<!-- 3.) and thus it is possible to diagonalized the second frontal slice S...2 with matrix S(1). However,
 this similarity transformation leads to an invalid Jordan matrix as defined by S...2. Thus, it is not
 possible to the core tensor S be rank two and it must be in fact rank three -->
 
