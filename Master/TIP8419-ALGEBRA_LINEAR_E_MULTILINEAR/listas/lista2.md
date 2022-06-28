@@ -119,22 +119,23 @@ $$\begin{equation*}\mathcal{X} = \sum_{r=1}^{R} \mathbf{A}^{(1)} \mathbf{s}_{r}^
 
 $$\begin{equation*}\mathcal{S} = \left(\sum_{r=1}^{R} \mathbf{A}^{(1)} \mathbf{s}_{r}^{(1)} \circ \dots \circ \mathbf{A}^{(N)} \mathbf{s}_{r}^{(N)} \right) \times_{1} {\mathbf{A}^{(1)}}^{H} \dots \times_{N} {\mathbf{A}^{(N)}}^H \end{equation*}$$
 
-2.5) Dado as propriedas que relacionam os produtos de modo-$N$, o tensor $\mathcal{S}$, convenientemente é reorganizado de modo que as matrizes hermitianas multiplicam a matriz de transformação original de mesmo modo. E dado que ${\mathbf{A}^{(n)}}^{H} \mathbf{A}^{(n)} = \mathbf{I}$, finalmente 
+2.5) Dado as propriedas que relacionam os produtos de modo-$N$, o tensor $\mathcal{S}$, convenientemente é reorganizado de modo que as matrizes hermitianas multiplicam a matriz de transformação original de mesmo modo.
 
 $$\begin{equation*}\mathcal{S} = \sum_{r=1}^{R} {\mathbf{A}^{(1)}}^{H} \mathbf{A}^{(1)} \mathbf{s}_{r}^{(1)} \circ \dots \circ {\mathbf{A}^{(N)}}^{H} \mathbf{A}^{(N)} \mathbf{s}_{r}^{(N)} \end{equation*}$$
 
-2.6) 
+2.6) Sendo ${\mathbf{A}^{(n)}}^{H} \mathbf{A}^{(n)} = \mathbf{I}$, obtemos:
 
 $$\begin{equation*} \mathcal{S} = \sum_{r=1}^{R} \mathbf{s}_{r}^{(1)} \circ \dots \circ \mathbf{s}_{r}^{(N)} \end{equation*}$$
 
-$$\begin{equation*} rank(\mathcal{X}) = rank(\mathcal{S}). \end{equation*}$$
+2.7) Consequentemente, $\mathcal{S}$ preserva o posto de $\mathcal{X}$, i.e, $\text{rank}(\mathcal{X}) = \text{rank}(\mathcal{S})$.
 
+---
 
-    2.) Ao assumir que as matrizes  $\mathbf{A}^{(n)} \in \mathbb{R}$
+2.8) Para o primiro caso onde a matriz era quadrada, os operadores de inversa e hermitiano foram utilizdos. Já para o caso $\mathbf{A}^{(n)} \in {\mathbb{C}}^{I_{n} \times R_{n}}$, é necessário estender o conceito para pseudo-inversa de uma matriz. Assumindo a sua existência, obtém-se
 
-Pseudo inversa
-${\mathbf{A}^{(n)}}^{\dagger} \mathbf{A}^{(n)} = \mathbf{I}$
+$$\begin{equation*}{\mathbf{A}^{(n)}}^{\dagger} \mathbf{A}^{(n)} = \mathbf{I}\end{equation*}$$
 
+E isso permite a extensão da demonstração para matrizes retangulares.
 
 <!---------------------------------------------------------------------------->
 
@@ -304,9 +305,9 @@ $$\begin{equation*} \mathcal{S}_{..2} = \begin{bmatrix}
 \mathbf{s}_{21} & 0\\
 0 & \mathbf{s}_{22}\\ \end{bmatrix} \end{equation*}$$
 
-<!-- 3.) and thus it is possible to diagonalized the second frontal slice S...2 with matrix S(1). However,
+3.) and thus it is possible to diagonalized the second frontal slice S...2 with matrix S(1). However,
 this similarity transformation leads to an invalid Jordan matrix as defined by S...2. Thus, it is not
-possible to the core tensor S be rank two and it must be in fact rank three -->
+possible to the core tensor S be rank two and it must be in fact rank three
 
 
 <!---------------------------------------------------------------------------->
