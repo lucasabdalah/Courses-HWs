@@ -109,29 +109,28 @@ $$\begin{equation*} \mathcal{S} = \sum_{r=1}^{R} \mathbf{s}_{r}^{(1)} \circ \dot
 
 $$\begin{equation*}\mathcal{S} = \mathcal{X} \times_{1} {\mathbf{A}^{(1)}}^{H} \dots \times_{N} {\mathbf{A}^{(N)}}^H \end{equation*}$$
 
+2.3) Desenvolvendo $\mathcal{X}$ em função de 2.1, obtém-se a representação em função do somatório ponderado pelas matrizes de mudança de base $\mathbf{A}^{(n)}$.
 
-2.3) Desenvolvendo $\mathcal{X}$
-
-$$\begin{equation*}\mathcal{X} =  \left(\sum_{r=1}^{R} \mathbf{s}_{r}^{(1)} \circ \dots \circ \mathbf{s}_{r}^{(N)} \right) \times_{1} \mathbf{A}^{(1)} \dots \times_{N} \mathbf{A}^{(N)} \end{equation*}$$
+$$\begin{equation*}\mathcal{X} = \left(\sum_{r=1}^{R} \mathbf{s}_{r}^{(1)} \circ \dots \circ \mathbf{s}_{r}^{(N)} \right) \times_{1} \mathbf{A}^{(1)} \dots \times_{N} \mathbf{A}^{(N)} \end{equation*}$$
 
 $$\begin{equation*}\mathcal{X} = \sum_{r=1}^{R} \mathbf{A}^{(1)} \mathbf{s}_{r}^{(1)} \circ \dots \circ \mathbf{A}^{(N)} \mathbf{s}_{r}^{(N)} \end{equation*}$$
 
-    2.4) Desenvolvendo $\mathcal{S}$
-
-$$\begin{equation*}\mathcal{S} = \mathcal{X} \times_{1} {\mathbf{A}^{(1)}}^{H} \dots \times_{N} {\mathbf{A}^{(N)}}^H \end{equation*}$$
+2.4) Dado as considerações anteriores para $\mathcal{S}$, o tensor *core* $\mathcal{S}$ também pode ser reescrito como:
 
 $$\begin{equation*}\mathcal{S} = \left(\sum_{r=1}^{R} \mathbf{A}^{(1)} \mathbf{s}_{r}^{(1)} \circ \dots \circ \mathbf{A}^{(N)} \mathbf{s}_{r}^{(N)} \right) \times_{1} {\mathbf{A}^{(1)}}^{H} \dots \times_{N} {\mathbf{A}^{(N)}}^H \end{equation*}$$
 
+2.5) Dado as propriedas que relacionam os produtos de modo-$N$, o tensor $\mathcal{S}$, convenientemente é reorganizado de modo que as matrizes hermitianas multiplicam a matriz de transformação original de mesmo modo. E dado que ${\mathbf{A}^{(n)}}^{H} \mathbf{A}^{(n)} = \mathbf{I}$, finalmente 
+
 $$\begin{equation*}\mathcal{S} = \sum_{r=1}^{R} {\mathbf{A}^{(1)}}^{H} \mathbf{A}^{(1)} \mathbf{s}_{r}^{(1)} \circ \dots \circ {\mathbf{A}^{(N)}}^{H} \mathbf{A}^{(N)} \mathbf{s}_{r}^{(N)} \end{equation*}$$
 
-${\mathbf{A}^{(n)}}^{H} \mathbf{A}^{(n)} = \mathbf{I}$
+2.6) 
 
 $$\begin{equation*} \mathcal{S} = \sum_{r=1}^{R} \mathbf{s}_{r}^{(1)} \circ \dots \circ \mathbf{s}_{r}^{(N)} \end{equation*}$$
 
 $$\begin{equation*} rank(\mathcal{X}) = rank(\mathcal{S}). \end{equation*}$$
 
 
-2.) Ao assumir que as matrizes  $\mathbf{A}^{(n)} \in \mathbb{R}$
+    2.) Ao assumir que as matrizes  $\mathbf{A}^{(n)} \in \mathbb{R}$
 
 Pseudo inversa
 ${\mathbf{A}^{(n)}}^{\dagger} \mathbf{A}^{(n)} = \mathbf{I}$
@@ -141,7 +140,7 @@ ${\mathbf{A}^{(n)}}^{\dagger} \mathbf{A}^{(n)} = \mathbf{I}$
 
 # Problem 3
 
-<div style="background-color:rgb(100, 100, 100, 0.15); text-align:left; padding:20px">
+<!-- <div style="background-color:rgb(100, 100, 100, 0.15); text-align:left; padding:20px">
 <p>
 
 Let $\mathcal{X} \in {\mathbb{C}}^{I_{1} \times I_{2} \times I_{3}}$ be given by
@@ -193,15 +192,124 @@ $$\begin{equation*} \mathbf{S} = \mathbf{U} \mathbf{D} \mathbf{U}^{-1} . \end{eq
 (iv) Conclude that this leads to a contradiction, by taking into account the Jordan form of $\mathbf{S}_{..2}$.
 
 </p> 
-</div>
+</div> -->
 
 ---
 
+3.1) *Unfoldings* do core do tensor $\mathcal{S}$
 
+$$\begin{equation*} \mathbf{[S]}_{(1)} = 
+\begin{bmatrix}
+1 & 0 & 0 & 1 \\
+0 & 1 & 0 & 0\\
+\end{bmatrix}
+\end{equation*}$$
+
+$$\begin{equation*} \mathbf{[S]}_{(2)} = 
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0\\
+\end{bmatrix}
+\end{equation*}$$
+
+$$\begin{equation*} \mathbf{[S]}_{(2)} = 
+\begin{bmatrix}
+1 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0\\
+\end{bmatrix}
+\end{equation*}$$
+
+
+$$\begin{equation*} \mathbf{[X]}_{(1)} =  \mathbf{A} \mathbf{[S]}_{(1)} ( \mathbf{C} \otimes \mathbf{B})^{\top} \end{equation*}$$
+
+$$\begin{equation*} \mathbf{[X]}_{(1)} = [\mathbf{a}_{1} \quad \mathbf{a}_{2}] 
+\begin{bmatrix}
+1 & 0 & 0 & 1 \\
+0 & 1 & 0 & 0\\
+\end{bmatrix} 
+\left[(\mathbf{c}_{1} \otimes \mathbf{b}_{1})^{\top} \quad (\mathbf{c}_{1} \otimes \mathbf{b}_{2})^{\top} \quad (\mathbf{c}_{2} \otimes \mathbf{b}_{1})^{\top} \quad (\mathbf{c}_{2} \otimes \mathbf{b}_{2})^{\top} \right] \end{equation*}$$
+
+$$\begin{equation*} \mathbf{[X]}_{(1)} = [\mathbf{a}_{1} \quad \mathbf{a}_{2}] 
+\begin{bmatrix}
+1 (\mathbf{c}_{1} \otimes \mathbf{b}_{1})^{\top} + 0(\mathbf{c}_{1} \otimes \mathbf{b}_{2})^{\top} + 0(\mathbf{c}_{2} \otimes \mathbf{b}_{1})^{\top} + 1(\mathbf{c}_{2} \otimes \mathbf{b}_{2})^{\top} \\
+0 (\mathbf{c}_{1} \otimes \mathbf{b}_{1})^{\top} + 1(\mathbf{c}_{1} \otimes \mathbf{b}_{2})^{\top} + 0(\mathbf{c}_{2} \otimes \mathbf{b}_{1})^{\top} + 0(\mathbf{c}_{2} \otimes \mathbf{b}_{2})^{\top} \\
+\end{bmatrix} 
+\end{equation*}$$
+
+
+$$\begin{equation*} \mathbf{[X]}_{(1)} = [\mathbf{a}_{1} \quad \mathbf{a}_{2}] 
+\begin{bmatrix}
+(\mathbf{c}_{1} \otimes \mathbf{b}_{1})^{\top} + (\mathbf{c}_{2} \otimes \mathbf{b}_{2})^{\top} \\
+(\mathbf{c}_{1} \otimes \mathbf{b}_{2})^{\top}\\
+\end{bmatrix} 
+\end{equation*}$$
+
+
+$$\begin{equation*} \mathbf{[X]}_{(1)} = \mathbf{a}_{1} \left[(\mathbf{c}_{1} \otimes \mathbf{b}_{1})^{\top} + (\mathbf{c}_{2} \otimes \mathbf{b}_{2})^{\top} \right] + \mathbf{a}_{2}\left[(\mathbf{c}_{1} \otimes \mathbf{b}_{2})^{\top} \right]
+\end{equation*}$$
+
+$$\begin{equation*} \mathbf{[X]}_{(1)} = \mathbf{a}_{1} (\mathbf{c}_{1} \otimes \mathbf{b}_{1})^{\top} + \mathbf{a}_{1} (\mathbf{c}_{2} \otimes \mathbf{b}_{2})^{\top} + \mathbf{a}_{2} (\mathbf{c}_{1} \otimes \mathbf{b}_{2})^{\top}
+\end{equation*}$$
+
+    3.) 
+
+$$\begin{equation*}\mathcal{X} = \mathbf{a}_{1} \circ \mathbf{b}_{1} \circ \mathbf{c}_{1} + \mathbf{a}_{1} \circ \mathbf{b}_{2} \circ \mathbf{c}_{2}  + \mathbf{a}_{2} \circ \mathbf{b}_{2} \circ \mathbf{c}_{1}
+\end{equation*}$$
+
+    3.) Dado a demonstração do problema 2, o posto do tensor é uma propriedade.
+
+$$\begin{equation*} \mathcal{S} = \sum_{r=1}^{2} \mathbf{s}_{r}^{(1)} \circ \mathbf{s}_{r}^{(2)} \circ \mathbf{s}_{r}^{(3)} \end{equation*}$$
+
+$$\begin{equation*} \mathcal{S}_{..1} = \sum_{r=1}^{2} \mathbf{s}_{1,r}^{(3)} \circ \mathbf{s}_{r}^{(1)} \circ {\mathbf{s}_{r}^{(2)}}^{\top} = \mathbf{S}^{(1)} \mathbf{D}_{1} \left( \mathbf{S}^{(3)} \right) {\mathbf{S}^{(2)}}^{\top} \end{equation*}$$
+
+$$\begin{equation*} \mathcal{S}_{..2} = \sum_{r=1}^{2} \mathbf{s}_{2,r}^{(3)} \circ \mathbf{s}_{r}^{(1)} \circ {\mathbf{s}_{r}^{(2)}}^{\top} = \mathbf{S}^{(1)} \mathbf{D}_{2} \left( \mathbf{S}^{(3)} \right) {\mathbf{S}^{(2)}}^{\top} \end{equation*}$$
+
+    3.) Identidade e SVD
+
+$$\begin{equation*} \mathcal{S}_{..1} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^{\top} = \mathbf{S}^{(1)} \mathbf{D}_{1} \left( \mathbf{S}^{(3)} \right) {\mathbf{S}^{(2)}}^{\top} = \mathbf{I} \end{equation*}$$
+
+
+$$\begin{equation*} \mathbf{S}^{(1)} = \mathbf{D}_{1} \left( \mathbf{S}^{(3)} \right) = \mathbf{S}^{(2)} = \mathbf{U}  = \mathbf{\Sigma} = \mathbf{V}^{\top} = \mathbf{I} \end{equation*}$$
+
+
+    3.) Rescrevendo $\mathcal{S}_{..2}$ a partir dos resultados obtidos em função de $\mathcal{S}_{..1}$.
+
+$$\begin{equation*} \mathcal{S}_{..2} = \mathbf{S}^{(1)} \mathbf{D}_{2} \left( \mathbf{S}^{(3)} \right) {\mathbf{S}^{(2)}}^{\top} \end{equation*}$$
+
+    3.) Multiplicando 
+
+
+$$\begin{equation*} \mathcal{S}_{..2} = \mathbf{S}^{(1)} \left[  \mathbf{S}^{(1)} \mathbf{D}_{2} \left( \mathbf{S}^{(3)} \right) {\mathbf{S}^{(2)}}^{\top} \right] {\mathbf{S}^{(1)}}^{-1}  \end{equation*}$$
+
+
+$$\begin{equation*} \mathcal{S}_{..2} =
+\begin{bmatrix}
+1 & 0\\
+0 & 1\\ \end{bmatrix} 
+\left\{ \begin{bmatrix}
+1 & 0\\
+0 & 1\\ \end{bmatrix} \mathbf{D}_{2} \left( \mathbf{S}^{(3)} \right) 
+\begin{bmatrix}
+1 & 0\\
+0 & 1\\ \end{bmatrix} \right\}  \begin{bmatrix}
+1 & 0\\
+0 & 1\\ \end{bmatrix} \end{equation*}$$
+
+    3.) Dado que a identidade é o elemento neutro na multiplicação de matrizes, podemos reescrever a equação omitindo-as.
+
+
+$$\begin{equation*} \mathcal{S}_{..2} = \mathbf{D}_{2} \left( \mathbf{S}^{(3)} \right) \end{equation*}$$
+
+$$\begin{equation*} \mathcal{S}_{..2} = \begin{bmatrix}
+\mathbf{s}_{21} & 0\\
+0 & \mathbf{s}_{22}\\ \end{bmatrix} \end{equation*}$$
+
+    <!-- 3.) and thus it is possible to diagonalized the second frontal slice S...2 with matrix S(1). However,
+this similarity transformation leads to an invalid Jordan matrix as defined by S...2. Thus, it is not
+possible to the core tensor S be rank two and it must be in fact rank three -->
 
 
 <!---------------------------------------------------------------------------->
-
 
 # Problem 4
 
@@ -229,3 +337,6 @@ $\underset{m \rightarrow \infty}{\lim} \mathcal{X}_m = \mathcal{X}.$
 </div>
 
 ---
+
+$$\begin{align*} \vdots \\ \vdots
+\end{align*}$$
