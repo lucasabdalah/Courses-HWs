@@ -197,7 +197,7 @@ $$\begin{equation*} \mathbf{S} = \mathbf{U} \mathbf{D} \mathbf{U}^{-1} . \end{eq
 
 ---
 
-3.1) *Unfoldings* do core do tensor $\mathcal{S}$
+3.1) Para provar a que o tensor $\mathcal{X}$ tem posto 3 pode-se observar os *unfoldings* de modo 1, 2 e 3 do tensor *core* $\mathcal{S}$
 
 $$\begin{equation*} \mathbf{[S]}_{(1)} = 
 \begin{bmatrix}
@@ -213,15 +213,18 @@ $$\begin{equation*} \mathbf{[S]}_{(2)} =
 \end{bmatrix}
 \end{equation*}$$
 
-$$\begin{equation*} \mathbf{[S]}_{(2)} = 
+$$\begin{equation*} \mathbf{[S]}_{(3)} = 
 \begin{bmatrix}
 1 & 0 & 0 & 1 \\
 0 & 0 & 1 & 0\\
 \end{bmatrix}
 \end{equation*}$$
 
+3.2) A partir da equação de representaçã o $\mathcal{X}$ em função da notação de matrizes *slices* (slide 162/244), obtém-se:
 
 $$\begin{equation*} \mathbf{[X]}_{(1)} =  \mathbf{A} \mathbf{[S]}_{(1)} ( \mathbf{C} \otimes \mathbf{B})^{\top} \end{equation*}$$
+
+3.3) Ao substituir os respectivos valores nas matrizes na expressão:
 
 $$\begin{equation*} \mathbf{[X]}_{(1)} = [\mathbf{a}_{1} \quad \mathbf{a}_{2}] 
 \begin{bmatrix}
@@ -237,7 +240,6 @@ $$\begin{equation*} \mathbf{[X]}_{(1)} = [\mathbf{a}_{1} \quad \mathbf{a}_{2}]
 \end{bmatrix} 
 \end{equation*}$$
 
-
 $$\begin{equation*} \mathbf{[X]}_{(1)} = [\mathbf{a}_{1} \quad \mathbf{a}_{2}] 
 \begin{bmatrix}
 (\mathbf{c}_{1} \otimes \mathbf{b}_{1})^{\top} + (\mathbf{c}_{2} \otimes \mathbf{b}_{2})^{\top} \\
@@ -245,43 +247,40 @@ $$\begin{equation*} \mathbf{[X]}_{(1)} = [\mathbf{a}_{1} \quad \mathbf{a}_{2}]
 \end{bmatrix} 
 \end{equation*}$$
 
-
 $$\begin{equation*} \mathbf{[X]}_{(1)} = \mathbf{a}_{1} \left[(\mathbf{c}_{1} \otimes \mathbf{b}_{1})^{\top} + (\mathbf{c}_{2} \otimes \mathbf{b}_{2})^{\top} \right] + \mathbf{a}_{2}\left[(\mathbf{c}_{1} \otimes \mathbf{b}_{2})^{\top} \right]
 \end{equation*}$$
 
 $$\begin{equation*} \mathbf{[X]}_{(1)} = \mathbf{a}_{1} (\mathbf{c}_{1} \otimes \mathbf{b}_{1})^{\top} + \mathbf{a}_{1} (\mathbf{c}_{2} \otimes \mathbf{b}_{2})^{\top} + \mathbf{a}_{2} (\mathbf{c}_{1} \otimes \mathbf{b}_{2})^{\top}
 \end{equation*}$$
 
-    3.) 
+3.4) A substituição avança, convenientemente para uma forma que pode ser justamente rescrita em função do produto externo dos vetores:
 
 $$\begin{equation*}\mathcal{X} = \mathbf{a}_{1} \circ \mathbf{b}_{1} \circ \mathbf{c}_{1} + \mathbf{a}_{1} \circ \mathbf{b}_{2} \circ \mathbf{c}_{2}  + \mathbf{a}_{2} \circ \mathbf{b}_{2} \circ \mathbf{c}_{1}
 \end{equation*}$$
 
-    3.) Dado a demonstração do problema 2, o posto do tensor é uma propriedade.
+3.5) A partir da demonstração e dos resultados do problema 2 (escrita do tensor *core* em função da decomposição CP), pode-se provar que $\mathcal{X}$ e $\mathcal{S}$ tem posto 3, como sugerido em (ii).
 
 $$\begin{equation*} \mathcal{S} = \sum_{r=1}^{2} \mathbf{s}_{r}^{(1)} \circ \mathbf{s}_{r}^{(2)} \circ \mathbf{s}_{r}^{(3)} \end{equation*}$$
+
+3.6) Com as ferramentas fornecidas, pode-se utilizar a equação (28) das notas de aula para aplicar a decomposição CP com a notação de *slices* frontais.
 
 $$\begin{equation*} \mathcal{S}_{..1} = \sum_{r=1}^{2} \mathbf{s}_{1,r}^{(3)} \circ \mathbf{s}_{r}^{(1)} \circ {\mathbf{s}_{r}^{(2)}}^{\top} = \mathbf{S}^{(1)} \mathbf{D}_{1} \left( \mathbf{S}^{(3)} \right) {\mathbf{S}^{(2)}}^{\top} \end{equation*}$$
 
 $$\begin{equation*} \mathcal{S}_{..2} = \sum_{r=1}^{2} \mathbf{s}_{2,r}^{(3)} \circ \mathbf{s}_{r}^{(1)} \circ {\mathbf{s}_{r}^{(2)}}^{\top} = \mathbf{S}^{(1)} \mathbf{D}_{2} \left( \mathbf{S}^{(3)} \right) {\mathbf{S}^{(2)}}^{\top} \end{equation*}$$
 
-    3.) Identidade e SVD
+3.7) Levando em consideração o que é sugerido em (ii) e (iii), relacionando a expressão com a decomposição em valores singulares (SVD) 
 
 $$\begin{equation*} \mathcal{S}_{..1} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^{\top} = \mathbf{S}^{(1)} \mathbf{D}_{1} \left( \mathbf{S}^{(3)} \right) {\mathbf{S}^{(2)}}^{\top} = \mathbf{I} \end{equation*}$$
 
+3.8) E como premissa: $\mathcal{S}_{..2} = \mathbf{I}$, isto implica que cada um dos termos da própria decomposição é uma matriz $2 \times 2$, tal que:
 
 $$\begin{equation*} \mathbf{S}^{(1)} = \mathbf{D}_{1} \left( \mathbf{S}^{(3)} \right) = \mathbf{S}^{(2)} = \mathbf{U}  = \mathbf{\Sigma} = \mathbf{V}^{\top} = \mathbf{I} \end{equation*}$$
 
+3.9) Como demonstrado acima, $\mathcal{S}_{..2}$ pode ser obtido também a partir dos resultados em função de $\mathcal{S}_{..1}$, com a multiplicação a esquerda por $\mathbf{S}^{(1)}$ e a direita ${\mathbf{S}^{(1)}}^{-1}$:
 
-    3.) Rescrevendo $\mathcal{S}_{..2}$ a partir dos resultados obtidos em função de $\mathcal{S}_{..1}$.
-
-$$\begin{equation*} \mathcal{S}_{..2} = \mathbf{S}^{(1)} \mathbf{D}_{2} \left( \mathbf{S}^{(3)} \right) {\mathbf{S}^{(2)}}^{\top} \end{equation*}$$
-
-    3.) Multiplicando 
-
+$$\begin{equation*} \mathcal{S}_{..2} =  \left[  \mathbf{S}^{(1)} \mathbf{D}_{2} \left( \mathbf{S}^{(3)} \right) {\mathbf{S}^{(2)}}^{\top} \right]  \end{equation*}$$
 
 $$\begin{equation*} \mathcal{S}_{..2} = \mathbf{S}^{(1)} \left[  \mathbf{S}^{(1)} \mathbf{D}_{2} \left( \mathbf{S}^{(3)} \right) {\mathbf{S}^{(2)}}^{\top} \right] {\mathbf{S}^{(1)}}^{-1}  \end{equation*}$$
-
 
 $$\begin{equation*} \mathcal{S}_{..2} =
 \begin{bmatrix}
@@ -296,19 +295,18 @@ $$\begin{equation*} \mathcal{S}_{..2} =
 1 & 0\\
 0 & 1\\ \end{bmatrix} \end{equation*}$$
 
-    3.) Dado que a identidade é o elemento neutro na multiplicação de matrizes, podemos reescrever a equação omitindo-as.
-
+3.10) Dado que a identidade é o elemento neutro na multiplicação de matrizes, podemos reescrever a equação omitindo-as:
 
 $$\begin{equation*} \mathcal{S}_{..2} = \mathbf{D}_{2} \left( \mathbf{S}^{(3)} \right) \end{equation*}$$
+
+3.11) Isso permite observar $\mathcal{S}_{..2}$ como diagonal, mas diferente da forma de Jordan, i.e, o posto do tensor é diferente de 2. 
 
 $$\begin{equation*} \mathcal{S}_{..2} = \begin{bmatrix}
 \mathbf{s}_{21} & 0\\
 0 & \mathbf{s}_{22}\\ \end{bmatrix} \end{equation*}$$
 
-3.) and thus it is possible to diagonalized the second frontal slice S...2 with matrix S(1). However,
-this similarity transformation leads to an invalid Jordan matrix as defined by S...2. Thus, it is not
-possible to the core tensor S be rank two and it must be in fact rank three
-
+3.12) Finalmente, o posto do tensor 
+$$\begin{equation*}\text{posto}(\mathcal{X}) = \text{posto}(\mathcal{S}) = 3 \end{equation*}.$$
 
 <!---------------------------------------------------------------------------->
 
@@ -339,5 +337,5 @@ $\underset{m \rightarrow \infty}{\lim} \mathcal{X}_m = \mathcal{X}.$
 
 ---
 
-$$\begin{align*} \vdots \\ \vdots
+$$\begin{align*} \vdots
 \end{align*}$$
