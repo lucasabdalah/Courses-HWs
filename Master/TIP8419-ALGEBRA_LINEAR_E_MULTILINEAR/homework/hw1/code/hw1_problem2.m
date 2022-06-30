@@ -57,7 +57,7 @@ function C = kron_prod(A, B)
 % Long description
 
 [M_rows, N_columns] = size(B);
-C = repelem(A, M_rows, N_columns).*repmat(B,[size(A)]);
+C = repelem(A, M_rows, N_columns).*repmat(B, size(A));
 
 end
 

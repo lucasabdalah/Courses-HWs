@@ -69,7 +69,7 @@ end
 
 
 % Author
-function [time] = method_author(A, B)
+function [time, C] = method_author(A, B)
     tic;
     C = hadamard_prod(A, B);
     time = toc;
@@ -77,7 +77,7 @@ end
 
 
 % Matlab
-function [time] = method_matlab(A, B)
+function [time, C] = method_matlab(A, B)
     tic;
     C = A.*B;
     time = toc;
