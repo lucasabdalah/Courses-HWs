@@ -1,7 +1,7 @@
 %% [TIP8419 - Algebra Linear e Multilinear]
 % ----------------------------
-% nd.m
 % Author: Lucas Abdalah
+% nd.m
 % 
 % ND is a package developped for the Multilinear Algebra Course
 % It is a shortcut for N-d array in reference to the homonym library in python
