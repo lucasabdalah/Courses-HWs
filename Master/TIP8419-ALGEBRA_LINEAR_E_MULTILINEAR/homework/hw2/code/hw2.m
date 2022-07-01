@@ -46,7 +46,7 @@ legend boxoff
 grid on
 axis tight
 
-savefig_tight(h_problem1a, "figures/hw2-problem1a", "both")
+% savefig_tight(h_problem1a, "figures/hw2-problem1a", "both")
 
 h_problem1b = figure();
 loglog(problem1.N, mean(problem1.time_1(:,:,2), 1),...
@@ -80,7 +80,26 @@ legend boxoff
 grid on
 axis tight
 
-savefig_tight(h_problem1b, "figures/hw2-problem1b", "both")
+% savefig_tight(h_problem1b, "figures/hw2-problem1b", "both")
 
 %% hw2_problem2
-% problem2 = load('hw2_problem2_data.mat');
+problem2 = load('hw2_problem2_data.mat');
+
+% Plot results
+h_problem2 = figure();
+semilogy(problem2.N, mean(problem2.time_1(:,:,1), 1),...
+    'Color', 'blue',...        
+    'LineStyle', '--',...
+    'LineWidth', 1.0,...
+    'Marker', 'o',...
+    'MarkerFaceColor', 'blue',...
+    'MarkerSize', 5);
+xticks(problem2.N);
+xlabel('Number of Matrices, N')
+ylabel('Time (s)')
+legend("KR product", 'Location', 'northwest') % legend(leg, 'Location', 'Northeastoutside')
+legend boxoff
+grid on
+axis tight
+
+% savefig_tight(h_problem2, "figures/hw2-h_problem2", "both")
