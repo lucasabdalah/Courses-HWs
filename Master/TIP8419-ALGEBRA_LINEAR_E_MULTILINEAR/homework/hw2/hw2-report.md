@@ -54,9 +54,13 @@ $\mathbf{X}^{\dagger} = [(\mathbf{A}^{\top} \mathbf{A}) \odot (\mathbf{B}^{\top}
 </p>
 </div>
 
-<!-- <p align="center">
-<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/code/figures/hw1-problem1.png" alt="Hadamard Product Cost Figure" title="Hadamard Product Cost Figure" width="512" />
-</p> -->
+<p align="center">
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw2/code/figures/hw2-problem1a.png" alt="Left Pseudo Inverse Cost Figure (R=2)" title="Left Pseudo Inverse Cost Figure (R=2)" width="512" />
+</p>
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw2/code/figures/hw2-problem1b.png" alt="Left Pseudo Inverse Cost Figure (R=4)" title="Left Pseudo Inverse Cost Figure (R=4)" width="512" />
+</p>
 
 <!---------------------------------------------------------------------------->
 
@@ -87,9 +91,9 @@ The symbols $\odot$ and $\diamond$  denotes the Hadamard and the Khatri-Rao Prod
 </p>
 </div>
 
-<!-- <p align="center">
-<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/code/figures/hw1-problem2.png" alt="Hadamard Product Cost Figure" title="Hadamard Product Cost Figure" width="512" />
-</p> -->
+<p align="center">
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw2/code/figures/hw2-problem2.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
+</p>
 
 
 
