@@ -10,7 +10,7 @@
 clearvars; close all; 
 
 
-%% hw1_problem1
+%% hw2_problem1
 problem1 = load('hw2_problem1_data.mat');
 
 %% Plot results
@@ -39,14 +39,14 @@ loglog(problem1.N,mean(problem1.time_3(:,:,1), 1),...
     'MarkerSize', 5);
 hold off
 xticks(problem1.N);
-xlabel('Matrix Dimension, N (R=2)')
+xlabel('Number of Rows, I (R=2)')
 ylabel('Time (s)')
 legend(["Method 1", "Method 2", "Method 3"], 'Location', 'Best') % legend(leg, 'Location', 'Northeastoutside')
 legend boxoff
 grid on
 axis tight
 
-% savefig_tight(h_problem1a, "figures/hw2-problem1a", "both")
+savefig_tight(h_problem1a, "figures/hw2-problem1a", "both")
 
 h_problem1b = figure();
 loglog(problem1.N, mean(problem1.time_1(:,:,2), 1),...
@@ -73,11 +73,14 @@ loglog(problem1.N,mean(problem1.time_3(:,:,2), 1),...
     'MarkerSize', 5);
 hold off
 xticks(problem1.N);
-xlabel('Matrix Dimension, N (R = 4)')
+xlabel('Number of Rows, I (R = 4)')
 ylabel('Time (s)')
 legend(["Method 1", "Method 2", "Method 3"], 'Location', 'Best') % legend(leg, 'Location', 'Northeastoutside')
 legend boxoff
 grid on
 axis tight
 
-% savefig_tight(h_problem1b, "figures/hw2-problem1b", "both")
+savefig_tight(h_problem1b, "figures/hw2-problem1b", "both")
+
+%% hw2_problem2
+% problem2 = load('hw2_problem2_data.mat');

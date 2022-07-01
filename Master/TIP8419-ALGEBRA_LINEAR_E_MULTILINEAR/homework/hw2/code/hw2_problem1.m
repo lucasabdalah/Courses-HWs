@@ -43,9 +43,9 @@ end
 data.tEnd = toc(tStart); % pair tic toc
 fprintf('.\n.\n.\nTotal Time: %2.1fs \n', data.tEnd)
 
-disp('Saving data...')
-save('hw2_problem1_data.mat','-struct','data');
-disp('Saved sucessfully')
+% disp('Saving data...')
+% save('hw2_problem1_data.mat','-struct','data');
+% disp('Saved sucessfully')
 
 %% Local Functions ------------------------------------------------------------
 
