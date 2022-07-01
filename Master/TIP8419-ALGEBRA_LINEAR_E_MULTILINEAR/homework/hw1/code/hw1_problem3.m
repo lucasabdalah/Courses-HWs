@@ -29,8 +29,8 @@ for RMC = 1:1:data.MC
         [data.time_method_author(RMC,ii)] = method_author(A{ii},B{ii});
     end
 
-    fprintf('.\n.\n.\n Elapsed Time: %2.1fs \n', sum([ ... 
-        data.time_method_author(:)], 1))
+    fprintf('.\n.\n.\n Elapsed Time: %2.1fs \n', sum(... 
+        data.time_method_author(:), 1))
 end    
 
 
@@ -57,7 +57,7 @@ function C = kr_prod(A, B)
     end
 end
 
-function [time] = method_author(A, B)
+function [time, C] = method_author(A, B)
     tic;
     C = kr_prod(A, B);
     time = toc;
