@@ -103,8 +103,7 @@ $$\begin{equation*} R = kr(A, B). \end{equation*}$$
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw2/code/figures/hw2-problem2.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
-</p>2
-
+</p>
 
 
 <!---------------------------------------------------------------------------->
