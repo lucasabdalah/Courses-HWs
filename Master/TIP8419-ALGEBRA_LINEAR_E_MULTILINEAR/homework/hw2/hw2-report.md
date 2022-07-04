@@ -17,7 +17,7 @@ Professors: André Lima e Henrique Goulart
 
 # Problem 1
 
-Generate $\mathbf{X} = \mathbf{A} \diamond \mathbf{B} \in \mathbb{R}^{I \times R}$, for randomly chosen $\mathbf{A} \in \mathbb{R}^{I \times R}$ and $\mathbf{B} \in \mathbb{R}^{I \times R}$. Compute the left pseudo-inverse of $\mathbf{X}$ and obtain a graph that shows the run time vs. number of rows $(I)$ for the following methods.
+Generate $\mathbf{X} = \mathbf{A} \diamond \mathbf{B} \in \mathbb{C}^{I \times R}$, for randomly chosen $\mathbf{A} \in \mathbb{C}^{I \times R}$ and $\mathbf{B} \in \mathbb{C}^{I \times R}$. Compute the left pseudo-inverse of $\mathbf{X}$ and obtain a graph that shows the run time vs. number of rows $(I)$ for the following methods.
 
 **Method 1:**
 
@@ -42,14 +42,18 @@ $\mathbf{X}^{\dagger} = [(\mathbf{A}^{\top} \mathbf{A}) \odot (\mathbf{B}^{\top}
 
 **Simulation setup**
 
+- 500 Monte Carlo Runs;
+- Each Monte Carlo iteration uses a new matrix initialization from a Normal distribution $\mathcal{N}(0,\,1)\,$;
+- Compute the mean for each value, for $N = \{2,4,6,8,16,32,64, 128, 256\}$.
 
 
 **Discussion**
 
+We can see that for all values of $I$, Matlab's method is outperformed by the methods 2 and 3. All methods present a subtle gap between their cost, approximately constant. Method 2 is two times faster then Matlab, while method 3 is ten times faster.
 
+The experiment with $R = 4$ also supports the results presented for $R = 2$, with very similar plots.
 
-<!-- [Problem 1 script][1] -->
-
+[Problem 1 script][1] and [Figures][3].
 
 </p>
 </div>
@@ -81,24 +85,30 @@ The symbols $\odot$ and $\diamond$  denotes the Hadamard and the Khatri-Rao Prod
 
 **Simulation setup**
 
-
+- 500 Monte Carlo Runs;
+- Each Monte Carlo iteration uses a new matrix initialization from a Normal distribution $\mathcal{N}(0,\,1)\,$;
+- Each matrix has $4 \times 2$ dimension;
+- Compute the mean for each value, for $N = \{2,4,6,8,10\}$.
 
 **Discussion**
 
+The results are consistent with the experiment perfomed in [HW1](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/hw1-report.pdf), that for randomly generated $\mathbf{A}$ and $\mathbf{B}$ $\in \mathbb{C}^{N\times N}$, an algorithm to compute the Khatri-Rao Product $\mathbf{A} \diamond \mathbf{B}$ was created according with the following prototype function: 
+$$\begin{equation*} R = kr(A, B). \end{equation*}$$
 
-<!-- [Problem 2 script][2] -->
+
+[Problem 2 script][2]
 
 </p>
 </div>
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw2/code/figures/hw2-problem2.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
-</p>
+</p>2
 
 
 
 <!---------------------------------------------------------------------------->
 
-<!-- [1]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/code/hw1_problem1.m> (Problem 1 script)
-[2]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/code/hw1_problem2.m> (Problem 2 script)
-[3]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/code/hw1_problem3.m> (Problem 3 script) -->
+[1]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw2/code/hw2_problem1.m> (Problem 1 script)
+[2]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw2/code/hw2_problem2.m> (Problem 2 script)
+[3]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw2/code/hw2.m> (Figures)
