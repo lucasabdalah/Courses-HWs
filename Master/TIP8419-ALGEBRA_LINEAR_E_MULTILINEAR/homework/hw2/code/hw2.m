@@ -104,4 +104,4 @@ axis tight
 %% Save Figures
 % savefig_tight(h_problem1a, "figures/hw2-problem1a", "both")
 % savefig_tight(h_problem1b, "figures/hw2-problem1b", "both")
-savefig_tight(h_problem2, "figures/hw2-problem2", "both")
+% savefig_tight(h_problem2, "figures/hw2-problem2", "both")
