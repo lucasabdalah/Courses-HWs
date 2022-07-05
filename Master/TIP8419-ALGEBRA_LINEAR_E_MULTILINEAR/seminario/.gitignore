@@ -1,0 +1,3 @@
+# Ignore matlab large files
+*.mat
+experiment1.m
