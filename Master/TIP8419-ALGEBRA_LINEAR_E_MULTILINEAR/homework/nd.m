@@ -32,7 +32,7 @@ methods(Static)
     %       distribution.
     % 
     %   See also.
-        C = complex(randn(M, N), randn(M,N));
+        C = complex(randn(M,N), randn(M,N));
     end
 
     function [X_nmse, X_nmse_dB] = nmse(X, X_hat)
@@ -40,7 +40,7 @@ methods(Static)
     %   [X_nmse, X_nmse_dB] = nd.nmse(X, X_hat) compute the NMSE of two arrays
     % 
     %   See also.
-        X_nmse = frob(X_hat - X)^2/(frob(X)^2);
+        X_nmse = frob(X - X_hat)^2/(frob(X)^2);
         X_nmse_dB = 20*log10(X_nmse);
     end
 
@@ -104,27 +104,25 @@ methods(Static)
 
 
     %% TENSOR FACTORS ESTIMATION
-    function [Ahat,Bhat] = lskrf(X, init)
+    function [Ahat,Bhat] = lskrf(X, M, N)
     % ND.LSKRF  Least-Squares Khatri-Rao Factorization (LSKRF)
     %   [Ahat,Bhat] = nd.lskrf(X, M, N) compute the LSKRF.
     %
     %   See also.
         [iX, jX] = size(X);
-        [iA, ~] = size(init.A0);
-        [iB, ~] = size(init.B0);
 
-        if iX == iA*iB
-            Ahat = init.A0;
-            Bhat = init.B0;
+        if iX == M*N
+            Ahat = complex(zeros(M,jX),0);
+            Bhat = complex(zeros(N,jX),0);
 
             for jj = 1:jX
-                Xp = reshape(X(:,jj), [iB iA]);
+                Xp = reshape(X(:,jj), [N M]);
                 [U,S,V] = svd(Xp);
                 Ahat(:,jj) = sqrt(S(1,1)).*conj(V(:,1));
                 Bhat(:,jj) = sqrt(S(1,1)).*U(:,1);
             end
         else
-            error('number of rows of X should be equal to size (init.A0,1)*size(init.B0,1)');
+            error('number of rows of X should be equal to size M*N');
         end
     
     end

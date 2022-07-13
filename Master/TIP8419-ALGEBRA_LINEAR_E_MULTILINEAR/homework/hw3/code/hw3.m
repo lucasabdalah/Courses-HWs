@@ -6,21 +6,15 @@
 % Author: Lucas Abdalah
 %
 
-
 clearvars; close all;
-% clc;
 
 %% Part 1 
-
 load('Practice_3_krf_matrix.mat');
 [iX, jX] = size(X);
 [iA, jA] = size(A);
 [iB, jB] = size(B);
 
-init.A0 = complex(zeros(iA,jA));
-init.B0 = complex(zeros(iB,jB));
-
-[Ahat,Bhat] = nd.lskrf(X, init);
+[Ahat,Bhat] = nd.lskrf(X, iA, iB);
 Xhat = nd.kr_(Ahat,Bhat);
 
 [X_NMSE, X_NMSE_dB] = nd.nmse(X, Xhat);
@@ -55,19 +49,43 @@ end
 
 
 %% Part 2
-pause
-% RMC = 10;
-% SNR_dB = 0:5:30;
-% I = 10; J = 10; R = 4;
+fprintf('.\n.\nPart 2 ---------------------------------------------- \n')    
+
+hw3_problem
+
+d1 = load('hw3_problem_data1.mat');
+d2 = load('hw3_problem_data2.mat');
+
+fprintf('\tMean Diff d1 vs d2: %2.2f dB \n', d1.meanNMSE - d2.meanNMSE);
+fprintf('\tMean Diff: %2.2f dB \n', mean(d1.meanNMSE - d2.meanNMSE, 2));
 
 
-% X0 = nd.kr_(A, B);
+%% Figure Results
+h_problem = figure;
+plot(d1.SNR_dB, d1.meanNMSE,...
+    'Color', 'blue',...        
+    'LineStyle', '--',...
+    'LineWidth', 1.0,...
+    'Marker', 'o',...
+    'MarkerFaceColor', 'blue',...
+    'MarkerSize', 5);
+hold on
+plot(d2.SNR_dB, d2.meanNMSE,...
+    'Color', 'red',...        
+    'LineStyle', '-',...
+    'LineWidth', 1.0,...
+    'Marker', 's',...
+    'MarkerFaceColor', 'red',...
+    'MarkerSize', 5);
+hold off
+xticks(d1.SNR_dB);
+xlabel("SNR (dB)")
+ylabel("NMSE (dB)")
+legend(["I = " + num2str(d1.I), "I = " + num2str(d2.I)], 'Location', 'Best')
+legend boxoff
+grid on
+% axis tight
 
-% X = X0 + alpha*V;
 
-% A = nd.randn_complex(I, J);
-% B = nd.randn_complex(J, J);
-
-% Xhat = tensor.mtx_prod_kr(Ahat,Bhat);
-
-%% Local Function -------------------------------------------------------------
+%% Save Figures
+savefig_tight(h_problem, "figures/hw3-problem1", "both")
