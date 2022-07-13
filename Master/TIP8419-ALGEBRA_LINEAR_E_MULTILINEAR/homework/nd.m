@@ -116,8 +116,8 @@ methods(Static)
             Bhat = complex(zeros(N,jX),0);
 
             for jj = 1:jX
-                Xp = reshape(X(:,jj), [N M]);
-                [U,S,V] = svd(Xp);
+                X_reshp = reshape(X(:,jj), [N M]);
+                [U,S,V] = svd(X_reshp);
                 Ahat(:,jj) = sqrt(S(1,1)).*conj(V(:,1));
                 Bhat(:,jj) = sqrt(S(1,1)).*U(:,1);
             end
