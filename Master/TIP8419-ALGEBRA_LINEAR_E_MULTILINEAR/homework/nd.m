@@ -20,7 +20,9 @@
 %   TENSOR FACTORS ESTIMATION
 %       ND.LSKRF        - Least-Squares Khatri-Rao Factorization (LSKRF)
 %       ND.LSKRONF      - Least-Squares  Kronecker Product Factorization (LSKRONF)
+%       ND.KPSVD        - Kronecker Product Singular Value Decomposition (KPSVD)
 %
+% 
 %   PARAFAC/CP
 %
 
@@ -139,7 +141,7 @@ methods(Static)
     
     
     function [Ahat,Bhat] = lskronf(X, Ma, Na, Mb, Nb)
-    % ND.LSKRONF  Least-Squares  Kronecker Product Factorization (LSKRONF)
+    % ND.LSKRONF  Least-Squares Kronecker Product Factorization (LSKRONF)
     %   [Ahat,Bhat] = nd.lskronf(X, Ma, Na, Mb, Nb) compute the LSKRONF.
     %
     %   See also.   
@@ -150,9 +152,9 @@ methods(Static)
             X_b = mat2cell(X, repelem(Mx/Ma,Ma), repelem(Nx/Na,Na));
             
             itCol = 1;
-            for j = 1:Na
-                for i = 1:Ma
-                    Xhat(:,itCol) = nd.vec(cell2mat(X_b(i,j)));
+            for jj = 1:Na
+                for ii = 1:Ma
+                    Xhat(:,itCol) = nd.vec(cell2mat(X_b(ii,jj)));
                     itCol = itCol + 1;
                 end
             end
@@ -162,10 +164,38 @@ methods(Static)
             Bhat = reshape(sqrt(S(1,1)).*U(:,1), [Mb Nb]);
 
         else
-            error('sizse of X(Mc, Nc) should match with Mc=Ma*Mb and Nc=Na*Nb, A(Ma, Na) and B(Mb, Nb)');
+            error('size of X(Mx, Nx) should match with Mc=Ma*Mb and Nc=Na*Nb, A(Ma, Na) and B(Mb, Nb)');
         end
     end
 
+
+    function [U,S,V,rkp] = kpsvd(X, Xstruct)
+    % ND.KPSVD  Kronecker Product Singular Value Decomposition (KPSVD)
+    %   [U,S,V,rkp] = nd.kpsvd(X, Xstruct) compute the KPSVD.
+    %
+    %   See also.   
+        [Mx,Nx] = size(X);
+        
+        if Xstruct(1)*Xstruct(3) == Mx && Xstruct(2)*Xstruct(4) == Nx % Verify the input dimensions 
+            Xhat = complex(zeros(Xstruct(3)*Xstruct(4),Xstruct(1)*Xstruct(2)),0);    
+            X_b = mat2cell(X, repelem(Mx/Xstruct(1),Xstruct(1)), repelem(Nx/Xstruct(2),Xstruct(2)));
+            
+            itCol = 1;
+            for jj = 1:Xstruct(2)
+                for ii = 1:Xstruct(1)
+                    Xhat(:,itCol) = nd.vec(cell2mat(X_b(ii,jj)));
+                    itCol = itCol + 1;
+                end
+            end
+            [U,S,V] = svd(Xhat');
+            rkp = rank(S);
+        else
+            error('size of X(Mx, Nx) should match with Mc=Xstruct(1)*Xstruct(3) and Nc=Xstruct(2)*Xstruct(4), for A(Xstruct(1), Xstruct(2)) and B(Xstruct(3), Xstruct(4))');
+        end
+
+    end
+    
+    
 
     %% PLACE HOLDER SECTION
 
