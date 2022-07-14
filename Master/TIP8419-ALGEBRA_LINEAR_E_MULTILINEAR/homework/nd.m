@@ -9,6 +9,8 @@
 % Content
 %   MATRIX FUNCTIONS
 %       ND.RANDN_COMPLEX    - Complex-valued matrix from normal distribution.
+%       ND.VEC              - Vectorize a matrix.
+%       ND.NMSE             - Normalized mean square error (NMSE) of a tensor.
 % 
 %   MATRIX PRODUCTS
 %       ND.HADAMARD_    - Hadamard product with two matrices.
@@ -17,6 +19,7 @@
 %
 %   TENSOR FACTORS ESTIMATION
 %       ND.LSKRF        - Least-Squares Khatri-Rao Factorization (LSKRF)
+%       ND.LSKRONF      - Least-Squares  Kronecker Product Factorization (LSKRONF)
 %
 %   PARAFAC/CP
 %
@@ -35,8 +38,16 @@ methods(Static)
         C = complex(randn(M,N), randn(M,N));
     end
 
+    function y = vec(x)
+    % ND.VEC - Vectorize a matrix.
+    %   y = vec(x) draws a vector from a given matrix.
+    % 
+    %   See also.
+        y = x(:);
+    end
+
     function [X_nmse, X_nmse_dB] = nmse(X, X_hat)
-    % ND.nmse - Normalized mean square error (NMSE) of a tensor.
+    % ND.NMSE - Normalized mean square error (NMSE) of a tensor.
     %   [X_nmse, X_nmse_dB] = nd.nmse(X, X_hat) compute the NMSE of two arrays
     % 
     %   See also.
@@ -111,13 +122,12 @@ methods(Static)
     %   See also.
         [iX, jX] = size(X);
 
-        if iX == M*N
+        if iX == M*N % Verify the input dimensions
             Ahat = complex(zeros(M,jX),0);
             Bhat = complex(zeros(N,jX),0);
 
             for jj = 1:jX
-                X_reshp = reshape(X(:,jj), [N M]);
-                [U,S,V] = svd(X_reshp);
+                [U,S,V] = svd(reshape(X(:,jj), [N M]));
                 Ahat(:,jj) = sqrt(S(1,1)).*conj(V(:,1));
                 Bhat(:,jj) = sqrt(S(1,1)).*U(:,1);
             end
@@ -127,21 +137,38 @@ methods(Static)
     
     end
     
+    
+    function [Ahat,Bhat] = lskronf(X, Ma, Na, Mb, Nb)
+    % ND.LSKRONF  Least-Squares  Kronecker Product Factorization (LSKRONF)
+    %   [Ahat,Bhat] = nd.lskronf(X, Ma, Na, Mb, Nb) compute the LSKRONF.
+    %
+    %   See also.   
+        [Mx,Nx] = size(X);
+        
+        if Ma*Mb == Mx && Na*Nb == Nx % Verify the input dimensions 
+            Xhat = complex(zeros(Mb*Nb,Ma*Na),0);    
+            X_b = mat2cell(X, repelem(Mx/Ma,Ma), repelem(Nx/Na,Na));
+            
+            itRow = 1;
+            for j = 1:Na
+                for i = 1:Ma
+                    Xhat(:,itRow) = nd.vec(cell2mat(X_b(i,j)));
+                    itRow = itRow + 1;
+                end
+            end
+
+            [U,S,V] = svd(Xhat);
+            Ahat = reshape(sqrt(S(1,1)).*conj(V(:,1)),[Ma Na]);
+            Bhat = reshape(sqrt(S(1,1)).*U(:,1), [Mb Nb]);
+
+        else
+            error('sizse of X(Mc, Nc) should match with Mc=Ma*Mb and Nc=Na*Nb, A(Ma, Na) and B(Mb, Nb)');
+        end
+    end
+
 
     %% PLACE HOLDER SECTION
 
 end
 
 end
-
-% targetSignals = []; %Default
-% for ii = 1:2:numel(varargin)
-%     switch lower(varargin{ii})
-%         case 'assigntovariables'
-%             assignToVariables = varargin{ii+1};
-%         case 'targetsignals'
-%             targetSignals = varargin{ii+1};
-%         otherwise
-%             error('EDFREAD: Unrecognized parameter-value pair specified. Valid values are ''assignToVariables'' and ''targetSignals''.')
-%     end
-% end
