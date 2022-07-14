@@ -149,11 +149,11 @@ methods(Static)
             Xhat = complex(zeros(Mb*Nb,Ma*Na),0);    
             X_b = mat2cell(X, repelem(Mx/Ma,Ma), repelem(Nx/Na,Na));
             
-            itRow = 1;
+            itCol = 1;
             for j = 1:Na
                 for i = 1:Ma
-                    Xhat(:,itRow) = nd.vec(cell2mat(X_b(i,j)));
-                    itRow = itRow + 1;
+                    Xhat(:,itCol) = nd.vec(cell2mat(X_b(i,j)));
+                    itCol = itCol + 1;
                 end
             end
 
