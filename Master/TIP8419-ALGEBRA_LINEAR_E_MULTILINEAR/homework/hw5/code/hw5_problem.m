@@ -2,38 +2,39 @@
 % by Lucas Abdalah
 % ----------------------------
 % 
-% hw5.m
+% hw5_problem.m
 % Author: Lucas Abdalah
 %
-
 clearvars; close all;
 
-%% Part 1 -------------------------------
+%% Problem 2
+RMC = 1000;
 M = 3; N = 3; P = 3; Q = 3;
 Xstruct = [M, N, P, Q];
 R = 3;
+d.Rvsrkp = 1:1:M*P;
+d.NMSE_dB = zeros(RMC, M*P);
 
-fprintf('\n.\n.\n ---------------- Problem 1 ----------------\n.\n.\n')
-X = modelkpsvd(R, Xstruct);
-[U,S,V,rkp] = nd.kpsvd(X, Xstruct);
+for rmc = 1:1:RMC
+    for defRank = d.Rvsrkp
+        X = modelkpsvd(R, Xstruct);
+        [U,S,V,rkp] = nd.kpsvd(X, Xstruct);
+        
+        Xhat = buildkpsvd(U, S, V, defRank, Xstruct);
+        [~, d.NMSE_dB(rmc, defRank)] = nd.nmse(X, Xhat);
+        
+        % fprintf(['\n.\n.\nOriginal Matrix vs KPSVD estimation\n' ...
+        %         '-----------------------------------\n' ... 
+        %         'rank\t|\tNMSE (dB)\t\n-----------------------------------\n']);
+        %         fprintf('%2.0f\t|\t%2.2f\t\n', defRank, d.NMSE_dB(rmc, defRank));
+    end
+    fprintf(' ----- (%2.0f, %2.0f) -------\n', rmc, defRank)
+end
 
-Xhat = buildkpsvd(U, S, V, rkp, Xstruct);
-[~, ndNMSEdB] = nd.nmse(X, Xhat);
-fprintf(['Original Matrix vs KPSVD estimation (full rank):\n' ...
-        '\tNMSE = %2.2f dB \n'], ndNMSEdB);
+fprintf('---------------- \n')
 
-
-%% Part 2 -----------------------------------
-% hw5_problem
-
-fprintf('\n.\n.\n ---------------- Problem 2 ----------------\n.\n.\n')
-d = load('hw5_problem_data.mat');
-
-fprintf(['Original Matrix vs KPSVD estimation\n' ...
-                '-----------------------------------\n' ... 
-                'rank\t|\tNMSE (dB)\t\n----------------------------------\n']);
-
-fprintf('%2.0f\t|\t%2.2f\t\n', [d.Rvsrkp; d.meanNMSE_dB]);
+d.meanNMSE_dB = mean(d.NMSE_dB,1);
+fprintf(' Mean NMSE: %2.2f dB \n', d.meanNMSE_dB);
 
 
 %% Figure Results
@@ -51,8 +52,11 @@ ylabel("NMSE (dB)")
 grid on
 axis tight
 
-% savefig_tight(h_problem, "figures/hw5-problem2", "both")
 
+%% Save Data
+disp('Saving data...')
+save('hw5_problem_data.mat','-struct','d');
+disp('Saved sucessfully')
 
 %% Local Function -------------------------------------------------------------
 function X = modelkpsvd(R, Xstruct)
