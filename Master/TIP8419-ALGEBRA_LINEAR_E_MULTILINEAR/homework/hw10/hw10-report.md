@@ -12,27 +12,28 @@ Professors: André Lima e Henrique Goulart
 - - - 
 
 # Table of Contents
-- [Multidimensional Least-Squares Khatri-Rao Factorization (MLS-KRF)](#multidimensional-least-squares-khatri-rao-factorization-mls-krf)
+- [Multidimensional Least-Squares Kronecker Factorization (MLS-KronF)](#multidimensional-least-squares-kronecker-factorization-mls-kronf)
   - [Problem 1](#problem-1)
   - [Problem 2](#problem-2)
 
-# Multidimensional Least-Squares Khatri-Rao Factorization (MLS-KRF)
+# Multidimensional Least-Squares Kronecker Factorization (MLS-KronF)
 
 ## Problem 1
 
-Let $\mathbf{X} = \mathbf{A}^{(1)} \diamond \mathbf{A}^{(2)} \diamond \dots \diamond \mathbf{A}^{(N)} \in \mathbb{C}^{I_{1}I_{2}\dots I_{N} \times R}$ be a matrix generated from the Khatri-Rao product of $N$ matrices $\mathbf{A}^{(n)} \in \mathbb{C}^{I_{n} \times R}$, with $n = 1, 2, \dots, N$. Considering $N = 3$ and choosing your own values for $R$ and $I_{n}, n = 1, 2, 3$, implement the MLS-KRF algorithm
-to find the estimates of $\mathbf{A}^{(1)}$, $\mathbf{A}^{(2)}$ and $\mathbf{A}^{(3)}$ by solving the following problem:
+Let $\mathbf{X} \in \mathbb{C}^{I_1 I_2 \dots I_N \times J_1 J_2 \dots J_N}$ be a matrix that we wish to approximate as $\mathbf{X} \approx \mathbf{A}^{(1)} \otimes \mathbf{A}^{(2)} \otimes \dots \otimes \mathbf{A}^{(N)}$, that is, as Kronecker product of $N$ matrices $\mathbf{A}^{(n)} \in \mathbb{C}^{I_{n} \times J_{n}}$ with $n = 1, 2, \dots, N$. For $N = 3$ and arbitrary $I_{n}$ and $J_{n}$, implement the MLSKronF algorithm that estimates  $\mathbf{A}^{(1)}$, $\mathbf{A}^{(2)}$, $\mathbf{A}^{(3)}$ by solving the following problem:
 
 $$\begin{equation*} 
-(\mathbf{\hat{A}^{(1)}}, \mathbf{\hat{A}^{(2)}}, \mathbf{\hat{A}^{(3)}}) = \underset{\mathbf{\hat{A}^{(1)}}, \mathbf{\hat{A}^{(2)}}, \mathbf{\hat{A}^{(3)}}} \min \, || \mathbf{X} - \mathbf{A}^{(1)} \diamond \mathbf{A}^{(2)} \diamond \mathbf{A}^{(3)} ||_{F}^{2} \end{equation*}$$
+(\mathbf{\hat{A}^{(1)}}, \mathbf{\hat{A}^{(2)}}, \mathbf{\hat{A}^{(3)}}) = \underset{\mathbf{\hat{A}^{(1)}}, \mathbf{\hat{A}^{(2)}}, \mathbf{\hat{A}^{(3)}}} \min \, || \mathbf{X} - \mathbf{A}^{(1)} \otimes \mathbf{A}^{(2)} \otimes \mathbf{A}^{(3)} ||_{F}^{2} \end{equation*}$$
 
-Compare the estimated matrices $\mathbf{\hat{A}^{(1)}}$, $\mathbf{\hat{A}^{(2)}}$ and $\mathbf{\hat{A}^{(3)}}$ with the original ones. What can you conclude? Explain the results.
+using either the truncated HOSVD or the HOOI initialized with the HOSVD (you should implement both versions).
 
-<u>Hint</u>: Use the file “krf_matrix_3D.mat” to validate your result.
+Test the algorithms on a matrix that exactly follows the model. Compare the estimated matrices $\mathbf{\hat{A}^{(1)}}$, $\mathbf{\hat{A}^{(2)}}$ and $\mathbf{\hat{A}^{(3)}}$ with the original ones. What can you conclude? Explain the results.
+
+<u>Hint</u>: Use the file “Practice_10_kronf_matrix_3D.mat” to validate your result.
 
 ---
 
-### Results
+<!-- ### Results
 
 <div style="background-color:rgba(0, 0, 200, 0.15); text-align:justify; padding:20px">
 <p>
@@ -87,18 +88,23 @@ We can see that for all columns are composed by the same real value, for all mat
 [Problem 1 script][1].
 
 </p>
-</div>
+</div> -->
 
 <!---------------------------------------------------------------------------->
 
 ## Problem 2 
 
-Assuming 1000 Monte Carlo experiments, generate $\mathbf{X}_{0} = \mathbf{A} \diamond \mathbf{B} \diamond \mathbf{C} \in \mathbb{C}^{I_{1} I_{2} I_{3} \times R}$, for randomly chosen $\mathbf{A} \in \mathbb{C}^{I_{1} \times R}$, $\mathbf{B} \in \mathbb{C}^{I_{2} \times R}$ and $\mathbf{C} \in \mathbb{C}^{I_{3} \times R}$, with $R = 4$, whose elements are drawn from a normal distribution. Let $\mathbf{X} = \mathbf{X}_{0} + \alpha V$ be a noisy version of $\mathbf{X}_{0}$, where $V$ is the additive noise term, whose elements are drawn from a normal distribution. The parameter α controls the power (variance) of the noise term, and is defined as a function of the signal to noise ratio (SNR), in dB, as follows
+Assuming 1000 Monte Carlo experiments, generate $\mathbf{X}_{0} = \mathbf{A} \otimes \mathbf{B} \otimes \mathbf{C} \in \mathbb{C}^{I_{1} I_{2} I_{3} \times J_{1} J_{2} J_{3}}$, for randomly chosen $\mathbf{A} \in \mathbb{C}^{I_{1} \times J_{1}}$, $\mathbf{B} \in \mathbb{C}^{I_{2} \times J_{2}}$ and $\mathbf{C} \in \mathbb{C}^{I_{3} \times J_{3}}$, whose elements are drawn from a normal distribution. Let $\mathbf{X} = \mathbf{X}_{0} + \alpha V$ be a noisy version of $\mathbf{X}_{0}$, where $V$ is the additive noise term, whose elements are drawn from a normal distribution. The parameter α controls the power (variance) of the noise term, and is defined as a function of the signal to noise ratio (SNR), in dB, as follows
 $$\begin{equation} 
 \text{SNR}_{\text{dB}} = 10\log_{10} \left( \frac{|| \mathbf{X}_{0} ||_{F}^{2}}{|| \alpha V ||_{F}^{2}} \right) 
 \end{equation}$$
 
-Assuming the SNR range $\{0, 5, 10, 15, 20, 25, 30\}$ dB, find the estimates $\mathbf{\hat{A}}$, $\mathbf{\hat{B}}$ and $\mathbf{\hat{C}}$ via the MLS-KRF algorithm, assuming $I_{1} = 2$, $I_{2} = 3$ and $I_{3} = 4$.
+Assuming the SNR range $\{0, 5, 10, 15, 20, 25, 30\}$ dB, find the estimates $\mathbf{\hat{A}}$, $\mathbf{\hat{B}}$ and $\mathbf{\hat{C}}$ via the MLS-KronF algorithm, assuming:
+
+1. $(I_1, I_2, I_3) = (J_1, J_2, J_3) = (2, 2, 2)$;
+2. $(I_1, I_2, I_3) = (J_1, J_2, J_3) = (5, 5, 5)$;
+3. $(I_1, I_2, I_3) = (J_1, J_2, J_3) = (2, 3, 4)$;
+4. $(I_1, I_2, I_3) = (2, 3, 4)$ and $(J_1, J_2, J_3) = (5, 6, 7)$.
 
 Let us define the normalized mean square error (NMSE) measure as follows
 
@@ -108,12 +114,11 @@ $$\begin{equation}
 
 where $\mathbf{X}_{0}(i)$ e $\mathbf{\hat{X}}_{0}(i)$ represent the original data matrix and the reconstructed one at the $i\text{th}$ experiment, respectively. For each SNR value and configuration, plot the NMSE vs. SNR curve. Discuss the obtained results. 
 
-<u>Note</u>: For a given SNR (dB), the parameter α to be used in your experiment is determined
-from equation (1).
+<u>Note</u>: For a given SNR (dB), the parameter α to be used in your experiment is determined from equation (1).
 
 ---
 
-### Results
+<!-- ### Results
 
 <div style="background-color:rgba(0, 0, 200, 0.15); text-align:justify; padding:20px">
 <p>
@@ -148,7 +153,7 @@ For each value of SNR, respectively:
 [Problem 2 script][2] and [Figures][3].
 
 </p>
-</div>
+</div> -->
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw9/code/figures/hw9-problem2.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
@@ -157,6 +162,6 @@ For each value of SNR, respectively:
 
 <!---------------------------------------------------------------------------->
 
-[1]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw9/code/hw9.m> (Problem 1 script)
-[2]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw9/code/hw9_problem.m> (Problem 2 script)
-[3]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw9/code/hw9.m> (Figures)
+[1]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10.m> (Problem 1 script)
+[2]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10_problem.m> (Problem 2 script)
+[3]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10.m> (Figures)
