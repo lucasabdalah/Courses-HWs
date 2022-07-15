@@ -33,6 +33,7 @@
 % 
 %   TENSOR DECOMPOSTIONS
 %       ND.HOSVD        - Perfom the High Order Singular Value Decomposition (HOSVD) of a tensor, truncated or full version.
+%       ND.HOOI         - Perfom the High Order Orthogonal Iteration (HOOI) of a tensor, truncated or full version.
 % 
 %   
 %   SAVE DATA TO TXT FILE 
@@ -324,10 +325,53 @@ methods(Static)
             end
         end
         S = nd.N_mode(ten, (cellfun(@(x) x', U,'UniformOutput',false)));
-        U = cellfun(@(x) x, U,'UniformOutput',false);
+        U = cellfun(@(x) x, U, 'UniformOutput',false);
     end
 
+    function [S, U, it] = hooi(ten, Atype, maxIt, ranksInput)
+    % ND.HOOI  Perfom the High Order Orthogonal Iteration (HOOI)
+    %  of a tensor, truncated or full version.
+    %   [S,U] = hooi(ten, 'trunc') compute the truncated-HOOI
+    %   [S,U] = hooi(ten, 'full') compute the full-HOOI
+    %
+    %   See also.
+        N = numel(size(ten));
+        [~, U_ten] = nd.hosvd(ten, 'full');
+        
+        if nargin < 3
+            maxIt = 50;
+        end
+        
+        switch Atype
+        case 'trunc'
+            for it = 1:maxIt
+                for ii = 1:N
+                    N_mode = 1:N;
+                    N_mode(ii) = [];
+                    Un = nd.N_mode(ten, U_ten, N_mode);
+                    [Ur, Sr, ~] = svd(nd.unfold(Un,ii));
+                    if nargin < 4
+                        U{ii} = Ur(:,1:rank(Sr));
+                    else
+                        U{ii} = Ur(:,1:ranksInput(ii));
+                    end
+                end
+            end
+        case 'full'
+            for it = 1:maxIt
+                for ii = 1:N
+                    N_mode = 1:N;
+                    N_mode(ii) = [];
+                    Un = nd.N_mode(ten, U_ten, N_mode);    
+                    [Usvd,~,~] = svd(nd.unfold(Un,ii));
+                    U{ii} = Usvd;
+                end
+            end
+        end
+        S = nd.N_mode(ten, cellfun(@(x) x', U, 'UniformOutput', false)) ; 
+    end
 
+    
     %% SAVE DATA TO TXT FILE
     function mat2txt(file, X, permission, header)
     % ND.MAT2TXT  Write a matrix X into a txt file
