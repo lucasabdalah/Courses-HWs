@@ -46,6 +46,12 @@ function includeHTML() {
     <a href="#hw5-report">HW5 report </a> <br>
     <a href="#hw6-report">HW6 report </a> <br>
     <a href="#hw7-report">HW7 report </a> <br>
+    <a href="#hw8-report">HW8 report </a> <br>
+    <a href="#hw9-report">HW9 report </a> <br>
+    <a href="#hw10-report">HW10 report </a> <br>
+    <a href="#hw11-report">HW11 report </a> <br>
+    <a href="#hw12-report">HW12 report </a> <br>
+    <a href="#hw13-report">HW13 report </a> <br>
 </div>
 <hr>
 <br>
@@ -127,6 +133,60 @@ function includeHTML() {
         </a> 
     </p> 
 </div> 
+<br>
+<div id="hw8-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw8/hw8-report.html"></div>
+<br> <div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> 
+            Return to Table of Contents 
+        </a> 
+    </p> 
+</div> 
+<br>
+<div id="hw9-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw9/hw9-report.html"></div>
+<br> <div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> 
+            Return to Table of Contents 
+        </a> 
+    </p> 
+</div>
+<br>
+<div id="hw10-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/hw10-report.html"></div>
+<br> <div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> 
+            Return to Table of Contents 
+        </a> 
+    </p> 
+</div>
+<br>
+<div id="hw11-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw11/hw11-report.html"></div>
+<br> <div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> 
+            Return to Table of Contents 
+        </a> 
+    </p> 
+</div>
+<br>
+<div id="hw12-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw12/hw12-report.html"></div>
+<br> <div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> 
+            Return to Table of Contents 
+        </a> 
+    </p> 
+</div>
+<br>
+<div id="hw13-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw13/hw13-report.html"></div>
+<br> <div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> 
+            Return to Table of Contents 
+        </a> 
+    </p> 
+</div>
 <br>
 </div>
 <script>
