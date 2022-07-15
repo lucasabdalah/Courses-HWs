@@ -1,9 +1,9 @@
 # TIP8419 - Algebra Linear e Multilinear
 Progresso no estudos e/ou trabalhos da disciplina de Algebra Linear e Multilinear
 
-Implementações:
+- [X] Merge Homeworks Report: [Report PDF](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw-report.pdf)
 
-- [X] SVD (Revisão)
+Individual Reports:
 - [X] Homework 0: [Report HW0](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw0/hw0-report.pdf)
 - [X] Homework 1: [Report HW1](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/hw1-report.pdf)
 - [X] Homework 2: [Report HW2](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw2/hw2-report.pdf)

@@ -2,7 +2,7 @@
     <html>
     <head>
         <meta charset="UTF-8">
-        <title>TIP8419 - Algebra Linear e Multilinear</title>
+        <title></title>
         <style>
 /* From extension vscode.github */
 /*---------------------------------------------------------------------------------------------
@@ -79,69 +79,142 @@
         
     </head>
     <body class="vscode-body vscode-light">
-        <h1 id="tip8419---algebra-linear-e-multilinear">TIP8419 - Algebra Linear e Multilinear</h1>
-<p>Progresso no estudos e/ou trabalhos da disciplina de Algebra Linear e Multilinear</p>
-<ul class="contains-task-list">
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Merge Homeworks Report: <a href="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw-report.pdf">Report PDF</a></li>
-</ul>
-<p>Individual Reports:</p>
-<ul class="contains-task-list">
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Homework 0: <a href="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw0/hw0-report.pdf">Report HW0</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Homework 1: <a href="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/hw1-report.pdf">Report HW1</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Homework 2: <a href="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw2/hw2-report.pdf">Report HW2</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Homework 3 <a href="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw3/hw3-report.pdf">Report HW3</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Homework 4 <a href="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw4/hw4-report.pdf">Report HW4</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Homework 5 <a href="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw5/hw5-report.pdf">Report HW5</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Homework 6 <a href="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw6/hw6-report.pdf">Report HW6</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Homework 7 <a href="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw7/hw7-report.pdf">Report HW7</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Homework 8</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Homework 9</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Homework 10</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Homework 11</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Homework 12</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Homework 13</li>
-</ul>
+        <!DOCTYPE html>
+<html>
+<script>
+function includeHTML() {
+  var z, i, elmnt, file, xhttp;
+  /*loop through a collection of all HTML elements:*/
+  z = document.getElementsByTagName("*");
+  for (i = 0; i < z.length; i++) {
+    elmnt = z[i];
+    /*search for elements with a certain atrribute:*/
+    file = elmnt.getAttribute("w3-include-html");
+    if (file) {
+      /*make an HTTP request using the attribute value as the file name:*/
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+          if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+          if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+          /*remove the attribute, and call this function once more:*/
+          elmnt.removeAttribute("w3-include-html");
+          includeHTML();
+        }
+      }      
+      xhttp.open("GET", file, true);
+      xhttp.send();
+      /*exit the function:*/
+      return;
+    }
+  }
+};
+</script>
+<h1>
+    <center> 
+        Lucas Abdalah <br>
+        [TI8419 - Multilinear Algebra] Homeworks <br>
+        Professors: André Lima e Henrique Goulart <br>
+    </center>
+</h1>
+<div id="toc">
+    <h1> Contents </h1>
+    <a href="#hw0-report">HW0 report </a> <br>
+    <a href="#hw1-report">HW1 report </a> <br>
+    <a href="#hw2-report">HW2 report </a> <br>
+    <a href="#hw3-report">HW3 report </a> <br>
+    <a href="#hw4-report">HW4 report </a> <br>
+    <a href="#hw5-report">HW5 report </a> <br>
+    <a href="#hw6-report">HW6 report </a> <br>
+    <a href="#hw7-report">HW7 report </a> <br>
+</div>
 <hr>
-<h2 id="course-content">Course Content</h2>
-<h3 id="introduction-6hs">Introduction (6hs)</h3>
-<ul>
-<li>Definitions, Notations and Mathematical Operations</li>
-</ul>
-<h3 id="special-decompositions-8hs">Special Decompositions (8hs)</h3>
-<ul>
-<li>Least-Squares Khatri-Rao Factorization</li>
-<li>Least-Squares Kronecker Factorization</li>
-<li>Kronecker Product Singular Value Decomposition (KPSVD)</li>
-</ul>
-<h3 id="tensor-overview-16hs">Tensor Overview (16hs)</h3>
-<ul>
-<li>Matricization: Transforming a Tensor into a Matrix</li>
-<li>Tensor Multiplication: The n-mode Product</li>
-<li>Tensor Networks</li>
-<li>Higher-Order Singular Value Decomposition (HOSVD)</li>
-<li>Best Multilinear Rank Approximation</li>
-<li>Multidimensional Least-Squares Khatri-Rao Factorization</li>
-<li>Multidimensional Least-Squares Kronecker Factorization</li>
-</ul>
-<h3 id="tensor-decomposition-12hs">Tensor Decomposition (12hs)</h3>
-<ul>
-<li>Introduction on Tensor Decomposition</li>
-<li>PARAFAC Decomposition</li>
-<li>Tensor Kronecker Product Singular Value Decomposition (TKPSVD)</li>
-<li>TUCKER Decomposition</li>
-<li>PARATUCK2 Decomposition</li>
-<li>Tensor Train Decomposition (TTD)</li>
-<li>Higher Order Power Iteration Method</li>
-</ul>
-<h3 id="tensor-completion-6hs">Tensor Completion (6hs)</h3>
-<h3 id="applications-of-tensor-decomposition">Applications of Tensor Decomposition</h3>
-<table>
-<thead>
-<tr>
-<th>Alerta de Nível: Conteúdo lecionado para aqui! (24/06/2022)</th>
-</tr>
-</thead>
-</table>
+<br>
+<div> 
+<div id="hw0-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw0/hw0-report.html"></div>
+<br> 
+<div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> Return to Table of Contents </a> 
+    </p> 
+</div> 
+<br>
+<div id="hw1-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/hw1-report.html">
+</div>
+<br> 
+<div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> 
+            Return to Table of Contents 
+        </a> 
+    </p> 
+</div> 
+<br>
+<div id="hw2-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw2/hw2-report.html"></div>
+<br> 
+<div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> 
+            Return to Table of Contents 
+        </a> 
+    </p> 
+</div> 
+<br>
+<div id="hw3-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw3/hw3-report.html"></div>
+<br> 
+<div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> 
+            Return to Table of Contents 
+        </a> 
+    </p> 
+</div> 
+<br>
+<div id="hw4-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw4/hw4-report.html"></div>
+<br> 
+<div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> 
+            Return to Table of Contents 
+        </a> 
+    </p> 
+</div> 
+<br>
+<div id="hw5-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw5/hw5-report.html"></div>
+<br> 
+<div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> 
+            Return to Table of Contents 
+        </a> 
+    </p> 
+</div> 
+<br>
+<div id="hw6-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw6/hw6-report.html"></div>
+<br> 
+<div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> 
+            Return to Table of Contents 
+        </a> 
+    </p> 
+</div> 
+<br>
+<div id="hw7-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw7/hw7-report.html"></div>
+<br> <div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> 
+            Return to Table of Contents 
+        </a> 
+    </p> 
+</div> 
+<br>
+</div>
+<script>
+includeHTML();
+</script>
+</body>
+</html>
 
         
         
