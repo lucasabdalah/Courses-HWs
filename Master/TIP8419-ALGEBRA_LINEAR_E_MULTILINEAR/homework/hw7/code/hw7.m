@@ -75,7 +75,7 @@ function dotProd = sliceort(Xten)
     for kk_xT = 1:size_Xten(3)
         for kk_x = 1:size_Xten(3)
             if kk_xT ~= kk_x
-                dotProd(end+1) = reshape(Xten(:,:,kk_xT),[],1)'*reshape(Xten(:,:,kk_x),[],1);
+                dotProd(end+1) = nd.vec(Xten(:,:,kk_xT))'*nd.vec(Xten(:,:,kk_x)) ;
             end
         end
     end

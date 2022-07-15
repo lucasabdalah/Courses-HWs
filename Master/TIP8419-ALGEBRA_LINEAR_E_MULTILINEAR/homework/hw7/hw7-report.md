@@ -19,12 +19,59 @@ Professors: André Lima e Henrique Goulart
 # High Order Singular Value Decomposition (HOSVD)
 
 ## Problem 1
-For a third-order tensor $\mathbb{X} \in \mathbb{C}^{I\times J\times K}$ implement the truncated high-order singular value decomposition (HOSVD), using the following prototype function:
+For a third-order tensor $\mathcal{X} \in \mathbb{C}^{I\times J\times K}$ implement the truncated high-order singular value decomposition (HOSVD), using the following prototype function:
 
 $$\begin{equation} 
-\left[\mathcal{S}, \mathbf{U}^{(1)}, \mathbf{U}^{(2)}, \mathbf{U}^{(3)} \right] = \text{hosvd}(\mathcal{S}) \end{equation}$$
+\left[\mathcal{S}, \mathbf{U}^{(1)}, \mathbf{U}^{(2)}, \mathbf{U}^{(3)} \right] = \text{hosvd}(\mathcal{X}) \end{equation}$$
 
 <u>Hint</u>: Use the file “hosvd_test.mat” to validate your results.
+
+--- 
+
+### Results
+
+<div style="background-color:rgba(0, 0, 200, 0.15); text-align:justify; padding:20px">
+<p>
+
+**Simulation setup**
+
+- The algorithm that uses the SVD was applied to the given initial tensor $\mathcal{X} \in \mathbb{C}^{I\times J\times K}$;
+- $I, J, K = 3, 4, 5$.
+
+**Discussion**
+
+To compare the given data with the estimated factors, we may use two main  experiment results: the orthogonality between the subtensors (slices) of $\mathcal{S}$ and the NMSE between the given data and obtained as output to HOSVD.
+
+The orthogonality assessment consists in compute the function $f_{ort}(\mathcal{S})$, that acumulates the scalar product bewteen the slices, following the equation below.
+
+$$\begin{equation*}
+f_{ort}(\mathcal{S}) = \sum_{k_{M}=1}^{K} \sum_{k_{N}=1}^{K} \text{vec}(\mathcal{S}_{:, :, k_{M}})^{\top}\text{vec}(\mathcal{S}_{:, :, k_{N}}) \quad for \, \, k_{M} \neq k_{N}
+\end{equation*}$$
+
+We obtain $f_{ort}(\mathcal{S}) = 0$, as expected for successful HOSVD.
+
+	-------------- The tensor slices are orthogonal if = zero -------------- 
+	f_ort = 0.00 
+
+The values obtained for NMSE present low SNR, with an emphasis to $\text{NMSE}(\mathcal{X, \hat{X}})$ value, with a very low SNR. 
+
+	--------------- NMSE between a given tensor X and estimation -------------- 
+	NMSE: -618.62 dB
+	--------------- NMSE between a given tensor core S and its estimation ----- 
+	NMSE: 6.51 dB
+	--------------- NMSE between the factor matrices U and their estimation ----- 
+	NMSE between U1 and its estimation: 8.52 dB
+	NMSE between U2 and its estimation: 6.02 dB
+	NMSE between U3 and its estimation: 4.12 dB
+
+We can see that both results, Orthogonality and NMSE, support the proper algorithm estimation hypothesis.
+
+[Problem 1 script][1].
+
+</p>
+</div>
+
+<!---------------------------------------------------------------------------->
 
 ---
 
@@ -50,70 +97,33 @@ $$\begin{equation*}
 
 **Simulation setup**
 
-- The algorithm that uses the SVD was applied to the initial factor matrices $\mathbf{A}_{0}$ and $\mathbf{B}_{0}$ initializated from a Normal distribution $\mathcal{N}(0,\,1)\,$;
+- The algorithm that uses the SVD was applied to the given initial tensor $\mathcal{X} \in \mathbb{C}^{R1 \times R2 \times R3}$ and $\mathcal{Y} \in \mathbb{C}^{P1 \times P2 \times P3}$;
+- $R1, R2, R3 = 8, 4, 10$;
+- $P1, P2, P3 = 5, 5, 5$.
 
 **Discussion**
 
-To compare the real data with the estimated factors, we may use two main results in the Experiment and Validation sections. The NMSE between the given data and obtained as output to LSKronF. As well the row/column factor scaling, i.e, apply the element-wise division between the given data and algorithm output for $\mathbf{A}$ vs $\mathbf{\hat{A}}$, and $\mathbf{B}$ vs $\mathbf{\hat{B}}$.
+To compare the both random tensor estimation with given multilinear ranks, we may use NMSE results between the given data and obtained as output to HOSVD. We may assess also by comparing the multilinear rank obtained in the tensor core $\mathcal{S}_{\mathcal{X}}$ and $\mathcal{S}_{\mathcal{Y}}$ estimated with the given ones.
 
-The NMSE value, with an emphasis to $\text{NMSE}(\mathbf{X_{0}, \hat{X}})$ value, with a very low SNR.
+	--------------- NMSE between a given tensor X and its estimation ----- 
+	NMSE: -600.49 dB
+	--------------- NMSE between a given tensor Y and its estimation ----- 
+	NMSE: -610.64 dB
 
-We can see that for all columns are composed by the same real value, for both $\mathbf{A}$ and $\mathbf{B}$. Hence, it presents the second evidence to confirm the proper algorithm estimation, since the columns differs only by a scale factor.
+The values obtained for NMSE present very low SNR, less than $-600 \, \text{dB}$.
 
-[Problem 1 script][1].
+As defined in the proposed problem, the given ranks of $\mathcal{X}$ $\mathcal{Y}$ are $R1, R2, R3 = 8, 4, 10$, and $P1, P2, P3 = 5, 5, 5$, respectively.
+
+	Tensor X multilinear rank: [8 4 10] 
+	Tensor Y multilinear rank: [5 5 5]
+
+We can see that that the algorithm provide the expected result, with the given ranks equal to the estimated. In conclusion, both results, NMSE and ranks estimation using the tensor core, support the proper algorithm estimation hypothesis.
+
+[Problem 2 script][1].
 
 </p>
 </div>
 
 <!---------------------------------------------------------------------------->
 
----
-
-
-### Results
-
-<div style="background-color:rgba(0, 0, 200, 0.15); text-align:justify; padding:20px">
-<p>
-
-**Simulation setup**
-
-- 1000 Monte Carlo Runs;
-- Each Monte Carlo iteration uses a new matrix initialization from a Normal distribution $\mathcal{N}(0,\,1)\,$;
-- SNR range $\{0, 5, 10, 15, 20, 25, 30\}$;
-- Compute the LSKronF for each value, for $(I, J) = (2, 4)$, $(P, Q) = (3, 5)$ and $(I, J) = (4, 8)$, $(P, Q) = (3, 5)$.
-
-**Discussion**
-
-The results are consistent with the experiment perfomed, that for randomly generated $\mathbf{A}$ and $\mathbf{B}$, what confirmed as shown in the previous part, the columns from given to estimated data differs only by a scale factor.
-
-From the figure results, we may assess the SNR gap between the NMSE curves.
-
-For each value of SNR, respectively:
-
-	Mean Diff d1 vs d2: 6.15 dB 
-	Mean Diff d1 vs d2: 5.81 dB 
-	Mean Diff d1 vs d2: 5.84 dB 
-	Mean Diff d1 vs d2: 5.84 dB 
-	Mean Diff d1 vs d2: 5.72 dB 
-	Mean Diff d1 vs d2: 5.80 dB 
-	Mean Diff d1 vs d2: 5.71 dB 
-
-The mean value for the difference (gap) between the curves:
-	
-	Mean Diff: 5.84 dB 
-
-[Problem 2 script][2] and [Figures][3].
-
-</p>
-</div>
-
-<p align="center">
-<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw4/code/figures/hw4-problem1.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
-</p>
-
-
-<!---------------------------------------------------------------------------->
-
-[1]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw4/code/hw4.m> (Problem 1 script)
-[2]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw4/code/hw4_problem.m> (Problem 2 script)
-[3]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw4/code/hw4.m> (Figures)
+[1]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw7/code/hw7.m> (Problem 1 script)

@@ -11,7 +11,7 @@ Implementações:
 - [X] Homework 4 [Report HW4](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw4/hw4-report.pdf)
 - [X] Homework 5 [Report HW5](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw5/hw5-report.pdf)
 - [X] Homework 6 [Report HW6](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw6/hw6-report.pdf)
-- [ ] Homework 7
+- [X] Homework 7 [Report HW7](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw7/hw7-report.pdf)
 - [ ] Homework 8
 - [ ] Homework 9
 - [ ] Homework 10
