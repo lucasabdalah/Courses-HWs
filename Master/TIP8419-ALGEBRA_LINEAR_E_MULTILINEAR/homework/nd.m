@@ -13,6 +13,7 @@
 %   TENSOR OPERATIONS
 %       ND.RANDN_COMPLEX    - Complex-valued array from normal distribution.
 %       ND.NMSE             - Normalized mean square error (NMSE) of a tensor.
+%       ND.SLICEORT         - Verify the orthogonality between the  slices of a tensor
 % 
 %   MATRIX PRODUCTS
 %       ND.HADAMARD_    - Hadamard product with two matrices.
@@ -74,6 +75,27 @@ methods(Static)
     %   See also.
         X_nmse = frob(X - X_hat)^2/(frob(X)^2);
         X_nmse_dB = 20*log10(X_nmse);
+    end
+
+
+    function f_ord = sliceort(Xten)
+    % ND.SLICEORT - Verify the orthogonality between slices of a tensor, by summing the
+    %  the scalar between all the slices.
+    % 
+    %   f_ord = sliceort(Xten) compute scalar product between tensor slices
+    % 
+    %   See also.
+        size_Xten = size(Xten);    
+        f_ord = [];
+
+        for kk_xT = 1:size_Xten(3)
+            for kk_x = 1:size_Xten(3)
+                if kk_xT ~= kk_x
+                    f_ord(end+1) = nd.vec(Xten(:,:,kk_xT))'*nd.vec(Xten(:,:,kk_x)) ;
+                end
+            end
+        end
+        f_ord = sum(f_ord);
     end
 
 
