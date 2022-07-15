@@ -22,9 +22,18 @@
 %       ND.LSKRONF      - Least-Squares  Kronecker Product Factorization (LSKRONF)
 %       ND.KPSVD        - Kronecker Product Singular Value Decomposition (KPSVD)
 %
+%   TENSOR RESHAPE AND N-PRODUCT
+%       ND.UNFOLD       - Unfold a tensor into N-mode tensor (matrix)
+%       ND.FOLD         - Fold a N-mode tensor (matrix) into a tensor
+%       ND.N_MODE       - Compute the N-mode product bewteen a tensor and factor matrices
+% 
+%   SAVE DATA TO TXT FILE 
+%       ND.MAT2TXT      - Write a matrix X into a txt file
+%       ND.TENSOR2TXT   - Write a 3D tensor X into a txt file
 % 
 %   PARAFAC/CP
 %
+% 
 
 classdef nd
 
@@ -195,9 +204,115 @@ methods(Static)
 
     end
     
+
+    %% TENSOR RESHAPE AND N-PRODUCT
+    function Xn = unfold(Xten,N_mode)
+    % ND.UNFOLD  Unfold a tensor into N-mode tensor (matrix)
+    %   Xn = unfold(Xten,N_mode) compute into N-mode tensor
+    %
+    %   See also.
+        Xten_Size = size(Xten);    
+        reSort = 1:1:numel(Xten_Size); % prod(size(Xten_Size))
+        reSort(N_mode) = [];        
+        Xn = reshape(permute(Xten,[N_mode reSort]), ...
+                    [], ...
+                    prod(Xten_Size)/Xten_Size(N_mode));
+    end
+
+
+    function Xten = fold(Xn,Xten_Size,N_mode)
+    % ND.FOLD  Fold a N-mode tensor (matrix) into a tensor
+    %   Xn = fold(Xn,Xten_Size,N_mode) fold a Xn into X tensor
+    %
+    %   See also.
+        reSort = 1:1:numel(Xten_Size);
+        reSort(N_mode) = [];
+        reSort = [N_mode reSort];
+        Xten = reshape(Xn,Xten_Size(reSort));
+        
+        switch N_mode
+            case 1
+                Xten = permute(Xten,reSort);
+            otherwise
+                reSort = 1:numel(Xten_Size);
+                for ii = 2:N_mode
+                    reSort([ii-1, ii]) = reSort([ii, ii-1]);
+                end
+                Xten = permute(Xten,reSort);
+        end
+    end
+
+
+    function Yten = N_mode(Xten,factors,N_mode)
+    % ND.N_MODE  Compute the N-mode product bewteen a tensor and factor matrices
+    %   Yten = N_mode(Xten,factors,N_mode) N-mode product bewteen a tensor and matrices
+    %
+    %   See also.
+        if nargin < 3
+            N_mode = 1:numel(factors); 
+        end
+        Xten_Size = size(Xten);
+        for nIt = N_mode
+            [Xten_Size(nIt), ~] = size(cell2mat(factors(nIt)));
+            Yten = nd.fold(cell2mat(factors(nIt))*nd.unfold(Xten,nIt), ...
+                            Xten_Size, ...
+                            nIt);
+        end
+    end    
     
 
+    %% SAVE DATA TO TXT FILE
+    function mat2txt(file, X, permission, header)
+    % ND.MAT2TXT  Write a matrix X into a txt file
+    %   mat2txt(file, X, 'w', header) - Overwite the file
+    %   mat2txt(file, X, 'a', header) - Append to the file end
+    %
+    %   See also.
+        [I, J] = size(X);
+        fileID = fopen(file, permission);
+        fprintf(fileID, [repelem('-', strlength(header)+3), '\n', header, ...
+                '\n', repelem('-', strlength(header)+3), '\n']);
+        fprintf(fileID, 'X(%d, %d)\n', I, J);
+            for ii = 1:I
+                for jj = 1:J
+                    fprintf(fileID, ' %2.0f', X(ii,jj));
+                end
+                fprintf(fileID, ';\n');
+            end
+        fprintf(fileID, '\n');
+        fclose(fileID);
+    end
+
+    
+    function tensor2txt(file, X, permission, header)
+    % ND.TENSOR2TXT  Write a 3D tensor X into a txt file
+    %   tensor2txt(file, X, 'w', header) - Overwite the file
+    %   tensor2txt(file, X, 'a', header) - Append to the file end
+    %
+    %   See also.
+        [I, J, K] = size(X);
+        
+        fileID = fopen(file, permission);
+        
+        fprintf(fileID, [repelem('-', strlength(header)+3), '\n', header, ...
+        '\n', repelem('-', strlength(header)+3), '\n']);
+
+        for kk = 1:K
+            fprintf(fileID, 'X(:, :, %d)\n', kk);
+            for ii = 1:I
+                for jj = 1:J
+                    fprintf(fileID, ' %2.0f', X(ii,jj,kk));
+                end
+                fprintf(fileID, ';\n');
+            end
+            fprintf(fileID, '\n');
+        end
+        fclose(fileID);    
+    end
+
+    
     %% PLACE HOLDER SECTION
+
 
 end
 
