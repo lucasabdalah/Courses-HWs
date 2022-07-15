@@ -330,7 +330,8 @@ methods(Static)
 
     function [S, U, it] = hooi(ten, Atype, maxIt, ranksInput)
     % ND.HOOI  Perfom the High Order Orthogonal Iteration (HOOI)
-    %  of a tensor, truncated or full version.
+    %   of a tensor, truncated or full version.
+    %
     %   [S,U] = hooi(ten, 'trunc') compute the truncated-HOOI
     %   [S,U] = hooi(ten, 'full') compute the full-HOOI
     %
@@ -371,7 +372,31 @@ methods(Static)
         S = nd.N_mode(ten, cellfun(@(x) x', U, 'UniformOutput', false)) ; 
     end
 
-    
+
+    function factors = mlskrf(X, N_mode, order)
+    % ND.MLSKRF  Perform the Multidimensional Least-Squares Khatri-Rao 
+    %   Factorization (MLSKRF) of a tensor.
+    % 
+    %   factors = mlskrf(X, N_mode, order) compute the MLSKRF of a tensor
+    %
+    %   See also.
+        [~,R] = size(X);
+        factors = cell(N_mode, 1);
+        factors_r = cell(R, N_mode);
+        for rr = 1:R
+            [Sr,Ur] = nd.hosvd(reshape(X(:,rr), flip(order)), 'full');
+            for nn = 1:N_mode
+                sr = (Sr(1)^(1/N_mode));
+                ur = Ur{N_mode-nn+1}(:,1);
+                factors_r{rr,nn} = sr*ur;
+            end
+        end
+        for n = 1:N_mode
+           factors{n} = reshape(cell2mat(factors_r(:,n)) ,[order(n) R]);
+        end
+    end
+
+
     %% SAVE DATA TO TXT FILE
     function mat2txt(file, X, permission, header)
     % ND.MAT2TXT  Write a matrix X into a txt file
