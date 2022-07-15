@@ -46,36 +46,36 @@ fprintf('.\n.\nScale factor for X and X_hat with MLSKRF\n');
 fprintf('---------------------------------------------- \n')    
 for jj = 1:1:X_size(2)
     for ii = 1:1:X_size(1)
-    fprintf('\tX_hat./X(:, %g): %.2g \n', jj, X_scale(ii,jj));
+    % fprintf('\tX_hat./X(:, %g): %.2g \n', jj, X_scale(ii,jj));
     end
-    % fprintf('\tX_hat./X(1:%g, %g): %.2g \n',X_size(1), jj, X_scale(ii,jj));
+    fprintf('\tX_hat./X(1:%g, %g): %.2g \n',X_size(1), jj, X_scale(ii,jj));
 end
 
 fprintf('.\n.\nScale factor for A and A_hat with MLSKRF\n');
 fprintf('---------------------------------------------- \n')    
 for jj = 1:1:R
     for ii = 1:1:I1
-        fprintf('\tA_hat./A(:,%g): %.2g \n', jj, A_scale(ii,jj));
+        % fprintf('\tA_hat./A(:,%g): %.2g \n', jj, A_scale(ii,jj));
     end
-    % fprintf('\tA_hat./A(1:%g, %g): %.2g \n', I1, jj, A_scale(ii,jj));
+    fprintf('\tA_hat./A(1:%g, %g): %.2g \n', I1, jj, A_scale(ii,jj));
 end
 
 fprintf('.\n.\nScale factor for B and B_hat with MLSKRF\n');
 fprintf('---------------------------------------------- \n')    
 for jj = 1:1:R
     for ii = 1:1:I2
-        fprintf('\tB_hat./B(:,%g): %.2g \n', jj, B_scale(ii,jj));
+        % fprintf('\tB_hat./B(:,%g): %.2g \n', jj, B_scale(ii,jj));
     end
-    % fprintf('\tB_hat./B(1:%g, %g): %.2g \n', I2, jj, B_scale(ii,jj));
+    fprintf('\tB_hat./B(1:%g, %g): %.2g \n', I2, jj, B_scale(ii,jj));
 end
 
 fprintf('.\n.\nScale factor for C and C_hat with MLSKRF\n');
 fprintf('---------------------------------------------- \n')    
 for jj = 1:1:R
     for ii = 1:1:I3
-        fprintf('\tC_hat./C(:,%g): %.2g \n', jj, C_scale(ii,jj));
+        % fprintf('\tC_hat./C(:,%g): %.2g \n', jj, C_scale(ii,jj));
     end
-    % fprintf('\tC_hat./C(1:%g, %g): %.2g \n', I3, jj, C_scale(ii,jj));
+    fprintf('\tC_hat./C(1:%g, %g): %.2g \n', I3, jj, C_scale(ii,jj));
 end
 
 %% Part 2
