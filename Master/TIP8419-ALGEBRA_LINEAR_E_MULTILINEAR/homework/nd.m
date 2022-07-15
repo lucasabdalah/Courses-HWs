@@ -7,9 +7,11 @@
 % It is a shortcut for N-d array in reference to the homonym library in python
 %
 % Content
-%   MATRIX FUNCTIONS
-%       ND.RANDN_COMPLEX    - Complex-valued matrix from normal distribution.
+%   MATRIX OPERATIONS
 %       ND.VEC              - Vectorize a matrix.
+% 
+%   TENSOR OPERATIONS
+%       ND.RANDN_COMPLEX    - Complex-valued array from normal distribution.
 %       ND.NMSE             - Normalized mean square error (NMSE) of a tensor.
 % 
 %   MATRIX PRODUCTS
@@ -27,6 +29,11 @@
 %       ND.FOLD         - Fold a N-mode tensor (matrix) into a tensor
 %       ND.N_MODE       - Compute the N-mode product bewteen a tensor and factor matrices
 % 
+% 
+%   TENSOR DECOMPOSTIONS
+%       ND.HOSVD        - Perfom the High Order Singular Value Decomposition (HOSVD) of a tensor, truncated or full version.
+% 
+%   
 %   SAVE DATA TO TXT FILE 
 %       ND.MAT2TXT      - Write a matrix X into a txt file
 %       ND.TENSOR2TXT   - Write a 3D tensor X into a txt file
@@ -39,24 +46,27 @@ classdef nd
 
 methods(Static)
     
-    %% MATRIX FUNCTIONS
-    function C = randn_complex(M, N)
-    % ND.RANDN_COMPLEX - Complex-valued matrix from normal distribution.
-    %   C = nd.randn_complex(M,N) draws a complex-valued matrix from normal 
+    %% MATRIX OPERATIONS
+    function y = vec(x)
+        % ND.VEC - Vectorize a matrix.
+        %   y = vec(x) draws a vector from a given matrix.
+        % 
+        %   See also.
+            y = x(:);
+    end
+    
+    
+    %% TENSOR OPERATIONS
+    function C = randn_complex(M, varargin)
+    % ND.RANDN_COMPLEX - Complex-valued array from normal distribution.
+    %   C = nd.randn_complex(M,N) draws a complex-valued array from normal 
     %       distribution.
     % 
     %   See also.
-        C = complex(randn(M,N), randn(M,N));
+            C = complex(randn(M,varargin{:}), randn(M, varargin{:}));
     end
 
-    function y = vec(x)
-    % ND.VEC - Vectorize a matrix.
-    %   y = vec(x) draws a vector from a given matrix.
-    % 
-    %   See also.
-        y = x(:);
-    end
-
+    
     function [X_nmse, X_nmse_dB] = nmse(X, X_hat)
     % ND.NMSE - Normalized mean square error (NMSE) of a tensor.
     %   [X_nmse, X_nmse_dB] = nd.nmse(X, X_hat) compute the NMSE of two arrays
@@ -83,6 +93,7 @@ methods(Static)
         elaspedTime = toc;
     end
 
+
     function [C, elaspedTime] = kron_(A, B)
     % ND.KRON_  Kronnecker product with two matrices.
     %   C = nd.kron_(A, B) compute the Kronnecker procuct.
@@ -100,6 +111,7 @@ methods(Static)
 
         elaspedTime = toc;
     end
+
 
     function [C, elaspedTime] = kr_(A, B)
     % ND.KR_  Khatri-Rao product with two matrices.
@@ -259,7 +271,40 @@ methods(Static)
                             nIt);
         end
     end    
-    
+
+
+    %% TENSOR DECOMPOSTIONS
+    function [S,U] = hosvd(ten, Atype, ranksInput)
+    % ND.HOSVD  Perfom the High Order Singular Value Decomposition (HOSVD)
+    %  of a tensor, truncated or full version.
+    %   [S,U] = hosvd(ten, 'trunc') compute the truncated-HOSVD
+    %   [S,U] = hosvd(ten, 'full') compute the full-HOSVD
+    %
+    %   See also.
+        N = numel(size(ten));
+        U = cell(N, 1);
+        
+        switch Atype
+        case 'trunc'
+                for i = 1:N
+                    [Ur, Sr, ~] = svd(nd.unfold(ten,i)); 
+                    if nargin < 3
+                        Ur = Ur(:,1:rank(Sr));
+                    else
+                        Ur = Ur(:,1:ranksInput(i));    
+                    end
+                    U{i} = Ur;
+                end
+        case 'full'
+            for i = 1:N
+                [Ur,~,~] = svd(nd.unfold(ten,i)); 
+                U{i} = Ur;
+            end
+        end
+        S = nd.N_mode(ten, (cellfun(@(x) x', U,'UniformOutput',false)));
+        U = cellfun(@(x) x, U,'UniformOutput',false);
+    end
+
 
     %% SAVE DATA TO TXT FILE
     function mat2txt(file, X, permission, header)
@@ -312,7 +357,6 @@ methods(Static)
 
     
     %% PLACE HOLDER SECTION
-
 
 end
 
