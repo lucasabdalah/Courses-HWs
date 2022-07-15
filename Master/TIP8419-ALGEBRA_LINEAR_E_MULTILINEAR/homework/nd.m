@@ -1,12 +1,11 @@
 %% [TIP8419 - Algebra Linear e Multilinear]
-% ----------------------------
 % Author: Lucas Abdalah
-% nd.m
 % 
 % ND is a package developped for the Multilinear Algebra Course
 % It is a shortcut for N-d array in reference to the homonym library in python
 %
-% Content
+% CONTENT
+% 
 %   MATRIX OPERATIONS
 %       ND.VEC              - Vectorize a matrix.
 % 
@@ -34,6 +33,7 @@
 %   TENSOR DECOMPOSTIONS
 %       ND.HOSVD        - Perfom the High Order Singular Value Decomposition (HOSVD) of a tensor, truncated or full version.
 %       ND.HOOI         - Perfom the High Order Orthogonal Iteration (HOOI) of a tensor, truncated or full version.
+%       ND.MLSKRF       - Perform the Multidimensional Least-Squares Khatri-Rao Factorization (MLSKRF) of a tensor.
 % 
 %   
 %   SAVE DATA TO TXT FILE 
