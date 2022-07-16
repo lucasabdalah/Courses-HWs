@@ -13,6 +13,7 @@
 %       ND.RANDN_COMPLEX    - Complex-valued array from normal distribution.
 %       ND.NMSE             - Normalized mean square error (NMSE) of a tensor.
 %       ND.SLICEORT         - Verify the orthogonality between the  slices of a tensor
+%       ND.SUPERDIAG        - Return a super diagonal 3D Tensor
 % 
 %   MATRIX PRODUCTS
 %       ND.HADAMARD_    - Hadamard product with two matrices.
@@ -35,13 +36,12 @@
 %       ND.HOOI         - Perfom the High Order Orthogonal Iteration (HOOI) of a tensor, truncated or full version
 %       ND.MLSKRF       - Perform the Multidimensional Least-Squares Khatri-Rao Factorization (MLSKRF) of a tensor
 %       ND.MLSKRONF     -  Perform the Multidimensional Least-Squares Kronecker Factorization (MLS-KronF) of a tensor
+%       ND.ALS          - Perform the Alternating Least-Squares (ALS) of a tensor
 %   
 % 
 %   SAVE DATA TO TXT FILE 
 %       ND.MAT2TXT      - Write a matrix X into a txt file
 %       ND.TENSOR2TXT   - Write a 3D tensor X into a txt file
-% 
-%   PARAFAC/CP
 %
 % 
 
@@ -76,7 +76,7 @@ methods(Static)
     % 
     %   See also.
         X_nmse = frob(X - X_hat)^2/(frob(X)^2);
-        X_nmse_dB = 20*log10(X_nmse);
+        X_nmse_dB = db(X_nmse);
     end
 
 
@@ -98,6 +98,18 @@ methods(Static)
             end
         end
         f_ord = sum(f_ord);
+    end
+
+
+    function X = superdiag(N)
+    % ND.SUPERDIAG - Return a super diagonal 3D Tensor
+    %   X = nd.superdiag(N) draws a super diagonal 3D Tensor.
+    % 
+    %   See also.
+        X = zeros(N,N,N);
+        for i = 1:N
+            X(i,i,i) = 1;
+        end
     end
 
 
@@ -298,7 +310,7 @@ methods(Static)
 
 
     %% TENSOR DECOMPOSTIONS
-    function [S,U] = hosvd(ten, Atype, ranksInput)
+    function [S, U] = hosvd(ten, Atype, ranksInput)
     % ND.HOSVD  Perfom the High Order Singular Value Decomposition (HOSVD)
     %  of a tensor, truncated or full version.
     %   [S,U] = hosvd(ten, 'trunc') compute the truncated-HOSVD
@@ -329,6 +341,7 @@ methods(Static)
         U = cellfun(@(x) x, U, 'UniformOutput',false);
     end
 
+    
     function [S, U, it] = hooi(ten, Atype, maxIt, ranksInput)
     % ND.HOOI  Perfom the High Order Orthogonal Iteration (HOOI)
     %   of a tensor, truncated or full version.
@@ -438,6 +451,49 @@ methods(Static)
     end
 
 
+    function [Ahat, Bhat, Chat, error, it] = als(X, R, tol, maxIt)
+    % ND.ALS  Perform the Alternating Least-Squares (ALS) of a tensor.
+    % 
+    %   [Ahat, Bhat, Chat, error, it] = als(X, R, maxIt) compute the MLSKRF of a tensor
+    %
+    %   See also.            
+        
+        if nargin < 4
+            maxIt = 200;
+            if nargin < 3
+                tol = 1e-6;
+            end
+        end
+    
+        I = size(X); 
+        Ahat = nd.randn_complex(I(1), R);
+        Bhat = nd.randn_complex(I(2), R);
+        Chat = nd.randn_complex(I(3), R);
+        X_1 = nd.unfold(X,1);
+        X_2 = nd.unfold(X,2);
+        X_3 = nd.unfold(X,3);
+        
+        error = zeros(1,maxIt);
+        [error(1), ~] = nd.nmse(X_1, Ahat*(nd.kr_(Chat,Bhat).'));
+        
+        for i = 2:maxIt
+            Bhat = X_2*pinv((nd.kr_(Chat,Ahat)).');
+            Chat = X_3*pinv((nd.kr_(Bhat,Ahat)).');
+            Ahat = X_1*pinv((nd.kr_(Chat,Bhat)).');
+            [error(i), ~] = nd.nmse(X_1, Ahat*(nd.kr_(Chat,Bhat).'));
+
+            if abs(error(i) - error(i-1)) < tol
+                error = error(1:i);
+                it = i;
+                break;
+            else
+                it = i;
+                continue;
+            end
+        end
+    end
+
+    
     %% SAVE DATA TO TXT FILE
     function mat2txt(file, X, permission, header)
     % ND.MAT2TXT  Write a matrix X into a txt file
@@ -486,9 +542,6 @@ methods(Static)
         end
         fclose(fileID);    
     end
-
-    
-    %% PLACE HOLDER SECTION
 
 end
 
