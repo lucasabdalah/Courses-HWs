@@ -31,11 +31,12 @@
 % 
 % 
 %   TENSOR DECOMPOSTIONS
-%       ND.HOSVD        - Perfom the High Order Singular Value Decomposition (HOSVD) of a tensor, truncated or full version.
-%       ND.HOOI         - Perfom the High Order Orthogonal Iteration (HOOI) of a tensor, truncated or full version.
-%       ND.MLSKRF       - Perform the Multidimensional Least-Squares Khatri-Rao Factorization (MLSKRF) of a tensor.
-% 
+%       ND.HOSVD        - Perfom the High Order Singular Value Decomposition (HOSVD) of a tensor, truncated or full version
+%       ND.HOOI         - Perfom the High Order Orthogonal Iteration (HOOI) of a tensor, truncated or full version
+%       ND.MLSKRF       - Perform the Multidimensional Least-Squares Khatri-Rao Factorization (MLSKRF) of a tensor
+%       ND.MLSKRONF     -  Perform the Multidimensional Least-Squares Kronecker Factorization (MLS-KronF) of a tensor
 %   
+% 
 %   SAVE DATA TO TXT FILE 
 %       ND.MAT2TXT      - Write a matrix X into a txt file
 %       ND.TENSOR2TXT   - Write a 3D tensor X into a txt file
@@ -340,7 +341,7 @@ methods(Static)
         [~, U_ten] = nd.hosvd(ten, 'full');
         
         if nargin < 3
-            maxIt = 50;
+            maxIt = 20;
         end
         
         switch Atype
@@ -351,7 +352,7 @@ methods(Static)
                     N_mode(ii) = [];
                     Un = nd.N_mode(ten, U_ten, N_mode);
                     [Ur, Sr, ~] = svd(nd.unfold(Un,ii));
-                    if nargin < 4
+                    if nargin < 3
                         U{ii} = Ur(:,1:rank(Sr));
                     else
                         U{ii} = Ur(:,1:ranksInput(ii));
@@ -393,6 +394,46 @@ methods(Static)
         end
         for n = 1:N_mode
            factors{n} = reshape(cell2mat(factors_r(:,n)) ,[order(n) R]);
+        end
+    end
+
+    function Ahat = mlskronf(X, rowsInput, colsInput, Atype)
+    % ND.MLSKRONF  Perform the Multidimensional Least-Squares Kronecker 
+    %   Factorization (MLS-KronF) of a tensor.
+    % 
+    %   factors = mlskronf(X, rowsInput, colsInput, Atype) compute the MLSKRF of a tensor
+    %
+    %   See also.            
+        dim = {repelem(rowsInput(2)*rowsInput(3), 1, rowsInput(1)); repelem(colsInput(2)*colsInput(3), 1, colsInput(1))};
+        Xb = mat2cell(X,dim{1},dim{2});
+        Inv = {flip(rowsInput), flip(colsInput)};
+        K = 1;
+
+        for jA = 1:colsInput(1)
+            for iA = 1:rowsInput(1)
+                dim = {repelem(rowsInput(3), 1, rowsInput(2)), repelem(colsInput(3), 1, colsInput(2))};
+                X_bc = mat2cell(cell2mat(Xb(iA,jA)), dim{1}, dim{2});
+                for jB = 1:colsInput(2)
+                    for iB = 1:rowsInput(2)
+                        vb(:,iB,jB) = nd.vec(cell2mat(X_bc(iB,jB)));
+                    end
+                end
+                Xhat(:,K) = reshape(vb,[],1);
+                K = K + 1;
+            end 
+        end
+        
+        switch Atype
+        case 'hosvd'
+            [S,U] = nd.hosvd(reshape(Xhat, flip(rowsInput.* colsInput)), 'full');
+        case 'hooi'
+            [S,U] = nd.hooi(reshape(Xhat, flip(rowsInput.* colsInput)), 'full');
+        end
+        
+        UN = length(U);
+        
+        for u = 1:UN
+            Ahat{UN - u + 1} = reshape((S(1)^(1/length(U)))*U{u}(:,1), [Inv{1}(u) Inv{2}(u)]);
         end
     end
 
