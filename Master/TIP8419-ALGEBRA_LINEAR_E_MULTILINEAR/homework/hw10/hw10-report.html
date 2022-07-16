@@ -112,17 +112,25 @@ Homework 9 [TI8419 - Multilinear Algebra]
 <p><strong>Simulation setup</strong></p>
 <ul>
 <li>The algorithm that uses the Kronecker Factorization was applied to the initial factor matrices, initializated from a Normal distribution <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mtext> </mtext><mn>1</mn><mo stretchy="false">)</mo><mtext> </mtext></mrow><annotation encoding="application/x-tex">\mathcal{N}(0,\,1)\,</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.14736em;">N</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em;"></span></span></span></span>;</li>
+<li>HOSVD initization</li>
+<li>HOOI initization</li>
 </ul>
 <p><strong>Discussion</strong></p>
-<p>To compare the real data with the estimated factors, we may use two main results in the Experiment and Validation sections. The NMSE between the given data and obtained as output to MLSKRF. As well the row/column factor scaling, i.e, apply the element-wise division between the given data and algorithm output for <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">X</mi></mrow><annotation encoding="application/x-tex">\mathcal{X}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathcal" style="margin-right:0.14643em;">X</span></span></span></span> vs <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi mathvariant="script">X</mi><mo>^</mo></mover></mrow><annotation encoding="application/x-tex">\mathcal{\hat{X}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9468em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathcal" style="margin-right:0.14643em;">X</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1111em;"><span class="mord">^</span></span></span></span></span></span></span></span></span></span>, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">A</mi></mrow><annotation encoding="application/x-tex">\mathbf{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord mathbf">A</span></span></span></span> vs <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi mathvariant="bold">A</mi><mo>^</mo></mover></mrow><annotation encoding="application/x-tex">\mathbf{\hat{A}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9495em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9495em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathbf">A</span></span><span style="top:-3.2551em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2875em;"><span class="mord mathbf">^</span></span></span></span></span></span></span></span></span></span>, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">B</mi></mrow><annotation encoding="application/x-tex">\mathbf{B}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord mathbf">B</span></span></span></span> vs <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi mathvariant="bold">B</mi><mo>^</mo></mover></mrow><annotation encoding="application/x-tex">\mathbf{\hat{B}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9495em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9495em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathbf">B</span></span><span style="top:-3.2551em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2875em;"><span class="mord mathbf">^</span></span></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">C</mi></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord mathbf">C</span></span></span></span> vs <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi mathvariant="bold">C</mi><mo>^</mo></mover></mrow><annotation encoding="application/x-tex">\mathbf{\hat{C}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9495em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9495em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathbf">C</span></span><span style="top:-3.2551em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2875em;"><span class="mord mathbf">^</span></span></span></span></span></span></span></span></span></span>.</p>
-<p>NMSE with MLSKronF</p>
-<pre><code>X and X_hat: -3.34 dB 
-A and A_hat: -0.92 dB 
-B and B_hat: 1.39 dB 
-C and C_hat: 2.22 dB 
+<p>To compare the real data with the estimated factors, we may use the experimental results for NMSE between the given data and obtained as output to MLSKRF with HOSVD and HOOI.</p>
+<p>NMSE with MLSKronF (HOSVD)</p>
+<pre><code>X and X_hat: -0.62 dB 
+A and A_hat: 4.07 dB 
+B and B_hat: 3.92 dB 
+C and C_hat: 1.91 dB 
 </code></pre>
-<p>The NMSE value, with an emphasis to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>NMSE</mtext><mo stretchy="false">(</mo><mi mathvariant="script">X</mi><mo separator="true">,</mo><mover accent="true"><mi mathvariant="script">X</mi><mo>^</mo></mover><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{NMSE}(\mathcal{X}, \mathcal{\hat{X}})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1968em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">NMSE</span></span><span class="mopen">(</span><span class="mord mathcal" style="margin-right:0.14643em;">X</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathcal" style="margin-right:0.14643em;">X</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1111em;"><span class="mord">^</span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> value.</p>
-<p>We can see that for all columns are composed by the same real value, for all matrices factors. Hence, it presents the second evidence to confirm the proper algorithm estimation, since the columns differs only by a scale factor.</p>
+<p>NMSE with MLSKronF (HOOI)</p>
+<pre><code>X and X_hat: -0.62 dB 
+A and A_hat: -9.49 dB 
+B and B_hat: -9.04 dB 
+C and C_hat: -3.97 dB 
+</code></pre>
+<p>The NMSE value, with an emphasis to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>NMSE</mtext><mo stretchy="false">(</mo><mi mathvariant="script">X</mi><mo separator="true">,</mo><mover accent="true"><mi mathvariant="script">X</mi><mo>^</mo></mover><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{NMSE}(\mathcal{X}, \mathcal{\hat{X}})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1968em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">NMSE</span></span><span class="mopen">(</span><span class="mord mathcal" style="margin-right:0.14643em;">X</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathcal" style="margin-right:0.14643em;">X</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1111em;"><span class="mord">^</span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> value, suport the hypothesis of a propor implementation of the algorithm.</p>
+<p>We can see that MLSKRF initialized with HOOI outperforms HOSVD for all values, presenting smaller NMSE values also for the factor matrices.</p>
 <p><a href="https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10.m" title="Problem 1 script">Problem 1 script</a>.</p>
 </p>
 </div>
@@ -154,56 +162,97 @@ C and C_hat: 2.22 dB
 <li>1000 Monte Carlo Runs;</li>
 <li>Each Monte Carlo iteration uses a new matrix initialization from a Normal distribution <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mtext> </mtext><mn>1</mn><mo stretchy="false">)</mo><mtext> </mtext></mrow><annotation encoding="application/x-tex">\mathcal{N}(0,\,1)\,</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.14736em;">N</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em;"></span></span></span></span>;</li>
 <li>SNR range <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">{</mo><mn>0</mn><mo separator="true">,</mo><mn>5</mn><mo separator="true">,</mo><mn>10</mn><mo separator="true">,</mo><mn>15</mn><mo separator="true">,</mo><mn>20</mn><mo separator="true">,</mo><mn>25</mn><mo separator="true">,</mo><mn>30</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{0, 5, 10, 15, 20, 25, 30\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">10</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">15</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">20</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">25</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">30</span><span class="mclose">}</span></span></span></span>;</li>
-<li>For <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mn>1</mn></msub><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">I_{1} = 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span>, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mn>2</mn></msub><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">I_{2} = 3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">3</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mn>3</mn></msub><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">I_{3} = 4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span></span></span></span>;</li>
-<li>For <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">R = 4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span></span></span></span>.</li>
+<li>Assuming four scenarios as proposed.</li>
 </ul>
 <p><strong>Discussion</strong></p>
-<p>The results are consistent with the experiment perfomed, that for randomly generated <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">A</mi></mrow><annotation encoding="application/x-tex">\mathbf{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord mathbf">A</span></span></span></span>, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">B</mi></mrow><annotation encoding="application/x-tex">\mathbf{B}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord mathbf">B</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">C</mi></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord mathbf">C</span></span></span></span>, what confirmed as shown in the previous part, the columns from given to estimated data differs only by a scale factor.</p>
+<p>The results are consistent with the experiment perfomed, that provide small SNR values for the randomly generated  factors <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">A</mi></mrow><annotation encoding="application/x-tex">\mathbf{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord mathbf">A</span></span></span></span>, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">B</mi></mrow><annotation encoding="application/x-tex">\mathbf{B}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord mathbf">B</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">C</mi></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord mathbf">C</span></span></span></span>.</p>
 <p>From the figure results, we may assess the SNR gap between the NMSE curves.</p>
 <p>For each value of SNR, respectively:</p>
 <table>
 <thead>
 <tr>
 <th style="text-align:center">SNR</th>
-<th style="text-align:center">NMSE</th>
+<th style="text-align:center">Scenario 1 NMSE</th>
+<th style="text-align:center">Scenario 2 NMSE</th>
+<th style="text-align:center">Scenario 3 NMSE</th>
+<th style="text-align:center">Scenario 4 NMSE</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:center">0</td>
-<td style="text-align:center">-3.34</td>
+<td style="text-align:center">8.64e-02</td>
+<td style="text-align:center">0.00e+00</td>
+<td style="text-align:center">5.22e-04</td>
+<td style="text-align:center">1.11e-16</td>
 </tr>
 <tr>
 <td style="text-align:center">5</td>
-<td style="text-align:center">-4.60</td>
+<td style="text-align:center">1.23e-03</td>
+<td style="text-align:center">-3.33e-16</td>
+<td style="text-align:center">4.07e-04</td>
+<td style="text-align:center">-1.11e-16</td>
 </tr>
 <tr>
 <td style="text-align:center">10</td>
-<td style="text-align:center">-4.80</td>
+<td style="text-align:center">0.00e+00</td>
+<td style="text-align:center">-1.11e-16</td>
+<td style="text-align:center">-1.23e-04</td>
+<td style="text-align:center">0.00e+00</td>
 </tr>
 <tr>
 <td style="text-align:center">15</td>
-<td style="text-align:center">-4.76</td>
+<td style="text-align:center">1.78e-15</td>
+<td style="text-align:center">0.00e+00</td>
+<td style="text-align:center">-2.22e-16</td>
+<td style="text-align:center">1.11e-16</td>
 </tr>
 <tr>
 <td style="text-align:center">20</td>
-<td style="text-align:center">-4.83</td>
+<td style="text-align:center">-1.37e-05</td>
+<td style="text-align:center">0.00e+00</td>
+<td style="text-align:center">0.00e+00</td>
+<td style="text-align:center">1.11e-16</td>
 </tr>
 <tr>
 <td style="text-align:center">25</td>
-<td style="text-align:center">-4.72</td>
+<td style="text-align:center">8.88e-16</td>
+<td style="text-align:center">6.66e-16</td>
+<td style="text-align:center">0.00e+00</td>
+<td style="text-align:center">0.00e+00</td>
 </tr>
 <tr>
 <td style="text-align:center">30</td>
-<td style="text-align:center">-4.84</td>
+<td style="text-align:center">8.88e-16</td>
+<td style="text-align:center">0.00e+00</td>
+<td style="text-align:center">0.00e+00</td>
+<td style="text-align:center">-4.44e-16</td>
+</tr>
+<tr>
+<td style="text-align:center">Mean</td>
+<td style="text-align:center">1.25e-02</td>
+<td style="text-align:center">3.17e-17</td>
+<td style="text-align:center">1.15e-04</td>
+<td style="text-align:center">-3.17e-17</td>
 </tr>
 </tbody>
 </table>
-<p><a href="https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10_problem.m" title="Problem 2 script">Problem 2 script</a> and <a href="https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10.m" title="Figures">Figures</a>.</p>
+<p>We can see that the HOOI initialization outperfomrs HOSVD with a small advantage
+Each experiment is implemented in: <a href="https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10_problem1.m" title="Problem 2 - Scenario 1">Problem 2 - Scenario 1</a>, <a href="https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10_problem2.m" title="Problem 2 - Scenario 2">Problem 2 - Scenario 2</a>, <a href="https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10_problem3.m" title="Problem 2 - Scenario 3">Problem 2 - Scenario 3</a>, <a href="https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10_problem4.m" title="Problem 2 - Scenario 4">Problem 2 - Scenario 4</a>.</p>
+<p>Code that generates the figures: <a href="https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10.m" title="Figures">Problem 2 script</a>,</p>
 </p>
 </div>
 <p align="center">
-<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw9/code/figures/hw9-problem2.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/figures/hw10-problem1.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
+</p>
+<p align="center">
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/figures/hw10-problem2.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
+</p>
+<p align="center">
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/figures/hw10-problem3.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
+</p>
+<p align="center">
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/figures/hw10-problem4.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
 </p>
 <!---------------------------------------------------------------------------->
 
