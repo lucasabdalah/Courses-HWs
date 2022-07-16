@@ -12,11 +12,11 @@ Professors: André Lima e Henrique Goulart
 - - - 
 
 # Table of Contents
-- [Alternating Least Squares (ALS) Algorithm](#alternating-least-squares-als-algorithm)
+- [Tensor Train Singular Value Decomposition (TT-SVD)](#tensor-train-singular-value-decomposition-tt-svd)
   - [Problem 1](#problem-1)
   - [Problem 2](#problem-2)
 
-# Alternating Least Squares (ALS) Algorithm
+# Tensor Train Singular Value Decomposition (TT-SVD)
 
 ## Problem 1
 
