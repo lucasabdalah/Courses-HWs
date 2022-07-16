@@ -56,7 +56,7 @@ fprintf('\tA and A_hat with MLSKronF: %2.2f dB \n', A_NMSE_dB);
 fprintf('\tB and B_hat with MLSKronF: %2.2f dB \n', B_NMSE_dB);
 fprintf('\tC and C_hat with MLSKronF: %2.2f dB \n', C_NMSE_dB);
 
-fprintf('---------------------------------------------- \n');
+fprintf('---------------------------------------------- \n\n\n');
 
 pause
 
@@ -64,6 +64,43 @@ d1 = load('hw10_problem_data1.mat');
 d2 = load('hw10_problem_data2.mat');
 d3 = load('hw10_problem_data3.mat');
 d4 = load('hw10_problem_data4.mat');
+
+%% NMSE Output
+fprintf('Mean NMSE for %d MC rounds:\n', d1.RMC);
+fprintf('HOSVD: %2.2e dB \n', d1.meanNMSE_dB_HOSVD);
+fprintf('HOOI: %2.2e dB \n', d1.meanNMSE_dB_HOOI);
+fprintf('---------------- \n')
+fprintf('Mean Diff d1 vs d2: %2.2e dB \n', d1.meanNMSE_dB_HOSVD - d1.meanNMSE_dB_HOOI);
+fprintf('Mean Diff: %2.2e dB \n', mean(d1.meanNMSE_dB_HOSVD - d1.meanNMSE_dB_HOOI, 2));
+
+fprintf('---------------- \n\n\n')
+
+fprintf('Mean NMSE for %d MC rounds:\n', d2.RMC);
+fprintf('HOSVD: %2.2e dB \n', d2.meanNMSE_dB_HOSVD);
+fprintf('HOOI: %2.2e dB \n', d2.meanNMSE_dB_HOOI);
+fprintf('---------------- \n')
+fprintf('Mean Diff d1 vs d2: %2.2e dB \n', d2.meanNMSE_dB_HOSVD - d2.meanNMSE_dB_HOOI);
+fprintf('Mean Diff: %2.2e dB \n', mean(d2.meanNMSE_dB_HOSVD - d2.meanNMSE_dB_HOOI, 2));
+
+fprintf('---------------- \n\n\n')
+
+fprintf('Mean NMSE for %d MC rounds:\n', d3.RMC);
+fprintf('HOSVD: %2.2e dB \n', d3.meanNMSE_dB_HOSVD);
+fprintf('HOOI: %2.2e dB \n', d3.meanNMSE_dB_HOOI);
+fprintf('---------------- \n')
+fprintf('Mean Diff d1 vs d2: %2.2e dB \n', d3.meanNMSE_dB_HOSVD - d3.meanNMSE_dB_HOOI);
+fprintf('Mean Diff: %2.2e dB \n', mean(d3.meanNMSE_dB_HOSVD - d3.meanNMSE_dB_HOOI, 2));
+
+fprintf('---------------- \n\n\n')
+
+fprintf('Mean NMSE for %d MC rounds:\n', d4.RMC);
+fprintf('HOSVD: %2.2e dB \n', d4.meanNMSE_dB_HOSVD);
+fprintf('HOOI: %2.2e dB \n', d4.meanNMSE_dB_HOOI);
+fprintf('---------------- \n')
+fprintf('Mean Diff d1 vs d2: %2.2e dB \n', d4.meanNMSE_dB_HOSVD - d4.meanNMSE_dB_HOOI);
+fprintf('Mean Diff: %2.2e dB \n', mean(d4.meanNMSE_dB_HOSVD - d4.meanNMSE_dB_HOOI, 2));
+
+pause
 
 %% Problem 1
 h_problem1 = figure();

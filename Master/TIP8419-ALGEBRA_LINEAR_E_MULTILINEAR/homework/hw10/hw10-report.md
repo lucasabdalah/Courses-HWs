@@ -41,22 +41,30 @@ Test the algorithms on a matrix that exactly follows the model. Compare the esti
 **Simulation setup**
 
 - The algorithm that uses the Kronecker Factorization was applied to the initial factor matrices, initializated from a Normal distribution $\mathcal{N}(0,\,1)\,$;
+- HOSVD initization
+- HOOI initization
 
 **Discussion**
 
-To compare the real data with the estimated factors, we may use two main results in the Experiment and Validation sections. The NMSE between the given data and obtained as output to MLSKRF. As well the row/column factor scaling, i.e, apply the element-wise division between the given data and algorithm output for $\mathcal{X}$ vs $\mathcal{\hat{X}}$, $\mathbf{A}$ vs $\mathbf{\hat{A}}$, $\mathbf{B}$ vs $\mathbf{\hat{B}}$ and $\mathbf{C}$ vs $\mathbf{\hat{C}}$.
+To compare the real data with the estimated factors, we may use the experimental results for NMSE between the given data and obtained as output to MLSKRF with HOSVD and HOOI.
 
-NMSE with MLSKronF
-	
-	X and X_hat: -3.34 dB 
-	A and A_hat: -0.92 dB 
-	B and B_hat: 1.39 dB 
-	C and C_hat: 2.22 dB 
+NMSE with MLSKronF (HOSVD)
 
+	X and X_hat: -0.62 dB 
+	A and A_hat: 4.07 dB 
+	B and B_hat: 3.92 dB 
+	C and C_hat: 1.91 dB 
 
-The NMSE value, with an emphasis to $\text{NMSE}(\mathcal{X}, \mathcal{\hat{X}})$ value.
+NMSE with MLSKronF (HOOI)
 
-We can see that for all columns are composed by the same real value, for all matrices factors. Hence, it presents the second evidence to confirm the proper algorithm estimation, since the columns differs only by a scale factor.
+	X and X_hat: -0.62 dB 
+	A and A_hat: -9.49 dB 
+	B and B_hat: -9.04 dB 
+	C and C_hat: -3.97 dB 
+
+The NMSE value, with an emphasis to $\text{NMSE}(\mathcal{X}, \mathcal{\hat{X}})$ value, suport the hypothesis of a propor implementation of the algorithm.
+
+We can see that MLSKRF initialized with HOOI outperforms HOSVD for all values, presenting smaller NMSE values also for the factor matrices.
 
 [Problem 1 script][1].
 
@@ -101,40 +109,56 @@ where $\mathbf{X}_{0}(i)$ e $\mathbf{\hat{X}}_{0}(i)$ represent the original dat
 - 1000 Monte Carlo Runs;
 - Each Monte Carlo iteration uses a new matrix initialization from a Normal distribution $\mathcal{N}(0,\,1)\,$;
 - SNR range $\{0, 5, 10, 15, 20, 25, 30\}$;
-- For $I_{1} = 2$, $I_{2} = 3$ and $I_{3} = 4$;
-- For $R = 4$.
-
+- Assuming four scenarios as proposed.
 
 **Discussion**
 
-The results are consistent with the experiment perfomed, that for randomly generated $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{C}$, what confirmed as shown in the previous part, the columns from given to estimated data differs only by a scale factor.
+The results are consistent with the experiment perfomed, that provide small SNR values for the randomly generated  factors $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{C}$.
 
 From the figure results, we may assess the SNR gap between the NMSE curves.
 
 For each value of SNR, respectively:
 
-| SNR 	| NMSE  |
-| :---: | :---: |
-| 0		| -3.34 |	
-| 5		| -4.60 |	
-| 10	| -4.80 |	
-| 15	| -4.76 |	
-| 20	| -4.83 |	
-| 25	| -4.72 |	
-| 30	| -4.84 |
+| SNR 	| Scenario 1 NMSE | Scenario 2 NMSE | Scenario 3 NMSE | Scenario 4 NMSE |
+| :---: | :---: | :---: | :---: | :---: |
+| 0		| 8.64e-02 | 0.00e+00  | 5.22e-04  | 1.11e-16  |
+| 5		| 1.23e-03 | -3.33e-16 | 4.07e-04  | -1.11e-16  |
+| 10	|  0.00e+00  | -1.11e-16  | -1.23e-04  | 0.00e+00  |	
+| 15	| 1.78e-15 |	0.00e+00  | -2.22e-16 | 1.11e-16  |
+| 20	| -1.37e-05 |	0.00e+00  | 0.00e+00 |  1.11e-16 |
+| 25	| 8.88e-16 |	6.66e-16   | 0.00e+00 |  0.00e+00  |
+| 30	| 8.88e-16 | 0.00e+00 | 0.00e+00 | -4.44e-16  |
+| Mean	| 1.25e-02| 3.17e-17 | 1.15e-04 | -3.17e-17  |
+	 
+We can see that the HOOI initialization outperfomrs HOSVD with a small advantage 
+Each experiment is implemented in: [Problem 2 - Scenario 1][2], [Problem 2 - Scenario 2][3], [Problem 2 - Scenario 3][4], [Problem 2 - Scenario 4][5].
 
-[Problem 2 script][2] and [Figures][3].
+Code that generates the figures: [Problem 2 script][6], 
 
 </p>
 </div>
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw9/code/figures/hw9-problem2.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/figures/hw10-problem1.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
 </p>
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/figures/hw10-problem2.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
+</p>
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/figures/hw10-problem3.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
+</p>
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/figures/hw10-problem4.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
+</p>
 
 <!---------------------------------------------------------------------------->
 
 [1]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10.m> (Problem 1 script)
-[2]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10_problem.m> (Problem 2 script)
-[3]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10.m> (Figures)
+[2]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10_problem1.m> (Problem 2 - Scenario 1)
+[3]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10_problem2.m> (Problem 2 - Scenario 2)
+[4]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10_problem3.m> (Problem 2 - Scenario 3)
+[5]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10_problem4.m> (Problem 2 - Scenario 4)
+[6]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/code/hw10.m> (Figures)
