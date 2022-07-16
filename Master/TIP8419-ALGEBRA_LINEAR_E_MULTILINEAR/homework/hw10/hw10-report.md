@@ -33,53 +33,26 @@ Test the algorithms on a matrix that exactly follows the model. Compare the esti
 
 ---
 
-<!-- ### Results
+### Results
 
 <div style="background-color:rgba(0, 0, 200, 0.15); text-align:justify; padding:20px">
 <p>
 
 **Simulation setup**
 
-- The algorithm that uses the Khatri-Rao Factorization was applied to the initial factor matrices, initializated from a Normal distribution $\mathcal{N}(0,\,1)\,$;
+- The algorithm that uses the Kronecker Factorization was applied to the initial factor matrices, initializated from a Normal distribution $\mathcal{N}(0,\,1)\,$;
 
 **Discussion**
 
 To compare the real data with the estimated factors, we may use two main results in the Experiment and Validation sections. The NMSE between the given data and obtained as output to MLSKRF. As well the row/column factor scaling, i.e, apply the element-wise division between the given data and algorithm output for $\mathcal{X}$ vs $\mathcal{\hat{X}}$, $\mathbf{A}$ vs $\mathbf{\hat{A}}$, $\mathbf{B}$ vs $\mathbf{\hat{B}}$ and $\mathbf{C}$ vs $\mathbf{\hat{C}}$.
 
-NMSE with MLSKRF
+NMSE with MLSKronF
 	
 	X and X_hat: -3.34 dB 
 	A and A_hat: -0.92 dB 
 	B and B_hat: 1.39 dB 
 	C and C_hat: 2.22 dB 
 
-Scale factor for X and X_hat with MLSKRF
-
-	X_hat./X(1:160, 1): 0.23 
-	X_hat./X(1:160, 2): 0.36 
-	X_hat./X(1:160, 3): 0.2 
-	X_hat./X(1:160, 4): 0.018 
-
-Scale factor for A and A_hat with MLSKRF
-	
-	A_hat./A(1:5, 1): 0.28 
-	A_hat./A(1:5, 2): 0.3 
-	A_hat./A(1:5, 3): 0.27 
-	A_hat./A(1:5, 4): -0.13
-
-Scale factor for B and B_hat with MLSKRF
-
-	B_hat./B(1:4, 1): 0.39 
-	B_hat./B(1:4, 2): -0.47 
-	B_hat./B(1:4, 3): 0.35 
-	B_hat./B(1:4, 4): 0.15
-
-Scale factor for B and B_hat with MLSKRF
-	
-	C_hat./C(1:8, 1): -0.27 
-	C_hat./C(1:8, 2): 0.31 
-	C_hat./C(1:8, 3): -0.26 
-	C_hat./C(1:8, 4): 0.11 
 
 The NMSE value, with an emphasis to $\text{NMSE}(\mathcal{X}, \mathcal{\hat{X}})$ value.
 
@@ -88,7 +61,7 @@ We can see that for all columns are composed by the same real value, for all mat
 [Problem 1 script][1].
 
 </p>
-</div> -->
+</div>
 
 <!---------------------------------------------------------------------------->
 
@@ -118,7 +91,7 @@ where $\mathbf{X}_{0}(i)$ e $\mathbf{\hat{X}}_{0}(i)$ represent the original dat
 
 ---
 
-<!-- ### Results
+### Results
 
 <div style="background-color:rgba(0, 0, 200, 0.15); text-align:justify; padding:20px">
 <p>
@@ -153,7 +126,7 @@ For each value of SNR, respectively:
 [Problem 2 script][2] and [Figures][3].
 
 </p>
-</div> -->
+</div>
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw9/code/figures/hw9-problem2.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />

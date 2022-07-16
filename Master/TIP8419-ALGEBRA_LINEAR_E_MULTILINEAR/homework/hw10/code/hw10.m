@@ -6,287 +6,180 @@
 % Author: Lucas Abdalah
 %
 
-%% ----- Homework 10 ----- %%
-clc;
-clear;
+clc; pause(0.1)
+clearvars;
 close all;
 
-load('homework_10_MLSKronF.mat')
 
-rows = [4 4 6];
-columns = [3 2 5];
+%% Problem 1 ----------------------------
+fprintf('------------------ Problem 1 ------------------------- \n')    
 
-%% Initialization by HOSVD
-[Matrices] = tensor.MLSKronF(X,rows,columns,'1');
-aux1 = tensor.mtx_prod_kron(Matrices{1},Matrices{2});
-Xhat = tensor.mtx_prod_kron(aux1,Matrices{3});
-disp(['Checking the NMSE (dB) between the original matrix X and its'...
-    'reconstruction with MLSKronF:'])
-nmse1 = (norm(X - Xhat,'fro')^2)/(norm(X,'fro')^2);
-nmse1 = 20*log10(nmse1)
-disp(['Checking the NMSE (dB) between the original matrix A and its'...
-    'estimation:'])
-nmsea = (norm(A - Matrices{1},'fro')^2)/(norm(A,'fro')^2);
-nmsea = 20*log10(nmsea)
-disp(['Checking the NMSE (dB) between the original matrix B and its'...
-    'estimation:'])
-nmseb = (norm(B - Matrices{2},'fro')^2)/(norm(B,'fro')^2);
-nmseb = 20*log10(nmseb)
-disp(['Checking the NMSE (dB) between the original matrix C and its'...
-    'estimation:'])
-nmsec = (norm(C - Matrices{3},'fro')^2)/(norm(C,'fro')^2);
-nmsec = 20*log10(nmsec)
+df = load('Practice_10_kronf_matrix_3D.mat');
 
-% %% Initialization by HOOI
-% [Matrices] = tensor.MLSKronF(X,rows,columns,'2');
-% aux1 = tensor.mtx_prod_kron(Matrices{1},Matrices{2});
-% Xhat = tensor.mtx_prod_kron(aux1,Matrices{3});
-% disp(['Checking the NMSE (dB) between the original matrix X and its'...
-%     'reconstruction with MLSKronF:'])
-% nmse1 = (norm(X - Xhat,'fro')^2)/(norm(X,'fro')^2);
-% nmse1 = 20*log10(nmse1)
-% disp(['Checking the NMSE (dB) between the original matrix A and its'...
-%     'estimation:'])
-% nmsea = (norm(A - Matrices{1},'fro')^2)/(norm(A,'fro')^2);
-% nmsea = 20*log10(nmsea)
-% disp(['Checking the NMSE (dB) between the original matrix B and its'...
-%     'estimation:'])
-% nmseb = (norm(B - Matrices{2},'fro')^2)/(norm(B,'fro')^2);
-% nmseb = 20*log10(nmseb)
-% disp(['Checking the NMSE (dB) between the original matrix C and its'...
-%     'estimation:'])
-% nmsec = (norm(C - Matrices{3},'fro')^2)/(norm(C,'fro')^2);
-% nmsec = 20*log10(nmsec)
+[I1, J1] = size(df.A); [I2, J2] = size(df.B); [I3, J3] = size(df.C);
+I = [I1 I2 I3]; J = [J1 J2 J3];
 
-% %% Monte Carlo Experiment
-% ia = 2;
-% ib = 2;
-% ic = 2;
-% ja = 2;
-% jb = 2;
-% jc = 2;
-% rows = [ia ib ic];
-% columns = [ja jb jc];
-% SNR = [0 5 10 15 20 25 30];
-% nmse1 = zeros(length(SNR),1);
-% nmse2 = zeros(length(SNR),1);
-% for snr = 1:length(SNR)
-%     for mc = 1:1000
-%         var_noise = 1/(10^(SNR(snr)/10));
-%         noise = sqrt(var_noise/2)*(randn(ia*ib*ic,ja*jb*jc) ...
-%             + 1j*randn(ia*ib*ic,ja*jb*jc));
-        
-%         A = randn(ia,ja) + 1i*randn(ia,ja);
-%         B = randn(ib,jb) + 1i*randn(ib,jb);
-%         C = randn(ic,jc) + 1i*randn(ic,jc);
-%         X = tensor.mtx_prod_kron(A,B);
-%         X = tensor.mtx_prod_kron(X,C);
-%         X_noisy = X + noise;
-        
-%         % HOSVD
-%         [Matrices] = tensor.MLSKronF(X_noisy,rows,columns,'1');
-%         aux1 = tensor.mtx_prod_kron(Matrices{1},Matrices{2});
-%         Xhat = tensor.mtx_prod_kron(aux1,Matrices{3});
-%         aux1 = (norm(X- Xhat,'fro')^2)/(norm(X,'fro')^2);
-%         nmse1(snr,1) = nmse1(snr,1) + 20*log10(aux1);
-%         % HOOI
-%         [Matrices] = tensor.MLSKronF(X_noisy,rows,columns,'2');
-%         aux2 = tensor.mtx_prod_kron(Matrices{1},Matrices{2});
-%         Xhat = tensor.mtx_prod_kron(aux2,Matrices{3});
-%         aux2 = (norm(X- Xhat,'fro')^2)/(norm(X,'fro')^2);
-%         nmse2(snr,1) = nmse2(snr,1) + 20*log10(aux2);
-%     end
-% end
-% nmse1  = nmse1/1000;
-% nmse2  = nmse2/1000;
+%% HOSVD version
+fprintf('------------------ HOSVD ------------------------- \n');
 
-% figure
-% txt = ['HOSVD Start'];
-% plot(SNR,nmse1,'-d','color', [0.3010 0.7450 0.9330], "linewidth", 2,...
-%     "markersize", 8, "DisplayName", txt);
-% hold on;
-% txt = ['HOOI Start'];
-% plot(SNR,nmse2,'-x','color', [0 0.4470 0.7410], "linewidth", 2,...
-%     "markersize", 8, "DisplayName", txt);
-% hold off;
-% title(['MLSKronF NMSE vs. SNR: (2,2,2,2,2,2)'])
-% xlabel('SNR (dB)')
-% ylabel('NMSE (dB)')
-% legend_copy = legend("location", "northwest");
-% set(legend_copy,'Interpreter','tex','location','northeast',"fontsize", 12)
-% grid on;
-% saveas(gcf,'hw10a1.png')
+factors = nd.mlskronf(df.X,I,J,'hosvd');
+df.Xhat = nd.kron_(nd.kron_(factors{1},factors{2}),factors{3});
 
-% ia = 5;
-% ib = 5;
-% ic = 5;
-% ja = 5;
-% jb = 5;
-% jc = 5;
-% rows = [ia ib ic];
-% columns = [ja jb jc];
-% SNR = [0 5 10 15 20 25 30];
-% nmse1 = zeros(length(SNR),1);
-% nmse2 = zeros(length(SNR),1);
-% for snr = 1:length(SNR)
-%     for mc = 1:250
-%         var_noise = 1/(10^(SNR(snr)/10));
-%         noise = sqrt(var_noise/2)*(randn(ia*ib*ic,ja*jb*jc) ...
-%             + 1j*randn(ia*ib*ic,ja*jb*jc));
-        
-%         A = randn(ia,ja) + 1i*randn(ia,ja);
-%         B = randn(ib,jb) + 1i*randn(ib,jb);
-%         C = randn(ic,jc) + 1i*randn(ic,jc);
-%         X = tensor.mtx_prod_kron(A,B);
-%         X = tensor.mtx_prod_kron(X,C);
-%         X_noisy = X + noise;
-        
-%         % HOSVD
-%         [Matrices] = tensor.MLSKronF(X_noisy,rows,columns,'1');
-%         aux1 = tensor.mtx_prod_kron(Matrices{1},Matrices{2});
-%         Xhat = tensor.mtx_prod_kron(aux1,Matrices{3});
-%         aux1 = (norm(X- Xhat,'fro')^2)/(norm(X,'fro')^2);
-%         nmse1(snr,1) = nmse1(snr,1) + 20*log10(aux1);
-%         % HOOI
-%         [Matrices] = tensor.MLSKronF(X_noisy,rows,columns,'2');
-%         aux2 = tensor.mtx_prod_kron(Matrices{1},Matrices{2});
-%         Xhat = tensor.mtx_prod_kron(aux2,Matrices{3});
-%         aux2 = (norm(X- Xhat,'fro')^2)/(norm(X,'fro')^2);
-%         nmse2(snr,1) = nmse2(snr,1) + 20*log10(aux2);
-%     end
-% end
-% nmse1  = nmse1/250;
-% nmse2  = nmse2/250;
+[~, X_NMSE_dB] = nd.nmse(df.X, df.Xhat);
+[~, A_NMSE_dB] = nd.nmse(df.A, factors{1});
+[~, B_NMSE_dB] = nd.nmse(df.B, factors{2});
+[~, C_NMSE_dB] = nd.nmse(df.C, factors{3});
 
-% figure
-% txt = ['HOSVD Start'];
-% plot(SNR,nmse1,'-d','color', [0.3010 0.7450 0.9330], "linewidth", 2,...
-%     "markersize", 8, "DisplayName", txt);
-% hold on;
-% txt = ['HOOI Start'];
-% plot(SNR,nmse2,'-x','color', [0 0.4470 0.7410], "linewidth", 2,...
-%     "markersize", 8, "DisplayName", txt);
-% hold off;
-% title(['MLSKronF NMSE vs. SNR: (5,5,5,5,5,5)'])
-% xlabel('SNR (dB)')
-% ylabel('NMSE (dB)')
-% legend_copy = legend("location", "northwest");
-% set(legend_copy,'Interpreter','tex','location','northeast',"fontsize", 12)
-% grid on;
-% saveas(gcf,'hw10a2.png')
+fprintf('.\n.\nNMSE for HOSVD\n');
+fprintf('---------------------------------------------- \n');  
+fprintf('\tX and X_hat with MLSKronF: %2.2f dB \n', X_NMSE_dB);
+fprintf('\tA and A_hat with MLSKronF: %2.2f dB \n', A_NMSE_dB);
+fprintf('\tB and B_hat with MLSKronF: %2.2f dB \n', B_NMSE_dB);
+fprintf('\tC and C_hat with MLSKronF: %2.2f dB \n', C_NMSE_dB);
 
-% ia = 2;
-% ib = 3;
-% ic = 4;
-% ja = 2;
-% jb = 3;
-% jc = 4;
-% rows = [ia ib ic];
-% columns = [ja jb jc];
-% SNR = [0 5 10 15 20 25 30];
-% nmse1 = zeros(length(SNR),1);
-% nmse2 = zeros(length(SNR),1);
-% for snr = 1:length(SNR)
-%     for mc = 1:1000
-%         var_noise = 1/(10^(SNR(snr)/10));
-%         noise = sqrt(var_noise/2)*(randn(ia*ib*ic,ja*jb*jc) ...
-%             + 1j*randn(ia*ib*ic,ja*jb*jc));
-        
-%         A = randn(ia,ja) + 1i*randn(ia,ja);
-%         B = randn(ib,jb) + 1i*randn(ib,jb);
-%         C = randn(ic,jc) + 1i*randn(ic,jc);
-%         X = tensor.mtx_prod_kron(A,B);
-%         X = tensor.mtx_prod_kron(X,C);
-%         X_noisy = X + noise;
-        
-%         % HOSVD
-%         [Matrices] = tensor.MLSKronF(X_noisy,rows,columns,'1');
-%         aux1 = tensor.mtx_prod_kron(Matrices{1},Matrices{2});
-%         Xhat = tensor.mtx_prod_kron(aux1,Matrices{3});
-%         aux1 = (norm(X- Xhat,'fro')^2)/(norm(X,'fro')^2);
-%         nmse1(snr,1) = nmse1(snr,1) + 20*log10(aux1);
-%         % HOOI
-%         [Matrices] = tensor.MLSKronF(X_noisy,rows,columns,'2');
-%         aux2 = tensor.mtx_prod_kron(Matrices{1},Matrices{2});
-%         Xhat = tensor.mtx_prod_kron(aux2,Matrices{3});
-%         aux2 = (norm(X- Xhat,'fro')^2)/(norm(X,'fro')^2);
-%         nmse2(snr,1) = nmse2(snr,1) + 20*log10(aux2);
-%     end
-% end
-% nmse1  = nmse1/1000;
-% nmse2  = nmse2/1000;
+fprintf('---------------------------------------------- \n');
 
-% figure
-% txt = ['HOSVD Start'];
-% plot(SNR,nmse1,'-d','color', [0.3010 0.7450 0.9330], "linewidth", 2,...
-%     "markersize", 8, "DisplayName", txt);
-% hold on;
-% txt = ['HOOI Start'];
-% plot(SNR,nmse2,'-x','color', [0 0.4470 0.7410], "linewidth", 2,...
-%     "markersize", 8, "DisplayName", txt);
-% hold off;
-% title(['MLSKronF NMSE vs. SNR: (2,3,4,2,3,4)'])
-% xlabel('SNR (dB)')
-% ylabel('NMSE (dB)')
-% legend_copy = legend("location", "northwest");
-% set(legend_copy,'Interpreter','tex','location','northeast',"fontsize", 12)
-% grid on;
-% saveas(gcf,'hw10a3.png')
+%% HOOI version
+fprintf('------------------ HOOI ------------------------- \n');
+factors = nd.mlskronf(df.X,I,J,'hooi');
+df.Xhat = nd.kron_(nd.kron_(factors{1},factors{2}),factors{3});
 
-% ia = 2;
-% ib = 3;
-% ic = 4;
-% ja = 5;
-% jb = 6;
-% jc = 7;
-% rows = [ia ib ic];
-% columns = [ja jb jc];
-% SNR = [0 5 10 15 20 25 30];
-% nmse1 = zeros(length(SNR),1);
-% nmse2 = zeros(length(SNR),1);
-% for snr = 1:length(SNR)
-%     for mc = 1:1000
-%         var_noise = 1/(10^(SNR(snr)/10));
-%         noise = sqrt(var_noise/2)*(randn(ia*ib*ic,ja*jb*jc) ...
-%             + 1j*randn(ia*ib*ic,ja*jb*jc));
-        
-%         A = randn(ia,ja) + 1i*randn(ia,ja);
-%         B = randn(ib,jb) + 1i*randn(ib,jb);
-%         C = randn(ic,jc) + 1i*randn(ic,jc);
-%         X = tensor.mtx_prod_kron(A,B);
-%         X = tensor.mtx_prod_kron(X,C);
-%         X_noisy = X + noise;
-        
-%         % HOSVD
-%         [Matrices] = tensor.MLSKronF(X_noisy,rows,columns,'1');
-%         aux1 = tensor.mtx_prod_kron(Matrices{1},Matrices{2});
-%         Xhat = tensor.mtx_prod_kron(aux1,Matrices{3});
-%         aux1 = (norm(X- Xhat,'fro')^2)/(norm(X,'fro')^2);
-%         nmse1(snr,1) = nmse1(snr,1) + 20*log10(aux1);
-%         % HOOI
-%         [Matrices] = tensor.MLSKronF(X_noisy,rows,columns,'2');
-%         aux2 = tensor.mtx_prod_kron(Matrices{1},Matrices{2});
-%         Xhat = tensor.mtx_prod_kron(aux2,Matrices{3});
-%         aux2 = (norm(X- Xhat,'fro')^2)/(norm(X,'fro')^2);
-%         nmse2(snr,1) = nmse2(snr,1) + 20*log10(aux2);
-%     end
-% end
-% nmse1  = nmse1/1000;
-% nmse2  = nmse2/1000;
+[~, X_NMSE_dB] = nd.nmse(df.X, df.Xhat);
+[~, A_NMSE_dB] = nd.nmse(df.A, factors{1});
+[~, B_NMSE_dB] = nd.nmse(df.B, factors{2});
+[~, C_NMSE_dB] = nd.nmse(df.C, factors{3});
 
-% figure
-% txt = ['HOSVD Start'];
-% plot(SNR,nmse1,'-d','color', [0.3010 0.7450 0.9330], "linewidth", 2,...
-%     "markersize", 8, "DisplayName", txt);
-% hold on;
-% txt = ['HOOI Start'];
-% plot(SNR,nmse2,'-x','color', [0 0.4470 0.7410], "linewidth", 2,...
-%     "markersize", 8, "DisplayName", txt);
-% hold off;
-% title(['MLSKronF NMSE vs. SNR: (2,3,4,5,6,7)'])
-% xlabel('SNR (dB)')
-% ylabel('NMSE (dB)')
-% legend_copy = legend("location", "northwest");
-% set(legend_copy,'Interpreter','tex','location','northeast',"fontsize", 12)
-% grid on;
-% saveas(gcf,'hw10a4.png')
+fprintf('.\n.\nNMSE for HOOI\n');
+fprintf('---------------------------------------------- \n');  
+fprintf('\tX and X_hat with MLSKronF: %2.2f dB \n', X_NMSE_dB);
+fprintf('\tA and A_hat with MLSKronF: %2.2f dB \n', A_NMSE_dB);
+fprintf('\tB and B_hat with MLSKronF: %2.2f dB \n', B_NMSE_dB);
+fprintf('\tC and C_hat with MLSKronF: %2.2f dB \n', C_NMSE_dB);
+
+fprintf('---------------------------------------------- \n');
+
+pause
+
+d1 = load('hw10_problem_data1.mat');
+d2 = load('hw10_problem_data2.mat');
+d3 = load('hw10_problem_data3.mat');
+d4 = load('hw10_problem_data4.mat');
+
+%% Problem 1
+h_problem1 = figure();
+plot(d1.SNR_dB, d1.meanNMSE_dB_HOSVD,...
+    'Color', 'blue',...        
+    'LineStyle', '-.',...
+    'LineWidth', 1.0,...
+    'Marker', 'o',...
+    'MarkerFaceColor', 'blue',...
+    'MarkerSize', 6);
+hold on
+plot(d1.SNR_dB, d1.meanNMSE_dB_HOOI,...
+    'Color', 'red',...        
+    'LineStyle', '--',...
+    'LineWidth', 1.0,...
+    'Marker', 's',...
+    'MarkerFaceColor', 'red',...
+    'MarkerSize', 5);
+hold off
+xticks(d1.SNR_dB);
+xlabel("SNR (dB)")
+ylabel("NMSE (dB)")
+legend(["HOSVD", "HOOI"], 'Location', 'northeast')
+legend boxoff
+grid on
+axis tight
+pbaspect([1 0.5 1])
+
+savefig_tight(h_problem1, "figures/hw10-problem1", "both")
+
+
+%% Problem 2
+h_problem2 = figure();
+plot(d2.SNR_dB, d2.meanNMSE_dB_HOSVD,...
+    'Color', 'blue',...        
+    'LineStyle', '-.',...
+    'LineWidth', 1.0,...
+    'Marker', 'o',...
+    'MarkerFaceColor', 'blue',...
+    'MarkerSize', 6);
+hold on
+plot(d2.SNR_dB, d2.meanNMSE_dB_HOOI,...
+    'Color', 'red',...        
+    'LineStyle', '--',...
+    'LineWidth', 1.0,...
+    'Marker', 's',...
+    'MarkerFaceColor', 'red',...
+    'MarkerSize', 5);
+hold off
+xticks(d2.SNR_dB);
+xlabel("SNR (dB)")
+ylabel("NMSE (dB)")
+legend(["HOSVD", "HOOI"], 'Location', 'northwest')
+legend boxoff
+grid on
+axis tight
+pbaspect([1 0.5 1])
+
+savefig_tight(h_problem2, "figures/hw10-problem2", "both")
+
+
+%% Problem 3
+h_problem3 = figure();
+plot(d3.SNR_dB, d3.meanNMSE_dB_HOSVD,...
+    'Color', 'blue',...        
+    'LineStyle', '-.',...
+    'LineWidth', 1.0,...
+    'Marker', 'o',...
+    'MarkerFaceColor', 'blue',...
+    'MarkerSize', 6);
+hold on
+plot(d3.SNR_dB, d3.meanNMSE_dB_HOOI,...
+    'Color', 'red',...        
+    'LineStyle', '--',...
+    'LineWidth', 1.0,...
+    'Marker', 's',...
+    'MarkerFaceColor', 'red',...
+    'MarkerSize', 5);
+hold off
+xticks(d3.SNR_dB);
+xlabel("SNR (dB)")
+ylabel("NMSE (dB)")
+legend(["HOSVD", "HOOI"], 'Location', 'northeast')
+legend boxoff
+grid on
+axis tight
+pbaspect([1 0.5 1])
+
+savefig_tight(h_problem3, "figures/hw10-problem3", "both")
+
+
+%% Problem 4
+h_problem4 = figure();
+plot(d4.SNR_dB, d4.meanNMSE_dB_HOSVD,...
+    'Color', 'blue',...        
+    'LineStyle', '-.',...
+    'LineWidth', 1.0,...
+    'Marker', 'o',...
+    'MarkerFaceColor', 'blue',...
+    'MarkerSize', 6);
+hold on
+plot(d4.SNR_dB, d4.meanNMSE_dB_HOOI,...
+    'Color', 'red',...        
+    'LineStyle', '--',...
+    'LineWidth', 1.0,...
+    'Marker', 's',...
+    'MarkerFaceColor', 'red',...
+    'MarkerSize', 5);
+hold off
+xticks(d4.SNR_dB);
+xlabel("SNR (dB)")
+ylabel("NMSE (dB)")
+pbaspect([1 0.5 1])
+legend(["HOSVD", "HOOI"], 'Location', 'northeast')
+legend boxoff
+grid on
+axis tight
+
+savefig_tight(h_problem4, "figures/hw10-problem4", "both")
