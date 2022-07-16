@@ -39,14 +39,18 @@ e_{(i)} = \underset{\mathbf{{A}}, \mathbf{{B}}, \mathbf{{C}}} \min \, || [\mathc
 
 ### Results
 
-  NMSE for ALS Validation
-  ---------------------------------------------- 
+NMSE for ALS Validation
+  
     X and X_hat: -123.33 dB 
     A and A_hat: 27.96 dB 
     B and B_hat: 0.64 dB 
     C and C_hat: 25.72 dB 
-  ---------------------------------------------- 
+  
 
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw11/code/figures/hw11-problem1.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
+</p>
 
 <!--  -->
 
@@ -78,9 +82,8 @@ where $\mathbf{Q}(m)$ and $\mathbf{\hat{Q}}$ denote the original data matrix and
 
 ### Results
 
-
 SNR (dB) Mean NMSE (dB) for 1000 MC rounds
-  --------------------------------------------------
+
 
     SNR 	|	NMSE 	
     ----------------------------------
@@ -124,5 +127,9 @@ SNR (dB) Mean NMSE (dB) for 1000 MC rounds
     25	|	15.48	
     30	|	15.63	
     -----------------------------------
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw11/code/figures/hw11-problem2.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
+</p>
 
 <!--  -->
