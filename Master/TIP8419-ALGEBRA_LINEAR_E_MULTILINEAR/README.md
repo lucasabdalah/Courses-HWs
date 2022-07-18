@@ -1,29 +1,23 @@
 # TIP8419 - Algebra Linear e Multilinear
 Progresso no estudos e/ou trabalhos da disciplina de Algebra Linear e Multilinear
 
-Implementações Pendentes:
+- [X] Merge Homeworks Report: [Report PDF](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw-report.pdf)
 
-- [ ] SVD (Revisão)
-- [ ] Homework 0: 
-  - [ ] Evaluate the computational performance for matrix inversion formulas
-  - [ ] Linear operator properties demonstration
-- [ ] Homework 1:
-  - [ ] Hadamard Product $(\odot)$
-  - [ ] Kronecker Product $(\otimes)$
-  - [ ] Kathri-Rao Product $(\diamond)$ 
-- [ ] Homework 3
-  - [ ] Least-Squares Khatri-Rao Factorization (LSKRF): $(\mathbf{\hat{A}},\mathbf{\hat{B}})=\min_{(\mathbf{A},\mathbf{B})} ||\mathbf{X} - \mathbf{A}\diamond\mathbf{B} ||$
-- [ ] Homework 4
-- [ ] Homework 5
-- [ ] Homework 6
-- [ ] Homework 7
-- [ ] Homework 8
-
-
-- - -
-## Quick Review
-
-
+Individual Reports:
+- [X] Homework 0: [Report HW0](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw0/hw0-report.pdf)
+- [X] Homework 1: [Report HW1](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw1/hw1-report.pdf)
+- [X] Homework 2: [Report HW2](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw2/hw2-report.pdf)
+- [X] Homework 3 [Report HW3](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw3/hw3-report.pdf)
+- [X] Homework 4 [Report HW4](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw4/hw4-report.pdf)
+- [X] Homework 5 [Report HW5](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw5/hw5-report.pdf)
+- [X] Homework 6 [Report HW6](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw6/hw6-report.pdf)
+- [X] Homework 7 [Report HW7](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw7/hw7-report.pdf)
+- [X] Homework 8 [Report HW8](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw8/hw8-report.pdf)
+- [X] Homework 9 [Report HW9](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw9/hw9-report.pdf)
+- [X] Homework 10 [Report HW10](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/hw10-report.pdf)
+- [X] Homework 11 [Report HW11](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw11/hw11-report.pdf)
+- [ ] Homework 12 [Report HW12](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw12/hw12-report.pdf)
+- [ ] Homework 13 [Report HW13](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw13/hw13-report.pdf)
 - - -
 
 ## Course Content
@@ -35,10 +29,6 @@ Implementações Pendentes:
 - Kronecker Product Singular Value Decomposition (KPSVD)
 ### Tensor Overview (16hs)
 - Matricization: Transforming a Tensor into a Matrix
-
-| Alerta de Nível: Conteúdo lecionado para aqui! (13/04/2022) |
-| --- |
-
 - Tensor Multiplication: The n-mode Product
 - Tensor Networks
 - Higher-Order Singular Value Decomposition (HOSVD)
@@ -55,3 +45,5 @@ Implementações Pendentes:
 - Higher Order Power Iteration Method
 ### Tensor Completion (6hs)
 ### Applications of Tensor Decomposition
+| Alerta de Nível: Conteúdo lecionado para aqui! (24/06/2022) |
+| --- |
