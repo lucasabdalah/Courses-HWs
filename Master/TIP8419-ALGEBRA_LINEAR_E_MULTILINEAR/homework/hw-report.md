@@ -52,6 +52,7 @@ function includeHTML() {
     <a href="#hw11-report">HW11 report </a> <br>
     <a href="#hw12-report">HW12 report </a> <br>
     <a href="#hw13-report">HW13 report </a> <br>
+    <a href="#code-report">Code report </a> <br>
 </div>
 <hr>
 <br>
@@ -180,6 +181,14 @@ function includeHTML() {
 </div>
 <br>
 <div id="hw13-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw13/hw13-report.html"></div>
+<br> <div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
+    <p> 
+        <a href="#toc"> 
+            Return to Table of Contents 
+        </a> 
+    </p> 
+</div>
+<div id="code-report" w3-include-html="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/nd-web.html"></div>
 <br> <div style="background-color:rgba(200, 0, 000, 0.15); text-align:justify; padding:1px"> 
     <p> 
         <a href="#toc"> 
