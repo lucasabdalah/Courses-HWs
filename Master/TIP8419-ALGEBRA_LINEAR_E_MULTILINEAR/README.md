@@ -16,9 +16,8 @@ Individual Reports:
 - [X] Homework 9 [Report HW9](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw9/hw9-report.pdf)
 - [X] Homework 10 [Report HW10](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw10/hw10-report.pdf)
 - [X] Homework 11 [Report HW11](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw11/hw11-report.pdf)
-- [ ] Homework 12
-- [ ] Homework 13
-
+- [ ] Homework 12 [Report HW12](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw12/hw12-report.pdf)
+- [ ] Homework 13 [Report HW13](https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/algebra/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw13/hw13-report.pdf)
 - - -
 
 ## Course Content

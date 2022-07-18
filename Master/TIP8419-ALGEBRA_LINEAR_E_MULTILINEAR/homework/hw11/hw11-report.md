@@ -27,17 +27,31 @@ $$\begin{equation*}
 
 where $\mathbf{A} = [a_1, \dots , a_R]$, $\mathbf{B} = [b_1, \dots , b_R]$, $\mathbf{C} = [c_1, \dots , c_R]$. 
 
-Considering a successful run, compare the estimated matrices $\mathbf{\hat{A}}, \mathbf{\hat{B}}, \mathbf{\hat{C}}$ with the original ones (also provided in the
+Considering a successful run, compare the estimated matrices $\mathbf{\mathbf{hat{A}}}, \mathbf{\hat{B}}, \mathbf{\hat{C}}$ with the original ones (also provided in the
 same Matlab file). Explain the results. 
 
 <u>Hint</u>: An error measure at the ith iteration can be calculated from the following formula:
 
-$$\begin{equation} 
-e_{(i)} = \underset{\mathbf{{A}}, \mathbf{{B}}, \mathbf{{C}}} \min \, || [\mathcal{X}]_{(1)} - \mathbf{\hat{A}}_{(i)} \left(\mathbf{\hat{C}}) \diamond \mathbf{\hat{B}}_{(i)}\right)^{\top} ||_{F} \end{equation}$$
+$$\begin{equation*} 
+e_{(i)} = \underset{\mathbf{{A}}, \mathbf{{B}}, \mathbf{{C}}} \min \, || [\mathcal{X}]_{(1)} - \mathbf{\hat{A}}_{(i)} \left(\mathbf{\hat{C}}) \diamond \mathbf{\hat{B}}_{(i)}\right)^{\top} ||_{F} \end{equation*}$$
 
 ---
 
 ### Results
+
+<div style="background-color:rgba(0, 0, 200, 0.15); text-align:justify; padding:20px">
+<p>
+
+**Simulation setup**
+
+- The ALS algorithm that estimates the factor matrices of $\mathcal{\hat{X}}$ from a given tensor $\mathcal{X}$, minimizing the distance between them.
+- $I, J, K = 8, 4, 5$;
+- $R = 3$;
+- Initialized from a Normal distribution $\mathcal{N}(0,\,1)\,$.
+
+**Discussion**
+
+To compare the real data with the estimated factors, we may use the experimental results for NMSE between the given data and obtained as output to ALS.
 
 NMSE for ALS Validation
   
@@ -46,6 +60,14 @@ NMSE for ALS Validation
     B and B_hat: 0.64 dB 
     C and C_hat: 25.72 dB 
   
+The results are consistent with the proposed scenario, since that for randomly generated $\mathbf{X}$, the algorithm succeds to obtain factors with small NMSE (dB) values.
+
+<u>Remark</u>: the $\text{NMSE}(\mathbf{B}, \mathbf{\hat{B}})$ presents the smaller error since we choose to fix $\mathbf{\hat{A}}$ and $\mathbf{\hat{C}}$ to estimate $\mathbf{\hat{B}}$ at the first iteration. This choice was arbitrary and its behavior is presented for any factor matrix that is estimated first.
+
+[Problem 1 script][1].
+
+</p>
+</div>
 
 
 <p align="center">
@@ -82,54 +104,51 @@ where $\mathbf{Q}(m)$ and $\mathbf{\hat{Q}}$ denote the original data matrix and
 
 ### Results
 
-SNR (dB) Mean NMSE (dB) for 1000 MC rounds
+<div style="background-color:rgba(0, 0, 200, 0.15); text-align:justify; padding:20px">
+<p>
+
+**Simulation setup**
+
+- 1000 Monte Carlo Runs;
+- Each Monte Carlo iteration uses a new matrix initialization from a Normal distribution $\mathcal{N}(0,\,1)\,$;
+- The ALS algorithm that estimates the factor matrices of $\mathcal{\hat{X}}$ from a given tensor $\mathcal{X}$, minimizing the distance between them.
+- SNR range $\{0, 5, 10, 15, 20, 25, 30\}$;
+- $I, J, K = 10, 4, 2$;
+- $R = 3$.
 
 
-    SNR 	|	NMSE 	
-    ----------------------------------
-      X 
-    -----------------------------------
-    0	|	-7.71	
-    5	|	-30.53	
-    10	|	-50.40	
-    15	|	-69.78	
-    20	|	-88.74	
-    25	|	-108.26	
-    30	|	-127.41	
-    -----------------------------------
-      A 
-    -----------------------------------
-    0	|	12.32	
-    5	|	13.83	
-    10	|	15.03	
-    15	|	15.17	
-    20	|	15.34	
-    25	|	15.23	
-    30	|	15.31	
-    -----------------------------------
-      B 
-    -----------------------------------
-    0	|	1.94	
-    5	|	1.00	
-    10	|	0.82	
-    15	|	0.98	
-    20	|	0.95	
-    25	|	0.89	
-    30	|	0.87	
-    -----------------------------------
-      C 
-    -----------------------------------
-    0	|	13.06	
-    5	|	14.69	
-    10	|	15.18	
-    15	|	15.33	
-    20	|	15.97	
-    25	|	15.48	
-    30	|	15.63	
-    -----------------------------------
+**Discussion**
+
+The Monte Carlo algorithm provides a repeated random sampling to obtain numerical results with the real data, a powerful tool to assess the trend using randomness.The experimental results for NMSE compare the given random data and obtained as output to ALS.
+
+
+|SNR [dB]	|	NMSE(X) [dB]	|	NMSE(A) [dB] |	NMSE(B) [dB] |	NMSE(C) [dB] |
+| :-----: | :-------: | :-----: | :-------: | :-----: |
+|0	|	-7.71   | 12.32	| 	1.94	|	13.06	|
+|5	|	-30.53	| 13.83	|	1.00	|	14.69	|
+|10	|	-50.40	|15.03	|	0.82	|	15.18	|
+|15	|	-69.78	|15.17	|	0.98	|	15.33	|
+|20	|	-88.74	|	15.34	|	0.95	|	15.97	|
+|25	|	-108.26	|	15.23	|	0.89	|	15.48	|
+|30	|	-127.41	|	15.31	|	0.87	|	15.63	|
+|  |  |  |  |  |
+    
+The results are consistent with the second problem scenario, since that for randomly generated data, the algorithm succeds to obtain factors with small NMSE (dB) values. As well the SNR and NMSE for $\mathbf{X}$ are inversely proportional variables, i.e, as the SNR increases, the NMSE decreases. 
+
+The factor matrices remains practically stagnant, with very few variation as the SNR varies. The main notable difference is the remark indicated in the first problem, which indicates that the $\text{NMSE}(\mathbf{B}, \mathbf{\hat{B}})$ presents the smaller error since we choose to fix $\mathbf{\hat{A}}$ and $\mathbf{\hat{C}}$ to estimate $\mathbf{\hat{B}}$ at the first iteration.
+
+[Problem 2 script][2] and [Figures][3].
+
+</p>
+</div>
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/lucasabdalah/Courses-HWs/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw11/code/figures/hw11-problem2.png" alt="Khatri-Rao Product Cost Figure" title="Khatri-Rao Product Cost Figure" width="512" />
 </p>
 
 <!--  -->
+
+
+[1]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw11/code/hw11.m> (Problem 1 script)
+[2]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw11/code/hw11_problem.m> (Problem 2 script)
+[3]: <https://github.com/lucasabdalah/Courses-HWs/blob/master/Master/TIP8419-ALGEBRA_LINEAR_E_MULTILINEAR/homework/hw11/code/hw11.m> (Figures)
