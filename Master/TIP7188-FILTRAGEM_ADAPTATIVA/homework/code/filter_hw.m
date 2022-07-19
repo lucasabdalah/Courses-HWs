@@ -1,4 +1,5 @@
-%% [TIP7188 - Filtragem Adaptativa]
+%% MÉTODOS 
+% [TIP7188 - Filtragem Adaptativa]
 % Author: Lucas Abdalah
 %
 % filter_hw.m
