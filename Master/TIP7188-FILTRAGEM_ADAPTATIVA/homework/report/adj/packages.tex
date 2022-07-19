@@ -2,17 +2,34 @@
 \usepackage[brazilian]{babel}
 \usepackage{graphicx}
 \usepackage{amssymb, mathrsfs, amsfonts, amsmath, esint, relsize, bm}
-\usepackage{hyperref}
 \usepackage{caption}
 \usepackage{indentfirst} 
 \usepackage{xcolor}
 \usepackage{csquotes} % When using babel or polyglossia with biblatex, loading csquotes is recommended to ensure that quoted texts are typeset according to the rules of your main language.
 \usepackage[ruled,vlined]{algorithm2e} % Algorithm
 \usepackage{pdfpages} % Include full PDF file
+\usepackage[]{hyperref}
+
 
 % References
 \usepackage[style=ieee]{biblatex}
 \addbibresource{refs.bib}
+
+
+\hypersetup{
+    pdftitle={Filtragem Adaptativa Hw},
+    pdfauthor={Lucas Abdalah},
+    % pdfsubject={Your subject here},
+    % pdfkeywords={keyword1, keyword2},
+    bookmarksnumbered=true,     
+    bookmarksopen=true,         
+    bookmarksopenlevel=1,       
+    colorlinks=false,            
+    pdfstartview=Fit,           
+    pdfpagemode=UseOutlines,    % this is the option you were lookin for
+    pdfpagelayout=TwoPageRight % put pdf as 2 pages
+}
+
 
 % \usepackage{hhline}
 % \usepackage{color}
