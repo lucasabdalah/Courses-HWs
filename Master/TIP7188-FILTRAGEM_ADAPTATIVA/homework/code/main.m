@@ -14,3 +14,7 @@ clc; pause(0.1)
 
 % filter_hw.hw2p5(false);
 
+Rx = [1,0.5; 0.5,1];
+Pxd = [0.5; 0.25];
+invRx = inv(Rx);
+w = invRx*Pxd;

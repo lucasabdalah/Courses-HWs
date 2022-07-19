@@ -4,17 +4,20 @@
 \usepackage{amssymb, mathrsfs, amsfonts, amsmath, esint, relsize, bm}
 \usepackage{caption}
 \usepackage{indentfirst} 
+\usepackage{todonotes}
 \usepackage{xcolor}
 \usepackage{csquotes} % When using babel or polyglossia with biblatex, loading csquotes is recommended to ensure that quoted texts are typeset according to the rules of your main language.
-\usepackage[ruled,vlined]{algorithm2e} % Algorithm
+% \usepackage[ruled,vlined]{algorithm2e} % Algorithm
 \usepackage{pdfpages} % Include full PDF file
-\usepackage[]{hyperref}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+% \usepackage[]{hyperref}
 
 
 % References
 \usepackage[style=ieee]{biblatex}
 \addbibresource{refs.bib}
 
+\numberwithin{equation}{section}
 
 \hypersetup{
     pdftitle={Filtragem Adaptativa Hw},
