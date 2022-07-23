@@ -1,10 +1,10 @@
-\section{Lista 2: Filtragem Linear Ótima}
+\section{Lista 2: Filtragem Linear Ótima} % <-----------------------------------------------------------------------------
 
 
-\subsection{Filtragem Ótima}
+\subsection{Filtragem Ótima} % <-----------------------------------------------------------------------------
 
 
-\subsubsection*{Coeficientes de Wiener}
+\subsubsection*{Coeficientes de Wiener} % <-----------------------------------------------------------------------------
 
 Considerando o problema de filtragem de Wiener, e assumindo conhecimento da matriz de correlação $\mathbf{R_{X}}$ e do vetor de correlação cruzada $\mathbf{p}_{\mathbf{X} d}$, pode-se obter os coeficientes de $\mathbf{w}$.
 \begin{equation} 
@@ -53,7 +53,7 @@ Finalmente, o resultado é uma expressão que compreende a inversão de matrizes
 \end{equation}
                                          
 
-\subsection{Erro Médio Quadrático Mínimo}
+\subsection{Erro Médio Quadrático Mínimo} % <-----------------------------------------------------------------------------
 Para verificar a expressão proposta, é necessário obter a matriz de correlação do vetor aumentado.
 \begin{align*}
     \mathbf{A} &= \mathbb{E} \left\{ \left[ \begin{matrix} d(n) \\ x(n) \end{matrix} \right] \left[ \begin{matrix} d(n)^{\top} & x(n)^{\top} \end{matrix} \right] \right\} \\
@@ -82,7 +82,7 @@ Finalmente, dado a equação obtida, com expressão equivalente à $J_{min}$, po
 \end{align*}
 
 
-\subsection{Cancelamento de Ruído}
+\subsection{Cancelamento de Ruído} % <-----------------------------------------------------------------------------
 \todo[inline, color=yellow!30]{Organizar}
 
 Inicialmente é necessário calcular a equação de erro do sistema aqui proposto
@@ -128,7 +128,7 @@ Onde é possível reescrever o termo final como
 \end{align}
 
 
-\subsection{Predição Ótima}
+\subsection{Predição Ótima} % <-----------------------------------------------------------------------------
 \todo[inline, color=yellow!30]{Organizar}
 
 O filtro linear ótimo que minimiza o erro médio quadrático é descrito pela solução das equações de Wiener. Portanto, inicialmente definir a matriz de autocorrelação para o processo descrito por $x(n)$
@@ -184,7 +184,7 @@ Entretanto, considerando que o processo $D(n)$ têm média nula então temos na 
 \end{align}
 
 
-\subsection{Superfície de Erro}
+\subsection{Superfície de Erro} % <-----------------------------------------------------------------------------
 \todo[inline, color=yellow!30]{Organizar}
 
 
@@ -225,3 +225,4 @@ Utilizando um software gráfico é possível obter a Figura \ref{fig:hw2p5} onde
     \caption{Superfície de erro $J(w_{0}, w_{1})$.}
     \label{fig:hw2p5}
 \end{figure}
+
