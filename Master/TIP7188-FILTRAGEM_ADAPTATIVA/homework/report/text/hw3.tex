@@ -249,280 +249,210 @@ no seguinte limite superior para o valor de convergência se compararmos diretam
 \subsection{Equalização de Canais} % <-----------------------------------------------------------------------------
 \todo[inline, color=yellow!30]{Organizar}
 
-\begin{enumerate}
+
+\subsubsection{Equalizado Ótimo e plano Z}
     
-    \item Forneça o equalizador ótimo segundo o critério de Wiener. Esboce a posição dos zeros do canal e do equalizador no plano Z.
+Considerando um sinal gaussiano branco $x(n)$ a saída do canal pode ser prontamente obtida por
+
+\begin{align}
+    y(n) = x(n) + 1.6 x(n - 1),
+\end{align}
+
+e a matriz de autocorrelação será então dada por
+
+\begin{align}
+    \mathbf{R}_{y} =
+    \begin{bmatrix}
+        \mathbb{E}\{y(n)y^{\text{H}}(n)\} & \mathbb{E}\{y(n)y^{\text{H}}(n - 1)\} \\
+        \mathbb{E}\{y(n - 1)y^{\text{H}}(n)\} & \mathbb{E}\{y(n - 1)y^{\text{H}}(n - 1)\}
+    \end{bmatrix},
+\end{align}
+
+onde podemos calcular os valores teóricos para as correlações da seguinte forma se assumirmos que existe independência entre amostras distintas e que o sinal é média nula 
+
+\begin{align*}
+    \mathbb{E}\{y(n)y^{\text{H}}(n)\} &= \mathbb{E}\{ \mathbf{x}^{2}(n) + 1.6 \mathbf{x}(n) \mathbf{x}^{\text{H}}(n - 1) + 1.6 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}} (n) \\
+    &+ 2.56 \mathbf{x}^{2}(n - 1) \} = 3.56, \\
+    \mathbb{E}\{y(n)y^{\text{H}}(n - 1)\} &= \mathbb{E}\{ \mathbf{x}(n) \mathbf{x}^{\text{H}}(n - 1) + 1.6 \mathbf{x}(n) \mathbf{x}^{\text{H}}(n - 2) + 1.6 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}} (n - 1) \\ 
+    &+ 2.56 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}}(n - 2) \} = 1.60, \\
+    \mathbb{E}\{y(n - 1)y^{\text{H}}(n)\} &= \mathbb{E}\{ \mathbf{x}(n - 1) \mathbf{x}^{\text{H}}(n) + 1.6 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}}(n - 1) + 1.6 \mathbf{x}(n - 2) \mathbf{x}^{\text{H}} (n) \\ 
+    &+ 2.56 \mathbf{x}(n - 2) \mathbf{x}^{\text{H}}(n - 1) \} = 1.60, \\
+    \mathbb{E}\{y(n - 1)y^{\text{H}}(n - 1)\} &= \mathbb{E}\{ \mathbf{x}^{2}(n - 1) + 1.6 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}}(n - 2) + 1.6 \mathbf{x}(n - 2) \mathbf{x}^{\text{H}} (n - 1) \\ 
+    &+ 2.56 \mathbf{x}(n - 2)^{2} \} = 3.56, \\
+\end{align*}
+
+podendo assim descrever a matriz de autocorrelação teórica e sua inversa como
+
+\begin{align}
+    \mathbf{R}_{y} =
+    \begin{bmatrix}
+        3.56 & 1.60 \\
+        1.60 & 3.56
+    \end{bmatrix},
+\end{align}
+
+\begin{align}
+    \mathbf{R}^{-1}_{y} = \frac{1}{3.56^{2} - 1.6^{2}}
+    \begin{bmatrix}
+        3.56 &  -1.60 \\
+        -1.60 & 3.56
+    \end{bmatrix} =
+    \begin{bmatrix}
+        0.35 &  -0.16 \\
+        -0.16 & 0.35
+    \end{bmatrix}.
+\end{align}
+
+Já o vetor de correlação cruzada teórico pode ser descrito por
+
+\begin{align}
+    \mathbf{p}_{yd} =
+    \begin{bmatrix}
+        \mathbb{E}\{y(n)d(n)\} \\
+        \mathbb{E}\{y(n - 1)d(n)\}
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        1 \\
+        0
+    \end{bmatrix},
+\end{align}
+
+pois queremos que o sinal de saída tenha a maior correlação possivel com o sinal desejado de um mesmo instante mas continue sendo independente de um sinal de um instante temporal diferente.
+Desse modo, podemos obter o equalizador ótimo segundo o critério de Wiener como
+
+\begin{align}
+    \mathbf{w}_{\text{opt}} = \mathbf{R}^{-1}_{y} \mathbf{p}_{yd} = \begin{bmatrix}
+        0.35 \\
+        -0.16
+    \end{bmatrix}.
+\end{align}
+
+Por fim, abaixo segue o traçado para os zeros das funções de transferência tanto do canal quanto do filtro ótimo em azul e em vermelho, respectivamente.
+
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig/hw3p4-zeros.pdf}
+    \caption{Zeros do canal e do equalizador no plano-z.}
+\end{figure}
+
+
+\subsubsection{Filtro de Erro de Predição Direta de Passo Unitário}
     
-        \textcolor{red}{Solução:}
-        
-        Considerando um sinal gaussiano branco $x(n)$ a saída do canal pode ser prontamente obtida por
-        
-        \begin{align}
-            y(n) = x(n) + 1.6 x(n - 1),
-        \end{align}
-        
-        e a matriz de autocorrelação será então dada por
-        
-        \begin{align}
-            \mathbf{R}_{y} =
-            \begin{bmatrix}
-                \mathbb{E}\{y(n)y^{\text{H}}(n)\} & \mathbb{E}\{y(n)y^{\text{H}}(n - 1)\} \\
-                \mathbb{E}\{y(n - 1)y^{\text{H}}(n)\} & \mathbb{E}\{y(n - 1)y^{\text{H}}(n - 1)\}
-            \end{bmatrix},
-        \end{align}
-        
-        onde podemos calcular os valores teóricos para as correlações da seguinte forma se assumirmos que existe independência entre amostras distintas e que o sinal é média nula 
-        
-        \begin{align*}
-            \mathbb{E}\{y(n)y^{\text{H}}(n)\} &= \mathbb{E}\{ \mathbf{x}^{2}(n) + 1.6 \mathbf{x}(n) \mathbf{x}^{\text{H}}(n - 1) + 1.6 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}} (n) \\
-            &+ 2.56 \mathbf{x}^{2}(n - 1) \} = 3.56, \\
-            \mathbb{E}\{y(n)y^{\text{H}}(n - 1)\} &= \mathbb{E}\{ \mathbf{x}(n) \mathbf{x}^{\text{H}}(n - 1) + 1.6 \mathbf{x}(n) \mathbf{x}^{\text{H}}(n - 2) + 1.6 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}} (n - 1) \\ 
-            &+ 2.56 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}}(n - 2) \} = 1.60, \\
-            \mathbb{E}\{y(n - 1)y^{\text{H}}(n)\} &= \mathbb{E}\{ \mathbf{x}(n - 1) \mathbf{x}^{\text{H}}(n) + 1.6 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}}(n - 1) + 1.6 \mathbf{x}(n - 2) \mathbf{x}^{\text{H}} (n) \\ 
-            &+ 2.56 \mathbf{x}(n - 2) \mathbf{x}^{\text{H}}(n - 1) \} = 1.60, \\
-            \mathbb{E}\{y(n - 1)y^{\text{H}}(n - 1)\} &= \mathbb{E}\{ \mathbf{x}^{2}(n - 1) + 1.6 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}}(n - 2) + 1.6 \mathbf{x}(n - 2) \mathbf{x}^{\text{H}} (n - 1) \\ 
-            &+ 2.56 \mathbf{x}(n - 2)^{2} \} = 3.56, \\
-        \end{align*}
-        
-        podendo assim descrever a matriz de autocorrelação teórica e sua inversa como
-        
-        \begin{align}
-            \mathbf{R}_{y} =
-            \begin{bmatrix}
-                3.56 & 1.60 \\
-                1.60 & 3.56
-            \end{bmatrix},
-        \end{align}
-        
-        \begin{align}
-            \mathbf{R}^{-1}_{y} = \frac{1}{3.56^{2} - 1.6^{2}}
-            \begin{bmatrix}
-                3.56 &  -1.60 \\
-                -1.60 & 3.56
-            \end{bmatrix} =
-            \begin{bmatrix}
-                0.35 &  -0.16 \\
-                -0.16 & 0.35
-            \end{bmatrix}.
-        \end{align}
-        
-        Já o vetor de correlação cruzada teórico pode ser descrito por
-        
-        \begin{align}
-            \mathbf{p}_{yd} =
-            \begin{bmatrix}
-                \mathbb{E}\{y(n)d(n)\} \\
-                \mathbb{E}\{y(n - 1)d(n)\}
-            \end{bmatrix} = 
-            \begin{bmatrix}
-                1 \\
-                0
-            \end{bmatrix},
-        \end{align}
-        
-        pois queremos que o sinal de saída tenha a maior correlação possivel com o sinal desejado de um mesmo instante mas continue sendo independente de um sinal de um instante temporal diferente.
-        Desse modo, podemos obter o equalizador ótimo segundo o critério de Wiener como
-        
-        \begin{align}
-            \mathbf{w}_{\text{opt}} = \mathbf{R}^{-1}_{y} \mathbf{p}_{yd} = \begin{bmatrix}
-                0.35 \\
-                -0.16
-            \end{bmatrix}.
-        \end{align}
-        
-        Por fim, abaixo segue o traçado para os zeros das funções de transferência tanto do canal quanto do filtro ótimo em azul e em vermelho, respectivamente.
-        
-        \begin{figure}[!htp]
-            \centering
-            \includegraphics[width=0.5\textwidth]{example-image}
-            % \includegraphics[width=0.5\textwidth]{figs/plano_z.png}            
-            \caption{Zeros do canal e do equalizador no plano-z.}
-        \end{figure}
-    
-    \item Obtenha o ﬁltro de erro de predição direta de passo unitário, correspondente ao sinal à saída do canal. Calcule os zeros deste ﬁltro e compare com os do equalizador.
-    
-        \textcolor{red}{Solução:}
 
-        De forma semelhante ao abordado anteriormente temos que o filtro de predição direta de passo unitário é dado por
-        
-        \begin{align}
-            \hat{x}(n) &= \sum^{M + k - 1}_{i = k} w_{f,i} x(n - i) = \sum^{2}_{i = 1} w_{f,i} x(n - i) = \mathbf{w}^{\text{T}}_{f} \mathbf{x}(n - 1),
-        \end{align}
+De forma semelhante ao abordado anteriormente temos que o filtro de predição direta de passo unitário é dado por
 
-        onde o erro quadrático médio é dado por
+\begin{align}
+    \hat{x}(n) &= \sum^{M + k - 1}_{i = k} w_{f,i} x(n - i) = \sum^{2}_{i = 1} w_{f,i} x(n - i) = \mathbf{w}^{\text{T}}_{f} \mathbf{x}(n - 1),
+\end{align}
 
-        \begin{align}
-            \mathbb{E}\{e^{2}(n)\} = \mathbb{E}\{(x(n) - \hat{x}(n) )^{2}\} = \mathbf{r}_{x}(0) - 2 \mathbf{w}^{\text{T}}_{f} \mathbf{r}_{x,f} + \mathbf{w}^{\text{T}}_{f} \mathbf{R}_{x} \mathbf{w}_{f},
-        \end{align}
+onde o erro quadrático médio é dado por
 
-        onde a solução ótima será dada por
+\begin{align}
+    \mathbb{E}\{e^{2}(n)\} = \mathbb{E}\{(x(n) - \hat{x}(n) )^{2}\} = \mathbf{r}_{x}(0) - 2 \mathbf{w}^{\text{T}}_{f} \mathbf{r}_{x,f} + \mathbf{w}^{\text{T}}_{f} \mathbf{R}_{x} \mathbf{w}_{f},
+\end{align}
 
-        \begin{align}
-            \mathbf{w}_{f,\text{opt}} = \mathbf{R}^{-1}_{x} \mathbf{r}_{x,f}.
-        \end{align}
+onde a solução ótima será dada por
 
-        Teremos assim que a mesma matriz de autocorrelação e o vetor de correlação cruzada serão definidos por
+\begin{align}
+    \mathbf{w}_{f,\text{opt}} = \mathbf{R}^{-1}_{x} \mathbf{r}_{x,f}.
+\end{align}
 
-        \begin{align}
-            \mathbf{R}_{y} &=
-            \begin{bmatrix}
-                3.56 & 1.60 \\
-                1.60 & 3.56
-            \end{bmatrix}, \\
-            \mathbf{r}_{y,f} &= 
-            \begin{bmatrix}
-                r_{y}(1) \\
-                r_{y}(2)
-            \end{bmatrix} =
-            \begin{bmatrix}
-                \mathbb{E}\{y(n) y(n - 1)\} \\
-                \mathbb{E}\{y(n) y(n - 2)\}
-            \end{bmatrix} = 
-            \begin{bmatrix}
-                1.60 \\
-                0
-            \end{bmatrix}.
-        \end{align}
+Teremos assim que a mesma matriz de autocorrelação e o vetor de correlação cruzada serão definidos por
 
-        Por essa razão temos
+\begin{align}
+    \mathbf{R}_{y} &=
+    \begin{bmatrix}
+        3.56 & 1.60 \\
+        1.60 & 3.56
+    \end{bmatrix}, \\
+    \mathbf{r}_{y,f} &= 
+    \begin{bmatrix}
+        r_{y}(1) \\
+        r_{y}(2)
+    \end{bmatrix} =
+    \begin{bmatrix}
+        \mathbb{E}\{y(n) y(n - 1)\} \\
+        \mathbb{E}\{y(n) y(n - 2)\}
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        1.60 \\
+        0
+    \end{bmatrix}.
+\end{align}
 
-        \begin{align}
-            \mathbf{w}_{f,\text{opt}} = 
-            \begin{bmatrix}
-                0.35 & -0.16 \\
-                -0.16 & 0.35
-            \end{bmatrix}
-            \begin{bmatrix}
-                1.60 \\
-                0
-            \end{bmatrix} =
-            \begin{bmatrix}
-                0.56 \\
-                -0.26
-            \end{bmatrix}.
-        \end{align}
+Por essa razão temos
 
-        Em seguida, podemos obter os zeros do filtro como
+\begin{align}
+    \mathbf{w}_{f,\text{opt}} = 
+    \begin{bmatrix}
+        0.35 & -0.16 \\
+        -0.16 & 0.35
+    \end{bmatrix}
+    \begin{bmatrix}
+        1.60 \\
+        0
+    \end{bmatrix} =
+    \begin{bmatrix}
+        0.56 \\
+        -0.26
+    \end{bmatrix}.
+\end{align}
 
-        \begin{align}
-            W(z) &= 0.56 - 0.26 z^{-1}, \\
-            0 &= 0.56 - 0.26 z^{-1}, \\
-            z &= 0.45,
-        \end{align}
+Em seguida, podemos obter os zeros do filtro como
 
-        que é o mesmo zero do equalizador definido anteriormente.
+\begin{align}
+    W(z) &= 0.56 - 0.26 z^{-1}, \\
+    0 &= 0.56 - 0.26 z^{-1}, \\
+    z &= 0.45,
+\end{align}
 
-    \item Obtenha as trajetórias sobre as curvas de nível, tendo condições iniciais nulas para os coeﬁcientes do equalizador, para os seguintes algoritmos: (a) Algoritmo de Newton, (b) Gradiente Determinístico, (c) Least Means Square e (d) Least Means Square Normalizado
-        
-        \textcolor{red}{Solução:}
-        
-        Antes de tudo é necessário definir a superfície de erro que servirá como referência para traçar as curvas de nível. Desse modo, podemos prontamente
-        definir a superfície MSE como
-        
-        \begin{align}
-            \mathbf{J}(w) &= \mathbb{E}\{e^{2}(n)\}, \\
-            \mathbf{J}(w) &= \sigma^{2}_{d} - 2\mathbf{w}^{T}\mathbf{p}_{xd} + w^{T}\mathbf{R}_{X}\mathbf{w}. \label{mseopt}  
-        \end{align}
-        
-        A evolução do erro quadrático médio está disponível nas Figuras \ref{fig:gradient_mse}, \ref{fig:lms_mse}, \ref{fig:newton_mse} e \ref{fig:nlms_mse} para cada um dos algoritmos requeridos.
-        Em relação à evolução do MSE todos os algoritmos apresentaram desempenhos similares, muito embora o NLMS tenha apresentado um desempenho levemente superior aos outros três. Existem algumas explicações que podem
-        ser alencadas para explicar tal comportamento dos métodos aplicados. Entre os mais evidentes é a presença do ruído no sistema, pois foi utilizado uma SNR de 30dB na transmissão do sinal e isso pode acarretar em 
-        falhas durante o processo de filtragem. Ademais, também posso citar a ordem utilizada para os filtros que foi definida como $M = 2$ e assim o algoritmo utiliza poucas informações para atualizar os seus coeficientes a cada iteração. 
-        
-        Por fim, também é de suma importância citar os efeitos do canal para o processo de filtragem. O canal utilizado tem uma resposta em frequência com memória e isso prejudica o processo de filtragem. Isso pode ser visto com mais clareza
-        na Figura \ref{fig:nlms_awgn} onde tracei novamente a evolução do MSE para o NLMS mas agora considerando um cenário onde a resposta em frequência do canal é unitária e a SNR de transmissão se mantém em 30 dB. Nessa nova figura 
-        podemos visualizar um comportamento mais eficiente do filtro e assim confirmar o impacto que a transmissão pelo canal sugerido tem para os algoritmos de filtragem implementados. Dessa forma, é necessário analisar se os algoritmos aqui 
-        implementados de fato conseguem acompanhar a evolução do sistema desfazendo as alterações inseridas pelos mais diversos fenômenos. Uma forma interessante de analisar o desempenho da filtragem, e nao apenas a convergência dos coeficientes 
-        do filtro, seria a análise da taxa de erro símbolo (SER) ou taxa erro bit (BER). Entretanto, isso foge ao escopo do que foi pedido nesse problema.
-        
-        
-        Desse modo, nas Figuras \ref{fig:hw3p4-newton}, \ref{fig:hw3p4-dga}, \ref{fig:hw3p4-lms} e \ref{fig:hw3p4-nlms} temos as curvas de convergência do algoritmo sobre a superficie MSE descrita na Equação (\ref{mseopt}). 
-        Como é possível visualizar para os métodos determinísticos a convergência ocorre de forma muito mais organizada e suave. Esse resultado é previsível visto que a convergência é guiada 
-        pelo conhecimento dos coeficientes ideais do filtro. Ademais, ainda é possível confirmar que o algoritmo do Gradiante Descendente de fato possue maior latência para convergir até o ponto 
-        ótimo quando comparado ao Método de Newton. Entretanto, apesar de convergir mais rapidamente o Método de Newton calcula diretamente uma inversão de matriz o que é computacionalmente custoso.
-        
-        Já para os métodos estocásticos é possível ver uma certa desorientação na convergência dos coeficientes do filtro. Isso se deve pois os coeficientes são calculados com base numa aproximação das 
-        estatísticas instantâneas do sinal. Entre os dois algoritmos é possivel visualizar que o LMS apresenta um comportamento de convergência mais estável, enquanto é possível notar alguns outliers no NLMS que são resultados das 
-        iterações iniciais do filtro.
+que é o mesmo zero do equalizador definido anteriormente.
 
-    \item Obtenha também a evolução do erro quadrático médio para cada um dos algoritmos anteriores.
-        
-        \textcolor{red}{Solução:}
 
-        \begin{figure}[!htp]
-            \centering
-            \includegraphics[width=0.80\textwidth]{fig/hw3p4-dga.pdf}
-            \caption{Resultados da implementação do algoritmo gradiente determinístico com $N = 1000$ amostras, filtro de ordem $M = 2$ e parâmtro $\mu = 10^{-2}$. \textbf{Superior:} Evoulação da curva MSE. \textbf{Inferior:} Caminho percorrido até o ponto de convergência, i.e, filtro de Wiener.}
-            \label{fig:hw3p4-dga}
-        \end{figure}
+\subsubsection{Curvas de MSE e de Nível dos algoritmos}
+\todo[inline, color=green!30]{Ok}
+Como apresentado anteriormente, na seção 2, questão 5, o conceito de superfície de erro utilizado para traçar as curvas de nível e MSE é baseado respectivamente nas funções $J(w) = \sigma^{2}_{d} - 2\mathbf{w}^{\top}\mathbf{p}_{\mathbf{X} d} + w^{\top}\mathbf{R}_{X}\mathbf{w} $ e $J(w) = \mathbb{E}\{e^{2}(n)\}$.
 
-        \begin{figure}[!htp]
-            \centering
-            \includegraphics[width=0.80\textwidth]{fig/hw3p4-newton.pdf}
-            \caption{Resultados da implementação do algoritmo Newton com $N = 1000$ amostras, filtro de ordem $M = 2$ e parâmtro $\mu = 0.5 \times 10^{-2}$. \textbf{Superior:} Evoulação da curva MSE. \textbf{Inferior:} Caminho percorrido até o ponto de convergência, i.e, filtro de Wiener.}
-            \label{fig:hw3p4-newton}
-        \end{figure}
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.80\textwidth]{fig/hw3p4-dga.pdf}
+    \caption{Resultados da implementação do algoritmo gradiente determinístico com $N = 1000$ amostras, filtro de ordem $M = 2$ e parâmtro $\mu = 10^{-2}$. \textbf{Superior:} Evoulação da curva MSE. \textbf{Inferior:} Caminho percorrido até o ponto de convergência, i.e, filtro de Wiener.}
+    \label{fig:hw3p4-dga}
+\end{figure}
 
-        \begin{figure}[!htp]
-            \centering
-            \includegraphics[width=0.80\textwidth]{fig/hw3p4-lms.pdf}
-            \caption{Resultados da implementação do algoritmo LMS com $N = 1000$ amostras, filtro de ordem $M = 2$ e parâmtro $\mu = 10^{-3}$. \textbf{Superior:} Evoulação da curva MSE. \textbf{Inferior:} Caminho percorrido até o ponto de convergência, i.e, filtro de Wiener.}
-            \label{fig:hw3p4-lms}
-        \end{figure}
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.80\textwidth]{fig/hw3p4-newton.pdf}
+    \caption{Resultados da implementação do algoritmo Newton com $N = 1000$ amostras, filtro de ordem $M = 2$ e parâmtro $\mu = 0.5 \times 10^{-2}$. \textbf{Superior:} Evoulação da curva MSE. \textbf{Inferior:} Caminho percorrido até o ponto de convergência, i.e, filtro de Wiener.}
+    \label{fig:hw3p4-newton}
+\end{figure}
 
-        \begin{figure}[!htp]
-            \centering
-            \includegraphics[width=0.80\textwidth]{fig/hw3p4-nlms.pdf}
-            \caption{Resultados da implementação do algoritmo NLMS com $N = 1000$ amostras, filtro de ordem $M = 2$ e parâmtros $\mu = 0.5 \times 10^{-1}$ and $\gamma = 0.5 $. \textbf{Superior:} Evoulação da curva MSE. \textbf{Inferior:} Caminho percorrido até o ponto de convergência, i.e, filtro de Wiener.}
-            \label{fig:hw3p4-nlms}
-        \end{figure}
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.80\textwidth]{fig/hw3p4-lms.pdf}
+    \caption{Resultados da implementação do algoritmo LMS com $N = 1000$ amostras, filtro de ordem $M = 2$ e parâmtro $\mu = 10^{-3}$. \textbf{Superior:} Evoulação da curva MSE. \textbf{Inferior:} Caminho percorrido até o ponto de convergência, i.e, filtro de Wiener.}
+    \label{fig:hw3p4-lms}
+\end{figure}
 
-        
-        \begin{figure}[!htp]
-            \centering
-            % \includegraphics[width=0.75\textwidth]{figs/newton_mse.png}
-            \includegraphics[width=0.5\textwidth]{example-image}
-            \caption{Evolução do MSE para o Método de Newton. $\text{Amostras} = 1000$, $M = 2$, $\mu = 10^{-3}$}
-            \label{fig:newton_mse}
-        \end{figure}
-        
-        \begin{figure}[!htp]
-            \centering
-            % \includegraphics[width=0.75\textwidth]{figs/gradient_mse.png}
-            \includegraphics[width=0.5\textwidth]{example-image}
-            \caption{Evolução do MSE para o Gradiente Determinístico. $\text{Amostras} = 1000$, $M = 2$, $\mu = 10^{-3}$}
-            \label{fig:gradient_mse}
-        \end{figure}
-        
-        \begin{figure}[!htp]
-            \centering
-            % \includegraphics[width=0.75\textwidth]{figs/lms_mse.png}
-            \includegraphics[width=0.5\textwidth]{example-image}
-            \caption{Evolução do MSE para o LMS. $\text{Amostras}  = 1000$, $M = 2$, $\mu = 10^{-3}$}
-            \label{fig:lms_mse}
-        \end{figure}
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.80\textwidth]{fig/hw3p4-nlms.pdf}
+    \caption{Resultados da implementação do algoritmo NLMS com $N = 1000$ amostras, filtro de ordem $M = 2$ e parâmtros $\mu = 0.5 \times 10^{-1}$ and $\gamma = 0.5 $. \textbf{Superior:} Evoulação da curva MSE. \textbf{Inferior:} Caminho percorrido até o ponto de convergência, i.e, filtro de Wiener.}
+    \label{fig:hw3p4-nlms}
+\end{figure}
 
-        \begin{figure}[!htp]
-            \centering
-            % \includegraphics[width=0.75\textwidth]{figs/nlms_mse.png}
-            \includegraphics[width=0.5\textwidth]{example-image}
-            \caption{Evolução do MSE para o NLMS. $\text{Amostras} = 1000$, $M = 2$, $\mu = 0.5$}
-            \label{fig:nlms_mse}
-        \end{figure}
-        
-        \begin{figure}[!htp]
-            \centering
-            % \includegraphics[width=0.75\textwidth]{figs/nlms_awgn.png}
-            \includegraphics[width=0.5\textwidth]{example-image}
-            \caption{Evolução do MSE para o NLMS em um Canal AWGN 30dB. $\text{Amostras} = 1000$, $M = 15$, $\mu = 0.5$}
-            \label{fig:nlms_awgn}
-        \end{figure}
+
+As Figuras \ref{fig:hw3p4-dga}, \ref{fig:hw3p4-newton}, \ref{fig:hw3p4-lms} e \ref{fig:hw3p4-nlms} apresentam
+o comportamento do erro quadrático médio (MSE) e as curvas de convergência sobre a superfície MSE para cada  algoritmos implementado. A ordem de $M = 2$ foi utilizada para todos os filtros, consequentemente o vetor de pesos na atualização possui apenas 2 coeficientes atualizados por iteração. O desempenho médio de todos é muito semelhante, com certa vantagem para o NLMS.
+
+Para os métodos determinísticos, é possível observar que há convergência organizada e suave. Isso é esperado, dado que o algoritmo utiliza o conhecimento dos coeficientes ideais do filtro. Enquanto para os métodos estocásticos, é visível algumas regiões de desordem na convergência, isso é dado como consequência da utilização das aproximações estatísticas instantâneas do sinal para o cálculo dos coeficientes. Ao comparar o LMS e sua versão normalizada, o primeiro apresenta uma maior estabilidade de convergência, enquanto o segundo apresentar uma numvem de pontos bem menos densa em torno da solução de Wiener, além de pontos que aparentemente se afastam da solução, consequência das iterações iniciais.
 
 \clearpage 
 
-    \item Qual o número de condicionamento para o problema em questão?
+
+\subsubsection{Número de condicionamento}
     
-        \textcolor{red}{Solução:}
+
         
         O número de condicionamento pode ser prontamente obtido pela expressão
 
@@ -544,50 +474,46 @@ no seguinte limite superior para o valor de convergência se compararmos diretam
             \lambda^{2} - 7.12 \lambda + 10.11 = 0. 
         \end{align}
 
-    \item Qual deveria ser o canal para que o número de condicionamento fosse menor/maior que 5?
-    Comente os resultados.
-    
-        \textcolor{red}{Solução:}
-        
-        Inicialmente podemos escrever a matriz de correlação contabilizando a contribuição dos coeficientes do canal para os elementos individuais
-        
-        \begin{align}
-            \mathbf{R}_{y} =
-            \begin{bmatrix}
-                a_{0} + a^{2}_{1} & a_{1}\\
-                a_{1} & a_{0} + a^{2}_{1}
-            \end{bmatrix},
-        \end{align}
 
-        onde a função de transferência do canal seria dada por $H(z) = a_{0} + a_{1}z^{-1}$. A partir dessa matriz de autocorrelação genérica podemos então 
-        definir o seguinte polinômio característico
+\subsubsection{Modelo de canal para número de condicionamento menor/maior que 5}
+Comente os resultados.
 
-        \begin{align}
-            &(\lambda - a_{0} + a^{2}_{1})^{2} - a^{2}_{1} = 0, \\
-            &\lambda^{2} \underbrace{- 2 (a_{0} + a^{2}_{1})}_{b} \lambda + \underbrace{(a_{0} + a^{2}_{1})^{2} - a^{2}_{1}}_{c} = 0, \\
-            &\lambda^{2} + b \lambda + c = 0,
-        \end{align}
+Inicialmente podemos escrever a matriz de correlação contabilizando a contribuição dos coeficientes do canal para os elementos individuais
 
-        onde sabemos que a solução é facilmente obtida pela fórmula de Bháskara. A partir disso podemos definir o número de condicionamento como
+\begin{align}
+    \mathbf{R}_{y} =
+    \begin{bmatrix}
+        a_{0} + a^{2}_{1} & a_{1}\\
+        a_{1} & a_{0} + a^{2}_{1}
+    \end{bmatrix},
+\end{align}
 
-        \begin{align}
-            \mathbb{C} (\mathbf{R}_{x}) &= \frac{\lambda_{\text{max}}}{\lambda_{\text{min}}}, \\
-            \mathbb{C} (\mathbf{R}_{x}) &= \frac{- b + \sqrt{b^{2} - 4c}}{- b - \sqrt{b^{2} - 4c}}, \\
-            \mathbb{C} (\mathbf{R}_{x}) &= \frac{2 (a_{0} + a^{2}_{1}) + \sqrt{4 (a_{0} + a^{2}_{1})^{2} - 4 (a_{0} + a^{2}_{1})^{2} + 4 a^{2}_{1}}}{2 (a_{0} + a^{2}_{1}) - \sqrt{4 (a_{0} + a^{2}_{1})^{2} - 4 (a_{0} + a^{2}_{1})^{2} + 4 a^{2}_{1}}}, \\
-            \mathbb{C} (\mathbf{R}_{x}) &= \frac{2 (a_{0} + a^{2}_{1}) + 2a_{1}}{2 (a_{0} + a^{2}_{1}) - 2a_{1}}, \\
-            \mathbb{C} (\mathbf{R}_{x}) &= \frac{a_{0} + a^{2}_{1} + a_{1}}{a_{0} + a^{2}_{1} - a_{1}},
-        \end{align}
+onde a função de transferência do canal seria dada por $H(z) = a_{0} + a_{1}z^{-1}$. A partir dessa matriz de autocorrelação genérica podemos então 
+definir o seguinte polinômio característico
 
-        assim temos agora uma fórmula para o número de condicionamento da matriz de autocorrelação com base nos coeﬁcientes de canal. A partir disso basta que as seguintes inequações sejam atendidas para que
-        obtenhamos um número de condicionamento maior ou menor do que o requerido
+\begin{align}
+    &(\lambda - a_{0} + a^{2}_{1})^{2} - a^{2}_{1} = 0, \\
+    &\lambda^{2} \underbrace{- 2 (a_{0} + a^{2}_{1})}_{b} \lambda + \underbrace{(a_{0} + a^{2}_{1})^{2} - a^{2}_{1}}_{c} = 0, \\
+    &\lambda^{2} + b \lambda + c = 0,
+\end{align}
 
-        \begin{align}
-            a_{0} + a^{2}_{1} + a_{1} &\geq 5 (a_{0} + a^{2}_{1} - a_{1}), \\
-            a_{0} + a^{2}_{1} + a_{1} &\leq 5 (a_{0} + a^{2}_{1} - a_{1}).
-        \end{align}
+onde sabemos que a solução é facilmente obtida pela fórmula de Bháskara. A partir disso podemos definir o número de condicionamento como
 
-\end{enumerate}
+\begin{align}
+    \mathbb{C} (\mathbf{R}_{x}) &= \frac{\lambda_{\text{max}}}{\lambda_{\text{min}}}, \\
+    \mathbb{C} (\mathbf{R}_{x}) &= \frac{- b + \sqrt{b^{2} - 4c}}{- b - \sqrt{b^{2} - 4c}}, \\
+    \mathbb{C} (\mathbf{R}_{x}) &= \frac{2 (a_{0} + a^{2}_{1}) + \sqrt{4 (a_{0} + a^{2}_{1})^{2} - 4 (a_{0} + a^{2}_{1})^{2} + 4 a^{2}_{1}}}{2 (a_{0} + a^{2}_{1}) - \sqrt{4 (a_{0} + a^{2}_{1})^{2} - 4 (a_{0} + a^{2}_{1})^{2} + 4 a^{2}_{1}}}, \\
+    \mathbb{C} (\mathbf{R}_{x}) &= \frac{2 (a_{0} + a^{2}_{1}) + 2a_{1}}{2 (a_{0} + a^{2}_{1}) - 2a_{1}}, \\
+    \mathbb{C} (\mathbf{R}_{x}) &= \frac{a_{0} + a^{2}_{1} + a_{1}}{a_{0} + a^{2}_{1} - a_{1}},
+\end{align}
 
+assim temos agora uma fórmula para o número de condicionamento da matriz de autocorrelação com base nos coeﬁcientes de canal. A partir disso basta que as seguintes inequações sejam atendidas para que
+obtenhamos um número de condicionamento maior ou menor do que o requerido
+
+\begin{align}
+    a_{0} + a^{2}_{1} + a_{1} &\geq 5 (a_{0} + a^{2}_{1} - a_{1}), \\
+    a_{0} + a^{2}_{1} + a_{1} &\leq 5 (a_{0} + a^{2}_{1} - a_{1}).
+\end{align}
 
 \clearpage
 

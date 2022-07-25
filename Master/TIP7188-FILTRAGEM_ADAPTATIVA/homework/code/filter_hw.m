@@ -211,7 +211,7 @@ function hw3p4(varargin)
     gamma = 0.5;
     [nlms.error, nlms.weights] = filter_hw.nlms(signal_x, signal_d, order, nlms.mi, gamma);
     % Plot - Deterministic Gradient Algorithm ------------------------------------
-    h1 = figure(1)
+    h1 = figure(1);
     subplot(2,1,1);
     semilogy(1:N, dg.error.^2,'-','color', c_.dg , "linewidth", 1); % MSE
     hold on
@@ -232,7 +232,7 @@ function hw3p4(varargin)
     filter_hw.export_fig(save_results, h1, [pathName, 'hw3p4-dga']);
 
     % Plot - Newton Implementation ------------------------------------
-    h2 = figure(2)
+    h2 = figure(2);
     subplot(2,1,1);
     semilogy(1:N, newton.error.^2,'-','color', c_.newton, "linewidth", 1); % MSE Curve
     hold on
@@ -253,7 +253,7 @@ function hw3p4(varargin)
     filter_hw.export_fig(save_results, h2, [pathName, 'hw3p4-newton']);
     
     % Plot - LMS Algorithm ------------------------------------
-    h3 = figure(3)
+    h3 = figure(3);
     subplot(2,1,1);
     semilogy(1:N, lms.error.^2,'-','color', c_.lms , "linewidth", 1); % MSE
     hold on
@@ -274,7 +274,7 @@ function hw3p4(varargin)
     filter_hw.export_fig(save_results, h3, [pathName, 'hw3p4-lms']);
 
     % Plot - NLMS Implementation ------------------------------------
-    h4 = figure(4)
+    h4 = figure(4);
     subplot(2,1,1);
     semilogy(1:N, nlms.error.^2,'-','color', c_.nlms, "linewidth", 1);
     hold on
@@ -314,7 +314,7 @@ function hw3p5(varargin)
     order = 15 + 1;
     % Number of samples
     Samples = 5000 + order;
-    % Defining the mse error and filter coeficients vectors.
+    % Empty vectors
     error = zeros(Samples,1);
     weights = zeros(order, Samples);
 
@@ -447,1167 +447,1357 @@ function hw3p5(varargin)
 %     misadjustment_t_2 = ((0.05/2)*(trace(Rxx_teorico)))/(1 - (0.05/2)*(trace(Rxx_teorico)));
 %     misadjustment_t_10 = ((0.05/10)*(trace(Rxx_teorico)))/(1 - (0.05/10)*(trace(Rxx_teorico)));
 %     misadjustment_t_50 = ((0.05/50)*(trace(Rxx_teorico)))/(1 - (0.05/50)*(trace(Rxx_teorico)));
-% end
+
+end
 
 
-% %% HOMEWORK 3 - PROBLEM 6
+%% HOMEWORK 3 - PROBLEM 6
 
-% function hw3p6(varargin)
-%     % hw3p6
-%     % (a) --------------------------------------
-%     disp('a')
-%     % Training Phase
-%     % Learning rate
-%     mi = 0.4;
-%     gamma = 1e-3;
-%     % I first implemented thinking of python notation, later I found out that
-%     % the reference book defines the order a bit different from what I usually
-%     % work. So to make the code close to Diniz notation the 'order + 1' is
-%     % needed.
-%     order = 15 + 1;
-%     % Number of samples
-%     Samples = 500;
-%     % Defining the mse error and filter coeficients vectors.
-%     error = zeros(Samples,1);
-%     weights = zeros(order, Samples);
+function hw3p6(varargin)
+    %% (a) --------------------------------------
+    c_ = struct('original', [57 106 177]./255, 'estimated', [204 37 41]./255, 'nlms', [107 76 154]./255, 'mean', 'k');
 
-%     % Defining the energy of the noise vector.
-%     SNR = inf;
-%     QAM_train = 4;
-%     signal_d_train = randi([0,QAM_train - 1],[Samples 1]); % The same pilot for every pilot frame and block.
-%     signal_d_train = qammod(signal_d_train,QAM_train); % 4-QAM Pilot Signal.
+    disp('a')
+    % Training Phase -----------------------------------------------------------------------------
+    % General setup
+    mi = 0.4e-0;
+    gamma = 1e-3;
+    order = 15; M = order + 1;
+    N = 500; % Samples
 
-%     % Convolving the channel and the signal.It is necesssary to sincronize the signal.
-%     %https://www.mathworks.com/help/signal/ref/filtfilt.html
-%     Hz = [0.5 1.2 1.5 -1];
-%     signal_x_train = filtfilt(Hz,1,signal_d_train);
+    % Empty vectors to fill with obtained coefficients.
+    error = zeros(N,1);
+    weights = zeros(M, N);
 
-%     % Training noise
-%     snr = 10^(SNR/10);
-%     energy_symbol = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
-%     var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%     noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
+    % Signal Model
+    SNR = inf;
+    QAM_train = 4;
+    signal_d_train = randi([0,QAM_train - 1],[N 1]); 
+    signal_d_train = qammod(signal_d_train,QAM_train);
+    Hz = [0.5 1.2 1.5 -1];
+    signal_x_train = filtfilt(Hz,1,signal_d_train);
+    snr = 10^(SNR/10);
+    energy = mean(abs(signal_x_train(:)).^2);
+    noise = sqrt(energy.*1/snr/2) * (complex(randn(N,1), randn(N,1)));
 
-%     % Generating the noisy received signal.
-%     signal_x_train = signal_x_train + noise;
-%     % NLMS algorithm
-%     for s = order:Samples
-%         aux = signal_x_train(s:-1:s-order+1);
-%         mi_normalized = mi/(gamma + norm(aux)^2);
-%         error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
-%         % Recursive expression.
-%         weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
-%     end
+    % Generating the noisy received signal.
+    signal_x_train = signal_x_train + noise;
+    % NLMS algorithm
+    for s = M:N
+        window_x = signal_x_train(s:-1:s-M+1);
+        mi_normalized = mi/(gamma + norm(window_x)^2);
+        error(s) = signal_d_train(s-M+1) - weights(:,s)'*window_x;
+        weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * window_x;
+    end
 
-%     % Transmission Phase
-%     % Number of samples
-%     Samples = 5000 + order;
-%     % Defining the mse error and filter coeficients vectors.
-%     aux = weights(:,s+1);
-%     error = zeros(Samples,1);
-%     weights = zeros(order, Samples);
-%     weights(:,order) = aux;
+    % Transmission -----------------------------------------------------------------------------
+    N = 5000 + M;
 
-%     % Defining the energy of the noise vector.
-%     SNR = 30;
-%     QAM = 16;
-%     signal_d = randi([0,QAM - 1],[Samples 1]); % The same pilot for every pilot frame and block.
-%     signal_d = qammod(signal_d,QAM); % 4-QAM Pilot Signal.
-
-%     % Convolving the channel and the signal. 
-%     signal_x = filtfilt(Hz,1,signal_d);
-
-%     % Transmission noise
-%     snr = 10^(SNR/10);
-%     energy_symbol = mean(abs(signal_x(:)).^2); % Energy symbol pilot. 
-%     var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%     noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-
-%     % Generating the noisy received signal.
-%     signal_x = signal_x + noise;
-%     signal_d_hat = zeros(size(signal_d));
-%     % NLMS algorithm
-%     for s = order:Samples
-%         aux = signal_x(s:-1:s-order+1);
-%         mi_normalized = mi/(gamma + norm(aux)^2);
-%         % Filtering the signal
-%         signal_d_hat(s-order+1) = weights(:,s)'*aux;
-%         % The equalizer does know the original signal
-%         %error(s) = signal_d(s-order+1) - weights(:,s)'*aux;
-%         % The equalizer does not know the original signal
-%         error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
-%         % Recursive expression.
-%         weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
-%     end
-
-%     % MSE Curve
-%     figure
-%     semilogy(1:Samples, abs(error).^2,'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 8);
-%     title('NLMS Behavior');
-%     xlabel('Samples');
-%     xlim([0 5000]);
-%     ylabel('MSE');
-%     grid on;
-%     % saveas(gcf,'L3_A_mse.png')
-
-%     % Temporal Evolution
-%     aux = qamdemod(signal_d_hat,QAM);
-%     aux1 = aux(1:100);
-%     aux2 = aux(4900:5000);
-
-%     figure
-%     subplot(211)
-%     txt = ['Original Signal'];
-%     stem(1:100, qamdemod(signal_d(1:100),QAM),'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold on;
-%     txt = ['Estimated Signal'];
-%     stem(1:100, aux1,'-','color', [0.4660 0.6740 0.1880], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold off;
-%     title('Temporal Evolution of First Samples');
-%     xlabel('Sample');
-%     ylabel('Magnitude');
-%     legend_copy = legend("location", "southwest");
-%     set (legend_copy, "fontsize", 6);
-%     grid on;
-%     subplot(212)
-%     txt = ['Original Signal'];
-%     stem(4900:5000, qamdemod(signal_d(4900:5000),QAM),'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold on;
-%     txt = ['Estimated Signal'];
-%     stem(4900:5000, aux2,'-','color', [0.4660 0.6740 0.1880], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold off;
-%     title('Temporal Evolution of Last Samples');
-%     xlabel('Sample');
-%     ylabel('Magnitude');
-%     legend_copy = legend("location", "southwest");
-%     set (legend_copy, "fontsize", 6);
-%     grid on;
-%     % saveas(gcf,'L3_A_t.png')
-
-%     % Constellation
-%     % https://www.mathworks.com/help/comm/gs/examine-16-qam-using-matlab.html
-%     figure
-%     subplot(221)
-%     plot(signal_d_train,'.','color', 'y',"markersize", 8)
-%     title('Training Signal');
-%     xlabel('In Phase');
-%     ylabel('Quadrature');
-%     axis([-2 2 -2 2]);
-%     set(gca,'Color','k');
-%     grid on;
-%     subplot(222)
-%     plot(signal_d,'.','color', 'y',"markersize", 8)
-%     title('Original Signal');
-%     xlabel('In Phase');
-%     ylabel('Quadrature');
-%     set(gca,'Color','k');
-%     grid on;
-%     subplot(223)
-%     plot(signal_x,'.','color', 'y',"markersize", 8)
-%     title('Transmitted Signal');
-%     xlabel('In Phase');
-%     ylabel('Quadrature');
-%     set(gca,'Color','k');
-%     grid on;
-%     subplot(224)
-%     plot(qammod(qamdemod(signal_d_hat,QAM),QAM),'.','color', 'y',"markersize", 8)
-%     title('Filtered Signal + Decisor');
-%     xlabel('In Phase');
-%     ylabel('Quadrature');
-%     set(gca,'Color','k');
-%     grid on;
-%     % saveas(gcf,'L3_A_c.png')
+    % Signal Model
+    SNR = 30;
+    QAM = 16;
+    signal_d = randi([0,QAM - 1],[N 1]); % The same pilot for every pilot frame and block.
+    signal_d = qammod(signal_d,QAM); % 4-QAM Pilot Signal.
+    signal_x = filtfilt(Hz,1,signal_d);
+    snr = 10^(SNR/10);
+    energy = mean(abs(signal_x(:)).^2); % Energy symbol pilot. 
+    noise = sqrt(energy.*1/snr/2) * (complex(randn(N,1), randn(N,1)));
+    signal_x = signal_x + noise;
     
-%     % (b) --------------------------------------
-%     disp('b')
-%     % Learning rate
-%     mi = 1e-3;
-%     % Filter order
-%     order = 15 + 1;
-
-%     % Generating Transmisssion Phase Data
-%     % If we want to evaluate the impact of the training size then we should
-%     % apply the same transmitted sequence to all the cases
-%     % Number of samples
-%     Samples = 5000 + 50;
-%     % Defining the energy of the noise vector.
-%     SNR = 30;
-%     QAM = 16;
-%     signal_d = randi([0,QAM - 1],[Samples 1]); 
-%     signal_d = qammod(signal_d,QAM);
-%     % Convolving the channel and the signal.
-%     Hz = [0.5 1.2 1.5 -1];
-%     signal_x = filter(Hz,1,signal_d);
-%     % Transmision noie
-%     snr = 10^(SNR/10);
-%     energy_symbol = mean(abs(signal_x(:)).^2); % Energy symbol pilot. 
-%     var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%     noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-%     % Generating the noisy received signal.
-%     signal_x = signal_x + noise;
-
-%     % Training with 50 Samples
-
-%     % Training Phase
-
-%     % Number of samples
-%     Samples = 50;
-
-%     % Defining the mse error and filter coeficients vectors.
-%     error = zeros(Samples,1);
-%     weights = zeros(order, Samples);
-
-%     % Defining the energy of the noise vector.
-%     QAM_train = 4;
-%     signal_d_train = randi([0,QAM_train - 1],[Samples 1]);
-%     signal_d_train = (1/sqrt(2)) * qammod(signal_d_train,QAM_train); 
-
-%     % Convolving the channel and the signal.
-%     Hz = [0.5 1.2 1.5 -1];
-%     signal_x_train = filter(Hz,1,signal_d_train);
-
-%     % Training noise
-%     snr = 10^(inf/10);
-%     energy_symbol = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
-%     var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%     noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-
-%     % Generating the noisy received signal.
-%     signal_x_train = signal_x_train + noise;
-%     % LMS algorithm
-%     for s = order:Samples
-%         aux = signal_x_train(s:-1:s-order+1);
-%         error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
-%         % Recursive expression.
-%         weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * aux;
-%     end
-
-%     % Transmission Phase
-
-%     % Defining the mse error and filter coeficients vectors.
-%     Samples = 5000 + 50;
-%     error = zeros(Samples,1);
-%     aux = weights(:,s+1);
-%     weights = zeros(order, Samples);
-%     weights(:,order) = aux;
-
-%     signal_d_hat_50 = zeros(size(signal_d));
-%     % LMS algorithm
-%     for s = order:Samples
-%         aux = signal_x(s:-1:s-order+1);
-%         % Filtering the signal
-%         signal_d_hat_50(s-order+1) = weights(:,s)'*aux;
-%         % The equalizer does not know the original signal
-%         error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
-%         % Recursive expression.
-%         weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * aux;
-%     end
-
-%     % Training with 150 Samples
-
-%     % Training Phase
-
-%     % Number of samples
-%     Samples = 150;
-
-%     % Defining the mse error and filter coeficients vectors.
-%     error = zeros(Samples,1);
-%     weights = zeros(order, Samples);
-
-%     % Defining the energy of the noise vector.
-%     QAM_train = 4;
-%     signal_d_train = randi([0,QAM_train - 1],[Samples 1]);
-%     signal_d_train = (1/sqrt(2)) * qammod(signal_d_train,QAM_train); 
-
-%     % Convolving the channel and the signal.
-%     Hz = [0.5 1.2 1.5 -1];
-%     signal_x_train = filter(Hz,1,signal_d_train);
-
-%     % Training noise
-%     snr = 10^(inf/10);
-%     energy_symbol = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
-%     var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%     noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-
-%     % Generating the noisy received signal.
-%     signal_x_train = signal_x_train + noise;
-%     % LMS algorithm
-%     for s = order:Samples
-%         aux = signal_x_train(s:-1:s-order+1);
-%         error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
-%         % Recursive expression.
-%         weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * aux;
-%     end
-
-%     % Transmission Phase
-
-%     % Defining the mse error and filter coeficients vectors.
-%     Samples = 5000 + 50;
-%     error = zeros(Samples,1);
-%     aux = weights(:,s+1);
-%     weights = zeros(order, Samples);
-%     weights(:,order) = aux;
-
-%     signal_d_hat_150 = zeros(size(signal_d));
-%     % LMS algorithm
-%     for s = order:Samples
-%         aux = signal_x(s:-1:s-order+1);
-%         % Filtering the signal
-%         signal_d_hat_150(s-order+1) = weights(:,s)'*aux;
-%         % The equalizer does not know the original signal
-%         error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
-%         % Recursive expression.
-%         weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * aux;
-%     end
-
-%     % Training with 300 Samples
-
-%     % Training Phase
-
-%     % Number of samples
-%     Samples = 300;
-
-%     % Defining the mse error and filter coeficients vectors.
-%     error = zeros(Samples,1);
-%     weights = zeros(order, Samples);
-
-%     % Defining the energy of the noise vector.
-%     QAM_train = 4;
-%     signal_d_train = randi([0,QAM_train - 1],[Samples 1]);
-%     signal_d_train = (1/sqrt(2)) * qammod(signal_d_train,QAM_train); 
-
-%     % Convolving the channel and the signal.
-%     Hz = [0.5 1.2 1.5 -1];
-%     signal_x_train = filter(Hz,1,signal_d_train);
-
-%     % Training noise
-%     snr = 10^(inf/10);
-%     energy_symbol = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
-%     var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%     noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-
-%     % Generating the noisy received signal.
-%     signal_x_train = signal_x_train + noise;
-%     % LMS algorithm
-%     for s = order:Samples
-%         aux = signal_x_train(s:-1:s-order+1);
-%         error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
-%         % Recursive expression.
-%         weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * aux;
-%     end
-
-%     % Transmission Phase
-
-%     % Defining the mse error and filter coeficients vectors.
-%     Samples = 5000 + 50;
-%     error = zeros(Samples,1);
-%     aux = weights(:,s+1);
-%     weights = zeros(order, Samples);
-%     weights(:,order) = aux;
-
-%     signal_d_hat_300 = zeros(size(signal_d));
-%     % LMS algorithm
-%     for s = order:Samples
-%         aux = signal_x(s:-1:s-order+1);
-%         % Filtering the signal
-%         signal_d_hat_300(s-order+1) = weights(:,s)'*aux;
-%         % The equalizer does not know the original signal
-%         error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
-%         % Recursive expression.
-%         weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * aux;
-%     end
-
-%     % Training with 500 Samples
-
-%     % Training Phase
-
-%     % Number of samples
-%     Samples = 500;
-
-%     % Defining the mse error and filter coeficients vectors.
-%     error = zeros(Samples,1);
-%     weights = zeros(order, Samples);
-
-%     % Defining the energy of the noise vector.
-%     QAM_train = 4;
-%     signal_d_train = randi([0,QAM_train - 1],[Samples 1]);
-%     signal_d_train = qammod(signal_d_train,QAM_train); 
-
-%     % Convolving the channel and the signal.
-%     Hz = [0.5 1.2 1.5 -1];
-%     signal_x_train = filter(Hz,1,signal_d_train);
-
-%     % Training noise
-%     snr = 10^(inf/10);
-%     energy_symbol = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
-%     var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%     noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-
-%     % Generating the noisy received signal.
-%     signal_x_train = signal_x_train + noise;
-%     % LMS algorithm
-%     for s = order:Samples
-%         aux = signal_x_train(s:-1:s-order+1);
-%         error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
-%         % Recursive expression.
-%         weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * aux;
-%     end
-
-%     % Transmission Phase
-
-%     % Defining the mse error and filter coeficients vectors.
-%     Samples = 5000 + 50;
-%     error = zeros(Samples,1);
-%     aux = weights(:,s+1);
-%     weights = zeros(order, Samples);
-%     weights(:,order) = aux;
-
-%     signal_d_hat_500 = zeros(size(signal_d));
-%     % LMS algorithm
-%     for s = order:Samples
-%         aux = signal_x(s:-1:s-order+1);
-%         % Filtering the signal
-%         signal_d_hat_500(s-order+1) = weights(:,s)'*aux;
-%         % The equalizer does not know the original signal
-%         error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
-%         % Recursive expression.
-%         weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * aux;
-%     end
-
-%     % Temporal Evolution 
-%     range_of_sampling = 4900:5000;
-%     [~,~,delay] = alignsignals(qamdemod(signal_d,QAM),qamdemod(signal_d_hat_500,QAM));
-
-%     aux = qamdemod(signal_d_hat_50,QAM);
-%     aux = circshift(aux,delay);
-%     aux_50 = aux(range_of_sampling);
-
-%     aux = qamdemod(signal_d_hat_150,QAM);
-%     aux = circshift(aux,delay);
-%     aux_150 = aux(range_of_sampling);
-
-%     aux = qamdemod(signal_d_hat_300,QAM);
-%     aux = circshift(aux,delay);
-%     aux_300 = aux(range_of_sampling);
-
-%     aux = qamdemod(signal_d_hat_500,QAM);
-%     aux = circshift(aux,delay);
-%     aux_500 = aux(range_of_sampling);
-
-%     figure
-%     subplot(221)
-%     txt = ['Original Signal'];
-%     stem(range_of_sampling, qamdemod(signal_d(range_of_sampling),QAM),'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold on;
-%     txt = ['Estimated Signal'];
-%     stem(range_of_sampling, aux_50,'-','color', [0.4660 0.6740 0.1880], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold off;
-%     title('50 Training Samples');
-%     xlabel('Sample');
-%     xlim([min(range_of_sampling) max(range_of_sampling)]);
-%     ylabel('Magnitude');
-%     legend_copy = legend("location", "southwest");
-%     set (legend_copy, "fontsize", 6);
-%     grid on;
-%     subplot(222)
-%     txt = ['Original Signal'];
-%     stem(range_of_sampling, qamdemod(signal_d(range_of_sampling),QAM),'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold on;
-%     txt = ['Estimated Signal'];
-%     stem(range_of_sampling, aux_150,'-','color', [0.4660 0.6740 0.1880], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold off;
-%     title('150 Training Samples');
-%     xlabel('Sample');
-%     xlim([min(range_of_sampling) max(range_of_sampling)]);
-%     ylabel('Magnitude');
-%     legend_copy = legend("location", "southwest");
-%     set (legend_copy, "fontsize", 6);
-%     grid on;
-%     subplot(223)
-%     txt = ['Original Signal'];
-%     stem(range_of_sampling, qamdemod(signal_d(range_of_sampling),QAM),'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold on;
-%     txt = ['Estimated Signal'];
-%     stem(range_of_sampling, aux_300,'-','color', [0.4660 0.6740 0.1880], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold off;
-%     title('300 Training Samples');
-%     xlabel('Sample');
-%     xlim([min(range_of_sampling) max(range_of_sampling)]);
-%     ylabel('Magnitude');
-%     legend_copy = legend("location", "southwest");
-%     set (legend_copy, "fontsize", 6);
-%     grid on;
-%     subplot(224)
-%     txt = ['Original Signal'];
-%     stem(range_of_sampling, qamdemod(signal_d(range_of_sampling),QAM),'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold on;
-%     txt = ['Estimated Signal'];
-%     stem(range_of_sampling, aux_500,'-','color', [0.4660 0.6740 0.1880], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold off;
-%     title('500 Training Samples');
-%     xlabel('Sample');
-%     xlim([min(range_of_sampling) max(range_of_sampling)]);
-%     ylabel('Magnitude');
-%     legend_copy = legend("location", "southwest");
-%     set (legend_copy, "fontsize", 6);
-%     grid on;
-%     %saveas(gcf,'L3Q6_B_t.png')
-
-%     % (c) --------------------------------------
-%     disp('c')
-%     % Training Stage  
-
-%     % Learning rate
-%     mi = 0.4;
-%     gamma = 1e-3;
-%     % Filter order
-%     order = 15 + 1;
-%     % Number of samples
-%     Samples = 500;
-%     % Defining the mse error and filter coeficients vectors.
-%     error = zeros(Samples,1);
-%     weights = zeros(order, Samples);
-
-%     % Defining the energy of the noise vector.
-%     SNR = 30;
-%     QAM_train = 4;
-%     signal_d_train = randi([0,QAM_train - 1],[Samples 1]); % The same pilot for every pilot frame and block.
-%     signal_d_train = qammod(signal_d_train,QAM_train); % 4-QAM Pilot Signal.
-
-%     % Convolving the channel and the signal.
-%     Hz = [0.5 1.2 1.5 -1];
-%     signal_x_train = filtfilt(Hz,1,signal_d_train);
-
-%     % Training noise
-%     snr = 10^(inf/10);
-%     energy_symbol = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
-%     var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%     noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-
-%     % Generating the noisy received signal.
-%     signal_x_train = signal_x_train + noise;
-%     for s = order:Samples
-%         aux = signal_x_train(s:-1:s-order+1);
-%         mi_normalized = mi/(gamma + norm(aux)^2);
-%         error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
-%         % Recursive expression.
-%         weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
-%     end
-
-%     % Transmission Stage 
-
-%     % Number of samples
-%     Samples = 5000 + 50;
-%     % Defining the mse error and filter coeficients vectors.
-%     error = zeros(Samples,1);
-%     weights = zeros(order, Samples);
-
-%     % Defining the energy of the noise vector.
-%     SNR = 30;
-%     QAM = 256;
-%     signal_d = randi([0,QAM - 1],[Samples 1]); % The same pilot for every pilot frame and block.
-%     signal_d = qammod(signal_d,QAM); % 4-QAM Pilot Signal.
-
-%     % Convolving the channel and the signal.
-%     Hz = [0.5 1.2 1.5 -1];
-%     signal_x = filtfilt(Hz,1,signal_d);
-
-%     % Training noise
-%     snr = 10^(SNR/10);
-%     energy_symbol = mean(abs(signal_x(:)).^2); % Energy symbol pilot. 
-%     var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%     noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-
-%     % Generating the noisy received signal.
-%     signal_x = signal_x + noise;
-%     signal_d_hat = zeros(size(signal_d));
-%     % NLMS algorithm
-%     for s = order:Samples
-%         aux = signal_x(s:-1:s-order+1);
-%         mi_normalized = mi/(gamma + norm(aux)^2);
-%         % Filtering the signal
-%         signal_d_hat(s-order+1) = weights(:,s)'*aux;
-%         % The equalizer does know the original signal
-%         %error(s) = signal_d(s-order+1) - weights(:,s)'*aux;
-%         % The equalizer does not know the original signal
-%         error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
-%         % Recursive expression.
-%         weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
-%     end
-
-%     % MSE Curve
-%     figure
-%     semilogy(1:Samples, abs(error).^2,'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 8);
-%     title('NLMS Behavior');
-%     xlabel('Samples');
-%     xlim([0 5000])
-%     ylabel('MSE');
-%     grid on;
-%     % saveas(gcf,'L3Q6_C_mse.png')
-
-%     % Temporal Evolution
-%     aux = qamdemod(signal_d_hat,QAM);
-%     aux1 = aux(1:100);
-%     aux2 = aux(4900:5000);
-
-%     figure
-%     subplot(211)
-%     txt = ['Original Signal'];
-%     stem(1:100, qamdemod(signal_d(1:100),QAM),'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold on;
-%     txt = ['Estimated Signal'];
-%     stem(1:100, aux1,'-','color', [0.4660 0.6740 0.1880], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold off;
-%     title('Temporal Evolution of First Samples');
-%     xlabel('Sample');
-%     xlim([0 100])
-%     ylabel('Magnitude');
-%     legend_copy = legend("location", "southwest");
-%     set (legend_copy, "fontsize", 6);
-%     grid on;
-%     subplot(212)
-%     txt = ['Original Signal'];
-%     stem(4900:5000, qamdemod(signal_d(4900:5000),QAM),'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold on;
-%     txt = ['Estimated Signal'];
-%     stem(4900:5000, aux2,'-','color', [0.4660 0.6740 0.1880], "linewidth", 1, "markersize", 3, "DisplayName", txt);
-%     hold off;
-%     title('Temporal Evolution of Last Samples');
-%     xlabel('Sample');
-%     xlim([4900 5000])
-%     ylabel('Magnitude');
-%     legend_copy = legend("location", "southwest");
-%     set (legend_copy, "fontsize", 6);
-%     grid on;
-%     % saveas(gcf,'L3Q6_C_t.png')
-
-%     % Constellation
-%     % https://www.mathworks.com/help/comm/gs/examine-16-qam-using-matlab.html
-%     %figure
-%     %subplot(221)
-%     %plot(signal_d_train,'.','color', [0.3010 0.7450 0.9330],"markersize", 3)
-%     %title('Training Signal');
-%     %xlabel('In Phase');
-%     %ylabel('Quadrature');
-%     %grid on;
-%     %subplot(222)
-%     %plot(signal_d,'.','color', [0.3010 0.7450 0.9330],"markersize", 3)
-%     %title('Original Signal');
-%     %xlabel('In Phase');
-%     %ylabel('Quadrature');
-%     %grid on;
-%     %subplot(223)
-%     %plot(signal_x,'.','color', [0.3010 0.7450 0.9330],"markersize", 3)
-%     %title('Transmitted Signal');
-%     %xlabel('In Phase');
-%     %ylabel('Quadrature');
-%     %grid on;
-%     %subplot(224)
-%     %plot(signal_d_hat,'.','color', [0.3010 0.7450 0.9330],"markersize", 3)
-%     %title('Filtered Signal');
-%     %xlabel('In Phase');
-%     %ylabel('Quadrature');
-%     %grid on;
-%     %saveas(gcf,'L3Q6_C_t.png')
-
-%     % (d) --------------------------------------
-%     disp('d')
-%     % Simulation parameters
-%     mi = 0.4;
-%     gamma = 1e-3;
-%     runs = 1; % runs = 1000;
-%     QAM_train = 4;
-%     snrs = [0 10 20 30];
-%     % Filter order
-%     order = 15 + 1;
-
-%     tic;
-%     % 4QAM
-%     QAM = 4
-%     SER = zeros(length(snrs),1);
-%     for ii = 1:length(snrs)
-%         snrs(ii)
-%         for rr = 1:runs
-%             % Training Stage  
-%             % Number of samples
-%             Samples = 500;
-%             % Defining the mse error and filter coeficients vectors.
-%             error = zeros(Samples,1);
-%             weights = zeros(order, Samples);
-
-%             % Defining the energy of the noise vector.
-%             signal_d_train = randi([0,QAM_train - 1],[Samples 1]);
-%             signal_d_train = qammod(signal_d_train,QAM_train);
-
-%             % Convolving the channel and the signal.
-%             Hz = [0.5 1.2 1.5 -1];
-%             signal_x_train = filtfilt(Hz,1,signal_d_train);
-
-%             % Training noise
-%             snr = 10^(inf/10);
-%             energy_symbol = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
-%             var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%             noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-
-%             % Generating the noisy received signal.
-%             signal_x_train = signal_x_train + noise;
-
-%             for s = order:Samples
-%                 aux = signal_x_train(s:-1:s-order+1);
-%                 mi_normalized = mi/(gamma + norm(aux)^2);
-%                 error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
-%                 % Recursive expression.
-%                 weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
-%             end
-
-%             % Transmission Stage 
-%             % Number of samples
-%             Samples = 5000;
-%             % Defining the mse error and filter coeficients vectors.
-%             error = zeros(Samples,1);
-%             weights = zeros(order, Samples);
-
-%             % Defining the energy of the noise vector.
-%             signal_d = randi([0,QAM - 1],[Samples 1]);
-%             signal_d = qammod(signal_d,QAM);
-
-%             % Convolving the channel and the signal.
-%             Hz = [0.5 1.2 1.5 -1];
-%             signal_x = filtfilt(Hz,1,signal_d);
-
-%             % Transmission noise
-%             snr = 10^(snrs(ii)/10);
-%             energy_symbol = mean(abs(signal_x(:)).^2); % Energy symbol pilot. 
-%             var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%             noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-
-%             % Generating the noisy received signal.
-%             signal_x = signal_x + noise;
-%             signal_d_hat = zeros(size(signal_d));
-%             % NLMS algorithm
-%             for s = order:Samples
-%                 aux = signal_x(s:-1:s-order+1);
-%                 mi_normalized = mi/(gamma + norm(aux)^2);
-%                 % Filtering the signal
-%                 signal_d_hat(s-order+1) = weights(:,s)'*aux;
-%                 % The equalizer does not know the original signal
-%                 error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
-%                 % Recursive expression.
-%                 weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
-%             end
-%             aux1 = qamdemod(signal_d,QAM);
-%             aux2 = qamdemod(signal_d_hat,QAM);
-%             SER(ii,1) = SER(ii,1) + sum(aux1~=aux2)/length(aux1);
-%         end
-%     end
-%     SER = SER/runs;
-%     figure
-%     txt = ['4QAM Signal'];
-%     semilogy(snrs, SER,'-','color', [0.3010 0.7450 0.9330], "linewidth", 3, "markersize", 8, "DisplayName", txt);
-%     hold on;
-
-%     % 16QAM 
-%     QAM = 16
-%     SER = zeros(length(snrs),1);
-%     for ii = 1:length(snrs)
-%         snrs(ii)
-%         for rr = 1:runs
-%             % Training Stage  
-%             % Number of samples
-%             Samples = 500;
-%             % Defining the mse error and filter coeficients vectors.
-%             error = zeros(Samples,1);
-%             weights = zeros(order, Samples);
-
-%             % Defining the energy of the noise vector.
-%             signal_d_train = randi([0,QAM_train - 1],[Samples 1]);
-%             signal_d_train = qammod(signal_d_train,QAM_train);
-
-%             % Convolving the channel and the signal.
-%             Hz = [0.5 1.2 1.5 -1];
-%             signal_x_train = filtfilt(Hz,1,signal_d_train);
-
-%             % Training noise
-%             snr = 10^(inf/10);
-%             energy_symbol = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
-%             var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%             noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-
-%             % Generating the noisy received signal.
-%             signal_x_train = signal_x_train + noise;
-
-%             for s = order:Samples
-%                 aux = signal_x_train(s:-1:s-order+1);
-%                 mi_normalized = mi/(gamma + norm(aux)^2);
-%                 error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
-%                 % Recursive expression.
-%                 weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
-%             end
-
-%             % Transmission Stage 
-%             % Number of samples
-%             Samples = 5000;
-%             % Defining the mse error and filter coeficients vectors.
-%             error = zeros(Samples,1);
-%             weights = zeros(order, Samples);
-
-%             % Defining the energy of the noise vector.
-%             signal_d = randi([0,QAM - 1],[Samples 1]);
-%             signal_d = qammod(signal_d,QAM);
-
-%             % Convolving the channel and the signal.
-%             Hz = [0.5 1.2 1.5 -1];
-%             signal_x = filtfilt(Hz,1,signal_d);
-
-%             % Transmission noise
-%             snr = 10^(snrs(ii)/10);
-%             energy_symbol = mean(abs(signal_x(:)).^2); % Energy symbol pilot. 
-%             var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%             noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-
-%             % Generating the noisy received signal.
-%             signal_x = signal_x + noise;
-%             signal_d_hat = zeros(size(signal_d));
-%             % NLMS algorithm
-%             for s = order:Samples
-%                 aux = signal_x(s:-1:s-order+1);
-%                 mi_normalized = mi/(gamma + norm(aux)^2);
-%                 % Filtering the signal
-%                 signal_d_hat(s-order+1) = weights(:,s)'*aux;
-%                 % The equalizer does not know the original signal
-%                 error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
-%                 % Recursive expression.
-%                 weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
-%             end
-%             aux1 = qamdemod(signal_d,QAM);
-%             aux2 = qamdemod(signal_d_hat,QAM);
-%             SER(ii,1) = SER(ii,1) + sum(aux1~=aux2)/length(aux1);
-%         end
-%     end
-%     SER = SER/runs;
-%     txt = ['16QAM Signal'];
-%     semilogy(snrs, SER,'-','color', [0 0.4470 0.7410], "linewidth", 3, "markersize", 8, "DisplayName", txt);
-%     hold on;
-
-%     % 64QAM 
-%     QAM = 64
-%     SER = zeros(length(snrs),1);
-%     for ii = 1:length(snrs)
-%         snrs(ii)
-%         for rr = 1:runs
-%             % Training Stage  
-%             % Number of samples
-%             Samples = 500;
-%             % Defining the mse error and filter coeficients vectors.
-%             error = zeros(Samples,1);
-%             weights = zeros(order, Samples);
-
-%             % Defining the energy of the noise vector.
-%             signal_d_train = randi([0,QAM_train - 1],[Samples 1]);
-%             signal_d_train = qammod(signal_d_train,QAM_train);
-
-%             % Convolving the channel and the signal.
-%             Hz = [0.5 1.2 1.5 -1];
-%             signal_x_train = filtfilt(Hz,1,signal_d_train);
-
-%             % Training noise
-%             snr = 10^(inf/10);
-%             energy_symbol = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
-%             var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%             noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-
-%             % Generating the noisy received signal.
-%             signal_x_train = signal_x_train + noise;
-
-%             for s = order:Samples
-%                 aux = signal_x_train(s:-1:s-order+1);
-%                 mi_normalized = mi/(gamma + norm(aux)^2);
-%                 error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
-%                 % Recursive expression.
-%                 weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
-%             end
-
-%             % Transmission Stage 
-%             % Number of samples
-%             Samples = 5000;
-%             % Defining the mse error and filter coeficients vectors.
-%             error = zeros(Samples,1);
-%             weights = zeros(order, Samples);
-
-%             % Defining the energy of the noise vector.
-%             signal_d = randi([0,QAM - 1],[Samples 1]);
-%             signal_d = qammod(signal_d,QAM);
-
-%             % Convolving the channel and the signal.
-%             Hz = [0.5 1.2 1.5 -1];
-%             signal_x = filtfilt(Hz,1,signal_d);
-
-%             % Transmission noise
-%             snr = 10^(snrs(ii)/10);
-%             energy_symbol = mean(abs(signal_x(:)).^2); % Energy symbol pilot. 
-%             var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%             noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-%             % Generating the noisy received signal.
-%             signal_x = signal_x + noise;
-%             signal_d_hat = zeros(size(signal_d));
-%             % NLMS algorithm
-%             for s = order:Samples
-%                 aux = signal_x(s:-1:s-order+1);
-%                 mi_normalized = mi/(gamma + norm(aux)^2);
-%                 % Filtering the signal
-%                 signal_d_hat(s-order+1) = weights(:,s)'*aux;
-%                 % The equalizer does not know the original signal
-%                 error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
-%                 % Recursive expression.
-%                 weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
-%             end
-%             aux1 = qamdemod(signal_d,QAM);
-%             aux2 = qamdemod(signal_d_hat,QAM);
-%             SER(ii,1) = SER(ii,1) + sum(aux1~=aux2)/length(aux1);
-%         end
-%     end
-%     SER = SER/runs;
-%     txt = ['64QAM Signal'];
-%     semilogy(snrs, SER,'-','color', [0.8500 0.3250 0.0980], "linewidth", 3, "markersize", 8, "DisplayName", txt);
-%     hold on;
-
-%     % 256QAM 
-%     QAM = 256
-%     SER = zeros(length(snrs),1);
-%     for ii = 1:length(snrs)
-%         snrs(ii)
-%         for rr = 1:runs
-%             % Training Stage  
-%             % Number of samples
-%             Samples = 500;
-%             % Defining the mse error and filter coeficients vectors.
-%             error = zeros(Samples,1);
-%             weights = zeros(order, Samples);
-
-%             % Defining the energy of the noise vector.
-%             signal_d_train = randi([0,QAM_train - 1],[Samples 1]);
-%             signal_d_train = qammod(signal_d_train,QAM_train);
-
-%             % Convolving the channel and the signal.
-%             Hz = [0.5 1.2 1.5 -1];
-%             signal_x_train = filtfilt(Hz,1,signal_d_train);
-
-%             % Training noise
-%             snr = 10^(inf/10);
-%             energy_symbol = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
-%             var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%             noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-
-%             % Generating the noisy received signal.
-%             signal_x_train = signal_x_train + noise;
-
-%             for s = order:Samples
-%                 aux = signal_x_train(s:-1:s-order+1);
-%                 mi_normalized = mi/(gamma + norm(aux)^2);
-%                 error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
-%                 % Recursive expression.
-%                 weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
-%             end
-
-%             % Transmission Stage 
-%             % Number of samples
-%             Samples = 5000;
-%             % Defining the mse error and filter coeficients vectors.
-%             error = zeros(Samples,1);
-%             weights = zeros(order, Samples);
-
-%             % Defining the energy of the noise vector.
-%             signal_d = randi([0,QAM - 1],[Samples 1]);
-%             signal_d = qammod(signal_d,QAM);
-
-%             % Convolving the channel and the signal.
-%             Hz = [0.5 1.2 1.5 -1];
-%             signal_x = filtfilt(Hz,1,signal_d);
-
-%             % Transmission noise
-%             snr = 10^(snrs(ii)/10);
-%             energy_symbol = mean(abs(signal_x(:)).^2); % Energy symbol pilot. 
-%             var_noise = energy_symbol .*  1/snr; % Variance of the noise.
-%             noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
-
-%             % Generating the noisy received signal.
-%             signal_x = signal_x + noise;
-%             signal_d_hat = zeros(size(signal_d));
-%             % NLMS algorithm
-%             for s = order:Samples
-%                 aux = signal_x(s:-1:s-order+1);
-%                 mi_normalized = mi/(gamma + norm(aux)^2);
-%                 % Filtering the signal
-%                 signal_d_hat(s-order+1) = weights(:,s)'*aux;
-%                 % The equalizer does not know the original signal
-%                 error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
-%                 % Recursive expression.
-%                 weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
-%             end
-%             aux1 = qamdemod(signal_d,QAM);
-%             aux2 = qamdemod(signal_d_hat,QAM);
-%             SER(ii,1) = SER(ii,1) + sum(aux1~=aux2)/length(aux1);
-%         end
-%     end
-
-%     t = toc; 
+    % Empty vectors to fill with obtained coefficients.
+    weightsShape = weights(:,s+1);
+    error = zeros(N,1);
+    weights = zeros(M, N);
+    weights(:,M) = weightsShape;
+    signal_d_hat = zeros(size(signal_d));
+
+    % NLMS algorithm with QAM signal
+    for s = M:N
+        window_x = signal_x(s:-1:s-M+1);
+        mi_normalized = mi/(gamma + norm(window_x)^2);
+        signal_d_hat(s-M+1) = weights(:,s)'*window_x; % Filtering the signal
+        error(s) = qammod(qamdemod(signal_x(s-M+1),QAM),QAM) - weights(:,s)'*window_x;
+        weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * window_x;
+    end
+
+    % MSE Curve
+    h1 = figure();
+    semilogy(1:N, abs(error).^2,'-','color', c_.nlms , "linewidth", 1);
+    hold on
+    semilogy(1:N, repelem(mean(abs(error).^2), N),'--','color', c_.mean , "linewidth", 1);
+    hold off
+    xlabel('Samples, N');
+    ylabel('MSE');
+    xlim([0 N]);
+    legend('NLMS', 'Mean', 'Location', 'Best');
+    grid on;
+    % savefig_tight(h1, 'figures/hw3p6a-MSE', 'both');
+
+    % Temporal Evolution
+    ShowEvolution = qamdemod(signal_d_hat,QAM);
+    Lsamples = 50;
+    h2 = figure();
+    subplot(2,2,1)
+    stem(1:Lsamples, qamdemod(signal_d(1:Lsamples),QAM),'-','color', c_.original, "linewidth", 1, "markersize", 2);
+    hold on;
+    stem(1:Lsamples, ShowEvolution(1:Lsamples), '--', 'color', c_.estimated, "linewidth", 1, "markersize", 2);
+    hold off;
+    xlabel('Sample, N');
+    ylabel('Magnitude');
+    axis([0 50 0 20])
+    grid on;
+    subplot(2,2,2)
+    stem(300:350, qamdemod(signal_d(300:350),QAM),'-','color', c_.original, "linewidth", 1, "markersize", 2);
+    hold on;
+    stem(300:350, ShowEvolution(300:350), '--', 'color', c_.estimated, "linewidth", 1, "markersize", 2);
+    hold off;
+    xlabel('Sample, N');
+    ylabel('Magnitude');
+    axis([300 350 0 20])
+    legend('Original', 'Estimated', 'Location', 'northeastoutside','Orientation', 'Horizontal','Position', [0.5 0.47 0.0 1], 'Units','normalized');
+    legend boxoff
+    grid on;
+    subplot(2,2,3)
+    stem(3000:3050, qamdemod(signal_d(3000:3050),QAM),'-','color', c_.original, "linewidth", 1, "markersize", 2);
+    hold on;
+    stem(3000:3050, ShowEvolution(3000:3050), '--', 'color', c_.estimated, "linewidth", 1, "markersize", 2);
+    hold off;
+    xlabel('Sample, N');
+    ylabel('Magnitude');
+    axis([3000 3050 0 20])
+    grid on;
+    subplot(2,2,4)
+    stem((5000-Lsamples):5000, qamdemod(signal_d((5000-Lsamples):5000),QAM),'-','color', c_.original, "linewidth", 1, "markersize", 2);
+    hold on;
+    stem((5000-Lsamples):5000, ShowEvolution((5000-Lsamples):5000), '--','color', c_.estimated, "linewidth", 1, "markersize", 2);
+    hold off;
+    xlabel('Sample, N');
+    ylabel('Magnitude');
+    axis([4950 5000 0 20])
+    grid on;
+    % savefig_tight(h2, 'figures/hw3p6a-evolution', 'both');
     
-%     disp(t)
+    % Plot Results
+    h3 = figure();
+    subplot(2,2,1)
+    plot(signal_d_train,'.','color', 'y',"markersize", 8)
+    title('Training');
+    xlabel('In Phase');
+    ylabel('Quadrature');
+    axis([-2 2 -2 2]);
+    set(gca,'Color','k');
+    subplot(2,2,2)
+    plot(signal_d,'.','color', 'y',"markersize", 8)
+    title('Original');
+    xlabel('In Phase');
+    ylabel('Quadrature');
+    set(gca,'Color','k');
+    subplot(2,2,3)
+    plot(signal_x,'.','color', 'y',"markersize", 8)
+    title('Transmitted');
+    xlabel('In Phase');
+    ylabel('Quadrature');
+    set(gca,'Color','k');
+    subplot(2,2,4)
+    plot(qammod(qamdemod(signal_d_hat,QAM),QAM),'.','color', 'y',"markersize", 8)
+    title('Filter and Decisor');
+    xlabel('In Phase');
+    ylabel('Quadrature');
+    set(gca,'Color','k');
+    set(gcf, 'InvertHardcopy', 'off')
 
-%     SER = SER/runs;
-%     txt = ['256QAM Signal'];
-%     semilogy(snrs, SER,'-','color', [0.4660 0.6740 0.1880], "linewidth", 3, "markersize", 8, "DisplayName", txt);
-%     hold off;
-%     legend_copy = legend("location", "southwest");
-%     set (legend_copy, "fontsize", 12);
-%     grid on;
-%     title('SER vs. SNR for different constelattions');
-%     xlabel('SNR (dB)');
-%     ylabel('SER');
-%     % saveas(gcf,'L3Q6_D_ser.png')
+    % savefig_tight(h3, 'figures/hw3p6a-QAM', 'both');
     
-% end
+    % General setup
 
 
-% %% HOMEWORK 4 - PROBLEM 1
-% function hw4p1(varargin)
+    %% (b) --------------------------------------
+    disp('b')
     
-%     % Forgeting rate
-%     lambda = 0.98;
-%     delta = 1;
-%     % Filter order
-%     order = 2 + 1;
+    % General setup
+    mi = 1e-3;
+    order = 15; M = order + 1;
+    N = 5000 + 50;
+    
+    % Signal Model
+    SNR = 30;
+    QAM = 16;
+    signal_d = qammod(randi([0,QAM - 1],[N 1]),QAM);
+    Hz = [0.5 1.2 1.5 -1];
+    signal_x = filter(Hz,1,signal_d);
+    snr = 10^(SNR/10);
+    energy = mean(abs(signal_x(:)).^2); % Energy symbol pilot. 
+    noise = sqrt(energy.*(1/snr)/2)*complex(randn(N,1), randn(N,1));
+    signal_x = signal_x + noise;
+
+    % Training (50 Samples)
+    N = 50;
+    error = zeros(N,1);
+    weights = zeros(M, N);
+
+    % Signal Model
+    QAM_train = 4;
+    signal_d_train = (1/sqrt(2)) * qammod(randi([0,QAM_train - 1],[N 1]),QAM_train); 
+    Hz = [0.5 1.2 1.5 -1];
+    signal_x_train = filter(Hz,1,signal_d_train);
+    snr = 10^(inf/10);
+    energy = mean(abs(signal_x_train(:)).^2);
+    noise = sqrt(energy.*1/snr/2) * (complex(randn(N,1), randn(N,1)));
+    signal_x_train = signal_x_train + noise;
+
+    % LMS algorithm
+    for s = M:N
+        window_x = signal_x_train(s:-1:s-M+1);
+        error(s) = signal_d_train(s-M+1) - weights(:,s)'*window_x;
+        weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * window_x;
+    end
+
+    % Transmission    
+    N = 5000 + 50; % Samples
+    
+    % Empty vectors
+    weights = zeros(M, N);
+    error = zeros(N,1);
+    weightsShape = weights(:,s+1);
+    weights(:,M) = weightsShape;
+    signal_d_hat_50 = zeros(size(signal_d));
+    
+    for s = M:N
+        windowX= signal_x(s:-1:s-M+1);
+        signal_d_hat_50(s-M+1) = weights(:,s)'*windowX;
+        error(s) = qammod(qamdemod(signal_x(s-M+1),QAM),QAM) - weights(:,s)'*windowX;
+        weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * windowX;
+    end
+
+    % Training (150 Samples)
+    N = 150;
+    % Empty vectors
+    error = zeros(N,1);
+    weights = zeros(M, N);
+
+    % Signal Model
+    QAM_train = 4;
+    signal_d_train = randi([0,QAM_train - 1],[N 1]);
+    signal_d_train = (1/sqrt(2)) * qammod(signal_d_train,QAM_train); 
+    Hz = [0.5 1.2 1.5 -1];
+    signal_x_train = filter(Hz,1,signal_d_train);
+    snr = 10^(inf/10);
+    energy = mean(abs(signal_x_train(:)).^2);
+    noise = sqrt(energy.*1/snr/2) * (complex(randn(N,1), randn(N,1)));
+    signal_x_train = signal_x_train + noise;
+    
+    % LMS
+    for s = M:N
+        aux = signal_x_train(s:-1:s-M+1);
+        error(s) = signal_d_train(s-M+1) - weights(:,s)'*aux;
+        weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * windowX;
+    end
+
+    % Transmission
+
+    N = 5000 + 50; % Samples
+    % Empty vectors
+    error = zeros(N,1);
+    weightsShape = weights(:,s+1);
+    weights = zeros(M, N);
+    weights(:,M) = weightsShape;
+    signal_d_hat_150 = zeros(size(signal_d));
+    
+    % LMS algorithm
+    for s = M:N
+        windowX= signal_x(s:-1:s-M+1);
+        signal_d_hat_150(s-M+1) = weights(:,s)'*windowX;
+        error(s) = qammod(qamdemod(signal_x(s-M+1),QAM),QAM) - weights(:,s)'*windowX;
+        weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * windowX;
+    end
+
+    % Training (300 Samples)
+    N = 300; 
+    % Empty vectors
+    error = zeros(N,1);
+    weights = zeros(M, N);
+    % Signal Model
+    QAM_train = 4;
+    signal_d_train = randi([0,QAM_train - 1],[N 1]);
+    signal_d_train = (1/sqrt(2)) * qammod(signal_d_train,QAM_train); 
+    Hz = [0.5 1.2 1.5 -1];
+    signal_x_train = filter(Hz,1,signal_d_train);
+    snr = 10^(inf/10);
+    energy = mean(abs(signal_x_train(:)).^2);
+    noise = sqrt(energy.*1/snr/2) * (complex(randn(N,1), randn(N,1)));
+    signal_x_train = signal_x_train + noise;
+
+    % LMS algorithm
+    for s = M:N
+        aux = signal_x_train(s:-1:s-M+1);
+        error(s) = signal_d_train(s-M+1) - weights(:,s)'*aux;
+        weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * windowX;
+    end
+
+    % Transmission
+
+    % Empty vectors
+    N = 5000 + 50;
+    error = zeros(N,1);
+    weightsShape = weights(:,s+1);
+    weights = zeros(M, N);
+    weights(:,M) = weightsShape;
+    signal_d_hat_300 = zeros(size(signal_d));
+    
+    % LMS algorithm
+    for s = M:N
+        windowX= signal_x(s:-1:s-M+1);
+        signal_d_hat_300(s-M+1) = weights(:,s)'*windowX;
+        error(s) = qammod(qamdemod(signal_x(s-M+1),QAM),QAM) - weights(:,s)'*windowX;
+        weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * windowX;
+    end
+
+    % Training (500 Samples)
+    N = 500;
+
+    % Empty vectors
+    error = zeros(N,1);
+    weights = zeros(M, N);
+
+    % Signal Model
+    QAM_train = 4;
+    signal_d_train = randi([0,QAM_train - 1],[N 1]);
+    signal_d_train = qammod(signal_d_train,QAM_train); 
+    Hz = [0.5 1.2 1.5 -1];
+    signal_x_train = filter(Hz,1,signal_d_train);
+    snr = 10^(inf/10);
+    energy = mean(abs(signal_x_train(:)).^2);
+    noise = sqrt(energy.*1/snr/2) * (complex(randn(N,1), randn(N,1)));
+    signal_x_train = signal_x_train + noise;
+    
+    % LMS
+    for s = M:N
+        aux = signal_x_train(s:-1:s-M+1);
+        error(s) = signal_d_train(s-M+1) - weights(:,s)'*aux;
+        weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * windowX;
+    end
+
+    % Transmission
+    N = 5000 + 50;
+ 
+    % Empty vectors
+    error = zeros(N,1);
+    weightsShape = weights(:,s+1);
+    weights = zeros(M, N);
+    weights(:,M) = weightsShape;
+    signal_d_hat_500 = zeros(size(signal_d));
+    
+    % LMS algorithm
+    for s = M:N
+        windowX= signal_x(s:-1:s-M+1);
+        signal_d_hat_500(s-M+1) = weights(:,s)'*windowX;
+        error(s) = qammod(qamdemod(signal_x(s-M+1),QAM),QAM) - weights(:,s)'*windowX;
+        weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * windowX;
+    end
+
+    % Temporal Evolution
+    selectWindow = 4975:5000;
+    [~,~,temporalShift] = alignsignals(qamdemod(signal_d,QAM),qamdemod(signal_d_hat_500,QAM));
+
+    
+    evolutionWindow = circshift(qamdemod(signal_d_hat_50,QAM),temporalShift);
+    evolutionWindow_50 = evolutionWindow(selectWindow);
+    evolutionWindow = circshift(qamdemod(signal_d_hat_150,QAM),temporalShift);
+    evolutionWindow_150 = evolutionWindow(selectWindow);
+    evolutionWindow = circshift(qamdemod(signal_d_hat_300,QAM),temporalShift);
+    evolutionWindow_300 = evolutionWindow(selectWindow);
+    evolutionWindow = circshift(qamdemod(signal_d_hat_500,QAM),temporalShift);
+    evolutionWindow_500 = evolutionWindow(selectWindow);
+
+    h4 = figure;
+    subplot(2,2,1)
+    stem(selectWindow, qamdemod(signal_d(selectWindow),QAM),'-','color', c_.original, "linewidth", 1, "markersize", 1);
+    hold on;
+    stem(selectWindow, evolutionWindow_50,'--','color', c_.estimated, "linewidth", 1, "markersize", 1);
+    hold off;
+    title('50 Samples');
+    xlabel('Sample, N');
+    xlim([min(selectWindow) max(selectWindow)]);
+    ylabel('Magnitude');
+    ylim([0 20])
+    legend('Original', 'Estimated', 'Location', 'northeastoutside','Orientation', 'Horizontal','Position', [0.5 0.47 0.0 1], 'Units','normalized');
+    grid on;
+    legend boxoff
+    subplot(2,2,2)
+    stem(selectWindow, qamdemod(signal_d(selectWindow),QAM),'-','color', c_.original, "linewidth", 1, "markersize", 1);
+    hold on;
+    stem(selectWindow, evolutionWindow_150,'--','color', c_.estimated, "linewidth", 1, "markersize", 1);
+    hold off;
+    title('150 Samples');
+    xlabel('Sample, N');
+    xlim([min(selectWindow) max(selectWindow)]);
+    ylabel('Magnitude');
+    grid on;
+    subplot(2,2,3)
+    stem(selectWindow, qamdemod(signal_d(selectWindow),QAM),'-','color', c_.original, "linewidth", 1, "markersize", 1);
+    hold on;
+    stem(selectWindow, evolutionWindow_300,'--','color', c_.estimated, "linewidth", 1, "markersize", 1);
+    hold off;
+    title('300 Samples');
+    xlabel('Sample, N');
+    xlim([min(selectWindow) max(selectWindow)]);
+    ylabel('Magnitude');
+    grid on;
+    subplot(2,2,4)
+    stem(selectWindow, qamdemod(signal_d(selectWindow),QAM),'-','color', c_.original, "linewidth", 1, "markersize", 1);
+    hold on;
+    stem(selectWindow, evolutionWindow_500,'--','color', c_.estimated, "linewidth", 1, "markersize", 1);
+    hold off;
+    title('500 Samples');
+    xlabel('Sample, N');
+    xlim([min(selectWindow) max(selectWindow)]);
+    ylabel('Magnitude');
+    grid on;
+
+    savefig_tight(h4, 'figures/hw3p6b-evolutionSamples', 'both');
 
 
-%     % Number of samples
-%     Samples = 100;
-%     % Defining the mse error and filter coeficients vectors.
-%     error = zeros(Samples,1);
-%     weights = zeros(order, Samples);
-%     weights(1,1) = 1; 
-%     % Generating the sinoide signal.
-%     t = linspace(-pi,pi,Samples).';
-%     signal_d = cos(pi*t/3);
-%     % Defining the energy of the noise vector.
-%     SNR_dB = 15;
-%     SNR_li = 10^(SNR_dB/10);
-%     variance_noise = 1/SNR_li;
-%     noise = sqrt(variance_noise/2).*randn(Samples,1);
-%     % Generating the noisy received signal.
-%     signal_x = signal_d + noise;
+    %% (c) --------------------------------------
+    disp('c');
 
-%     % Deterministic correlation matrix initialization
-%     y = zeros(Samples,1);
-%     Rd = delta*eye(order); 
-%     for ss = 2:(Samples - order - 1)
-%         % Deterministic correlation matrix inverse
-%         Rd = (1/lambda)*(Rd - (Rd*signal_x(ss:ss+order-1)*signal_x(ss:ss+order-1)'*Rd)/(lambda + signal_x(ss:ss+order-1)'*Rd*signal_x(ss:ss+order-1)));
-%         % Error between the desired signal and the filtered signal.
-%         error(ss) = signal_d(ss) - weights(:,ss-1)' * signal_x(ss:ss+order-1); 
-%         % Recursive expression.
-%         weights(:,ss) = weights(:,ss-1) + Rd*error(ss)*signal_x(ss:ss+order-1);
-%         weights(1,ss) = 1;
-%         % Output
-%         y(ss) = weights(:,ss-1)' * signal_x(ss:ss+order-1);
-%     end
+    % General Setup
+    N = 500;
+    mi = 0.4;
+    gamma = 1e-3;
+    order = 15; M = order+1;
 
-%     aux = weights(:,1:10).';
-%     tabela = [aux(1,:);aux(2,:);aux(3,:);aux(4,:);aux(5,:);aux(6,:);aux(7,:);aux(8,:);aux(9,:);aux(10,:);];
-%     Tabela = array2table(tabela);
-%     Tabela.Properties.RowNames = {'i = 1' 'i = 2' 'i = 3' 'i = 4' 'i = 5' 'i = 6' 'i = 7' 'i = 8' 'i = 9' 'i = 10'};
-%     Tabela.Properties.VariableNames = {'1st Coeff' '2nd Coeff' '3rd Coeff'};
-%     % table2latex(Tabela,'tabela.tex');
+    % Empty vectors
+    error = zeros(N,1);
+    weights = zeros(M, N);
 
-%     % MSE Curve
-%     figure
-%     txt = ['Filtered Signal'];
-%     plot(y,'-','color', [0.4660 0.6740 0.1880], "linewidth", 2, "markersize", 8, "DisplayName", txt);
-%     hold on;
-%     txt = ['Source Signal'];
-%     plot(signal_d,'-','color', [0.3010 0.7450 0.9330], "linewidth", 2, "markersize", 8, "DisplayName", txt);
-%     hold off;
-%     title('Predicted Signal vs. Source Signal');
-%     xlabel('Samples');
-%     ylabel('Magnitude');
-%     legend_copy = legend("location", "northeast");
-%     set (legend_copy, "fontsize", 12);
-%     grid on;
-%     % saveas(gcf,'L4Q1.png')
+    % Signal Model
+    SNR = 30;
+    QAM_train = 4;
+    signal_d_train = randi([0,QAM_train - 1],[N 1]);
+    signal_d_train = qammod(signal_d_train,QAM_train);
+    Hz = [0.5 1.2 1.5 -1];
+    signal_x_train = filtfilt(Hz,1,signal_d_train);
+    snr = 10^(inf/10);
+    energy = mean(abs(signal_x_train(:)).^2);
+    noise = sqrt(energy.*1/snr/2) * complex(randn(N,1), randn(N,1));;
+    signal_x_train = signal_x_train + noise;
 
-% end
+    % LMS
+    for s = M:N
+        aux = signal_x_train(s:-1:s-M+1);
+        mi_normalized = mi/(gamma + norm(aux)^2);
+        error(s) = signal_d_train(s-M+1) - weights(:,s)'*aux;
+        weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
+    end
+
+    % Transmission
+    N = 5000 + 50; % Number of samples
+    
+    % Empty vectors
+    error = zeros(N,1);
+    weights = zeros(M, N);
+
+    % Signal Model
+    SNR = 30;
+    QAM = 256;
+    signal_d = randi([0,QAM - 1],[N 1]);
+    signal_d = qammod(signal_d,QAM); % 4-QAM Pilot Signal.
+    Hz = [0.5 1.2 1.5 -1];
+    signal_x = filtfilt(Hz,1,signal_d);
+    snr = 10^(SNR/10);
+    energy = mean(abs(signal_x(:)).^2);
+    noise = sqrt(energy.*1/snr/2)*complex(randn(N,1), randn(N,1));;
+    signal_x = signal_x + noise;
+    signal_d_hat = zeros(size(signal_d));
+    
+    % NLMS
+    for s = M:N
+        aux = signal_x(s:-1:s-M+1);
+        mi_normalized = mi/(gamma + norm(aux)^2);
+        signal_d_hat(s-M+1) = weights(:,s)'*aux;
+        error(s) = qammod(qamdemod(signal_x(s-M+1),QAM),QAM) - weights(:,s)'*aux;
+        weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
+    end
+
+    % MSE
+    h5 = figure();
+    semilogy(1:N, abs(error).^2,'-','color', c_.nlms , "linewidth", 1);
+    hold on
+    semilogy(1:N, repelem(mean(abs(error).^2), N),'--','color', c_.mean , "linewidth", 1);
+    hold off
+    xlabel('Samples, N');
+    xlim([0 N]);
+    ylabel('MSE');
+    legend('NLMS', 'Mean', 'Location', 'Best');
+    grid on;
+    savefig_tight(h5, 'figures/hw3p6c-MSE', 'both');
+
+    % Temporal Evolution
+    L = 50; 
+    aux = qamdemod(signal_d_hat,QAM);
+    aux1 = aux(1:L);
+    aux2 = aux(5000-L:5000);
+    
+    figure
+    subplot(211)
+    stem(1:L, qamdemod(signal_d(1:L),QAM),'-','color', c_.original, "linewidth", 1, "markersize", 3);
+    hold on;
+    stem(1:L, aux1,'-','color', c_.estimated, "linewidth", 1, "markersize", 3);
+    hold off;
+    title('First Samples');
+    xlabel('Sample, N');
+    xlim([0 L])
+    ylabel('Magnitude');
+    legend('Original', 'Estimated', 'Location', 'northeastoutside','Orientation', 'Horizontal','Position', [0.5 0.47 0.0 1.03], 'Units','normalized');
+    legend boxoff
+    grid on;
+    subplot(212)
+    stem((5000-L):5000, qamdemod(signal_d((5000-L):5000),QAM),'-','color', c_.original, "linewidth", 1, "markersize", 3);
+    hold on;
+    stem((5000-L):5000, aux2,'-','color', c_.estimated, "linewidth", 1, "markersize", 3);
+    hold off;
+    title('Last Samples');
+    xlabel('Sample, N');
+    ylabel('Magnitude');
+    xlim([(5000-L) 5000])
+    grid on;
+    % savefig_tight(h5, 'figures/hw3p6c-evolution', 'both');
 
 
-% %% HOMEWORK 4 - PROBLEM 3
-% function hw4p3(varargin)
-%     % Forgeting rate
-%     lambda = 0.99;
-%     % Filter order
-%     order = 3;
-%     % SNR (dB) 
-%     SNR_dB = 3;
+    %% (d) --------------------------------------
+    disp('d')
 
-%     % Number of samples
-%     Samples = 1010;
-%     % Defining the mse error and filter coeficients vectors.
-%     error = zeros(Samples,1);
-%     weights = zeros(order, Samples);
-%     % Defining the energy of the noise vector.
-%     SNR_li = 10^(SNR_dB/10);
-%     variance_noise = 1/SNR_li;
-%     noise = sqrt(variance_noise/2).*randn(Samples,1);
-%     % Generating the sinoide signal.
-%     t = linspace(-pi,pi,Samples).';
-%     signal_d = sin(2*pi*t);
-%     % Generating the noisy received signal.
-%     signal_x = signal_d + noise;
-%     % Defining delta by the inverse of the signal energy
-%     delta  = 1/(sum(signal_x.^2)/length(signal_x));
+    
+    for RMC = 1:rmc
+        for iiSNR = 1:SNRdB
+            QAM4.SER
+            QAM16.SER
+            QAM64.SER
+            QAM256.SER
+        end
+    end
 
-%     % Deterministic correlation matrix initialization
-%     Rd = delta*eye(order); 
-%     %signal_d = signal_d(order:end,1); 
-%     for ss = 2:(Samples - order - 1)
-%         % Deterministic correlation matrix inverse
-%         Rd = (1/lambda)*(Rd - (Rd*signal_x(ss:ss+order-1)*signal_x(ss:ss+order-1)'*Rd)/(lambda + signal_x(ss:ss+order-1)'*Rd*signal_x(ss:ss+order-1)));
-%         % Error between the desired signal and the filtered signal.
-%         error(ss) = signal_d(ss) - weights(:,ss-1)' * signal_x(ss:ss+order-1); 
-%         % Recursive expression.
-%         weights(:,ss) = weights(:,ss-1) + Rd*error(ss)*signal_x(ss:ss+order-1);
-%     end
-%     weights = flip(weights); 
-%     % I first implemented thinking of python notation, later I found out that
-%     % the reference book defines the order a bit different from what I usually
-%     % work. So to make the code close to Diniz notation the 'order + 1' is
-%     % needed.
-%     % Coefficients Curve
-%     figure
-%     subplot(2,1,1)
-%     txt = ['w0'];
-%     plot(1:Samples, weights(1,:),'-','color', [0.3010 0.7450 0.9330], "linewidth", 2, "markersize", 8, "DisplayName",txt);
-%     hold on;
-%     txt = ['w1'];
-%     plot(1:Samples, weights(2,:),'-','color', [0.4660 0.6740 0.1880], "linewidth", 2, "markersize", 8, "DisplayName",txt);
-%     hold off;
-%     title('RLS Coefficients Behavior');
-%     xlabel('Samples');
-%     xlim([0 1000]);
-%     ylabel('Magnitude');
-%     legend_copy = legend("location", "northeast");
-%     set (legend_copy, "fontsize", 8);
-%     grid on;
+    % Simulation parameters
+    mi = 0.4;
+    gamma = 1e-3;
+    runs = 1; % runs = 1000;
+    QAM_train = 4;
+    snrs = [0 10 20 30];
+    % Filter order
+    order = 15 + 1;
 
-%     % MSE Curve
-%     subplot(2,1,2)
-%     semilogy(1:Samples, error.^2,'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 8);
-%     title('RLS Behavior');
-%     xlabel('Samples');
-%     xlim([0 1000]);
-%     ylabel('MSE');
-%     grid on;
+    tic;
+    % 4QAM
+    QAM = 4
+    SER = zeros(length(snrs),1);
+    for ii = 1:length(snrs)
+        snrs(ii)
+        for rr = 1:runs
+            % Training Stage  
+            % Number of samples
+            Samples = 500;
+            % Empty vectors
+            error = zeros(Samples,1);
+            weights = zeros(order, Samples);
+
+            % Defining the energy of the noise vector.
+            signal_d_train = randi([0,QAM_train - 1],[Samples 1]);
+            signal_d_train = qammod(signal_d_train,QAM_train);
+
+            % Convolving the channel and the signal.
+            Hz = [0.5 1.2 1.5 -1];
+            signal_x_train = filtfilt(Hz,1,signal_d_train);
+
+            % Training noise
+            snr = 10^(inf/10);
+            energy = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
+            
+            noise = sqrt(energy.*1/snr/2) * (randn(Samples,1) + 1i*randn(Samples,1));
+
+            % Generating the noisy received signal.
+            signal_x_train = signal_x_train + noise;
+
+            for s = order:Samples
+                aux = signal_x_train(s:-1:s-order+1);
+                mi_normalized = mi/(gamma + norm(aux)^2);
+                error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
+                % Recursive expression.
+                weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
+            end
+
+            % Transmission Stage 
+            % Number of samples
+            Samples = 5000;
+            % Empty vectors
+            error = zeros(Samples,1);
+            weights = zeros(order, Samples);
+
+            % Defining the energy of the noise vector.
+            signal_d = randi([0,QAM - 1],[Samples 1]);
+            signal_d = qammod(signal_d,QAM);
+
+            % Convolving the channel and the signal.
+            Hz = [0.5 1.2 1.5 -1];
+            signal_x = filtfilt(Hz,1,signal_d);
+
+            % Transmission noise
+            snr = 10^(snrs(ii)/10);
+            energy = mean(abs(signal_x(:)).^2); % Energy symbol pilot. 
+            
+            noise = sqrt(energy.*1/snr/2) * (randn(Samples,1) + 1i*randn(Samples,1));
+
+            % Generating the noisy received signal.
+            signal_x = signal_x + noise;
+            signal_d_hat = zeros(size(signal_d));
+            % NLMS algorithm
+            for s = order:Samples
+                aux = signal_x(s:-1:s-order+1);
+                mi_normalized = mi/(gamma + norm(aux)^2);
+                % Filtering the signal
+                signal_d_hat(s-order+1) = weights(:,s)'*aux;
+                % The equalizer does not know the original signal
+                error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
+                % Recursive expression.
+                weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
+            end
+            aux1 = qamdemod(signal_d,QAM);
+            aux2 = qamdemod(signal_d_hat,QAM);
+            SER(ii,1) = SER(ii,1) + sum(aux1~=aux2)/length(aux1);
+        end
+    end
+    SER = SER/runs;
+    figure
+    txt = ['4QAM Signal'];
+    semilogy(snrs, SER,'-','color', [0.3010 0.7450 0.9330], "linewidth", 3, "markersize", 8, "DisplayName", txt);
+    hold on;
+
+    % 16QAM 
+    QAM = 16
+    SER = zeros(length(snrs),1);
+    for ii = 1:length(snrs)
+        snrs(ii)
+        for rr = 1:runs
+            % Training Stage  
+            % Number of samples
+            Samples = 500;
+            % Empty vectors
+            error = zeros(Samples,1);
+            weights = zeros(order, Samples);
+
+            % Defining the energy of the noise vector.
+            signal_d_train = randi([0,QAM_train - 1],[Samples 1]);
+            signal_d_train = qammod(signal_d_train,QAM_train);
+
+            % Convolving the channel and the signal.
+            Hz = [0.5 1.2 1.5 -1];
+            signal_x_train = filtfilt(Hz,1,signal_d_train);
+
+            % Training noise
+            snr = 10^(inf/10);
+            energy = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
+            
+            noise = sqrt(energy.*1/snr/2) * (randn(Samples,1) + 1i*randn(Samples,1));
+
+            % Generating the noisy received signal.
+            signal_x_train = signal_x_train + noise;
+
+            for s = order:Samples
+                aux = signal_x_train(s:-1:s-order+1);
+                mi_normalized = mi/(gamma + norm(aux)^2);
+                error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
+                % Recursive expression.
+                weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
+            end
+
+            % Transmission Stage 
+            % Number of samples
+            Samples = 5000;
+            % Empty vectors
+            error = zeros(Samples,1);
+            weights = zeros(order, Samples);
+
+            % Defining the energy of the noise vector.
+            signal_d = randi([0,QAM - 1],[Samples 1]);
+            signal_d = qammod(signal_d,QAM);
+
+            % Convolving the channel and the signal.
+            Hz = [0.5 1.2 1.5 -1];
+            signal_x = filtfilt(Hz,1,signal_d);
+
+            % Transmission noise
+            snr = 10^(snrs(ii)/10);
+            energy = mean(abs(signal_x(:)).^2); % Energy symbol pilot. 
+            
+            noise = sqrt(energy.*1/snr/2) * (randn(Samples,1) + 1i*randn(Samples,1));
+
+            % Generating the noisy received signal.
+            signal_x = signal_x + noise;
+            signal_d_hat = zeros(size(signal_d));
+            % NLMS algorithm
+            for s = order:Samples
+                aux = signal_x(s:-1:s-order+1);
+                mi_normalized = mi/(gamma + norm(aux)^2);
+                % Filtering the signal
+                signal_d_hat(s-order+1) = weights(:,s)'*aux;
+                % The equalizer does not know the original signal
+                error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
+                % Recursive expression.
+                weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
+            end
+            aux1 = qamdemod(signal_d,QAM);
+            aux2 = qamdemod(signal_d_hat,QAM);
+            SER(ii,1) = SER(ii,1) + sum(aux1~=aux2)/length(aux1);
+        end
+    end
+    SER = SER/runs;
+    txt = ['16QAM Signal'];
+    semilogy(snrs, SER,'-','color', [0 0.4470 0.7410], "linewidth", 3, "markersize", 8, "DisplayName", txt);
+    hold on;
+
+    % 64QAM 
+    QAM = 64
+    SER = zeros(length(snrs),1);
+    for ii = 1:length(snrs)
+        snrs(ii)
+        for rr = 1:runs
+            % Training Stage  
+            % Number of samples
+            Samples = 500;
+            % Empty vectors
+            error = zeros(Samples,1);
+            weights = zeros(order, Samples);
+
+            % Defining the energy of the noise vector.
+            signal_d_train = randi([0,QAM_train - 1],[Samples 1]);
+            signal_d_train = qammod(signal_d_train,QAM_train);
+
+            % Convolving the channel and the signal.
+            Hz = [0.5 1.2 1.5 -1];
+            signal_x_train = filtfilt(Hz,1,signal_d_train);
+
+            % Training noise
+            snr = 10^(inf/10);
+            energy = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
+            
+            noise = sqrt(energy.*1/snr/2) * (randn(Samples,1) + 1i*randn(Samples,1));
+
+            % Generating the noisy received signal.
+            signal_x_train = signal_x_train + noise;
+
+            for s = order:Samples
+                aux = signal_x_train(s:-1:s-order+1);
+                mi_normalized = mi/(gamma + norm(aux)^2);
+                error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
+                % Recursive expression.
+                weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
+            end
+
+            % Transmission Stage 
+            % Number of samples
+            Samples = 5000;
+            % Empty vectors
+            error = zeros(Samples,1);
+            weights = zeros(order, Samples);
+
+            % Defining the energy of the noise vector.
+            signal_d = randi([0,QAM - 1],[Samples 1]);
+            signal_d = qammod(signal_d,QAM);
+
+            % Convolving the channel and the signal.
+            Hz = [0.5 1.2 1.5 -1];
+            signal_x = filtfilt(Hz,1,signal_d);
+
+            % Transmission noise
+            snr = 10^(snrs(ii)/10);
+            energy = mean(abs(signal_x(:)).^2); % Energy symbol pilot. 
+            
+            noise = sqrt(energy.*1/snr/2) * (randn(Samples,1) + 1i*randn(Samples,1));
+            % Generating the noisy received signal.
+            signal_x = signal_x + noise;
+            signal_d_hat = zeros(size(signal_d));
+            % NLMS algorithm
+            for s = order:Samples
+                aux = signal_x(s:-1:s-order+1);
+                mi_normalized = mi/(gamma + norm(aux)^2);
+                % Filtering the signal
+                signal_d_hat(s-order+1) = weights(:,s)'*aux;
+                % The equalizer does not know the original signal
+                error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
+                % Recursive expression.
+                weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
+            end
+            aux1 = qamdemod(signal_d,QAM);
+            aux2 = qamdemod(signal_d_hat,QAM);
+            SER(ii,1) = SER(ii,1) + sum(aux1~=aux2)/length(aux1);
+        end
+    end
+    SER = SER/runs;
+    txt = ['64QAM Signal'];
+    semilogy(snrs, SER,'-','color', [0.8500 0.3250 0.0980], "linewidth", 3, "markersize", 8, "DisplayName", txt);
+    hold on;
+
+    % 256QAM 
+    QAM = 256
+    SER = zeros(length(snrs),1);
+    for ii = 1:length(snrs)
+        snrs(ii)
+        for rr = 1:runs
+            % Training Stage  
+            % Number of samples
+            Samples = 500;
+            % Empty vectors
+            error = zeros(Samples,1);
+            weights = zeros(order, Samples);
+
+            % Defining the energy of the noise vector.
+            signal_d_train = randi([0,QAM_train - 1],[Samples 1]);
+            signal_d_train = qammod(signal_d_train,QAM_train);
+
+            % Convolving the channel and the signal.
+            Hz = [0.5 1.2 1.5 -1];
+            signal_x_train = filtfilt(Hz,1,signal_d_train);
+
+            % Training noise
+            snr = 10^(inf/10);
+            energy = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
+            
+            noise = sqrt(energy.*1/snr/2) * (randn(Samples,1) + 1i*randn(Samples,1));
+
+            % Generating the noisy received signal.
+            signal_x_train = signal_x_train + noise;
+
+            for s = order:Samples
+                aux = signal_x_train(s:-1:s-order+1);
+                mi_normalized = mi/(gamma + norm(aux)^2);
+                error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
+                % Recursive expression.
+                weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
+            end
+
+            % Transmission Stage 
+            % Number of samples
+            Samples = 5000;
+            % Empty vectors
+            error = zeros(Samples,1);
+            weights = zeros(order, Samples);
+
+            % Defining the energy of the noise vector.
+            signal_d = randi([0,QAM - 1],[Samples 1]);
+            signal_d = qammod(signal_d,QAM);
+
+            % Convolving the channel and the signal.
+            Hz = [0.5 1.2 1.5 -1];
+            signal_x = filtfilt(Hz,1,signal_d);
+
+            % Transmission noise
+            snr = 10^(snrs(ii)/10);
+            energy = mean(abs(signal_x(:)).^2); % Energy symbol pilot. 
+            
+            noise = sqrt(energy.*1/snr/2) * (randn(Samples,1) + 1i*randn(Samples,1));
+
+            % Generating the noisy received signal.
+            signal_x = signal_x + noise;
+            signal_d_hat = zeros(size(signal_d));
+            % NLMS algorithm
+            for s = order:Samples
+                aux = signal_x(s:-1:s-order+1);
+                mi_normalized = mi/(gamma + norm(aux)^2);
+                % Filtering the signal
+                signal_d_hat(s-order+1) = weights(:,s)'*aux;
+                % The equalizer does not know the original signal
+                error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
+                % Recursive expression.
+                weights(:,s+1) = weights(:,s) + mi_normalized * conj(error(s)) * aux;
+            end
+            aux1 = qamdemod(signal_d,QAM);
+            aux2 = qamdemod(signal_d_hat,QAM);
+            SER(ii,1) = SER(ii,1) + sum(aux1~=aux2)/length(aux1);
+        end
+    end
+
+    t = toc; 
+    
+    disp(t)
+
+    SER = SER/runs;
+    txt = ['256QAM Signal'];
+    semilogy(snrs, SER,'-','color', [0.4660 0.6740 0.1880], "linewidth", 3, "markersize", 8, "DisplayName", txt);
+    hold off;
+    legend_copy = legend("location", "southwest");
+    set (legend_copy, "fontsize", 12);
+    grid on;
+    title('SER vs. SNR for different constelattions');
+    xlabel('SNR (dB)');
+    ylabel('SER');
+    % saveas(gcf,'L3Q6_D_ser.png')
+
+    disp('pause');
+    pause();
+    return
+    
+end
+
+
+%% HOMEWORK 4 - PROBLEM 1
+function hw4p1(varargin)
+    disp('hw4p1')
+    c_ = struct('original', [57 106 177]./255, 'estimated', [204 37 41]./255, 'nlms', [107 76 154]./255, 'mean', 'k');
+
+    % Forgeting rate
+    lambda = 0.98;
+    delta = 1;    
+    order = 2 + 1; % Filter order
+    Samples = 100; % Number of samples
+    
+    % Signal Model
+    error = zeros(Samples,1);
+    weights = zeros(order, Samples);
+    weights(1,1) = 1; 
+    t = linspace(-pi,pi,Samples).';
+    signal_d = cos(pi*t/3);
+    SNR_dB = 15;
+    SNR_li = 10^(SNR_dB/10);
+    variance_noise = 1/SNR_li;
+    noise = sqrt(variance_noise/2).*randn(Samples,1);
+    signal_x = signal_d + noise;
+
+    % Deterministic correlation matrix initialization
+    y = zeros(Samples,1);
+    Rd = delta*eye(order); 
+    for ss = 2:(Samples - order - 1)
+        Rd = (1/lambda)*(Rd - (Rd*signal_x(ss:ss+order-1)*signal_x(ss:ss+order-1)'*Rd)/(lambda + signal_x(ss:ss+order-1)'*Rd*signal_x(ss:ss+order-1)));
+        error(ss) = signal_d(ss) - weights(:,ss-1)' * signal_x(ss:ss+order-1); 
+        weights(:,ss) = weights(:,ss-1) + Rd*error(ss)*signal_x(ss:ss+order-1);
+        weights(1,ss) = 1;
+        y(ss) = weights(:,ss-1)' * signal_x(ss:ss+order-1);
+    end
+
+    aux = weights(:,1:10).';
+    tabela = [aux(1,:);aux(2,:);aux(3,:);aux(4,:);aux(5,:);aux(6,:);aux(7,:);aux(8,:);aux(9,:);aux(10,:);];
+    Tabela = array2table(tabela);
+    Tabela.Properties.RowNames = {'i = 1' 'i = 2' 'i = 3' 'i = 4' 'i = 5' 'i = 6' 'i = 7' 'i = 8' 'i = 9' 'i = 10'};
+    Tabela.Properties.VariableNames = {'1st Coeff' '2nd Coeff' '3rd Coeff'};
+
+    % MSE Curve
+    figure()
+    plot(y,'--','color', c_.estimated, "linewidth", 1);
+    hold on;
+    plot(signal_d,'-','color', c_.original, "linewidth", 1);
+    hold off;
+    xlabel('Samples');
+    ylabel('Magnitude');
+    legend('Estimated', 'Original', 'Location', 'Best');
+    grid on;
+
+end
+
+
+%% HOMEWORK 4 - PROBLEM 3
+function hw4p3(varargin)
+    
+    c_ = struct('original', [57 106 177]./255, 'estimated', [204 37 41]./255, 'nlms', [107 76 154]./255, 'mean', 'k');
+
+    lambda = 0.99; % Forgeting rate
+    order = 3; % Filter order
+    SNR_dB = 3; % SNR (dB)
+
+    
+    Samples = 1010; % Number of samples
+    error = zeros(Samples,1); % Empty vectors
+    weights = zeros(order, Samples);
+    SNR_li = 10^(SNR_dB/10); % Defining the energy of the noise vector.
+    variance_noise = 1/SNR_li;
+    noise = sqrt(variance_noise/2).*randn(Samples,1);
+    t = linspace(-pi,pi,Samples).'; % Generating the sinoide signal.
+    signal_d = sin(2*pi*t); % Generating the noisy received signal.
+    signal_x = signal_d + noise; % Defining delta by the inverse of the signal energy
+    delta  = 1/(sum(signal_x.^2)/length(signal_x));
+
+    % Deterministic correlation matrix initialization
+    Rd = delta*eye(order); 
+    %signal_d = signal_d(order:end,1); 
+    for ss = 2:(Samples - order - 1)
+        Rd = (1/lambda)*(Rd - (Rd*signal_x(ss:ss+order-1)*signal_x(ss:ss+order-1)'*Rd)/(lambda + signal_x(ss:ss+order-1)'*Rd*signal_x(ss:ss+order-1)));
+        error(ss) = signal_d(ss) - weights(:,ss-1)' * signal_x(ss:ss+order-1); 
+        weights(:,ss) = weights(:,ss-1) + Rd*error(ss)*signal_x(ss:ss+order-1);
+    end
+    weights = flip(weights); 
+    
+    
+    figure()
+    subplot(2,1,1)
+    plot(1:Samples, weights(1,:),'-','color', c_.original, "linewidth", 1);
+    hold on;
+    plot(1:Samples, weights(2,:),'--','color', c_.estimated, "linewidth", 1);
+    hold off;
+    title('RLS Coefficients Behavior');
+    xlabel('Samples');
+    ylabel('Magnitude');
+    xlim([0 1000]);
+    legend('$w_0$', '$w_1$', 'interpreter', 'latex', 'Location', 'Best');
+    grid on;
+
+    % MSE Curve
+    subplot(2,1,2)
+    semilogy(1:Samples, error.^2,'-','color', c_.nlms, "linewidth", 1, "markersize", 8);
+    % hold on
+    title('RLS Behavior');
+    xlabel('Samples');
+    xlim([0 1000]);
+    ylabel('MSE');
+    grid on;
     %order_snr_forgeting
     % saveas(gcf,'L4Q3_rls_mse_3_3_99.png')
     
 end
+
+
+%% HOMEWORK 4 - PROBLEM 4
+function hw4p4(varargin)
+
+    % Forgeting rate
+    lambda = 0.999;
+    % Filter order
+    order = 2;
+    % Number of samples
+    Samples = 1000;
+    % Defining the mse error and filter coeficients vectors.
+    error = zeros(Samples,1);
+    weights = zeros(order, Samples);
+    %Wiener Solution
+    wiener = [0.35;-0.15];
+    % Defining the energy of the noise vector.
+    SNR_dB = inf;
+    SNR_li = 10^(SNR_dB/10);
+    variance_noise = 1/SNR_li;
+    noise = sqrt(variance_noise/2).*randn(Samples,1);
+    % Generating the original signal.
+    signal_d = randn(Samples,1);
+    % Convolving the channel and the signal.
+    Hz = [1 1.6];
+    signal_x = filter(Hz,1,signal_d);
+    % Generating the noisy received signal.
+    signal_x = signal_x + noise;
+    % Defining delta by the inverse of the signal energy
+    delta  = 1/(sum(signal_x.^2)/length(signal_x));
+    % Defining the autocorrelation matrix and the cross-correlation vector.
+    Rx = [3.56, 1.60; 1.60, 3.56;];
+    p = [1; 0;];
+
+    % Deterministic correlation matrix initialization
+    Rd = delta*eye(order); 
+    signal_d = signal_d(order:end,1); 
+    for ss = 2:(Samples - order - 1)
+        % Deterministic correlation matrix inverse
+        Rd = (1/lambda)*(Rd - (Rd*signal_x(ss:ss+order-1)*signal_x(ss:ss+order-1)'*Rd)/(lambda + signal_x(ss:ss+order-1)'*Rd*signal_x(ss:ss+order-1)));
+        % Error between the desired signal and the filtered signal.
+        error(ss) = signal_d(ss) - weights(:,ss-1)' * signal_x(ss:ss+order-1); 
+        % Recursive expression.
+        weights(:,ss) = weights(:,ss-1) + Rd*error(ss)*signal_x(ss:ss+order-1);
+    end
+    weights = flip(weights); 
+
+    % Coefficients Curve
+    figure
+    txt = ['w0'];
+    plot(1:Samples, weights(1,:),'-','color', [0.3010 0.7450 0.9330], "linewidth", 2, "markersize", 8, "DisplayName",txt);
+    hold on;
+    txt = ['w1'];
+    plot(1:Samples, weights(2,:),'-','color', [0.4660 0.6740 0.1880], "linewidth", 2, "markersize", 8, "DisplayName",txt);
+    hold off;
+    title('RLS Coefficients Behavior');
+    xlabel('Samples');
+    ylabel('Magnitude');
+    legend_copy = legend("location", "northeast");
+    set (legend_copy, "fontsize", 12);
+    grid on;
+    % saveas(gcf,'rls_coefficients.png')
+
+    % MSE Curve
+    figure
+    semilogy(1:Samples, error.^2,'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 8);
+    title('RLS Behavior');
+    xlabel('Samples');
+    ylabel('MSE');
+    grid on;
+    % saveas(gcf,'rls_mse.png')
+
+    % Contour
+    figure
+    [W0, W1] = meshgrid (-1:0.01:1,-1:0.01:1);
+    w0 = reshape(W0,[],1);
+    w1 = reshape(W1,[],1);
+    [aux,~] = size(w0);
+    for i = 1:aux
+    w = [w0(i); w1(i)]; 
+    % We are considering that the desired signal has unitary variance.
+    Z(i) = 1 - 2*w.'*p + w.'*Rx*w;
+    end
+    Z = reshape(Z,size(W0));
+    contour(W0,W1,Z);
+    colormap('gray')
+    hold on;
+    for ss = 1:(Samples - order)
+    plot(weights(1,ss),weights(2,ss),".-",'color', [0.3010 0.7450 0.9330],"markersize", 8); 
+    end
+    plot(wiener(1,1),wiener(2,1),"x",'color', [0.4660 0.6740 0.1880],"markersize", 6); 
+    hold off;
+    title('RLS Contour');
+    xlabel('W_1');
+    ylabel('W_0');
+    grid on;
+    % saveas(gcf,'rls_contour.png')
+    
+end
+
+
+%% HOMEWORK 4 - PROBLEM 5
+
+function hw4p5(varargin)
+
+    % RLS algorithm
+
+    % Training Stage  
+
+    % Forgeting rate
+    lambda = 0.999;
+    % Filter order
+    order = 15 + 1;
+    % Number of samples
+    Samples = 500;
+    % Defining the mse error and filter coeficients vectors
+    error = zeros(Samples,1);
+    weights = zeros(order, Samples);
+
+    % Defining the energy of the noise vector
+    SNR = inf;
+    QAM_train = 4;
+    signal_d_train = randi([0,QAM_train - 1],[Samples 1]); 
+    signal_d_train = qammod(signal_d_train,QAM_train); 
+
+    % Convolving the channel and the signal
+    Hz = [0.5 1.2 1.5 -1];
+    signal_x_train = filtfilt(Hz,1,signal_d_train);
+
+    % Training noise
+    snr = 10^(SNR/10);
+    energy_symbol = mean(abs(signal_x_train(:)).^2); 
+    var_noise = energy_symbol .*  1/snr; 
+    noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
+
+    % Generating the noisy received signal.
+    signal_x_train = signal_x_train + noise;
+    % Defining delta by the inverse of the signal energy
+    delta  = 1/(sum(signal_x_train.^2)/length(signal_x_train));
+
+    % Deterministic correlation matrix initialization
+    Rd = delta*eye(order); 
+    signal_d_train = signal_d_train(order:end,1); 
+    for ss = 2:(Samples - order - 1)
+        % Deterministic correlation matrix inverse
+        Rd = (1/lambda)*(Rd - (Rd*signal_x_train(ss:ss+order-1)*signal_x_train(ss:ss+order-1)'*Rd)/(lambda + signal_x_train(ss:ss+order-1)'*Rd*signal_x_train(ss:ss+order-1)));
+        % Error between the desired signal and the filtered signal.
+        error(ss) = signal_d_train(ss) - weights(:,ss-1)' * signal_x_train(ss:ss+order-1); 
+        % Recursive expression.
+        weights(:,ss) = weights(:,ss-1) + Rd*conj(error(ss))*signal_x_train(ss:ss+order-1);
+    end
+
+    % Transmission Stage 
+
+    % Number of samples
+    Samples = 5000 + 50;
+    % Defining the mse error and filter coeficients vectors
+    error = zeros(Samples,1);
+    weights = zeros(order, Samples);
+
+    % Defining the energy of the noise vector
+    SNR = 30;
+    QAM = 16;
+    signal_d = randi([0,QAM - 1],[Samples 1]);
+    signal_d = qammod(signal_d,QAM);
+
+    % Convolving the channel and the signal
+    Hz = [0.5 1.2 1.5 -1];
+    signal_x = filtfilt(Hz,1,signal_d);
+
+    % Transmision noise
+    snr = 10^(SNR/10);
+    energy_symbol = mean(abs(signal_x(:)).^2); 
+    var_noise = energy_symbol .*  1/snr;
+    noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
+
+    % Generating the noisy received signal
+    signal_x = signal_x + noise;
+
+    % Defining delta by the inverse of the signal energy
+    delta  = 1/(sum(signal_x.^2)/length(signal_x));
+
+    % Deterministic correlation matrix initialization
+    Rd = delta*eye(order); 
+    signal_d_hat = zeros(size(signal_d));
+    % RLS algorithm
+    for ss = 2:(Samples - order - 1)
+        % Deterministic correlation matrix inverse
+        Rd = (1/lambda)*(Rd - (Rd*signal_x(ss:ss+order-1)*signal_x(ss:ss+order-1)'*Rd)/(lambda + signal_x(ss:ss+order-1)'*Rd*signal_x(ss:ss+order-1)));
+        signal_d_hat(ss) = weights(:,ss-1)' * signal_x(ss:ss+order-1);
+        % Error between the desired signal and the filtered signal.
+        error(ss) = qammod(qamdemod(signal_x(ss),QAM),QAM) - weights(:,ss-1)' * signal_x(ss:ss+order-1); 
+        % Recursive expression.
+        weights(:,ss) = weights(:,ss-1) + Rd*conj(error(ss))*signal_x(ss:ss+order-1);
+    end
+    weights_rls = weights(:,Samples-order-1);
+
+    % MSE Curve
+    figure
+    semilogy(1:500, abs(error(1:500)).^2,'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 8);
+    title('RLS Behavior');
+    xlabel('Samples');
+    ylabel('MSE');
+    grid on;
+    % saveas(gcf,'L4Q5_rls_999.png')
+
+    % Temporal Evolution
+    aux = qamdemod(signal_d_hat,QAM);
+    aux1 = aux(1:100);
+    aux2 = aux(4900:5000);
+
+    figure
+    subplot(211)
+    txt = ['Original Signal'];
+    stem(1:100, qamdemod(signal_d(1:100),QAM),'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 3, "DisplayName", txt);
+    hold on;
+    txt = ['Estimated Signal'];
+    stem(1:100, aux1,'-','color', [0.4660 0.6740 0.1880], "linewidth", 1, "markersize", 3, "DisplayName", txt);
+    hold off;
+    title('Temporal Evolution of First Samples');
+    xlabel('Sample');
+    ylabel('Magnitude');
+    legend_copy = legend("location", "southwest");
+    set (legend_copy, "fontsize", 6);
+    grid on;
+    subplot(212)
+    txt = ['Original Signal'];
+    stem(4900:5000, qamdemod(signal_d(4900:5000),QAM),'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 3, "DisplayName", txt);
+    hold on;
+    txt = ['Estimated Signal'];
+    stem(4900:5000, aux2,'-','color', [0.4660 0.6740 0.1880], "linewidth", 1, "markersize", 3, "DisplayName", txt);
+    hold off;
+    title('Temporal Evolution of Last Samples');
+    xlabel('Sample');
+    ylabel('Magnitude');
+    legend_copy = legend("location", "southwest");
+    set (legend_copy, "fontsize", 6);
+    grid on;
+    % saveas(gcf,'L4Q5_rls_t.png')
+
+    % LMS algorithm 
+
+    % Training Stage  
+    % Learning rate
+    mi = 1e-3;
+    % Filter order
+    order = 15 + 1;
+    % Number of samples
+    Samples = 500;
+    % Defining the mse error and filter coeficients vectors.
+    error = zeros(Samples,1);
+    weights = zeros(order, Samples);
+
+    % Defining the energy of the noise vector.
+    SNR = inf;
+    QAM_train = 4;
+    signal_d_train = randi([0,QAM_train - 1],[Samples 1]);
+    signal_d_train = qammod(signal_d_train,QAM_train);
+
+    % Convolving the channel and the signal.
+    Hz = [0.5 1.2 1.5 -1];
+    signal_x_train = filter(Hz,1,signal_d_train);
+
+    % Training noise
+    snr = 10^(SNR/10);
+    energy_symbol = mean(abs(signal_x_train(:)).^2); % Energy symbol pilot. 
+    var_noise = energy_symbol .*  1/snr; % Variance of the noise.
+    noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
+
+    % Generating the noisy received signal.
+    signal_x_train = signal_x_train + noise;
+
+    for s = order:Samples
+        aux = signal_x_train(s:-1:s-order+1);
+        error(s) = signal_d_train(s-order+1) - weights(:,s)'*aux;
+        % Recursive expression.
+        weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * aux;
+    end
+
+    % Transmission Stage 
+    % Number of samples
+    Samples = 5000;
+    % Defining the mse error and filter coeficients vectors.
+    error = zeros(Samples,1);
+    weights = zeros(order, Samples);
+
+    % Defining the energy of the noise vector.
+    SNR = 30;
+    QAM = 16;
+    signal_d = randi([0,QAM - 1],[Samples 1]); 
+    signal_d = qammod(signal_d,QAM);
+
+    % Convolving the channel and the signal.
+    Hz = [0.5 1.2 1.5 -1];
+    signal_x = filter(Hz,1,signal_d);
+
+    % Training noise
+    snr = 10^(SNR/10);
+    energy_symbol = mean(abs(signal_x(:)).^2); % Energy symbol pilot. 
+    var_noise = energy_symbol .*  1/snr; % Variance of the noise.
+    noise = sqrt(var_noise/2) * (randn(Samples,1) + 1i*randn(Samples,1));
+
+    % Generating the noisy received signal.
+    signal_x = signal_x + noise;
+
+    signal_d_hat = zeros(size(signal_d));
+    for s = order:Samples
+        aux = signal_x(s:-1:s-order+1);
+        signal_d_hat(s-order+1) = weights(:,s)'*aux;
+        error(s) = qammod(qamdemod(signal_x(s-order+1),QAM),QAM) - weights(:,s)'*aux;
+        % Recursive expression.
+        weights(:,s+1) = weights(:,s) + 2 * mi * conj(error(s)) * aux;
+    end
+    weights_lms = weights(:,s + 1);
+
+    % MSE Curve
+    figure
+    semilogy(1:500, abs(error(1:500)).^2,'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 8);
+    title('LMS Behavior');
+    xlabel('Samples');
+    ylabel('MSE');
+    grid on;
+    % saveas(gcf,'L4Q5_lms.png')
+
+    % Filter Response
+    %https://www.mathworks.com/help/signal/ug/frequency-response.html#:~:text=To%20convert%20normalized%20frequency%20back,by%20half%20the%20sample%20frequency.&text=freqz%20can%20also%20accept%20a,(b%2Ca%2Cw)%3B
+    figure
+    [Hlms,wlms] = freqz(weights_lms.',1,'whole',512);
+    [Hrls,wrls] = freqz(weights_rls.',1,'whole',512);
+    [Hc,wc] = freqz([0.5 1.2 1.5 -1],1,'whole',512);
+    txt = ['Unknown System'];
+    plot(wc/pi,20*log10(abs(Hc)),'-','color', [0.3010 0.7450 0.9330], "linewidth", 1, "markersize", 8, "DisplayName", txt);
+    hold on;
+    txt = ['LMS Filter Response'];
+    plot(wlms/pi,20*log10(abs(Hlms)),'-','color', [0.4660 0.6740 0.1880], "linewidth", 1, "markersize", 8, "DisplayName", txt);
+    hold on;
+    txt = ['RLS Filter Response'];
+    plot(wrls/pi,20*log10(abs(Hrls)),'-','color', [0 0.4470 0.7410], "linewidth", 1, "markersize", 8, "DisplayName", txt);
+    hold off;
+    title('System Identification with RLS and LMS')
+    xlabel('Normalized Frequency (\times\pi rad/sample)')
+    ylabel('Magnitude (dB)')
+    grid on;
+    legend_copy = legend("location", "southwest");
+    set (legend_copy, "fontsize", 6);
+    % saveas(gcf,'L4Q5_filter_response.png')
+end
+
 
 
 %% VERBOSE DETAILS
