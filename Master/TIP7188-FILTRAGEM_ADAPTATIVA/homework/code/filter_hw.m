@@ -1091,116 +1091,490 @@ function SER = hw3p6(varargin)
 end
 
 
-%% ----------------------- OK ATE AQUI
-
 
 %% HOMEWORK 4 - PROBLEM 1
+
+function [y, weights]  = hw4p1rls(signal_x, signal_d, M, lambda, delta, fixcoeff)
+    N = length(signal_d);
+    error = zeros(N,1);
+    weights = zeros(M, N);
+    Rd = delta*eye(M);
+    y = zeros(N,1);
+    weights(1,1) = 1;
+
+    for n = 2:(N - M - 1)
+        Rd = (1/lambda)*(Rd - (Rd*signal_x(n:n+M-1)*signal_x(n:n+M-1)'*Rd)/(lambda + signal_x(n:n+M-1)'*Rd*signal_x(n:n+M-1)));
+        error(n) = signal_d(n) - weights(:,n-1)' * signal_x(n:n+M-1); 
+        weights(:,n) = weights(:,n-1) + Rd*error(n)*signal_x(n:n+M-1);
+        if fixcoeff
+            weights(1,n) = 1; % Impose first coeff fix
+        end
+        y(n) = weights(:,n-1)' * signal_x(n:n+M-1);
+    end
+
+end
+
 function hw4p1(varargin)
     disp('hw4p1')
-    c_ = struct('original', [57 106 177]./255, 'estimated', [204 37 41]./255, 'nlms', [107 76 154]./255, 'mean', 'k');
+    c_ = struct('original', [57 106 177]./255, 'fixcoef', [204 37 41]./255, 'freecoef', [62 150 81]./255);
 
-    % Forgeting rate
+    % General Setup
     N = 100; 
     order = 2; M = order + 1;
     lambda = 0.98;
     delta = 1;    
     
     % Signal Model
-    error = zeros(N,1);
-    weights = zeros(M, N);
-    weights(:,1) = 1;
-    Rd = delta*eye(M); 
-    y = zeros(N,1);
-    t = linspace(-pi,pi,N).';
+    t = linspace(-3*pi,3*pi,N).';
     signal_d = cos(pi*t/3);
-    SNR_dB = 15;
-    SNR_li = 10^(SNR_dB/10);
-    variance_noise = 1/SNR_li;
-    noise = sqrt(variance_noise/2).*randn(N,1);
+    SNR_dB = 10;
+    noise = sqrt((1/(10^(SNR_dB/10)))/2).*randn(N,1);
     signal_x = signal_d + noise;
 
-    for n = 2:(N - M - 1)
-        Rd = (1/lambda)*(Rd - (Rd*signal_x(n:n+M-1)*signal_x(n:n+M-1)'*Rd)/(lambda + signal_x(n:n+M-1)'*Rd*signal_x(n:n+M-1)));
-        error(n) = signal_d(n) - weights(:,n-1)' * signal_x(n:n+M-1); 
-        weights(:,n) = weights(:,n-1) + Rd*error(n)*signal_x(n:n+M-1);
-        % Impose first coeff fix
-        weights(1,n) = 1;
-        y(n) = weights(:,n-1)' * signal_x(n:n+M-1);
-    end
+    [fixcoef.y, fixcoef.weights] = filter_hw.hw4p1rls(signal_x, signal_d, M, lambda, delta, true);
+    [freecoef.y, freecoef.weights] = filter_hw.hw4p1rls(signal_x, signal_d, M, lambda, delta, false);
 
-    filter_hw.mat2txt('hw4p1coef.txt', weights(:,1:10).', 'w', 'coef fix');
+    filter_hw.mat2txt('hw4p1coef.txt', fixcoef.weights(:,1:10).', 'w', 'coef fix');
+    filter_hw.mat2txt('hw4p1coef.txt', freecoef.weights(:,1:10).', 'a', 'free fix');
 
     % MSE Curve
-    figure()
-    plot(y,'--','color', c_.estimated, "linewidth", 1);
+    h1 = figure();
+    plot(signal_d,'-','color', 'k', "linewidth", 1);
     hold on;
-    plot(signal_d,'-','color', c_.original, "linewidth", 1);
+    plot(fixcoef.y,'--','color', c_.fixcoef,  'Marker', '^', 'MarkerFaceColor', c_.fixcoef, 'MarkerIndices',1:20:length(fixcoef.y), "linewidth", 1);
+    plot(freecoef.y,'-.','color', c_.freecoef,  'Marker', 'o', 'MarkerFaceColor', c_.freecoef, 'MarkerIndices',1:25:length(freecoef.y), "linewidth", 1);
     hold off;
     xlabel('Samples, N');
     ylabel('Magnitude');
-    legend('Estimated', 'Original', 'Location', 'Best');
+    legend('Original (SNR = 10 dB)', 'Fix Coef', 'Free Coef', 'Location', 'Best');
     grid on;
+    savefig_tight(h1, 'figures/hw4p1', 'both');
 
 end
 
 
 %% HOMEWORK 4 - PROBLEM 3
-function hw4p3(varargin)
-    
-    c_ = struct('original', [57 106 177]./255, 'estimated', [204 37 41]./255, 'nlms', [107 76 154]./255, 'mean', 'k');
 
-    lambda = 0.99; % Forgeting rate
-    order = 4; % Filter order
-    SNR_dB = 3; % SNR (dB)
-
+function [error, weights] = hw4p3rls(signal_d, M, SNR_dB, lambda)
+    N = length(signal_d);
+    error = zeros(N,1);
+    weights = zeros(M, N);
     
-    Samples = 1010; % Number of samples
-    error = zeros(Samples,1); % Empty vectors
-    weights = zeros(order, Samples);
-    SNR_li = 10^(SNR_dB/10); % Defining the energy of the noise vector.
-    variance_noise = 1/SNR_li;
-    noise = sqrt(variance_noise/2).*randn(Samples,1);
-    t = linspace(-pi,pi,Samples).'; % Generating the sinoide signal.
-    signal_d = sin(2*pi*t); % Generating the noisy received signal.
+    noise = sqrt((1/(10^(SNR_dB/10)))/2).*randn(N,1);
     signal_x = signal_d + noise; % Defining delta by the inverse of the signal energy
+    
     delta  = 1/(sum(signal_x.^2)/length(signal_x));
+    Rd = delta*eye(M);
 
-    % Deterministic correlation matrix initialization
-    Rd = delta*eye(order); 
-    signal_d = signal_d(order:end,1); 
-    for ss = 2:(Samples - order - 1)
-        Rd = (1/lambda)*(Rd - (Rd*signal_x(ss:ss+order-1)*signal_x(ss:ss+order-1)'*Rd)/(lambda + signal_x(ss:ss+order-1)'*Rd*signal_x(ss:ss+order-1)));
-        error(ss) = signal_d(ss) - weights(:,ss-1)' * signal_x(ss:ss+order-1); 
-        weights(:,ss) = weights(:,ss-1) + Rd*error(ss)*signal_x(ss:ss+order-1);
+    signal_d = signal_d(M:end,1); 
+    for ss = 2:(N - M - 1)
+        Rd = (1/lambda)*(Rd - (Rd*signal_x(ss:ss+M-1)*signal_x(ss:ss+M-1)'*Rd)/(lambda + signal_x(ss:ss+M-1)'*Rd*signal_x(ss:ss+M-1)));
+        error(ss) = signal_d(ss) - weights(:,ss-1)' * signal_x(ss:ss+M-1); 
+        weights(:,ss) = weights(:,ss-1) + Rd*error(ss)*signal_x(ss:ss+M-1);
     end
     weights = flip(weights); 
+
+end
+
+function hw4p3(varargin)
+    disp('hw4p3');
+
+    c_ = struct('original', [57 106 177]./255, 'estimated', [204 37 41]./255, 'nlms', [107 76 154]./255, 'mean', 'k');
     
+    % General Setup
+    N = 510;
+    A.lambda = 0.9;
+    B.lambda = 0.99;
+    C.lambda = 0.999;
+
+    % Order = 2 ------------------------------------------------------------------------------------------------------------------------------------------------
+    order = 2; M = order + 1;
+    SNR_dB = 3;
+
+    % Signal Model
+    t = linspace(-pi,pi,N).';
+    signal_d = sin(2*pi*t); % Generating the noisy received signal.
     
-    figure()
-    subplot(2,1,1)
-    plot(1:Samples, weights(1,:),'-','color', c_.original, "linewidth", 1);
-    hold on;
-    plot(1:Samples, weights(2,:),'--','color', c_.estimated, "linewidth", 1);
-    hold off;
-    title('RLS Coefficients Behavior');
+    % Change: M, SNR, lambda
+    [A.error, A.weights] = filter_hw.hw4p3rls(signal_d, M, SNR_dB, A.lambda);
+    [B.error, B.weights] = filter_hw.hw4p3rls(signal_d, M, SNR_dB, B.lambda);
+    [C.error, C.weights] = filter_hw.hw4p3rls(signal_d, M, SNR_dB, C.lambda);
+
+    % Plot - 3 dB
+    h1 = figure();
+    subplot(2,2,1)
+    semilogy(1:N, A.error.^2,'-','color', c_.nlms, "linewidth", 1, "markersize", 8);
+    hold on
+    semilogy(1:N, repelem(mean(A.error.^2), N), '--', 'color', c_.mean, "linewidth", 1);
+    hold off
     xlabel('Samples, N');
-    ylabel('Magnitude');
-    xlim([0 1000]);
-    legend('$w_0$', '$w_1$', 'interpreter', 'latex', 'Location', 'Best');
+    xlim([0 N-10]);
+    ylim([1e-8 1e0])
+    ylabel('MSE');
+    legend(strcat(sprintf('RLS (M = %2.0f, SNR = $%2.0f$ dB,', order, SNR_dB), ' $\lambda$ = ', num2str(A.lambda), ')'), strcat('Mean =', num2str(mean(A.error.^2))), 'interpreter', 'latex', 'Orientation', 'Vertical', 'Location', 'NorthOutside')
+    legend boxoff
     grid on;
 
-    % MSE Curve
-    subplot(2,1,2)
-    semilogy(1:Samples, error.^2,'-','color', c_.nlms, "linewidth", 1, "markersize", 8);
-    % hold on
-    title('RLS Behavior');
+    subplot(2,2,2)
+    semilogy(1:N, B.error.^2,'-','color', c_.nlms, "linewidth", 1, "markersize", 8);
+    hold on
+    semilogy(1:N, repelem(mean(B.error.^2), N), '--', 'color', c_.mean, "linewidth", 1);
+    hold off
     xlabel('Samples, N');
-    xlim([0 1000]);
+    xlim([0 N-10]);
+    ylim([1e-8 1e0])
     ylabel('MSE');
+    legend(strcat(sprintf('RLS (M = %2.0f, SNR = $%2.0f$ dB,', order, SNR_dB), ' $\lambda$ = ', num2str(B.lambda), ')'), strcat('Mean =', num2str(mean(B.error.^2))), 'interpreter', 'latex', 'Orientation', 'Vertical', 'Location', 'NorthOutside')
+    legend boxoff
     grid on;
-    %order_snr_forgeting
-    % saveas(gcf,'L4Q3_rls_mse_3_3_99.png')
     
+    subplot(2,2,3)
+    plot(1:N, A.weights(1,:),'-','color', c_.original, "linewidth", 1);
+    hold on;
+    plot(1:N, A.weights(2,:),'--','color', c_.estimated, "linewidth", 1);
+    hold off;
+    xlabel('Samples, N');
+    ylabel('Magnitude');
+    xlim([0 N-10]);
+    legend('$w_0$', '$w_1$', 'interpreter', 'latex', 'Orientation', 'Horizontal', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+
+    subplot(2,2,4)
+    plot(1:N, B.weights(1,:),'-','color', c_.original, "linewidth", 1);
+    hold on;
+    plot(1:N, B.weights(2,:),'--','color', c_.estimated, "linewidth", 1);
+    hold off;
+    xlabel('Samples, N');
+    ylabel('Magnitude');
+    xlim([0 N-10]);
+    legend('$w_0$', '$w_1$', 'interpreter', 'latex', 'Orientation', 'Horizontal', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+    
+    % savefig_tight(h1, 'figures/hw4p3-fig1', 'both');
+
+    h2 = figure();
+    subplot(2,1,1)
+    semilogy(1:N, C.error.^2,'-','color', c_.nlms, "linewidth", 1, "markersize", 8);
+    hold on
+    semilogy(1:N, repelem(mean(C.error.^2), N), '--', 'color', c_.mean, "linewidth", 1);
+    hold off
+    xlabel('Samples, N');
+    xlim([0 N-10]);
+    ylim([1e-8 1e0])
+    ylabel('MSE');
+    legend(strcat(sprintf('RLS (M = %2.0f, SNR = $%2.0f$ dB,', order, SNR_dB), ' $\lambda$ = ', num2str(C.lambda), ')'), strcat('Mean =', num2str(mean(B.error.^2))), 'interpreter', 'latex', 'Orientation', 'Vertical', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+    
+    subplot(2,1,2)
+    plot(1:N, C.weights(1,:),'-','color', c_.original, "linewidth", 1);
+    hold on;
+    plot(1:N, C.weights(2,:),'--','color', c_.estimated, "linewidth", 1);
+    hold off;
+    xlabel('Samples, N');
+    ylabel('Magnitude');
+    xlim([0 N-10]);
+    legend('$w_0$', '$w_1$', 'interpreter', 'latex', 'Orientation', 'Horizontal', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+
+    % savefig_tight(h2, 'figures/hw4p3-fig2', 'both');
+
+    pause;
+    close all;
+
+    SNR_dB = inf;
+
+    % Signal Model
+    t = linspace(-pi,pi,N).';
+    signal_d = sin(2*pi*t); % Generating the noisy received signal.
+    
+    % Change: M, SNR, lambda
+    [A.error, A.weights] = filter_hw.hw4p3rls(signal_d, M, SNR_dB, A.lambda);
+    [B.error, B.weights] = filter_hw.hw4p3rls(signal_d, M, SNR_dB, B.lambda);
+    [C.error, C.weights] = filter_hw.hw4p3rls(signal_d, M, SNR_dB, C.lambda);
+
+    % Plot - inf dB
+    h3 = figure();
+    subplot(2,2,1)
+    semilogy(1:N, A.error.^2,'-','color', c_.nlms, "linewidth", 1, "markersize", 8);
+    hold on
+    semilogy(1:N, repelem(mean(A.error.^2), N), '--', 'color', c_.mean, "linewidth", 1);
+    hold off
+    xlabel('Samples, N');
+    xlim([0 N-10]);
+    ylim([1e-8 1e0])
+    ylabel('MSE');
+    legend(strcat(sprintf('RLS (M = %2.0f, SNR = $%2.0f$ dB,', order, SNR_dB), ' $\lambda$ = ', num2str(A.lambda), ')'), strcat('Mean =', num2str(mean(A.error.^2))), 'interpreter', 'latex', 'Orientation', 'Vertical', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+
+    subplot(2,2,2)
+    semilogy(1:N, B.error.^2,'-','color', c_.nlms, "linewidth", 1, "markersize", 8);
+    hold on
+    semilogy(1:N, repelem(mean(B.error.^2), N), '--', 'color', c_.mean, "linewidth", 1);
+    hold off
+    xlabel('Samples, N');
+    xlim([0 N-10]);
+    ylim([1e-8 1e0])
+    ylabel('MSE');
+    legend(strcat(sprintf('RLS (M = %2.0f, SNR = $%2.0f$ dB,', order, SNR_dB), ' $\lambda$ = ', num2str(B.lambda), ')'), strcat('Mean =', num2str(mean(B.error.^2))), 'interpreter', 'latex', 'Orientation', 'Vertical', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+    
+    subplot(2,2,3)
+    plot(1:N, A.weights(1,:),'-','color', c_.original, "linewidth", 1);
+    hold on;
+    plot(1:N, A.weights(2,:),'--','color', c_.estimated, "linewidth", 1);
+    hold off;
+    xlabel('Samples, N');
+    ylabel('Magnitude');
+    xlim([0 N-10]);
+    legend('$w_0$', '$w_1$', 'interpreter', 'latex', 'Orientation', 'Horizontal', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+
+    subplot(2,2,4)
+    plot(1:N, B.weights(1,:),'-','color', c_.original, "linewidth", 1);
+    hold on;
+    plot(1:N, B.weights(2,:),'--','color', c_.estimated, "linewidth", 1);
+    hold off;
+    xlabel('Samples, N');
+    ylabel('Magnitude');
+    xlim([0 N-10]);
+    legend('$w_0$', '$w_1$', 'interpreter', 'latex', 'Orientation', 'Horizontal', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+    
+    % savefig_tight(h3, 'figures/hw4p3-fig3', 'both');
+
+    h4 = figure();
+    subplot(2,1,1)
+    semilogy(1:N, C.error.^2,'-','color', c_.nlms, "linewidth", 1, "markersize", 8);
+    hold on
+    semilogy(1:N, repelem(mean(C.error.^2), N), '--', 'color', c_.mean, "linewidth", 1);
+    hold off
+    xlabel('Samples, N');
+    xlim([0 N-10]);
+    ylim([1e-8 1e0])
+    ylabel('MSE');
+    legend(strcat(sprintf('RLS (M = %2.0f, SNR = $%2.0f$ dB,', order, SNR_dB), ' $\lambda$ = ', num2str(C.lambda), ')'), strcat('Mean =', num2str(mean(B.error.^2))), 'interpreter', 'latex', 'Orientation', 'Vertical', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+    
+    subplot(2,1,2)
+    plot(1:N, C.weights(1,:),'-','color', c_.original, "linewidth", 1);
+    hold on;
+    plot(1:N, C.weights(2,:),'--','color', c_.estimated, "linewidth", 1);
+    hold off;
+    xlabel('Samples, N');
+    ylabel('Magnitude');
+    xlim([0 N-10]);
+    legend('$w_0$', '$w_1$', 'interpreter', 'latex', 'Orientation', 'Horizontal', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+
+    % savefig_tight(h4, 'figures/hw4p3-fig4', 'both');
+    
+    pause;
+    close all;
+
+    % Order = 3 ------------------------------------------------------------------------------------------------------------------------------------------------
+    order = 3; M = order + 1;
+    SNR_dB = 3;
+
+    % Signal Model
+    t = linspace(-pi,pi,N).';
+    signal_d = sin(2*pi*t); % Generating the noisy received signal.
+    
+    % Change: M, SNR, lambda
+    [A.error, A.weights] = filter_hw.hw4p3rls(signal_d, M, SNR_dB, A.lambda);
+    [B.error, B.weights] = filter_hw.hw4p3rls(signal_d, M, SNR_dB, B.lambda);
+    [C.error, C.weights] = filter_hw.hw4p3rls(signal_d, M, SNR_dB, C.lambda);
+
+    % Plot - 3 dB
+    h5 = figure();
+    subplot(2,2,1)
+    semilogy(1:N, A.error.^2,'-','color', c_.nlms, "linewidth", 1, "markersize", 8);
+    hold on
+    semilogy(1:N, repelem(mean(A.error.^2), N), '--', 'color', c_.mean, "linewidth", 1);
+    hold off
+    xlabel('Samples, N');
+    xlim([0 N-10]);
+    ylim([1e-8 1e0])
+    ylabel('MSE');
+    legend(strcat(sprintf('RLS (M = %2.0f, SNR = $%2.0f$ dB,', order, SNR_dB), ' $\lambda$ = ', num2str(A.lambda), ')'), strcat('Mean =', num2str(mean(A.error.^2))), 'interpreter', 'latex', 'Orientation', 'Vertical', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+
+    subplot(2,2,2)
+    semilogy(1:N, B.error.^2,'-','color', c_.nlms, "linewidth", 1, "markersize", 8);
+    hold on
+    semilogy(1:N, repelem(mean(B.error.^2), N), '--', 'color', c_.mean, "linewidth", 1);
+    hold off
+    xlabel('Samples, N');
+    xlim([0 N-10]);
+    ylim([1e-8 1e0])
+    ylabel('MSE');
+    legend(strcat(sprintf('RLS (M = %2.0f, SNR = $%2.0f$ dB,', order, SNR_dB), ' $\lambda$ = ', num2str(B.lambda), ')'), strcat('Mean =', num2str(mean(B.error.^2))), 'interpreter', 'latex', 'Orientation', 'Vertical', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+    
+    subplot(2,2,3)
+    plot(1:N, A.weights(1,:),'-','color', c_.original, "linewidth", 1);
+    hold on;
+    plot(1:N, A.weights(2,:),'--','color', c_.estimated, "linewidth", 1);
+    hold off;
+    xlabel('Samples, N');
+    ylabel('Magnitude');
+    xlim([0 N-10]);
+    legend('$w_0$', '$w_1$', 'interpreter', 'latex', 'Orientation', 'Horizontal', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+
+    subplot(2,2,4)
+    plot(1:N, B.weights(1,:),'-','color', c_.original, "linewidth", 1);
+    hold on;
+    plot(1:N, B.weights(2,:),'--','color', c_.estimated, "linewidth", 1);
+    hold off;
+    xlabel('Samples, N');
+    ylabel('Magnitude');
+    xlim([0 N-10]);
+    legend('$w_0$', '$w_1$', 'interpreter', 'latex', 'Orientation', 'Horizontal', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+    
+    % savefig_tight(h5, 'figures/hw4p3-fig5', 'both');
+
+    h6 = figure();
+    subplot(2,1,1)
+    semilogy(1:N, C.error.^2,'-','color', c_.nlms, "linewidth", 1, "markersize", 8);
+    hold on
+    semilogy(1:N, repelem(mean(C.error.^2), N), '--', 'color', c_.mean, "linewidth", 1);
+    hold off
+    xlabel('Samples, N');
+    xlim([0 N-10]);
+    ylim([1e-8 1e0])
+    ylabel('MSE');
+    legend(strcat(sprintf('RLS (M = %2.0f, SNR = $%2.0f$ dB,', order, SNR_dB), ' $\lambda$ = ', num2str(C.lambda), ')'), strcat('Mean =', num2str(mean(B.error.^2))), 'interpreter', 'latex', 'Orientation', 'Vertical', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+    
+    subplot(2,1,2)
+    plot(1:N, C.weights(1,:),'-','color', c_.original, "linewidth", 1);
+    hold on;
+    plot(1:N, C.weights(2,:),'--','color', c_.estimated, "linewidth", 1);
+    hold off;
+    xlabel('Samples, N');
+    ylabel('Magnitude');
+    xlim([0 N-10]);
+    legend('$w_0$', '$w_1$', 'interpreter', 'latex', 'Orientation', 'Horizontal', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+
+    % savefig_tight(h6, 'figures/hw4p3-fig6', 'both');
+
+    pause;
+    close all;
+
+    SNR_dB = inf;
+
+    % Signal Model
+    t = linspace(-pi,pi,N).';
+    signal_d = sin(2*pi*t); % Generating the noisy received signal.
+    
+    % Change: M, SNR, lambda
+    [A.error, A.weights] = filter_hw.hw4p3rls(signal_d, M, SNR_dB, A.lambda);
+    [B.error, B.weights] = filter_hw.hw4p3rls(signal_d, M, SNR_dB, B.lambda);
+    [C.error, C.weights] = filter_hw.hw4p3rls(signal_d, M, SNR_dB, C.lambda);
+
+    % Plot - inf dB
+    h7 = figure();
+    subplot(2,2,1)
+    semilogy(1:N, A.error.^2,'-','color', c_.nlms, "linewidth", 1, "markersize", 8);
+    hold on
+    semilogy(1:N, repelem(mean(A.error.^2), N), '--', 'color', c_.mean, "linewidth", 1);
+    hold off
+    xlabel('Samples, N');
+    xlim([0 N-10]);
+    ylim([1e-8 1e0])
+    ylabel('MSE');
+    legend(strcat(sprintf('RLS (M = %2.0f, SNR = $%2.0f$ dB,', order, SNR_dB), ' $\lambda$ = ', num2str(A.lambda), ')'), strcat('Mean =', num2str(mean(A.error.^2))), 'interpreter', 'latex', 'Orientation', 'Vertical', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+
+    subplot(2,2,2)
+    semilogy(1:N, B.error.^2,'-','color', c_.nlms, "linewidth", 1, "markersize", 8);
+    hold on
+    semilogy(1:N, repelem(mean(B.error.^2), N), '--', 'color', c_.mean, "linewidth", 1);
+    hold off
+    xlabel('Samples, N');
+    xlim([0 N-10]);
+    ylim([1e-8 1e0])
+    ylabel('MSE');
+    legend(strcat(sprintf('RLS (M = %2.0f, SNR = $%2.0f$ dB,', order, SNR_dB), ' $\lambda$ = ', num2str(B.lambda), ')'), strcat('Mean =', num2str(mean(B.error.^2))), 'interpreter', 'latex', 'Orientation', 'Vertical', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+    
+    subplot(2,2,3)
+    plot(1:N, A.weights(1,:),'-','color', c_.original, "linewidth", 1);
+    hold on;
+    plot(1:N, A.weights(2,:),'--','color', c_.estimated, "linewidth", 1);
+    hold off;
+    xlabel('Samples, N');
+    ylabel('Magnitude');
+    xlim([0 N-10]);
+    legend('$w_0$', '$w_1$', 'interpreter', 'latex', 'Orientation', 'Horizontal', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+
+    subplot(2,2,4)
+    plot(1:N, B.weights(1,:),'-','color', c_.original, "linewidth", 1);
+    hold on;
+    plot(1:N, B.weights(2,:),'--','color', c_.estimated, "linewidth", 1);
+    hold off;
+    xlabel('Samples, N');
+    ylabel('Magnitude');
+    xlim([0 N-10]);
+    legend('$w_0$', '$w_1$', 'interpreter', 'latex', 'Orientation', 'Horizontal', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+    
+    savefig_tight(h7, 'figures/hw4p3-fig7', 'both');
+
+    h8 = figure();
+    subplot(2,1,1)
+    semilogy(1:N, C.error.^2,'-','color', c_.nlms, "linewidth", 1, "markersize", 8);
+    hold on
+    semilogy(1:N, repelem(mean(C.error.^2), N), '--', 'color', c_.mean, "linewidth", 1);
+    hold off
+    xlabel('Samples, N');
+    xlim([0 N-10]);
+    ylim([1e-8 1e0])
+    ylabel('MSE');
+    legend(strcat(sprintf('RLS (M = %2.0f, SNR = $%2.0f$ dB,', order, SNR_dB), ' $\lambda$ = ', num2str(C.lambda), ')'), strcat('Mean =', num2str(mean(B.error.^2))), 'interpreter', 'latex', 'Orientation', 'Vertical', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+    
+    subplot(2,1,2)
+    plot(1:N, C.weights(1,:),'-','color', c_.original, "linewidth", 1);
+    hold on;
+    plot(1:N, C.weights(2,:),'--','color', c_.estimated, "linewidth", 1);
+    hold off;
+    xlabel('Samples, N');
+    ylabel('Magnitude');
+    xlim([0 N-10]);
+    legend('$w_0$', '$w_1$', 'interpreter', 'latex', 'Orientation', 'Horizontal', 'Location', 'NorthOutside')
+    legend boxoff
+    grid on;
+
+    savefig_tight(h8, 'figures/hw4p3-fig8', 'both');
+
+
+
+
 end
 
 
