@@ -3,24 +3,24 @@
 
 \subsection{Média e Autocorrelação} % <-----------------------------------------------------------------------------
 \todo[inline, color=yellow!30]{Organizar}
-Para o cálculo da média é possível escrever
+Para obter a média, basta a expressão de acordo com o operador esperança $\mathbb{E}\{ \cdot \}$, dado que as variáveis aleatórias tem mesma média, resume-se a expressão:
 				
+\begin{align*}
+    \mathbb{E}\{ x(n)\} &= \mathbb{E}\{ v(n) + 3v(n-1)\} \\
+    &= \mu + 3\mu \\
+    &= 4\mu
+\end{align*}
+
+Já a variância, é obtida aplicando o mesmo operador à expressão seguinte:
+
+\begin{align*}
+    \mathbb{E}\{[(x(n) - \mu_{X})]^2\} = \mathbb{E}\{[v(n) - 3v(n-1) - \mu_{X}]^{2}\} \\
+    &= \mathbb{E}\{[v(n) - 3v(n-1) - \mu_{X}]^{2}\} \\
+\end{align*}
+
 \begin{align}
-    &E[x(n)] = E[v(n) + 3v(n-1)], 
-\end{align}
-
-mas uma vez que todas as variáveis aleatórias possuem mesma média o resultado será
-
-\begin{align}
-    &E[x(n)] = \mu + 3\mu = 4\mu.  
-\end{align}
-
-De forma semelhante a variância pode ser obtida por 
-
-\begin{align}
-    &\mathbb{E}\{[(x(n) - \mu_{X})]^2\}, \\
-    &\mathbb{E}\{[x(n) - 4\mu]^2\} = \mathbb{E}\{[v(n) - 3v(n-1) -4\mu]^{2}\}, \\
-    &\mathbb{E}\{[x(n) - 4\mu]^2\} = \mathbb{E}\{[v(n) - \mu + 3v(n-1) -3\mu]^{2}\},
+    \mathbb{E}\{[x(n) - 4\mu]^2\} = \mathbb{E}\{[v(n) - 3v(n-1) -4\mu]^{2}\}, \\
+    \mathbb{E}\{[x(n) - 4\mu]^2\} = \mathbb{E}\{[v(n) - \mu + 3v(n-1) -3\mu]^{2}\},
 \end{align}
 
 e ao desenvolver o valor quadrado da expressão chega-se em
