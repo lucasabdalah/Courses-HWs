@@ -2,8 +2,6 @@
 
 
 \subsection{Média e Autocorrelação} % <-----------------------------------------------------------------------------
-\todo[inline, color=green!30]{Ok}
-
 Para obter a média, basta a expressão de acordo com o operador esperança $\mathbb{E}\{ \cdot \}$, dado que as variáveis aleatórias tem mesma média, resume-se a expressão:
 				
 \begin{align*}
@@ -35,94 +33,71 @@ Para afirmar que o processo apresentado é estacionário em sentido amplo, abrev
 Visto que os pré-requisitos são cumpridos, pode-se concluir que o processo é de fato WSS. Entretanto, para afirmar algo além disso é necessário conhecer os movimentos de ordem superior do caso estudado.
 
 
-\subsection{Processos Escationários} % <-----------------------------------------------------------------------------
-\todo[inline, color=yellow!30]{Organizar}
-\begin{align} 
-    &x(n) = v_1(n) + 3v_2(n-1), \\
-    &y(n) = v_2(n + 1) + 3v_1(n-1),
-\end{align}
+\subsection{Processos Estacionários} % <-----------------------------------------------------------------------------
+    
+\textbf{Funções de autocorrelação de $x$ e de $y$}
 
-em que $v_1(n)$ e $v_2(n)$ são processos de ruído branco independentes cada um com variância igual a $0,5$.
+Primeiramente, é conveniente definir o processo de ruído branco, visto que este possui propriedades bastante conveniente para a solução do problema. O processo desta natureza tem média nula e tem todas as suas amostras independentes entre si. Isto permite que seja obtida a média de novos processos resultantes da mistura linear desses ruídos.
+
+Para $x(n)$, obtém-se a média dado:
+\begin{align*}
+    \mathbb{E}\{x(n)\} &= \mathbb{E}\{v_{1}(n) + 3v_{2}(n-1)\} \\
+    & = \mu_{1} + 3\mu_{2} \\
+    & = 0 
+\end{align*}
+
+Enquanto para a variânciam, tem-se que (semelhante ao exercício 1.1):
+
+\begin{align*}
+    \mathbb{E}\{[x(n) - \mu]^{2}\} &= \mathbb{E}\{[x(n) - 0]^{2}\}\\
+    &= \mathbb{E}\{[v_{1}(n) + 3v_{2}(n-1)]^{2}\} \\
+    &= \mathbb{E}\{ [v^{2}_{1}(n)] + 6[v_{1}(n)v_{2}(n-1)] + 9[v^{2}_{2}(n-1)]\} \\
+    &= 1 \sigma^{2}_{1} + 9 \sigma^{2}_{2} \\
+    &= 5
+\end{align*}
+
+O mesmo procedimento é aplicado para $y(n)$:
+
+\begin{align*}
+    \mathbb{E}\{y(n)\} &= \mathbb{E}\{v_{2}(n+1) + 3v_{1}(n-1)\} \\
+    &= \mu_{2} + 3\mu_{1} \\
+    &= 0
+\end{align*}
+
+\begin{align*}
+    \mathbb{E}\{[y(n) - \mu]^{2}\} &= \mathbb{E}\{[y(n) - 0]^{2}\} \\
+    &= \mathbb{E}\{[v_{2}(n+1) + 3v_{1}(n-1)]^{2}\} \\
+    &= \mathbb{E}\{ [v^{2}_{2}(n)] + 6[v_{2}(n+1)v_{1}(n-1)] + 9[v^{1}_{2}(n-1)]\} \\
+    &= 9 \sigma^{2}_{1} + 1 \sigma^{2}_{2} \\
+    &= 5
+\end{align*}
+
+Para função de autocorrelação de $x(n)$, sabe-se que as amostras são descorrelacionadas e o processo é de média nula, então o produto de diversos termos igual a zero também é zero. Temos que:
+
+\begin{align*}
+    r_{x}(\tau) &= \mathbb{E}\{x(n)x(n + \tau)\} = \mathbb{E}\{[v_{1}(n) + 3v_{2}(n-1)][v_{1}(n + \tau) + 3v_{2}(n-1 + \tau)]\}, \\
+    &= \mathbb{E}\{v_{1}(n)v_{1}(n + \tau) + 3v_{1}(n)v_{2}(n-1 + \tau) + 3v_{2}(n-1)v_{1}(n + \tau) + 9v_{2}(n-1)v_{2}(n-1 + \tau) \}\\
+    &= \vdots \quad \text{(Mesmo passo a passo do problema 1.1)} \\
+    &= 0
+\end{align*}
+
+Para $y(n)$, o processo é o mesmo, consquentemente  $r_{y}(\tau) = 0$.
+
+Finalmente, observa-se que estatísticas de primeira e de segunda ordem são independentes do tempo para ambos, i.e, os dois processos são \textbf{WSS}.
 
 
-    
-    \todo[inline, color=red!30]{item} Quais são as funções de autocorrelação de $x$ e de $y$? Os processos são WSS?
-    
-        \textcolor{red}{Solução:}
-        
-        Antes de tudo é de interesse definir o processo estocástico de ruído branco. Um processo desse tipo é formado por um número qualquer de amostras
-        independentes entre si e com média nula. Desse modo, uma vez que a média de processos de ruído branco são nulas é possível obter facilmente a média dos novos processos formados pela combinação dos ruídos
-        
-        \begin{align}
-            &\mathbb{E}\{x(n)\} = \mathbb{E}\{v_{1}(n) + 3v_{2}(n-1)\} = \mu_{1} + 3\mu_{2} = 0, \\
-            &\mathbb{E}\{y(n)\} = \mathbb{E}\{v_{2}(n+1) + 3v_{1}(n-1)\} = \mu_{2} + 3\mu_{1} = 0.
-        \end{align}
-        
-        Para a variância teremos uma resposta similar
-        
-        \begin{align*}
-            &\mathbb{E}\{[x(n) - \mu]^{2}\} = \mathbb{E}\{[x(n) - 0]^{2}\} = \mathbb{E}\{[x(n)]^{2}\}, \\
-            &\mathbb{E}\{[x(n) - \mu]^{2}\} = \mathbb{E}\{[v_{1}(n) + 3v_{2}(n-1)]^{2}\} = \mathbb{E}\{ [v^{2}_{1}(n)] + 6[v_{1}(n)v_{2}(n-1)] + 9[v^{2}_{2}(n-1)]\}, \\
-            &\mathbb{E}\{[y(n) - \mu]^{2}\} = \mathbb{E}\{[y(n) - 0]^{2}\} = \mathbb{E}\{[y(n)]^{2}\}, \\
-            &\mathbb{E}\{[y(n) - \mu]^{2}\} = \mathbb{E}\{[v_{2}(n+1) + 3v_{1}(n-1)]^{2}\} = \mathbb{E}\{ [v^{2}_{2}(n+1)] + 6[v_{2}(n+1)v_{1}(n-1)] + 9[v^{2}_{1}(n-1)]\}.
-        \end{align*}
-        
-        Rescrevendo a expressão para obter a formula da variância e utilizando o fato dos processos de ruído serem descorrelacionados uma nova expressão é obtida
-        
-        \begin{align}
-            &\mathbb{E}\{[x(n) - \mu]^{2}\} = \mathbb{E}\{ [v^{2}_{1}(n) - 0] + 0 + 9[v^{2}_{2}(n-1) - 0]\}, \\
-            &\mathbb{E}\{[x(n) - \mu]^{2}\} = \sigma^{2}_{1} + 9\sigma^{2}_{2} = 10*0.5 = 5, \\
-            &\mathbb{E}\{[y(n) - \mu]^{2}\} = \mathbb{E}\{ [v^{2}_{2}(n+1) - 0] + 0 + 9[v^{2}_{1}(n-1) - 0]\}, \\
-            &\mathbb{E}\{[y(n) - \mu]^{2}\} = \sigma^{2}_{2} + 9\sigma^{2}_{1} = 10*0.5 = 5.
-        \end{align}
-        
-        A função de autocorrelação para $X$ é calculada como se segue 
-        
-        \begin{align}
-            r_{x}(\tau) &= \mathbb{E}\{x(n)x(n + \tau)\} = \mathbb{E}\{[v_{1}(n) + 3v_{2}(n-1)][v_{1}(n + \tau) + 3v_{2}(n-1 + \tau)]\}, \\
-            r_{x}(\tau) &= \mathbb{E}\{[v_{1}(n)v_{1}(n + \tau)] + 3[v_{1}(n)v_{2}(n-1 + \tau)] + 3[v_{2}(n-1)v_{1}(n + \tau)] \\ 
-            &+ 9[v_{2}(n-1)v_{2}(n-1 + \tau)] \}.    
-        \end{align}
-        
-        Sabendo que amostras de um mesmo processo são descorrelacionadas e que ambos os processos também são descorrelacionados, além de termos conhecimento 
-        de que ambos possuem média nula, então 
-        
-        \begin{align}
-            &\mathbb{E}\{[v_{1}(n)v_{1}(n + \tau)]\} = \mathbb{E}\{[v_{1}(n)]\} \mathbb{E}\{[v_{1}(n + \tau)]\} = 0, \\ 
-            &3\mathbb{E}\{[v_{1}(n)v_{2}(n-1 + \tau)]\} = 3\mathbb{E}\{[v_{1}(n)]\} \mathbb{E}\{[v_{2}(n-1 + \tau)]\} = 0, \\
-            &3\mathbb{E}\{[v_{2}(n-1)v_{1}(n + \tau)]\} = 3\mathbb{E}\{[v_{2}(n-1)]\} \mathbb{E}\{[v_{1}(n + \tau)]\} = 0, \\
-            &9\mathbb{E}\{[v_{2}(n-1)v_{2}(n-1 + \tau)]\} = 9\mathbb{E}\{[v_{2}(n-1)]\} \mathbb{E}\{[v_{2}(n-1 + \tau)]\} = 0, \\ 
-            &r_{x}(\tau) = 0.
-        \end{align}
-        
-        Repetindo o procedimento para $Y$ e omitindo informações redundantes chega-se ao seguinte resultado
-        
-        \begin{align}
-            &r_{y}(\tau) = 0.
-        \end{align}
-        
-        Sendo as estatísticas de primeira e de segunda ordem independentes quanto ao tempo para os dois processos então é possível afirmar que eles são WSS.
-    
-    \todo[inline, color=red!30]{item} Qual é a função de correlação cruzada $r_{xy}(n_1,n_0)$? Estes processos são conjuntamente estacionários (no sentido amplo)? Justifique.
-    
-        \textcolor{red}{Solução:}
-        
-        \begin{align}
-            r_{x,y}(n_{1},n_{0}) &= \mathbb{E}\{[x(n_{1})y^{*}(n_{0})]\} = \mathbb{E}\{[v_{1}(n_{1}) + 3v_{2}(n_{1}-1)][v_{2}(n_{0}+1) + 3v_{1}(n_{0}-1)]^{*}\}, \\
-            r_{x,y}(n_{1},n_{0}) &= \mathbb{E}\{[v_{1}(n_{1})v^{*}_{2}(n_{0}+1)] + 3[v_{1}(n_{1})v^{*}_{1}(n_{0}-1)] + 3[v_{2}(n_{1}-1)v^{*}_{2}(n_{0}+1)] \\ 
-            &+ 9[v_{2}(n_{1}-1)v^{*}_{1}(n_{0}-1)]\}.  
-        \end{align}
-        
-        Novamente considerando que os processos de ruído branco são descorrelacionadas entre si e que as amostras individuais são também independentes então podemos simplificar a expressão acima da seguinte forma
-        
-        \begin{align}
-            &r_{x,y}(n_{1},n_{0}) = 0 
-        \end{align}
-        
-        Sendo assim, os processos podem ser considerados conjuntamente estacionários uma vez que a correlação cruzada é independente do instante temporal e que os processos que compoem o processo conjunto podem 
-        ser considerados estacionários em sentido amplo isoladamente. Entretanto, vale notar que foi possível realizar tal afirmação apenas por termos conhecimento da relação de independência entre os processos 
-        de ruído branco, pois de outro modo não seria possível realizar afirmações quanto a correlação cruzada do processo conjunto.
-    
+\textbf{Função de correlação cruzada}
+
+Para obter a função de correlação cruzada, basta aplicar as premissas utilizadas anteriormente: I) Processo de ruído branco é descorrelacionado; II) Média nula.
+\begin{align*}
+    r_{x,y}(n_{1},n_{0}) &= \mathbb{E}\{[x(n_{1})y^{*}(n_{0})]\} \\
+    & = \mathbb{E}\{[v_{1}(n_{1}) + 3v_{2}(n_{1}-1)][v_{2}(n_{0}+1) + 3v_{1}(n_{0}-1)]^{*}\}, \\
+    &= \mathbb{E}\{v_{1}(n_{1})v^{*}_{2}(n_{0}+1) + 3v_{1}(n_{1})v^{*}_{1}(n_{0}-1) + 3v_{2}(n_{1}-1)v^{*}_{2}(n_{0}+1) + 9v_{2}(n_{1}-1)v^{*}_{1}(n_{0}-1)\} \\
+    &= 0
+\end{align*}
+
+Esta função também é igual a zero, $r_{x,y}(n_{1},n_{0}) = 0$. Isto implica que os processos são conjuntamente estacionários, pois há independência do tempo da função, e por partir de processos de ruído branco, processos WSS individualmente, isto sustenta os desenvolvimento acima.
+
 
 \subsection{Matriz de Autocorrelação} % <-----------------------------------------------------------------------------
 \todo[inline, color=yellow!30]{Organizar}

@@ -219,137 +219,137 @@ geradas pelo canal.
 
 
 \subsection{Equalização de Canais} % <-----------------------------------------------------------------------------
-\todo[inline, color=yellow!30]{Organizar}
-\begin{enumerate}
+\todo[inline, color=red!30]{Finalizar}
+% \begin{enumerate}
     
-    \item Calcule a adaptação do algoritmo usando o RLS e mostre a evolução temporal dos coeficientes.
+%     \item Calcule a adaptação do algoritmo usando o RLS e mostre a evolução temporal dos coeficientes.
 
-        \textcolor{red}{Solução:}
+%         \textcolor{red}{Solução:}
 
-        A evolução temporal dos coeficientes do filtro pode ser encontrada na Figura \ref{fig:rls_coefficient}.  
-        Aqui é possível verificar a convergência e estabilização dos coeficientes do filtro partindo do zero a medida que o número 
-        de iterações cresce. Existem algumas oscilações ao final do processo, mas nada considerável. Caso o fator de esquecimento fosse
-        aumentado possivelmente haveriam oscilações com maiores magnitudes nos coeficientes de filtro. 
+%         A evolução temporal dos coeficientes do filtro pode ser encontrada na Figura \ref{fig:rls_coefficient}.  
+%         Aqui é possível verificar a convergência e estabilização dos coeficientes do filtro partindo do zero a medida que o número 
+%         de iterações cresce. Existem algumas oscilações ao final do processo, mas nada considerável. Caso o fator de esquecimento fosse
+%         aumentado possivelmente haveriam oscilações com maiores magnitudes nos coeficientes de filtro. 
 
-    \item Obtenha as trajetórias sobre as curvas de nível, tendo condições iniciais nulas para os
-    coeficientes do equalizador. Verifique qual a melhor inicialização do algoritmo RLS. Compare
-    com os algoritmos LMS, LMS-Normalizado e Gauss-Newton.
+%     \item Obtenha as trajetórias sobre as curvas de nível, tendo condições iniciais nulas para os
+%     coeficientes do equalizador. Verifique qual a melhor inicialização do algoritmo RLS. Compare
+%     com os algoritmos LMS, LMS-Normalizado e Gauss-Newton.
 
-        \textcolor{red}{Solução:}
+%         \textcolor{red}{Solução:}
 
-        As trajetórias dos algoritmos Newton, Gradiente, LMS e NLMS estão disponíveis nas Figuras \ref{fig:newton_contour}, \ref{fig:gradient_contour}, 
-        \ref{fig:lms_contour} e \ref{fig:nlms_contour}. Na Figura \ref{fig:rls_contour} é apresentado o traçado da trajetória de convergência para o RLS.
-        É possível verificar que o RLS apresenta um comportamento de convergência na superfície MSE mais próximo do algoritmo LMS. Existem alguns outliers durante 
-        o processo de filtragem, mas de modo geral o filtro tende à solução ótima de uma forma mais organizada e estável do que o NLMS.
+%         As trajetórias dos algoritmos Newton, Gradiente, LMS e NLMS estão disponíveis nas Figuras \ref{fig:newton_contour}, \ref{fig:gradient_contour}, 
+%         \ref{fig:lms_contour} e \ref{fig:nlms_contour}. Na Figura \ref{fig:rls_contour} é apresentado o traçado da trajetória de convergência para o RLS.
+%         É possível verificar que o RLS apresenta um comportamento de convergência na superfície MSE mais próximo do algoritmo LMS. Existem alguns outliers durante 
+%         o processo de filtragem, mas de modo geral o filtro tende à solução ótima de uma forma mais organizada e estável do que o NLMS.
 
-    \item Obtenha também a evolução do erro quadrático médio para cada um dos algoritmos anteriores.
+%     \item Obtenha também a evolução do erro quadrático médio para cada um dos algoritmos anteriores.
 
-        \textcolor{red}{Solução:} 
+%         \textcolor{red}{Solução:} 
 
-        As evolução do erro quadrático médio para os algoritmos Newton, Gradiente, LMS e NLMS já foram abordadas na seção 
-        anterior e podem ser revisitadas nas Figuras \ref{fig:newton_mse}, \ref{fig:gradient_mse}, \ref{fig:lms_mse} e \ref{fig:nlms_mse}.
-        adicionalmente, o traçado da evolução do MSE para o método RLS está presente na Figura \ref{fig:rls_mse}. Nessa figura podemos verificar
-        que o RLS apresenta uma latência de convergência menor que o LMS e NLMS, mas ao final do processo aparentemente o grau de estabilidade da
-        solução dos coeficientes de filtro parece ser menor do que quando comparamos com os quatro algoritmos de filtragem mencionados anteriormente.
+%         As evolução do erro quadrático médio para os algoritmos Newton, Gradiente, LMS e NLMS já foram abordadas na seção 
+%         anterior e podem ser revisitadas nas Figuras \ref{fig:newton_mse}, \ref{fig:gradient_mse}, \ref{fig:lms_mse} e \ref{fig:nlms_mse}.
+%         adicionalmente, o traçado da evolução do MSE para o método RLS está presente na Figura \ref{fig:rls_mse}. Nessa figura podemos verificar
+%         que o RLS apresenta uma latência de convergência menor que o LMS e NLMS, mas ao final do processo aparentemente o grau de estabilidade da
+%         solução dos coeficientes de filtro parece ser menor do que quando comparamos com os quatro algoritmos de filtragem mencionados anteriormente.
 
 
-\begin{figure}[!htp]
-    \centering
-    % \includegraphics[width=0.75\textwidth]{figs/rls_coefficients.png}
-    \includegraphics[width=0.5\textwidth]{example-image}
-    \caption{Convergência dos coeficientes para o RLS. $\text{Amostras} = 5000$, $M = 2$, $\lambda = 0.99$}
-    \label{fig:rls_coefficient}
-\end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/rls_coefficients.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Convergência dos coeficientes para o RLS. $\text{Amostras} = 5000$, $M = 2$, $\lambda = 0.99$}
+%     \label{fig:rls_coefficient}
+% \end{figure}
 
-\begin{figure}[!htp]
-    \centering
-    % \includegraphics[width=0.75\textwidth]{figs/rls_contour.png}
-    \includegraphics[width=0.5\textwidth]{example-image}
-    \caption{Caminho de convergência na superficie MSE para o RLS. $\text{Amostras} = 5000$, $M = 2$, $\lambda = 0.99$}
-    \label{fig:rls_contour}
-\end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/rls_contour.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Caminho de convergência na superficie MSE para o RLS. $\text{Amostras} = 5000$, $M = 2$, $\lambda = 0.99$}
+%     \label{fig:rls_contour}
+% \end{figure}
 
-\begin{figure}[!htp]
-    \centering
-    % \includegraphics[width=0.75\textwidth]{figs/rls_mse.png}
-    \includegraphics[width=0.5\textwidth]{example-image}
-    \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 5000$, $M = 2$, $\lambda = 0.99$}
-    \label{fig:rls_mse}
-\end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/rls_mse.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 5000$, $M = 2$, $\lambda = 0.99$}
+%     \label{fig:rls_mse}
+% \end{figure}
 
-\end{enumerate}
+% \end{enumerate}
 
 
 \subsection{Equalização Adaptativa} % <-----------------------------------------------------------------------------
-\todo[inline, color=yellow!30]{Organizar}
+\todo[inline, color=red!30]{Finalizar}
 
-Assim como na questão da lista anterior foi considerado novamente que o filtro é de ordem $M = 15$.
-Os resultados podem ser encontrados nas Figuras \ref{fig:L4Q5_a1}, \ref{fig:L4Q5_a2}, \ref{fig:L4Q5_a3} e \ref{fig:L4Q5_a4}.
-Inicialmente é possível confirmar uma evidente vantagem na velocidade de convergência do RLS quando o comparamos com o algoritmo LMS.
-Independentemente do fator de esquecimento considerado todos apresentam uma vantagem considerável sobre o LMS quando se observa tanto a 
-latência quanto o desempenho da evolução do MSE. Desse modo, o RLS tem menor latência e melhor desempenho MSE quando comparamos com o LMS.
+% Assim como na questão da lista anterior foi considerado novamente que o filtro é de ordem $M = 15$.
+% Os resultados podem ser encontrados nas Figuras \ref{fig:L4Q5_a1}, \ref{fig:L4Q5_a2}, \ref{fig:L4Q5_a3} e \ref{fig:L4Q5_a4}.
+% Inicialmente é possível confirmar uma evidente vantagem na velocidade de convergência do RLS quando o comparamos com o algoritmo LMS.
+% Independentemente do fator de esquecimento considerado todos apresentam uma vantagem considerável sobre o LMS quando se observa tanto a 
+% latência quanto o desempenho da evolução do MSE. Desse modo, o RLS tem menor latência e melhor desempenho MSE quando comparamos com o LMS.
 
-Já quando voltamos nossa análise para o impacto do fator de esquecimento é possível verificar uma interessante característica do 
-RLS. O fator de esquecimento atua de forma semelhante ao passo de aprendizado nos algoritmos LMS e NLMS, mas num sentido um  pouco diferente. Desse modo, quanto
-maior o seu valor mais flexível torna-se o filtro para adaptar-se a novos estímulos. Assim, nas Figuras \ref{fig:L4Q5_a2} e \ref{fig:L4Q5_a3}, onde o 
-fator de esquecimento é definido respectivamente por $\lambda = 0.9$ e $\lambda = 0.99$, é possível ver que o MSE apresenta oscilações de 
-elevadas magnitudades mesmo após a convergência pois estamos restringindo a flexibilidade do RLS. Já na Figura \ref{fig:L4Q5_a4} onde temos um fator de esquecimento 
-definido por $\lambda = 0.999$ temos oscilações de magnitudades consideravelmente menores quando comparamos com os dois casos anteriores. Já com relação ao valor de convergência
-MSE não é possível notar grandes diferenças entre os casos considerados, visto que todos oscilam em torno de um valor aproximadamente igual.
+% Já quando voltamos nossa análise para o impacto do fator de esquecimento é possível verificar uma interessante característica do 
+% RLS. O fator de esquecimento atua de forma semelhante ao passo de aprendizado nos algoritmos LMS e NLMS, mas num sentido um  pouco diferente. Desse modo, quanto
+% maior o seu valor mais flexível torna-se o filtro para adaptar-se a novos estímulos. Assim, nas Figuras \ref{fig:L4Q5_a2} e \ref{fig:L4Q5_a3}, onde o 
+% fator de esquecimento é definido respectivamente por $\lambda = 0.9$ e $\lambda = 0.99$, é possível ver que o MSE apresenta oscilações de 
+% elevadas magnitudades mesmo após a convergência pois estamos restringindo a flexibilidade do RLS. Já na Figura \ref{fig:L4Q5_a4} onde temos um fator de esquecimento 
+% definido por $\lambda = 0.999$ temos oscilações de magnitudades consideravelmente menores quando comparamos com os dois casos anteriores. Já com relação ao valor de convergência
+% MSE não é possível notar grandes diferenças entre os casos considerados, visto que todos oscilam em torno de um valor aproximadamente igual.
 
-Por fim, nas Figuras \ref{fig:L4Q5_a5} e \ref{fig:L4Q5_a6} são traçados os gráficos da evolução temporal e da resposta em frequência para
-o cenário proposto, respectivamente. Na primeira figura vemos a adaptação do algoritmo RLS a medida que o número de iterações progride e, apesar do
-equalizador desconhecer o sinal verdadeiro, existe uma aparente melhora de desempenho a medida que o filtro progride. Já na figura seguinte são comparados
-diretamente as repostas em frequência dos filtros LMS e RLS em relação ao sistema desconhecido com $\mu = 0.001$ e $\lambda = 0.999$, respectivamente.
-A partir de tal resultado podemos verificar que o filtro RLS consegue adaptar-se mais facilmente ao sistema desconhecido enquanto o filtro LMS apresenta
-intensas variações que possivelmente prejudicariam o processo de filtragem.
+% Por fim, nas Figuras \ref{fig:L4Q5_a5} e \ref{fig:L4Q5_a6} são traçados os gráficos da evolução temporal e da resposta em frequência para
+% o cenário proposto, respectivamente. Na primeira figura vemos a adaptação do algoritmo RLS a medida que o número de iterações progride e, apesar do
+% equalizador desconhecer o sinal verdadeiro, existe uma aparente melhora de desempenho a medida que o filtro progride. Já na figura seguinte são comparados
+% diretamente as repostas em frequência dos filtros LMS e RLS em relação ao sistema desconhecido com $\mu = 0.001$ e $\lambda = 0.999$, respectivamente.
+% A partir de tal resultado podemos verificar que o filtro RLS consegue adaptar-se mais facilmente ao sistema desconhecido enquanto o filtro LMS apresenta
+% intensas variações que possivelmente prejudicariam o processo de filtragem.
 
 
-\begin{figure}[!htp]
-    \centering
-    % \includegraphics[width=0.75\textwidth]{figs/L4Q5_lms.png}
-    \includegraphics[width=0.5\textwidth]{example-image}
-    \caption{Comportamento da evolução do MSE para o LMS. $\text{Amostras} = 500$, $M = 15$, $\mu = 0.001$}
-    \label{fig:L4Q5_a1}
-\end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_lms.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Comportamento da evolução do MSE para o LMS. $\text{Amostras} = 500$, $M = 15$, $\mu = 0.001$}
+%     \label{fig:L4Q5_a1}
+% \end{figure}
 
-\begin{figure}[!htp]
-    \centering
-    % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_9.png}
-    \includegraphics[width=0.5\textwidth]{example-image}
-    \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.9$}
-    \label{fig:L4Q5_a2}
-\end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_9.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.9$}
+%     \label{fig:L4Q5_a2}
+% \end{figure}
 
-\begin{figure}[!htp]
-    \centering
-    % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_99.png}
-    \includegraphics[width=0.5\textwidth]{example-image}
-    \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.99$}
-    \label{fig:L4Q5_a3}
-\end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_99.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.99$}
+%     \label{fig:L4Q5_a3}
+% \end{figure}
 
-\begin{figure}[!htp]
-    \centering
-    % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_999.png}
-    \includegraphics[width=0.5\textwidth]{example-image}
-    \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.999$}
-    \label{fig:L4Q5_a4}
-\end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_999.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.999$}
+%     \label{fig:L4Q5_a4}
+% \end{figure}
 
-\begin{figure}[!htp]
-    \centering
-    % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_t.png}
-    \includegraphics[width=0.5\textwidth]{example-image}
-    \caption{Evolução temporal para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.999$}
-    \label{fig:L4Q5_a5}
-\end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_t.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Evolução temporal para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.999$}
+%     \label{fig:L4Q5_a5}
+% \end{figure}
 
-\begin{figure}[!htp]
-    \centering
-    % \includegraphics[width=0.75\textwidth]{figs/L4Q5_filter_response.png}
-    \includegraphics[width=0.5\textwidth]{example-image}
-    \caption{Comparativo da resposta em frequência para LMS e RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.999$}
-    \label{fig:L4Q5_a6}
-\end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_filter_response.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Comparativo da resposta em frequência para LMS e RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.999$}
+%     \label{fig:L4Q5_a6}
+% \end{figure}
 
