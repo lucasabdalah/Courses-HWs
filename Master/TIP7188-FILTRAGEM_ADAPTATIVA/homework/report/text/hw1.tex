@@ -105,215 +105,129 @@ Esta função também é igual a zero, $r_{x,y}(n_{1},n_{0}) = 0$. Isto implica 
 
 Para garantir a existência da matriz de correlação, deve-se corresponder as seguintes premissas: I) $\mathbf{R_{x}} = \mathbf{R^{H}_{x}}$; II) $\mathbf{a^{H}} \mathbf{R_{xa}} \geq 0$; III) $\mathbf{Ax} = \lambda \mathbf{x}, \forall \lambda \geq 0 | \mathbf{x} \in \mathbb{R}$.
 
-\todo[inline, color=yellow!30]{Organizar}
+Assumindo um vetor aleatório bidimensional: $\mathbf{X} = (x_{1},x_{2})$, a existência de $\mathbf{R}$ e sua hermitiana, $\mathbf{R}^{H}$. 
 
-Desse modo, considerando um vetor aleatório bidimensional descrito por $\mathbf{X} = (x_{1},x_{2})$ podemos então
+Os elementos da contra-diagonal da matriz hermitiana deve obdece para são equivalência simétrica:
+I) $\mathbb{E}\{[x_{1}x^{*}_{2}]\} = \mathbb{E}\{[x_{2}x^{*}_{1}]\}$ e II) $\mathbb{E}\{[x_{2}x^{*}_{1}]\} = \mathbb{E}\{[x_{1}x^{*}_{2}]\}$
 
+Além disso, a vantagem de $\mathbb{E}\{\cdot\}$ ser um operador linear, garante que os resultados são de fato iguais, independente da ordem dos vetores.
+
+Já a limitação dos autovalores está diretamente ao determinante da matriz, sendo esse maior que zero, o critério imposto é atingido, i.e, para o caso $2 \times 2$, o produto dos elementos da diagonal principal é maior que o produto dos elementos da contra-diagonal.\\
+
+\textbf{Processo estocástico estacionário escalar}
+
+Em processo semelhante ao exemplo anterior, assume-se um processo estocástico estacionário escalar do tipo $\mathbf{X}_{(t)} = x(t)$ e sua versão atrasada $\mathbf{X}_{(t + \tau)} = x(t + \tau)$. Dado a matriz $\mathbf{R}$ e sua hermitiana, $\mathbf{R}^{H}$.
+
+Os elementos da contra-diagonal da matriz hermitiana deve obdece para são equivalência simétrica:
+I) $\mathbb{E}\{[x(t)x^{*}(t + \tau)]\} = \mathbb{E}\{[x(t + \tau)x^{*}(t)]\}$ e II) $\mathbb{E}\{[x(t + \tau)x^{*}(t)]\} = \mathbb{E}\{[x(t)x^{*}(t + \tau)]\}$.
+
+Novamente, a vantagem do operador linear é conveniente para que independente da ordem, e igualdade na contra-diagonal, i.e, simetria.
+
+Para os autovalores, o produto dos elementos da diagonal principal é maior que o produto dos elementos da contra-diagonal, i.e:
 \begin{align*}
-    \mathbf{R} &= \left[ 
-    \begin{matrix}
-        \mathbb{E}\{[x^{2}_{1}]\} & \mathbb{E}\{[x_{1}x^{*}_{2}]\} \\
-        \mathbb{E}\{[x_{2}x^{*}_{1}]\} & \mathbb{E}\{[x^{2}_{2}]\} \\
-    \end{matrix} \right], \\
-    \mathbf{R}^{\text{H}} &= \left[ 
-    \begin{matrix}
-        \mathbb{E}\{[x^{2}_{1}]\} & \mathbb{E}\{[x_{2}x^{*}_{1}]\} \\
-        \mathbb{E}\{[x_{1}x^{*}_{2}]\} & \mathbb{E}\{[x^{2}_{2}]\} \\
-    \end{matrix} \right].
+    \mathbb{E}\{[x^{2}(t)]\} \mathbb{E}\{[x^{2}(t + \tau)]\} > \mathbb{E}\{[x(t)x^{*}(t + \tau)]]\}  \mathbb{E}\{[x(t + \tau)]x^{*}(t)]\}
 \end{align*}
 
-Inicialmente, podemos garantir a simetria quanto ao hermitiano se fizermos 
-
-\begin{align}
-    &\mathbb{E}\{[x_{1}x^{*}_{2}]\} \overset{\Delta}{=} \mathbb{E}\{[x_{2}x^{*}_{1}]\},
-    &\mathbb{E}\{[x_{2}x^{*}_{1}]\} \overset{\Delta}{=} \mathbb{E}\{[x_{1}x^{*}_{2}]\}.
-\end{align}
-
-Entretanto, sabemos que o operador esperança é linear tornando assim as expressões acima equivalentes. Em continuidade do problema, podemos 
-considerar que a restrição as quais os autovalores estão submetidos pode ser facilmente atingida ao garantirmos que o determinante da matriz 
-de correlação seja maior que a nulidade
-
-\begin{align}
-    &\mathbb{E}\{[x^{2}_{1}]\} \mathbb{E}\{[x^{2}_{1}]\} - \mathbb{E}\{[x_{1}x_{2}]\} \mathbb{E}\{[x_{2}x_{1}]\} > 0, \\
-    &\mathbb{E}\{[x_{1}^{2}]\} \mathbb{E}\{[x^{2}_{2}]\} > \mathbb{E}\{[x_{1}x_{2}]\} \mathbb{E}\{[x_{2}x_{1}]\}.
-\end{align}
-
-\todo[inline, color=red!30]{item} Um processo estocástico estacionário escalar?
-
-
-
-Considerando um processo estocástico estacionário escalar do tipo $\mathbf{X}_{t} = x(t)$ e uma versão atrasada desse
-processo definida por $\mathbf{X}_{t + \tau} = x(t + \tau)$ temos que a matriz de correlação pode ser escrita da seguinte forma
-
-\begin{align}
-    \mathbf{R} &= \left[ 
-    \begin{matrix}
-        \mathbb{E}\{[x^{2}(t)_{1}]\} & \mathbb{E}\{[x(t)x^{*}(t + \tau)]\} \\
-        \mathbb{E}\{[x(t + \tau)x^{*}(t)]\} & \mathbb{E}\{[x^{2}(t + \tau)]\} \\
-    \end{matrix} \right], \\
-    \mathbf{R}^{\text{H}} &= \left[ 
-    \begin{matrix}
-        \mathbb{E}\{[x^{2}(t)_{1}]\} & \mathbb{E}\{[x(t + \tau)x^{*}(t)]\} \\
-        \mathbb{E}\{[x(t)x^{*}(t + \tau)]\} & \mathbb{E}\{[x^{2}(t + \tau)]\} \\
-    \end{matrix} \right].
-\end{align}
-
-
-Em sequência, podemos garantir a simetria quanto ao hermitiano se fizermos 
-
-\begin{align}
-    &\mathbb{E}\{[x(t)x^{*}(t + \tau)]\} \overset{\Delta}{=} \mathbb{E}\{[x(t + \tau)x^{*}(t)]\}, \\
-    &\mathbb{E}\{[x(t + \tau)x^{*}(t)]\} \overset{\Delta}{=} \mathbb{E}\{[x(t)x^{*}(t + \tau)]\},
-\end{align}
-
-mas, mais uma vez, considerando que o operador esperança é linear então as duas expressões são equivalentes. Já considerando a
-restrição imposta aos autovalores da matriz temos novamente
-
-\begin{align}
-    &\mathbb{E}\{[x^{2}(t)]\} \mathbb{E}\{[x^{2}(t + \tau)]\} > \mathbb{E}\{[x(t)x^{*}(t + \tau)]]\}  \mathbb{E}\{[x(t + \tau)]x^{*}(t)]\}.
-\end{align}
-    
 
 \subsection{Matriz Definida Positiva} % <-----------------------------------------------------------------------------
-\todo[inline, color=yellow!30]{Organizar}
 
-\begin{align}
-    \mathbb{E}\left\{\mathbf{x}^H \mathbf{R}_{\mathbf{x}}^{-1} \mathbf{x} \right\} = N
-\end{align}
+Assumindo a expressão que define matriz de autocorrelação e que existe sua inversa bem, 
 
+\begin{align*}
+    \mathbb{E}\{\mathbf{x} \mathbf{x}^{\text{H}}\} &= \mathbf{R}_{x} \\
+    \mathbb{E}\{\mathbf{x} \mathbf{x}^{\text{H}}\}\mathbf{R}^{-1}_{x} &= \mathbf{R}_{x}\mathbf{R}^{-1}_{x} \\
+\end{align*}
 
+A inversa pode adentrar o operador, enquanto do lado direito obtém-se uma matrix identidade
+\begin{align*}
+    \mathbb{E}\{\mathbf{x} \mathbf{x}^{\text{H}}\mathbf{R}^{-1}_{x}\} = \mathbf{I}_{N \times N}
+\end{align*}
 
-Inicialmente podemos escrever a expressão regular para a matriz de autocorrelação e supondo que de fato existe uma inversa bem definida 
-para a matriz de autocorrelação
+Isto permite aplicar o traço da matriz e por meio da propriedade de permutação cíclica do operador, tem-se que:
+\begin{align*}
+    \text{Trace}\{\mathbb{E}\{\mathbf{x} \mathbf{x}^{\text{H}}\mathbf{R}^{-1}_{x}\}\} &= \text{Tr}\{\mathbf{I}_{N \times N}\} 
+\end{align*}
 
-\begin{align}
-    \mathbb{E}\{\mathbf{x} \mathbf{x}^{\text{H}}\} = \mathbf{R}_{x}, \\
-    \mathbb{E}\{\mathbf{x} \mathbf{x}^{\text{H}}\}\mathbf{R}^{-1}_{x} = \mathbf{R}_{x}\mathbf{R}^{-1}_{x}, \\
-    \mathbb{E}\{\mathbf{x} \mathbf{x}^{\text{H}}\mathbf{R}^{-1}_{x}\} = \mathbf{I}_{N}, \\
-\end{align}
+Observa-se que o traço da matriz identidade $\mathbf{I}_{N \times N}$ é justamente a soma dos elementos da diagonal, $N$.
 
-Desse modo, podemos aplicar o operador traço de matriz e por meio da propriedade de permutação cíclica desse operador chegamos ao seguinte resultado
-
-\begin{align}
-    \text{Tr}\{\mathbb{E}\{\mathbf{x} \mathbf{x}^{\text{H}}\mathbf{R}^{-1}_{x}\}\} = \text{Tr}\{\mathbf{I}_{N}\}, \\
-    \text{Tr}\{\mathbb{E}\{\mathbf{x}^{\text{H}}\mathbf{R}^{-1}_{x} \mathbf{x}\}\} = \text{Tr}\{\mathbf{I}_{N}\}, \\
-    \text{Tr}\{\mathbb{E}\{\mathbf{x}^{\text{H}}\mathbf{R}^{-1}_{x} \mathbf{x}\}\} = N,
-\end{align}
-
-onde a ultima expressão se justifica pois temos uma matriz identidade de ordem $N$ no lado direito. Desse modo, seu traço é dado por $\sum^{N}_{i = 1} 1 = N$.
+\begin{align*}
+    \text{Trace}\{\mathbb{E}\{\mathbf{x}^{\text{H}}\mathbf{R}^{-1}_{x} \mathbf{x}\}\} &= \sum^{N} 1 \\
+    &= N
+\end{align*}
 
 
 \subsection{Covariância e correlação} % <-----------------------------------------------------------------------------
-\todo[inline, color=yellow!30]{Organizar}
- 
-\todo[inline, color=red!30]{item} $\mathbf{R}_\mathbf{x} = \mathbf{C}_\mathbf{x} + {\mathbf{\mu}}_{\mathbf{x}}{\mathbf{\mu}}_{\mathbf{x}}^H$    
-    
-\begin{align}
-    &C_{X} = \mathbb{E}\{[(x - \mu)(x - \mu)^{H}]\} = \mathbb{E}\{[xx^{H} -x\mu^{H} - \mu x^{H} + \mu \mu^{H}]\}, \\
-    &C_{X} = \mathbb{E}\{[xx^{H}]\} -\mathbb{E}\{[x\mu^{H}]\} - \mathbb{E}\{[\mu x^{H}]\} + \mathbb{E}\{[\mu \mu^{H}]\}.
-\end{align}
 
+\textbf{Expressão 1}
+Dado que a matriz de Covariância pode ser obtida por:
+\begin{align*}
+    C_{X} &= \mathbb{E}\{[(x - \mu)(x - \mu)^{H}]\} \\
+    &= \mathbb{E}\{xx^{H}\} -\mathbb{E}\{x\mu^{H}\} - \mathbb{E}\{\mu x^{H}\} + \mathbb{E}\{\mu \mu^{H}\}
+\end{align*}
 
-Considerando a matriz de correlação pode ser escrita por $R_{X} = \mathbb{E}\{[xx^{H}]\}$ e que o valor médio de um escalar é o próprio escalar temos
+Considerando que a matriz de correlação pode ser escrita como demonstrado no exercício 1.4:
 
-\begin{align}
-    &C_{X} = R_{X} - \mathbb{E}\{[x\mu^{H}]\} - \mathbb{E}\{[\mu x^{H}]\} + \mu \mu^{H}, \\
-    &C_{X} = R_{X} - \mu^{H}\mathbb{E}\{[x]\} - \mu \mathbb{E}\{[x^{H}]\} + \mu \mu^{H}, \\
-    &C_{X} = R_{X} - \mu \mu^{H} - \mu \mu^{H} + \mu \mu^{H}, \\
-    &C_{X} = R_{X} - \mu \mu^{H}, \\
+\begin{align*}
+    C_{X} &= R_{X} - \mu^{H}\mathbb{E}\{[x]\} - \mu \mathbb{E}\{[x^{H}]\} + \mu \mu^{H}, \\
+    &= R_{X} - \mu \mu^{H} - \mu \mu^{H} + \mu \mu^{H}, \\
+    &= R_{X} - \mu \mu^{H}, \\
+\end{align*}    
+
+Por fim, obtém-se que:
+\begin{align*}
     &R_{X} = C_{X} + \mu \mu^{H}.
-\end{align}
+\end{align*}
 
-\todo[inline, color=red!30]{item} $\mathbf{C}_{\mathbf{x} + \mathbf{y}} = \mathbf{C}_{\mathbf{x}} +
-\mathbf{C}_{\mathbf{y}}$, para $\mathbf{x}$ e $\mathbf{y}$ descorrelacionados
+\textbf{Expressão 2}
+As expressões de correlação cruzada são obtidos de forma análoga, tal que:
 
-
-
-\begin{align}
-    &\mathbf{C}_{\mathbf{x} + \mathbf{y}} = \mathbf{C}_{\mathbf{x}} + \mathbf{C}_{\mathbf{xy}} + \mathbf{C}_{\mathbf{yx}} + \mathbf{C}_{\mathbf{y}}.
-\end{align}
-
-Onde os termos de correlação cruzada $\mathbf{C}_{\mathbf{xy}}$ e $\mathbf{C}_{\mathbf{yx}}$ podem ser obtidos  da seguinte maneira
 
 \begin{align}
-    &\mathbf{C_{xy}} = \mathbb{E}\{[x - \mu_{x}][y - \mu_{y}]\}, \\
-    &\mathbf{C_{xy}} = \mathbb{E}\{[xy]\} - \mathbb{E}\{[x\mu_{y}]\} - \mathbb{E}\{[\mu_{x} y]\} + \mathbb{E}\{[\mu_{x} \mu_{y}]\}, \\
-    &\mathbf{C_{xy}} = \mathbb{E}\{[xy]\} - \mu_{y} \mu_{x} - \mu_{x} \mu_{y} + \mu_{x} \mu_{y}, \\
-    &\mathbf{C_{xy}} = \mathbb{E}\{[xy]\} + \mu_{x} \mu_{y}, \\
-    &\mathbf{C_{xy}} = \mu_{x} \mu_{y}, \\
+    \mathbf{C_{xy}} &= \mathbb{E}\{[x - \mu_{x}][y - \mu_{y}]\}, \\
+    &= \mathbb{E}\{[xy]\} - \mathbb{E}\{[x\mu_{y}]\} - \mathbb{E}\{[\mu_{x} y]\} + \mathbb{E}\{[\mu_{x} \mu_{y}]\} \\
+    &= \mathbb{E}\{[xy]\} - \mu_{y} \mu_{x} - \mu_{x} \mu_{y} + \mu_{x} \mu_{y} \\
+    &= \mathbb{E}\{[xy]\} + \mu_{x} \mu_{y}, \\
+    &= \mu_{x} \mu_{y} \\
 \end{align}
 
-\begin{align}
-    &\mathbf{C_{yx}} = \mathbb{E}\{[y - \mu_{y}][x - \mu_{x}]\}, \\
-    &\mathbf{C_{yx}} = \mathbb{E}\{[yx]\} - \mathbb{E}\{[y\mu_{x}]\} - \mathbb{E}\{[\mu_{y} x]\} + \mathbb{E}\{[\mu_{y} \mu_{x}]\}, \\
-    &\mathbf{C_{yx}} = \mathbb{E}\{[yx]\} - \mu_{y} \mu_{x} - \mu_{x} \mu_{y} + \mu_{y} \mu_{x}, \\
-    &\mathbf{C_{yx}} = \mathbb{E}\{[yx]\} - \mu_{x} \mu_{y}, \\
-    &\mathbf{C_{yx}} = - \mu_{x} \mu_{y}.
-\end{align}
-
-Portanto, é possível afirmar que a soma dos termos de correlação cruzada é nula e que a correlação da soma de dois vetores descorrelacionados é de fato 
-dada por $\mathbf{C}_{\mathbf{x} + \mathbf{y}} = \mathbf{C}_{\mathbf{x}} + \mathbf{C}_{\mathbf{y}}$
-
-\begin{align}
-    &\mathbf{C_{xy}} + \mathbf{C_{yx}}  = \mu_{x} \mu_{y} - \mu_{x} \mu_{y}, \\
-    &\mathbf{C_{xy}} + \mathbf{C_{yx}}  = 0.
-\end{align}
+De forma análoga, obtém que $\mathbf{C_{yx}} = - \mu_{x} \mu_{y}$, consquentemente
+\begin{align*}
+    \mathbf{C_{xy}} + \mathbf{C_{yx}} &= \mu_{x} \mu_{y} - \mu_{x} \mu_{y} \\
+    &= 0
+\end{align*}
 
 
 \subsection{Função de autocorrelação} % <-----------------------------------------------------------------------------
-\todo[inline, color=yellow!30]{Organizar}
-\begin{align}
-    x(n) = v_1(n) + 2v_1(n + 1) + 3v_2(n-1) ?
-\end{align}
-
-Este é um processo WSS? Justifique.
-
-
-
-Para simplificar o desenvolvimento iremos considerar que os processos possuem media nula e são descorrelacionados
+\textbf{Função do Processo}
+Como nos problemas anteriores, utiliza-se como premissa que os processos são descorrelacionados e tem média nula. A função é dada por $r_{x} = \mathbb{E}\{x(n) x^{*}(n)\}$, tal que
 
 \begin{align*}
-    r_{x} &= \mathbb{E}\{x(n) x^{*}(n)\}, \\
-    r_{x} &= \mathbb{E}\{[v_{1}(n) + 2v_{1}(n+1) + 3v_{2}(n-1)] [v_{1}(n) + 2v_{1}(n+1) + 3v_{2}(n-1)]^{*}(n)\}, \\
-    r_{x} &= \mathbb{E}\{[v_{1}(n)v^{*}_{1}(n) + 2v_{1}(n)v^{*}_{1}(n+1) + 3v_{1}(n)v^{*}_{2}(n-1) + 2v_{1}(n + 1)v^{*}_{1}(n) + 4v_{1}(n+1)v^{*}_{1}(n+1) \\
-   &+6v_{1}(n+1)v^{*}_{2}(n-1)] + 3v_{2}(n-1)v^{*}_{1}(n) +  6v_{2}(n-1)v^{*}_{1}(n+1) + 9v_{2}(n-1)v^{*}_{2}(n-1)\}, \\
-    r_{x} &= r_{v}(n,n) + 2r_{v}(n,n+1) + 0 + 2r_{v}(n+1,n) + 4r_{v}(n+1,n+1) + 0 + 0 + 0 + 9r_{v}(n-1,n-1), \\
-    r_{x} &= r_{v}(n,n) + 2r_{v}(n,n+1) + 2r_{v}(n+1,n) + 4r_{v}(n+1,n+1) + 9r_{v}(n-1,n-1).
+    r_{x} &= \mathbb{E}\{[v_{1}(n) + 2v_{1}(n+1) + 3v_{2}(n-1)] [v_{1}(n) + 2v_{1}(n+1) + 3v_{2}(n-1)]^{*}(n)\} \\
+    &= r_{v}(n,n) + 2r_{v}(n,n+1) + 2r_{v}(n+1,n) + 4r_{v}(n+1,n+1) + 9r_{v}(n-1,n-1)
 \end{align*}
 
-Após uma breve análise na expressão $r_{v}(n_{1},n_{0})$ é possível verificar que determinados termos anulam-se ao considerar um único momento temporal devido a presença da função degrau unitário, permitindo a seguinte simplificação:
+Observa-se que apenas termos onde a função degrau está presente permanecem, enquanto o restantes podem ser cancelados, de modo que:
+\begin{align*}
+    r_{x} &= 2r_{v}(n,n+1) + 2r_{v}(n+1,n)\\
+    &= \delta(n - n - 1) + \delta(n + 1 - n)
+\end{align*}
 
-\begin{align}
-    &r_{x} = 2r_{v}(n,n+1) + 2r_{v}(n+1,n), \\
-    &r_{x} = \delta(n - n - 1) + \delta(n + 1 - n).
-\end{align}
+Isto pode ser reorganizado, sendo $\tau = n_{1} - n_{2}$, de modo que:
 
-Onde a generalização pode ser descrita por:
+\begin{align*}
+    r_{x}(n_{1}, n_{2}) = \delta(\tau) + \delta(-\tau)
+\end{align*}
 
-\begin{align}
-    &r_{x}(n_{1}, n_{2})= \delta(n_{1} - n_{2}) + \delta(n_{2} - n_{1}).  
-\end{align}
-
-Uma vez que a correlação é dependente apenas de um deslocamento temporal, então podemos classificar esse processo como WSS.
-
-\todo[inline, color=red!30]{item} Encontre a a matrix de correlação de um vetor aleatório consistindo de oito amostras consecutivas de
-$x(n)$.
+Há apenas um deslocamento temporal $(\tau)$ atrelado à correlação, logo o processo é WSS.
 
 
+\textbf{Matriz de Correlação}
 
-\begin{align}
-    \mathbf{R}_{\mathbf{x}} = \left[
-    \begin{matrix}
-        2 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
-        0 & 2 & 0 & 0 & 0 & 0 & 0 & 0\\
-        0 & 0 & 2 & 0 & 0 & 0 & 0 & 0\\
-        0 & 0 & 0 & 2 & 0 & 0 & 0 & 0\\
-        0 & 0 & 0 & 0 & 2 & 0 & 0 & 0\\
-        0 & 0 & 0 & 0 & 0 & 2 & 0 & 0\\
-        0 & 0 & 0 & 0 & 0 & 0 & 2 & 0\\
-        0 & 0 & 0 & 0 & 0 & 0 & 0 & 2
-    \end{matrix}
-    \right]
-\end{align}
-Para chegar a esse resultado foi utilizado a expressão para a correlação obtida no item anterior. Uma vez que a função delta de dirac terá um valor não nulo apenas quando o argumento for zero, isso irá acontecer apenas quando os momentos $n_{1}$ e $n_{2}$ forem iguais e isso irá acontecer apenas com os elementos da diagonal principal.
+Utilizando as relações obtidas anteriormente, é possível observar que os únicos elementos não nulos pertencem à diagonal, onde $n_{1}= n_{2}$, acarretando $\delta(0) + \delta(0) = 2$.
 
+Considerando 8 amostras consecutivas, a matriz de correlação é dada por:
+\begin{align*}
+    \mathbf{R}_{\mathbf{x}} = 2 \times I_{8 \times 8}
+\end{align*}
+
+Isto é, uma matriz $8 \times 8$, onde apenas a diagonal é não nula, preenchida por 2.
