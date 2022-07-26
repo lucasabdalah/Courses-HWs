@@ -475,6 +475,8 @@ function hw3p5(varargin)
     
     Export = [mis.the02 mis.emp02; mis.the10 mis.emp10; mis.the50 mis.emp50];
     filter_hw.mat2txt('hw3p5mis.txt', Export, 'w', 'Misadjustment');
+    filter_hw.mat2txt('hw3p5mis.txt', Rxx, 'a', 'Rxx');
+    
 
     fprintf('Misadjustment ------------ \n\t Emp | The \n');
     fprintf('\t %2.4f | %2.4f \n', Export');
