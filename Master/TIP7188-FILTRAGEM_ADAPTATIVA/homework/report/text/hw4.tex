@@ -61,280 +61,245 @@ Na inicialização do filtro, ambos distam igualmente do sinal desejado, porém 
 \end{figure}
 
 
-% \subsection{Erro de Estimação a Priori} % <-----------------------------------------------------------------------------
-% \todo[inline, color=yellow!30]{Organizar}
-    
-% \begin{align}
-%     \epsilon(n) = d(n) - \boldsymbol{w}^{\text{H}}(n - 1) \boldsymbol{x}(n),
-% \end{align}
+\subsection{Erro de Estimação a Priori} % <-----------------------------------------------------------------------------
 
-% em que $d(n)$ é a resposta desejada, $x(n)$ é o vetor de entrada do filtro e $\boldsymbol{w}(n - 1)$ é a estimativa
-% anterior do vetor de coeficientes do filtro. Seja $e(n)$ o erro de estimação a posteriori
+De partida, é necessário relacionar o error $e(n)$ e o erro a priori $\epsilon(n)$. Utilizando a expressão recursiva de $w(n)$ no instante $n$, de modo que: $\mathbf{w}(n) = \mathbf{w}(n-1) + \epsilon(n) \mathbf{S}_{D}(n) \mathbf{x}(n)$.
+\begin{align*}
+    e(n) &= d(n) - \mathbf{w}^{\text{H}}(n) \mathbf{x}(n) \\
+    &= d(n) - \mathbf{x}^{\text{H}}(n) \mathbf{w}(n) \\
+    &= d(n) - \mathbf{x}^{\text{H}}(n) \left[\mathbf{w}(n-1) + \epsilon(n) \mathbf{S}_{D}(n) \mathbf{x}(n)\right] \\
+    &= d(n) - \mathbf{x}^{\text{H}}(n) \mathbf{w}(n-1) - \mathbf{x}^{\text{H}}(n) \epsilon(n) \mathbf{S}_{D}(n) \mathbf{x}(n) \\
+\end{align*}
 
-% \begin{align}
-%     e(n) = d(n) - \boldsymbol{w}^{\text{H}}(n) \boldsymbol{x}(n),
-% \end{align}
+Dado que $\epsilon(n) = d(n) - \mathbf{x}^{\text{H}}(n) \mathbf{w}(n-1)$, obtém-se:
+\begin{align*}
+    e(n) &= \epsilon(n) - \epsilon(n) \mathbf{x}^{\text{H}}(n) \mathbf{S}_{D}(n) \mathbf{x}(n) \\
+    &= \epsilon(n) - \epsilon(n) \mathbf{x}^{\text{H}}(n) \mathbf{S}_{D}(n) \mathbf{x}(n) \\
+\end{align*}
 
-% em que $\boldsymbol{w}(n)$ é a estimativa atual do vetor de coeficientes do filtro. Para dados complexos ambos
-% $\epsilon(n)$ e $e(n)$ são de valores complexos. Mostre que o produto $\epsilon(n)e^{*}(n)$ é sempre de valor real.
+Conjugando o elemento de erro $e(n)$ e no lado direito da expressão, pdemos introduzir o termo que representa a chamada distância de Mahalanobis $M_D$, logo temos:
+\begin{align*}
+    e^{*}(n) &= \epsilon^{*}(n) - \epsilon^{*}(n) \mathbf{x}^{\text{H}}(n) \mathbf{S}_{D}(n) \mathbf{x}(n) \\
+    &= \epsilon^{*}(n) - \epsilon^{*}(n) M_D \\
+    &= \epsilon^{*}(n) (1 - M_D)
+\end{align*}
 
-% \textcolor{red}{Solução:}
+Multiplicando a expressão pelo erro $e(n)$ à esquerda, é possível avaliar a questão numérica:
+\begin{align*}
+    \epsilon(n) e^{*}(n) &= \epsilon(n) \epsilon^{*}(n) \left(1 - M_D \right).
+\end{align*}
 
-% Primeiramente é necessário reescrever $e(n)$ em termos de $\epsilon(n)$. Inicialmente podemos escrever os coeficientes de filtro do instante $n$,
-% utilizando o erro a priori, da seguinte forma
+Podemos observar que 
+\begin{enumerate}
+    \item Dado que $M_D$ é distância, é sempre real e positiva, logo $\left(1 - M_D \right)$ é sempre real;
+    \item Enquanto $\epsilon(n) \epsilon^{*}(n)$ é uma norma dada por $||\epsilon(n)||^{2} = \epsilon(n), \epsilon^{*}(n)$, sempre posivitiva e real.
+\end{enumerate}
 
-% \begin{align}
-%     \boldsymbol{w}(n) = \boldsymbol{w}(n-1) + \epsilon(n) \boldsymbol{S}_{D}(n) \boldsymbol{x}(n),
-% \end{align}
-
-% e em seguida substituímos a expressão acima na definição do erro de estimação instantâneo e obtemos 
-
-% \begin{align}
-%     e(n) &= d(n) - \boldsymbol{w}^{\text{H}}(n) \boldsymbol{x}(n), \\
-%     e(n) &= d(n) - \boldsymbol{x}^{\text{H}}(n) \boldsymbol{w}(n), \\
-%     e(n) &= d(n) - \boldsymbol{x}^{\text{H}}(n) \left[\boldsymbol{w}(n-1) + \epsilon(n) \boldsymbol{S}_{D}(n) \boldsymbol{x}(n)\right], \\
-%     e(n) &= d(n) - \boldsymbol{x}^{\text{H}}(n) \boldsymbol{w}(n-1) - \boldsymbol{x}^{\text{H}}(n) \epsilon(n) \boldsymbol{S}_{D}(n) \boldsymbol{x}(n), \\
-%     e(n) &= \underbrace{d(n) - \boldsymbol{x}^{\text{H}}(n) \boldsymbol{w}(n-1)}_{\epsilon(n)} - \epsilon(n) \boldsymbol{x}^{\text{H}}(n) \boldsymbol{S}_{D}(n) \boldsymbol{x}(n), \\
-%     e(n) &= \epsilon(n) - \epsilon(n) \boldsymbol{x}^{\text{H}}(n) \boldsymbol{S}_{D}(n) \boldsymbol{x}(n), \\
-% \end{align}
-
-% e em sequência desenvolvemos o conjugado de $e(n)$ do seguinte modo
-
-% \begin{align}
-%     e^{*}(n) &= \epsilon^{*}(n) - \epsilon^{*}(n) \boldsymbol{x}^{\text{H}}(n) \boldsymbol{S}_{D}(n) \boldsymbol{x}(n),
-% \end{align}
-
-% onde o termo $\boldsymbol{x}^{\text{H}}(n) \boldsymbol{S}_{D}(n) \boldsymbol{x}(n)$ é a distância de Mahalanobis que será sempre real e positiva.
-% Desse modo, ao fazermos $\epsilon(n) e^{*}(n)$ obtemos 
-
-% \begin{align}
-%     \epsilon(n) e^{*}(n) &= \epsilon(n) \left[\epsilon^{*}(n) - \epsilon^{*}(n) \boldsymbol{x}^{\text{H}}(n) \boldsymbol{S}_{D}(n) \boldsymbol{x}(n)\right], \\
-%     \epsilon(n) e^{*}(n) &= \epsilon(n) \epsilon^{*}(n) - \epsilon(n) \epsilon^{*}(n) \boldsymbol{x}^{\text{H}}(n) \boldsymbol{S}_{D}(n) \boldsymbol{x}(n), \\
-%     \epsilon(n) e^{*}(n) &= \epsilon(n) \epsilon^{*}(n) \left(1 - \boldsymbol{x}^{\text{H}}(n) \boldsymbol{S}_{D}(n) \boldsymbol{x}(n)\right).
-% \end{align}
-
-% Dessa forma, sabemos que o termos $\left(1 - \boldsymbol{x}^{\text{H}}(n) \boldsymbol{S}_{D}(n) \boldsymbol{x}(n)\right)$ será sempre real, embora nem sempre positivo,
-% e $\epsilon(n) \epsilon^{*}(n)$ pode simplesmente ser visto como uma norma dada por $||\epsilon(n)||^{2} = \epsilon(n) \epsilon^{*}(n)$, demonstrando assim que sempre 
-% teremos um valor real para $\epsilon(n) e^{*}(n)$.
+Isto permite concluir que o produto do erro pelo seu conjugado será sempre real.
 
 
-% \subsection{Preditor Adaptativo} % <-----------------------------------------------------------------------------
-% \todo[inline, color=yellow!30]{Organizar}
-% Os resultados podem ser encontrados nas Figuras \ref{fig:L4Q3_a1} - \ref{fig:L4Q3_a8}. Nas figuras \ref{fig:L4Q3_a1} e \ref{fig:L4Q3_a2} temos a evolução
-% dos coeficientes de filtro e do MSE para o RLS com fator de esquecimento $\lambda = 0.9$, SNR = $3$ dB e ordens $M = 2$ e $M = 3$, respectivamente. Nesses cenários podemos 
-% ver que o RLS não atingiu a estabilidade em seus coeficientes de filtro embora tenha apresentado um comportamento MSE sem grandes variâncões de magnitude. Ademais, no segundo cenário
-% é possível verificar maior estabilidade na evolução do MSE graças ao incremento na ordem do RLS. Em sequência, nas Figuras \ref{fig:L4Q3_a3} e \ref{fig:L4Q3_a4} temos dois cenárioss similares, 
-% mas agora com um fator dde conhecimento igual a $\lambda = 0.99$. Diferentemente dos dois primeiros cenários agora é possível verificar que o RLS atingiu estabilidade em seus coeficientes de filtro, 
-% além de um melhor desempenho na evolução do MSE do que nos casos anteriores. Isso se deve pois, diferente do que ocorre com o passo de aprendizado nos algoritmos estudados anteriormente, a medida que
-% $\lambda$ cresce menos fléxivel torna-se o filtro. Desse modo, é mais fácil para esses novos cenários adaptem-se à evolução do canal com maior facilidade. Alem disso, novamente foi possível observar 
-% o impacto da ordem do RLS na estabilidade da evolução do MSE, onde para o cenário $M = 3$ foi verificado um melhor desempenho do que para o cenário $M = 2$.
+\subsection{Preditor Adaptativo} % <-----------------------------------------------------------------------------
 
-% Por fim, nos resta analisar o impacto da SNR na estabilidade e desempenho do RLS. Nas Figuras \ref{fig:L4Q3_a5} e \ref{fig:L4Q3_a6} temos o equivalente ao primeiro par de cenários, mas agora 
-% com a diferença de que ambos os cenários são de SNR infinita. Para o primeiro caso com $M = 2$ vemos uma estabilização perfeita dos coeficientes do filtro e uma evolução do erro MSE que tende ao erro de
-% precisão da máquina. Dessa forma, podemos considerar esse um cenário ideal para o RLS. Sequencialmente, na figura seguinte consideramos um cenário $M = 3$ e podemos verificar que não existiu convergência para
-% esse cenário. Inicialmente existiu uma certa estabilização na evolução do MSE, mas apos algumas iterações o filtro perdeu a estabilidade e seus coeficientes "explodiram". Esse comportamento pode ser explicado 
-% tanto pelo aumento da ordem do filtro quanto pelo fator de esquecimento que torna o filtro muito pouco fléxivel e suscetível a instabilidades provocadas por mudanças repentinas. Por fim, nas Figuras \ref{fig:L4Q3_a7}
-% e \ref{fig:L4Q3_a8} temos dois resultados estáveis na evolução do MSE e nos coeficientes do filtro RLS. Isso se deve principalmente a um fator de esquecimento que fornece maior capacidade de resistir a instabilidades
-% geradas pelo canal.
+As Figuras~\ref{fig:hw4p3-fig1}, \ref{fig:hw4p3-fig2}, mostram o comportamento do RLS para um cenário de SNR $=$ 3 dB, e a medida que $\lambda$ aumenta uma casa decimal com 9, o erro médio diminui, se aproxima de um valor estável, mas os coeficientes do filtro não convergem.
 
-% \begin{figure}[!htp]
-%     \centering
-%     %\includegraphics[width=0.825\textwidth]{figs/L4Q3_rls_mse_2_3_9.png}
-%     \includegraphics[width=0.5\textwidth]{example-image}
-%     \caption{SNR = 3 dB, M = 2 and $\lambda = 0.9$}
-%     \label{fig:L4Q3_a1}
-% \end{figure}
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw4p3-fig1.pdf}
+    \caption{RLS com 500 amostras, $M=2$, SNR = 3dB, variando $\lambda$.}
+    \label{fig:hw4p3-fig1}
+\end{figure}
 
-% \begin{figure}[!htp]
-%     \centering
-%     %\includegraphics[width=0.825\textwidth]{figs/L4Q3_rls_mse_3_3_9.png}
-%     \includegraphics[width=0.5\textwidth]{example-image}
-%     \caption{SNR = 3 dB, M = 3 and $\lambda = 0.9$}
-%     \label{fig:L4Q3_a2}
-% \end{figure}
+\clearpage
 
-% \begin{figure}[!htp]
-%     \centering
-%     %\includegraphics[width=0.825\textwidth]{figs/L4Q3_rls_mse_2_3_99.png}
-%     \includegraphics[width=0.5\textwidth]{example-image}
-%     \caption{SNR = 3 dB, M = 2 and $\lambda = 0.99$}
-%     \label{fig:L4Q3_a3}
-% \end{figure}
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw4p3-fig2.pdf}
+    \caption{RLS com 500 amostras, $M=2$, SNR = 3dB, com $\lambda = 0.999$.}
+    \label{fig:hw4p3-fig2}
+\end{figure}
 
-% \begin{figure}[!htp]
-%     \centering
-%     %\includegraphics[width=0.825\textwidth]{figs/L4Q3_rls_mse_3_3_99.png}
-%     \includegraphics[width=0.5\textwidth]{example-image}
-%     \caption{SNR = 3 dB, M = 3 and $\lambda = 0.99$}
-%     \label{fig:L4Q3_a4}
-% \end{figure}
+As Figuras~\ref{fig:hw4p3-fig3}, \ref{fig:hw4p3-fig4},mostram o comportamento do RLS para um cenário de SNR $\rightarrow \infty$ dB. Para $\lambda =0.9$, o algoritmo diverge abruptamente. Entretanto, para $\lambda = \{0.99, 0.999\}$ o erro médio é muito abaixo dos outros cenários, enquanto os coeficientes do filtro convergem para o valor estável de pesos.
 
-% \begin{figure}[!htp]
-%     \centering
-%     %\includegraphics[width=0.825\textwidth]{figs/L4Q3_rls_mse_2_inf_9.png}
-%     \includegraphics[width=0.5\textwidth]{example-image}
-%     \caption{SNR = $\infty$ dB, M = 2 and $\lambda = 0.9$}
-%     \label{fig:L4Q3_a5}
-% \end{figure}
+A análise análoga é feita para as Figuras~\ref{fig:hw4p3-fig5}-\ref{fig:hw4p3-fig8}, sendo que desta vez a ordem do filtro é de $M=3$.
 
-% \begin{figure}[!htp]
-%     \centering
-%     %\includegraphics[width=0.825\textwidth]{figs/L4Q3_rls_mse_3_inf_9.png}
-%     \includegraphics[width=0.5\textwidth]{example-image}
-%     \caption{SNR = $\infty$ dB, M = 3 and $\lambda = 0.9$}
-%     \label{fig:L4Q3_a6}
-% \end{figure}
-
-% \begin{figure}[!htp]
-%     \centering
-%     %\includegraphics[width=0.825\textwidth]{figs/L4Q3_rls_mse_2_inf_99.png}
-%     \includegraphics[width=0.5\textwidth]{example-image}
-%     \caption{SNR = $\infty$ dB, M = 2 and $\lambda = 0.99$}
-%     \label{fig:L4Q3_a7}
-% \end{figure}
-
-% \begin{figure}[!htp]
-%     \centering
-%     % \includegraphics[width=0.825\textwidth]{figs/L4Q3_rls_mse_3_inf_99.png}
-%     \includegraphics[width=0.5\textwidth]{example-image}
-%     \caption{SNR = $\infty$ dB, M = 3 and $\lambda = 0.99$}
-%     \label{fig:L4Q3_a8}
-% \end{figure}
-% \clearpage
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw4p3-fig3.pdf}
+    \caption{RLS com 500 amostras, $M=3$, SNR = $\infty$dB, variando $\lambda$.}
+    \label{fig:hw4p3-fig3}
+\end{figure}
 
 
-% \subsection{Equalização de Canais} % <-----------------------------------------------------------------------------
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw4p3-fig4.pdf}
+    \caption{RLS com 500 amostras, $M=2$, SNR = $\infty$dB, $\lambda = 0.999$.}
+    \label{fig:hw4p3-fig4}
+\end{figure}
+
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw4p3-fig5.pdf}
+    \caption{RLS com 500 amostras, $M=3$, SNR = 3dB, variando $\lambda$.}
+    \label{fig:hw4p3-fig5}
+\end{figure}
+
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw4p3-fig6.pdf}
+    \caption{RLS com 500 amostras, $M=3$, SNR = 3dB, com $\lambda = 0.999$.}
+    \label{fig:hw4p3-fig6}
+\end{figure}
+
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw4p3-fig7.pdf}
+    \caption{RLS com 500 amostras, $M=3$, SNR = $\infty$dB, variando $\lambda$.}
+    \label{fig:hw4p3-fig7}
+\end{figure}
+
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw4p3-fig8.pdf}
+    \caption{RLS com 500 amostras, $M=3$, SNR = $\infty$dB, $\lambda = 0.999$.}
+    \label{fig:hw4p3-fig8}
+\end{figure}
+
+\clearpage
+
+
+\subsection{Equalização de Canais} % <-----------------------------------------------------------------------------
 % \todo[inline, color=red!30]{Finalizar}
-% % \begin{enumerate}
+% \begin{enumerate}
     
-% %     \item Calcule a adaptação do algoritmo usando o RLS e mostre a evolução temporal dos coeficientes.
+%     \item Calcule a adaptação do algoritmo usando o RLS e mostre a evolução temporal dos coeficientes.
 
-% %         \textcolor{red}{Solução:}
+%         \textcolor{red}{Solução:}
 
-% %         A evolução temporal dos coeficientes do filtro pode ser encontrada na Figura \ref{fig:rls_coefficient}.  
-% %         Aqui é possível verificar a convergência e estabilização dos coeficientes do filtro partindo do zero a medida que o número 
-% %         de iterações cresce. Existem algumas oscilações ao final do processo, mas nada considerável. Caso o fator de esquecimento fosse
-% %         aumentado possivelmente haveriam oscilações com maiores magnitudes nos coeficientes de filtro. 
+%         A evolução temporal dos coeficientes do filtro pode ser encontrada na Figura \ref{fig:rls_coefficient}.  
+%         Aqui é possível verificar a convergência e estabilização dos coeficientes do filtro partindo do zero a medida que o número 
+%         de iterações cresce. Existem algumas oscilações ao final do processo, mas nada considerável. Caso o fator de esquecimento fosse
+%         aumentado possivelmente haveriam oscilações com maiores magnitudes nos coeficientes de filtro. 
 
-% %     \item Obtenha as trajetórias sobre as curvas de nível, tendo condições iniciais nulas para os
-% %     coeficientes do equalizador. Verifique qual a melhor inicialização do algoritmo RLS. Compare
-% %     com os algoritmos LMS, LMS-Normalizado e Gauss-Newton.
+%     \item Obtenha as trajetórias sobre as curvas de nível, tendo condições iniciais nulas para os
+%     coeficientes do equalizador. Verifique qual a melhor inicialização do algoritmo RLS. Compare
+%     com os algoritmos LMS, LMS-Normalizado e Gauss-Newton.
 
-% %         \textcolor{red}{Solução:}
+%         \textcolor{red}{Solução:}
 
-% %         As trajetórias dos algoritmos Newton, Gradiente, LMS e NLMS estão disponíveis nas Figuras \ref{fig:newton_contour}, \ref{fig:gradient_contour}, 
-% %         \ref{fig:lms_contour} e \ref{fig:nlms_contour}. Na Figura \ref{fig:rls_contour} é apresentado o traçado da trajetória de convergência para o RLS.
-% %         É possível verificar que o RLS apresenta um comportamento de convergência na superfície MSE mais próximo do algoritmo LMS. Existem alguns outliers durante 
-% %         o processo de filtragem, mas de modo geral o filtro tende à solução ótima de uma forma mais organizada e estável do que o NLMS.
+%         As trajetórias dos algoritmos Newton, Gradiente, LMS e NLMS estão disponíveis nas Figuras \ref{fig:newton_contour}, \ref{fig:gradient_contour}, 
+%         \ref{fig:lms_contour} e \ref{fig:nlms_contour}. Na Figura \ref{fig:rls_contour} é apresentado o traçado da trajetória de convergência para o RLS.
+%         É possível verificar que o RLS apresenta um comportamento de convergência na superfície MSE mais próximo do algoritmo LMS. Existem alguns outliers durante 
+%         o processo de filtragem, mas de modo geral o filtro tende à solução ótima de uma forma mais organizada e estável do que o NLMS.
 
-% %     \item Obtenha também a evolução do erro quadrático médio para cada um dos algoritmos anteriores.
+%     \item Obtenha também a evolução do erro quadrático médio para cada um dos algoritmos anteriores.
 
-% %         \textcolor{red}{Solução:} 
+%         \textcolor{red}{Solução:} 
 
-% %         As evolução do erro quadrático médio para os algoritmos Newton, Gradiente, LMS e NLMS já foram abordadas na seção 
-% %         anterior e podem ser revisitadas nas Figuras \ref{fig:newton_mse}, \ref{fig:gradient_mse}, \ref{fig:lms_mse} e \ref{fig:nlms_mse}.
-% %         adicionalmente, o traçado da evolução do MSE para o método RLS está presente na Figura \ref{fig:rls_mse}. Nessa figura podemos verificar
-% %         que o RLS apresenta uma latência de convergência menor que o LMS e NLMS, mas ao final do processo aparentemente o grau de estabilidade da
-% %         solução dos coeficientes de filtro parece ser menor do que quando comparamos com os quatro algoritmos de filtragem mencionados anteriormente.
-
-
-% % \begin{figure}[!htp]
-% %     \centering
-% %     % \includegraphics[width=0.75\textwidth]{figs/rls_coefficients.png}
-% %     \includegraphics[width=0.5\textwidth]{example-image}
-% %     \caption{Convergência dos coeficientes para o RLS. $\text{Amostras} = 5000$, $M = 2$, $\lambda = 0.99$}
-% %     \label{fig:rls_coefficient}
-% % \end{figure}
-
-% % \begin{figure}[!htp]
-% %     \centering
-% %     % \includegraphics[width=0.75\textwidth]{figs/rls_contour.png}
-% %     \includegraphics[width=0.5\textwidth]{example-image}
-% %     \caption{Caminho de convergência na superficie MSE para o RLS. $\text{Amostras} = 5000$, $M = 2$, $\lambda = 0.99$}
-% %     \label{fig:rls_contour}
-% % \end{figure}
-
-% % \begin{figure}[!htp]
-% %     \centering
-% %     % \includegraphics[width=0.75\textwidth]{figs/rls_mse.png}
-% %     \includegraphics[width=0.5\textwidth]{example-image}
-% %     \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 5000$, $M = 2$, $\lambda = 0.99$}
-% %     \label{fig:rls_mse}
-% % \end{figure}
-
-% % \end{enumerate}
+%         As evolução do erro quadrático médio para os algoritmos Newton, Gradiente, LMS e NLMS já foram abordadas na seção 
+%         anterior e podem ser revisitadas nas Figuras \ref{fig:newton_mse}, \ref{fig:gradient_mse}, \ref{fig:lms_mse} e \ref{fig:nlms_mse}.
+%         adicionalmente, o traçado da evolução do MSE para o método RLS está presente na Figura \ref{fig:rls_mse}. Nessa figura podemos verificar
+%         que o RLS apresenta uma latência de convergência menor que o LMS e NLMS, mas ao final do processo aparentemente o grau de estabilidade da
+%         solução dos coeficientes de filtro parece ser menor do que quando comparamos com os quatro algoritmos de filtragem mencionados anteriormente.
 
 
-% \subsection{Equalização Adaptativa} % <-----------------------------------------------------------------------------
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/rls_coefficients.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Convergência dos coeficientes para o RLS. $\text{Amostras} = 5000$, $M = 2$, $\lambda = 0.99$}
+%     \label{fig:rls_coefficient}
+% \end{figure}
+
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/rls_contour.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Caminho de convergência na superficie MSE para o RLS. $\text{Amostras} = 5000$, $M = 2$, $\lambda = 0.99$}
+%     \label{fig:rls_contour}
+% \end{figure}
+
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/rls_mse.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 5000$, $M = 2$, $\lambda = 0.99$}
+%     \label{fig:rls_mse}
+% \end{figure}
+
+% \end{enumerate}
+
+
+\subsection{Equalização Adaptativa} % <-----------------------------------------------------------------------------
 % \todo[inline, color=red!30]{Finalizar}
 
-% % Assim como na questão da lista anterior foi considerado novamente que o filtro é de ordem $M = 15$.
-% % Os resultados podem ser encontrados nas Figuras \ref{fig:L4Q5_a1}, \ref{fig:L4Q5_a2}, \ref{fig:L4Q5_a3} e \ref{fig:L4Q5_a4}.
-% % Inicialmente é possível confirmar uma evidente vantagem na velocidade de convergência do RLS quando o comparamos com o algoritmo LMS.
-% % Independentemente do fator de esquecimento considerado todos apresentam uma vantagem considerável sobre o LMS quando se observa tanto a 
-% % latência quanto o desempenho da evolução do MSE. Desse modo, o RLS tem menor latência e melhor desempenho MSE quando comparamos com o LMS.
+% Assim como na questão da lista anterior foi considerado novamente que o filtro é de ordem $M = 15$.
+% Os resultados podem ser encontrados nas Figuras \ref{fig:L4Q5_a1}, \ref{fig:L4Q5_a2}, \ref{fig:L4Q5_a3} e \ref{fig:L4Q5_a4}.
+% Inicialmente é possível confirmar uma evidente vantagem na velocidade de convergência do RLS quando o comparamos com o algoritmo LMS.
+% Independentemente do fator de esquecimento considerado todos apresentam uma vantagem considerável sobre o LMS quando se observa tanto a 
+% latência quanto o desempenho da evolução do MSE. Desse modo, o RLS tem menor latência e melhor desempenho MSE quando comparamos com o LMS.
 
-% % Já quando voltamos nossa análise para o impacto do fator de esquecimento é possível verificar uma interessante característica do 
-% % RLS. O fator de esquecimento atua de forma semelhante ao passo de aprendizado nos algoritmos LMS e NLMS, mas num sentido um  pouco diferente. Desse modo, quanto
-% % maior o seu valor mais flexível torna-se o filtro para adaptar-se a novos estímulos. Assim, nas Figuras \ref{fig:L4Q5_a2} e \ref{fig:L4Q5_a3}, onde o 
-% % fator de esquecimento é definido respectivamente por $\lambda = 0.9$ e $\lambda = 0.99$, é possível ver que o MSE apresenta oscilações de 
-% % elevadas magnitudades mesmo após a convergência pois estamos restringindo a flexibilidade do RLS. Já na Figura \ref{fig:L4Q5_a4} onde temos um fator de esquecimento 
-% % definido por $\lambda = 0.999$ temos oscilações de magnitudades consideravelmente menores quando comparamos com os dois casos anteriores. Já com relação ao valor de convergência
-% % MSE não é possível notar grandes diferenças entre os casos considerados, visto que todos oscilam em torno de um valor aproximadamente igual.
+% Já quando voltamos nossa análise para o impacto do fator de esquecimento é possível verificar uma interessante característica do 
+% RLS. O fator de esquecimento atua de forma semelhante ao passo de aprendizado nos algoritmos LMS e NLMS, mas num sentido um  pouco diferente. Desse modo, quanto
+% maior o seu valor mais flexível torna-se o filtro para adaptar-se a novos estímulos. Assim, nas Figuras \ref{fig:L4Q5_a2} e \ref{fig:L4Q5_a3}, onde o 
+% fator de esquecimento é definido respectivamente por $\lambda = 0.9$ e $\lambda = 0.99$, é possível ver que o MSE apresenta oscilações de 
+% elevadas magnitudades mesmo após a convergência pois estamos restringindo a flexibilidade do RLS. Já na Figura \ref{fig:L4Q5_a4} onde temos um fator de esquecimento 
+% definido por $\lambda = 0.999$ temos oscilações de magnitudades consideravelmente menores quando comparamos com os dois casos anteriores. Já com relação ao valor de convergência
+% MSE não é possível notar grandes diferenças entre os casos considerados, visto que todos oscilam em torno de um valor aproximadamente igual.
 
-% % Por fim, nas Figuras \ref{fig:L4Q5_a5} e \ref{fig:L4Q5_a6} são traçados os gráficos da evolução temporal e da resposta em frequência para
-% % o cenário proposto, respectivamente. Na primeira figura vemos a adaptação do algoritmo RLS a medida que o número de iterações progride e, apesar do
-% % equalizador desconhecer o sinal verdadeiro, existe uma aparente melhora de desempenho a medida que o filtro progride. Já na figura seguinte são comparados
-% % diretamente as repostas em frequência dos filtros LMS e RLS em relação ao sistema desconhecido com $\mu = 0.001$ e $\lambda = 0.999$, respectivamente.
-% % A partir de tal resultado podemos verificar que o filtro RLS consegue adaptar-se mais facilmente ao sistema desconhecido enquanto o filtro LMS apresenta
-% % intensas variações que possivelmente prejudicariam o processo de filtragem.
+% Por fim, nas Figuras \ref{fig:L4Q5_a5} e \ref{fig:L4Q5_a6} são traçados os gráficos da evolução temporal e da resposta em frequência para
+% o cenário proposto, respectivamente. Na primeira figura vemos a adaptação do algoritmo RLS a medida que o número de iterações progride e, apesar do
+% equalizador desconhecer o sinal verdadeiro, existe uma aparente melhora de desempenho a medida que o filtro progride. Já na figura seguinte são comparados
+% diretamente as repostas em frequência dos filtros LMS e RLS em relação ao sistema desconhecido com $\mu = 0.001$ e $\lambda = 0.999$, respectivamente.
+% A partir de tal resultado podemos verificar que o filtro RLS consegue adaptar-se mais facilmente ao sistema desconhecido enquanto o filtro LMS apresenta
+% intensas variações que possivelmente prejudicariam o processo de filtragem.
 
 
-% % \begin{figure}[!htp]
-% %     \centering
-% %     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_lms.png}
-% %     \includegraphics[width=0.5\textwidth]{example-image}
-% %     \caption{Comportamento da evolução do MSE para o LMS. $\text{Amostras} = 500$, $M = 15$, $\mu = 0.001$}
-% %     \label{fig:L4Q5_a1}
-% % \end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_lms.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Comportamento da evolução do MSE para o LMS. $\text{Amostras} = 500$, $M = 15$, $\mu = 0.001$}
+%     \label{fig:L4Q5_a1}
+% \end{figure}
 
-% % \begin{figure}[!htp]
-% %     \centering
-% %     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_9.png}
-% %     \includegraphics[width=0.5\textwidth]{example-image}
-% %     \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.9$}
-% %     \label{fig:L4Q5_a2}
-% % \end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_9.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.9$}
+%     \label{fig:L4Q5_a2}
+% \end{figure}
 
-% % \begin{figure}[!htp]
-% %     \centering
-% %     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_99.png}
-% %     \includegraphics[width=0.5\textwidth]{example-image}
-% %     \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.99$}
-% %     \label{fig:L4Q5_a3}
-% % \end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_99.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.99$}
+%     \label{fig:L4Q5_a3}
+% \end{figure}
 
-% % \begin{figure}[!htp]
-% %     \centering
-% %     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_999.png}
-% %     \includegraphics[width=0.5\textwidth]{example-image}
-% %     \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.999$}
-% %     \label{fig:L4Q5_a4}
-% % \end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_999.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Comportamento da evolução do MSE para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.999$}
+%     \label{fig:L4Q5_a4}
+% \end{figure}
 
-% % \begin{figure}[!htp]
-% %     \centering
-% %     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_t.png}
-% %     \includegraphics[width=0.5\textwidth]{example-image}
-% %     \caption{Evolução temporal para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.999$}
-% %     \label{fig:L4Q5_a5}
-% % \end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_rls_t.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Evolução temporal para o RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.999$}
+%     \label{fig:L4Q5_a5}
+% \end{figure}
 
-% % \begin{figure}[!htp]
-% %     \centering
-% %     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_filter_response.png}
-% %     \includegraphics[width=0.5\textwidth]{example-image}
-% %     \caption{Comparativo da resposta em frequência para LMS e RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.999$}
-% %     \label{fig:L4Q5_a6}
-% % \end{figure}
+% \begin{figure}[!htp]
+%     \centering
+%     % \includegraphics[width=0.75\textwidth]{figs/L4Q5_filter_response.png}
+%     \includegraphics[width=0.5\textwidth]{example-image}
+%     \caption{Comparativo da resposta em frequência para LMS e RLS. $\text{Amostras} = 500$, $M = 15$, $\lambda = 0.999$}
+%     \label{fig:L4Q5_a6}
+% \end{figure}
 
