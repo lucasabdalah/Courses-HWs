@@ -83,92 +83,50 @@ Finalmente, dado a equação obtida, com expressão equivalente à $J_{min}$, po
 
 
 \subsection{Cancelamento de Ruído} % <-----------------------------------------------------------------------------
-\todo[inline, color=yellow!30]{Organizar}
 
-Inicialmente é necessário calcular a equação de erro do sistema aqui proposto
+Formulando a expressão do erro a partir do sistema sugerido:
+\begin{align*}
+    e(n) &= x(n) - \hat{v_{1}} \\
+    &= x(n) - \mathbf{w}^{T}v_{2}(n)
+\end{align*}
 
-\begin{align}
-    e(n) &= x(n) - \hat{v_{1}} = x(n) - \mathbf{w}^{T}v_{2}(n)
-\end{align}
+Dado a equação obtida acima, deve-se aplicar: I) função erro quadrático médio (MSE), II) o operador valor esperado, com o filtro apresentando coeficientes constantes.
 
-Em seguida faz-necessário calcular a função mean square error(MSE) que é facilmente fornecida pela manipulação algébrica abaixo
+\begin{align*}
+    \mathbb{E}\{e^{2}(n)\} &= \mathbb{E}\{x^{2}(n)\} - 2\mathbf{w}^{T}\mathbb{E}\{x(n) v_{2}(n)\} + \mathbf{w}^{T}\mathbb{E}\{v_{2}(n)v_{2}(n)^{T}\} \mathbf{w},& \\
+    &= \sigma^{2}_{x} - 2\mathbf{w}^{T}\mathbf{p}_{xv_{2}} + \mathbf{w}^{T}\mathbf{R}_{v_{2}} \mathbf{w}.&
+\end{align*}
 
-\begin{align}
-    e^{2}(n) &= [x(n) - \mathbf{w}^{T}v_{2}(n)][x(n) - \mathbf{w}^{T}v_{2}(n)]^{T}, \\
-    e^{2}(n) &= x^{2}(n) - 2x(n)\mathbf{w}^{T}v_{2}(n) + \mathbf{w}^{T}v_{2}(n)v_{2}^{T}\mathbf{w}.
-\end{align}
+Isto permite encontrar a equação para calculcar o $\mathbf{w}$ que minimiza o MSE via gradiante.
 
-Sendo considerado que o filtro apresenta coeficientes constantes é possível aplicar o operador Valor Esperado de forma a obter a seguinte relação
+\begin{align*}
+    \nabla_{\mathbf{w}} \mathbb{E}\{e^{2}(n)\} &= 0 \\
+    - 2\mathbf{p}_{xv_{2}} + 2\mathbf{R}_{v_{2}} \mathbf{w} &= 0  \\
+    -\mathbf{p}_{xv_{2}} + \mathbf{R}_{v_{2}} \mathbf{w} &= 0
+\end{align*}
 
-\begin{align}
-    \mathbb{E}\{e^{2}(n)\} = \mathbb{E}\{x^{2}(n)\} - 2\mathbf{w}^{T}\mathbb{E}\{x(n) v_{2}(n)\} + \mathbf{w}^{T}\mathbb{E}\{v_{2}(n)v_{2}(n)^{T}\} \mathbf{w},& \\
-    \mathbb{E}\{e^{2}(n)\} = \sigma^{2}_{x} - 2\mathbf{w}^{T}\mathbf{p}_{xv_{2}} + \mathbf{w}^{T}\mathbf{R}_{v_{2}} \mathbf{w}.&
-\end{align}
-
-Por fim, basta encontrar o $\mathbf{w}$ que minimiza o MSE acima. Para chegar a esse fim, calcula-se o gradiante quanto ao $\mathbf{w}$ igualando-se o resultado da operação a zero
-
-\begin{align}
-    \nabla_{\mathbf{w}} \mathbb{E}\{e^{2}(n)\} = - 2\mathbf{p}_{xv_{2}} + 2\mathbf{R}_{v_{2}} \mathbf{w} = 0,& \\
-    -\mathbf{p}_{xv_{2}} + \mathbf{R}_{v_{2}} \mathbf{w} = 0,& \\
-    \mathbf{R}_{v_{2}} \mathbf{w} = \mathbf{p}_{xv_{2}}.&
-\end{align}
-
-Utilizando a identidade matricial abaixo é possível resolver a equação acima para obter o seguinte resultado
-
-\begin{align}
-    \mathbf{R}^{-1}_{v_{2}}\mathbf{R}_{v_{2}} \mathbf{w} &= \mathbf{R}^{-1}_{v_{2}}\mathbf{p}_{xv_{2}}, \\
-    \mathbf{I}\mathbf{w} &= \mathbf{R}^{-1}_{v_{2}}\mathbf{p}_{xv_{2}}, \\ 
-    \mathbf{w} &= \mathbf{R}^{-1}_{v_{2}}\mathbf{p}_{xv_{2}}. 
-\end{align}
-
-Onde é possível reescrever o termo final como
-
-\begin{align}
-    \mathbf{w} = \mathbf{R}^{-1}_{v_{2}}(\mathbf{p}_{d} + \mathbf{p}_{v_{1}} + \mathbf{p}_{v_{2}}) 
-\end{align}
+Por fim, temos que $\mathbf{w} = \mathbf{R}_{v_{2}}^{-1} \mathbf{p}_{xv_{2}}$ é o vetor de pesos do filtro.
 
 
 \subsection{Predição Ótima} % <-----------------------------------------------------------------------------
-\todo[inline, color=yellow!30]{Organizar}
 
-O filtro linear ótimo que minimiza o erro médio quadrático é descrito pela solução das equações de Wiener. Portanto, inicialmente definir a matriz de autocorrelação para o processo descrito por $x(n)$
-
-\begin{align} 
+O primeiro passo é definir a matriz de autocorrelação para $x(n)$. Visando a simplicidade, mas sem perda de generalidade, pode-se considerar que o processo $S$ é WSS e tem variância $\sigma^{2}_{s}$:
+\begin{align*} 
     \mathbf{R}_{x} = 
     \begin{bmatrix}
         \mathbb{E}\{x(n)x^{*}(n)\} & \mathbb{E}\{x(n-1)x^{*}(n)\} \\
         \mathbb{E}\{x(n)x^{*}(n-1)\}  & \mathbb{E}\{x(n-1)x^{*}(n-1)\} 
-    \end{bmatrix},
-\end{align}
-
-se considerarmos que o processo $S(n)$ é WSS com variância $\sigma^{2}_{s}$ podemos calcular as correlações como se segue
-
-\begin{align*} 
-    \mathbb{E}\{x(n)x^{*}(n)\} &= \mathbb{E}\{ s(n - a) s^{*}(n - a) + s(n - a) s^{*}(n - 4a) + s(n - 4a) s^{*}(n - a) \\
-    &+ s(n - 4a) s^{*}(n - 4a) \} = \sigma^{2}_{s} + 0 + 0 + \sigma^{2}_{s} = 2\sigma^{2}_{s} , \\
-    \mathbb{E}\{x(n-1)x^{*}(n)\} &= \mathbb{E}\{ s(n - 1 -a) s^{*}(n - a) + s(n - 1 - a) s^{*}(n - 4a) + s(n - 1 - 4a) s^{*}(n - a) \\
-    &+ s(n - 1 - 4a) s^{*}(n - 4a) \} = 0 + 0 + 0 + 0 = 0, \\
-    \mathbb{E}\{x(n)x^{*}(n-1)\} &= \mathbb{E}\{ s(n - a) s^{*}(n - 1 - a) + s(n - a) s^{*}(n - 1 - 4a) + s(n - 4a) s^{*}(n - 1 - a) \\
-    &+ s(n - 4a) s^{*}(n - 1 - 4a) \} = 0 + 0 + 0 + 0 = 0, \\
-    \mathbb{E}\{x(n-1)x^{*}(n-1)\} &= \mathbb{E}\{ s(n - 1 -a) s^{*}(n - 1 - a) + s(n - 1 - a) s^{*}(n - 1 - 4a) \\
-    &+ s(n - 1 - 4a) s^{*}(n - 1 - a) + s(n - 1 - 4a) s^{*}(n - 1 - 4a) \} = \sigma^{2}_{s} + 0 + 0 + \sigma^{2}_{s} = 2\sigma^{2}_{s}, \\
+    \end{bmatrix}
 \end{align*}
 
-obtendo assim
+Dado as premissas assumidas, a matriz pode ser simplificada para uma matriz diagonal preenchido por $2 \sigma^{2}_{s}$.
 
-\begin{align} 
-    \mathbf{R}_{x} = 
-    \begin{bmatrix}
-        2 \sigma^{2}_{s} & 0 \\
-        0  & 2 \sigma^{2}_{s}
-    \end{bmatrix}.
-\end{align}
+Finalmente, considerando média nula para o processo $D$, a consequencia é que o vetor de correlação cruzada também é nulo.
 
-Entretanto, considerando que o processo $D(n)$ têm média nula então temos na verdade um vetor de correlação cruzada nulo. Desse modo, o filtro linear
-ótimo para esse processo seria o próprio vetor nulo. Sendo assim
 
-\begin{align} 
-    \mathbf{w}_{\text{opt}} = \mathbf{R}^{-1}_{x} \mathbf{p}_{xd} = 
+\begin{align*} 
+    \mathbf{w}_{\text{opt}} &= \mathbf{R}^{-1}_{x} \mathbf{p}_{xd} \\
+    & = 
     \begin{bmatrix}
         2 \sigma^{2}_{s} & 0 \\
         0  & 2 \sigma^{2}_{s}
@@ -176,48 +134,45 @@ Entretanto, considerando que o processo $D(n)$ têm média nula então temos na 
     \begin{bmatrix}
         0 \\
         0 
-    \end{bmatrix} = 
+    \end{bmatrix} \\
+    &= 
     \begin{bmatrix}
         0 \\
         0 
-    \end{bmatrix},  
-\end{align}
+    \end{bmatrix}
+\end{align*}
+
+Isto implica que o filtro linear ótimo para esse processo seria o próprio vetor nulo.
 
 
 \subsection{Superfície de Erro} % <-----------------------------------------------------------------------------
-\todo[inline, color=yellow!30]{Organizar}
+
+Dado os coeficientes, temos que a matriz de correlação $\mathbf{R}_{x}$ do filtro ótimo é uma matriz identidade de ordem $2 \times 2$.
+
+Aplicando a solução do filtro ótimo de Wiener, obtém-se finalmente o vetor de pesos:
+\begin{align*}
+    \mathbf{w}_{\text{opt}} &= \mathbf{R}^{-1}_{x} \mathbf{p}_{xd} \\
+    &= \left[ \begin{matrix} 1 & 0 \\ 0 & 1 \end{matrix} \right]  \left[ \begin{matrix} 2 \\ 4.5 \end{matrix} \right] \\
+    &= \left[ \begin{matrix} 2 \\ 4.5 \end{matrix} \right]
+\end{align*}
 
 
-A partir dos coeficientes fornecidos é possível escrever a matrix de correlação necessário para o filtro ótimo de wiener como uma matriz identidade de ordem 2
-						
-\begin{align}
-    \mathbf{R}_{X} = \left[ \begin{matrix} 1 & 0 \\ 0 & 1 \end{matrix} \right]
-\end{align}
+\textbf{A superfície definida por $J(\mathbf{w})$}
 
-Ao utilizar a solução fechada do problema chega-se ao seguinte vetor resultado
-
-\begin{align}
-    \mathbf{w}_{\text{opt}} &= \mathbf{R}^{-1}_{x} \mathbf{p}_{xd} = \left[ \begin{matrix} 1 & 0 \\ 0 & 1 \end{matrix} \right]  \left[ \begin{matrix} 2 \\ 4.5 \end{matrix} \right] = \left[ \begin{matrix} 2 \\ 4.5 \end{matrix} \right].
-\end{align}
-
-A superfície definida por $J(\mathbf{w})$. Faça um gráfico da mesma.
-
-\textcolor{red}{Solução:}
-
-Para obter a expressão que define a superfície basta desenvolver a expressão para o erro médio
+Abrindo a equação do erro médio, para obter a expressãoque define a superfície. 
 
 \begin{align}
-    \mathbf{J}(w) &= \mathbb{E}\{e^{2}(n)\} = \sigma^{2}_{d} - 2\mathbf{w}^{T}\mathbf{p}_{xd} + w^{T}\mathbf{R}_{X}\mathbf{w}. \label{eq:mse}   
+    \mathbf{J}(w) &= \mathbb{E}\{e^{2}(n)\} \\
+    &= \sigma^{2}_{d} - 2\mathbf{w}^{T}\mathbf{p}_{xd} + w^{T}\mathbf{R}_{X}\mathbf{w}. \label{eq:mse}   
 \end{align}
 
-Substituindo os valores encontrados anteriormente na expressão da superfície
+Aplicando os valores obtidos na expressão da superfície:
+\begin{align*}
+    \mathbf{J}(w_{0}, w_{1}) &= 24.40 - 2 \left[ \begin{matrix} w_{0}  w_{1} \end{matrix} \right] \left[ \begin{matrix} 2 \\ 4.5 \end{matrix} \right] + \left[ \begin{matrix} w_{0}  w_{1} \end{matrix} \right] \left[ \begin{matrix} 1 & 0 \\ 0 & 1 \end{matrix} \right]  \left[ \begin{matrix} w_{0}  \\ w_{1} \end{matrix} \right] \\
+    &= 24.40 - 4w_{0} - 9w_{1} + w^{2}_{0} + w^{2}_{1}
+\end{align*}
 
-\begin{align}
-    \mathbf{J}(w_{0}, w_{1}) &= 24.40 - 2 \left[ \begin{matrix} w_{0}  w_{1} \end{matrix} \right] \left[ \begin{matrix} 2 \\ 4.5 \end{matrix} \right] + \left[ \begin{matrix} w_{0}  w_{1} \end{matrix} \right] \left[ \begin{matrix} 1 & 0 \\ 0 & 1 \end{matrix} \right]  \left[ \begin{matrix} w_{0}  \\ w_{1} \end{matrix} \right], \\
-    \mathbf{J}(w_{0},w_{1}) &= 24.40 - 4w_{0} - 9w_{1} + w^{2}_{0} + w^{2}_{1}.
-\end{align}
-
-Utilizando um software gráfico é possível obter a Figura \ref{fig:hw2p5} onde é traçada a superfície de erro MSE expressa na Equação (\ref{eq:mse}).
+Utilizando um MATLAB é possível obter a Figura~\ref{fig:hw2p5} onde é traçada a superfície de erro MSE expressada na Equação (\ref{eq:mse}).
 
 \begin{figure}[!htb]
     \centering
@@ -225,4 +180,3 @@ Utilizando um software gráfico é possível obter a Figura \ref{fig:hw2p5} onde
     \caption{Superfície de erro $J(w_{0}, w_{1})$.}
     \label{fig:hw2p5}
 \end{figure}
-
