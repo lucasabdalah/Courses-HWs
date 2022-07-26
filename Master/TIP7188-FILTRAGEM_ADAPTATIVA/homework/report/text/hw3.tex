@@ -201,84 +201,47 @@ Finalmente, de acordo com a expressão anterior, temos que para garantir estabil
 
 
 \subsection{Algoritmo LMS Normalizado} % <-----------------------------------------------------------------------------
-\todo[inline, color=yellow!30]{Organizar}
-Em acordância com o livro texto da disciplina a expressão de atualização dos coeficientes de filtro para o algoritmo NLMS é dada por
-
-\begin{align}
+A expressão recursiva do algoritmo NLMS para atualização dos coeficientes de filtro é dada por:
+\begin{align*}
     \mathbf{w}(k+1) = \mathbf{w}(k) + \frac{\mu_{norm}}{\gamma + \mathbf{x}^{\text{T}}(k) \mathbf{x}(k)} \mathbf{e}(k) \mathbf{x}(k),
-\end{align}
+\end{align*}
 
-e considerando que o valor médio do passo de aprendizado aplicado na direção LMS $2 \mathbf{e}(k) \mathbf{x}(k)$ é descrito por $\frac{\mu_{norm}}{2 \text{tr}(\mathbf{R_{xx}})}$, então é possível chegar
-no seguinte limite superior para o valor de convergência se compararmos diretamente as fórmulas de atualização do LMS padrão com o LMS normalizado
+A partir da relação com o algortimo LMS, asssumindo um valor médio de $\mu$, na direção de $2 \mathbf{e}(k) \mathbf{x}(k)$ está diretamente relacionado com a expressão: 
+\begin{align*}
+    \frac{\mu_{norm}}{2 \text{trace}(\mathbf{R_{xx}})}
+\end{align*}
 
-\begin{align}
-    0 &< \frac{\mu_{norm}}{2 \text{tr}(\mathbf{R_{xx}})} < \frac{1}{\text{tr}(\mathbf{R_{xx}})}, \\
+Finalmente, isso permite limitar à direita o valor de convergência do NLMS, tendo como parâmetro as equações utilizadas na atualização do LMS.
+\begin{align*}
+    0 &< \frac{\mu_{norm}}{2 \text{trace}(\mathbf{R_{xx}})} < \frac{1}{\text{trace}(\mathbf{R_{xx}})} \\
     0 &< \mu_{norm} < 2, 
-\end{align}
+\end{align*}
         
-\clearpage
-
 
 \subsection{Equalização de Canais} % <-----------------------------------------------------------------------------
-\todo[inline, color=yellow!30]{Organizar}
 
+\subsubsection*{Equalizado Ótimo e plano Z}
 
-\subsubsection{Equalizado Ótimo e plano Z}
-    
-Considerando um sinal gaussiano branco $x(n)$ a saída do canal pode ser prontamente obtida por
-
-\begin{align}
-    y(n) = x(n) + 1.6 x(n - 1),
-\end{align}
-
-e a matriz de autocorrelação será então dada por
-
-\begin{align}
+Considerando o sinal gaussiano branco $x(n)$, a saída do canal $y(n)$ é dada por: $ y(n) = x(n) + 1.6 x(n - 1)$. Consequentemente, tem a seguinte a matriz de autocorrelação:
+\begin{align*}
     \mathbf{R}_{y} =
     \begin{bmatrix}
         \mathbb{E}\{y(n)y^{\text{H}}(n)\} & \mathbb{E}\{y(n)y^{\text{H}}(n - 1)\} \\
         \mathbb{E}\{y(n - 1)y^{\text{H}}(n)\} & \mathbb{E}\{y(n - 1)y^{\text{H}}(n - 1)\}
     \end{bmatrix},
-\end{align}
-
-onde podemos calcular os valores teóricos para as correlações da seguinte forma se assumirmos que existe independência entre amostras distintas e que o sinal é média nula 
-
-\begin{align*}
-    \mathbb{E}\{y(n)y^{\text{H}}(n)\} &= \mathbb{E}\{ \mathbf{x}^{2}(n) + 1.6 \mathbf{x}(n) \mathbf{x}^{\text{H}}(n - 1) + 1.6 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}} (n) \\
-    &+ 2.56 \mathbf{x}^{2}(n - 1) \} = 3.56, \\
-    \mathbb{E}\{y(n)y^{\text{H}}(n - 1)\} &= \mathbb{E}\{ \mathbf{x}(n) \mathbf{x}^{\text{H}}(n - 1) + 1.6 \mathbf{x}(n) \mathbf{x}^{\text{H}}(n - 2) + 1.6 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}} (n - 1) \\ 
-    &+ 2.56 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}}(n - 2) \} = 1.60, \\
-    \mathbb{E}\{y(n - 1)y^{\text{H}}(n)\} &= \mathbb{E}\{ \mathbf{x}(n - 1) \mathbf{x}^{\text{H}}(n) + 1.6 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}}(n - 1) + 1.6 \mathbf{x}(n - 2) \mathbf{x}^{\text{H}} (n) \\ 
-    &+ 2.56 \mathbf{x}(n - 2) \mathbf{x}^{\text{H}}(n - 1) \} = 1.60, \\
-    \mathbb{E}\{y(n - 1)y^{\text{H}}(n - 1)\} &= \mathbb{E}\{ \mathbf{x}^{2}(n - 1) + 1.6 \mathbf{x}(n - 1) \mathbf{x}^{\text{H}}(n - 2) + 1.6 \mathbf{x}(n - 2) \mathbf{x}^{\text{H}} (n - 1) \\ 
-    &+ 2.56 \mathbf{x}(n - 2)^{2} \} = 3.56, \\
 \end{align*}
 
-podendo assim descrever a matriz de autocorrelação teórica e sua inversa como
-
-\begin{align}
+Aplicando os valores em cada expressão de correlação, e sabendo que sinal tem média nula e suas amostras são independentes, temos que matriz de autocorrelação teórica:
+\begin{align*}
     \mathbf{R}_{y} =
     \begin{bmatrix}
         3.56 & 1.60 \\
         1.60 & 3.56
-    \end{bmatrix},
-\end{align}
+    \end{bmatrix}
+\end{align*}
 
-\begin{align}
-    \mathbf{R}^{-1}_{y} = \frac{1}{3.56^{2} - 1.6^{2}}
-    \begin{bmatrix}
-        3.56 &  -1.60 \\
-        -1.60 & 3.56
-    \end{bmatrix} =
-    \begin{bmatrix}
-        0.35 &  -0.16 \\
-        -0.16 & 0.35
-    \end{bmatrix}.
-\end{align}
-
-Já o vetor de correlação cruzada teórico pode ser descrito por
-
-\begin{align}
+O vetor de correlação cruzada é dado por:
+\begin{align*}
     \mathbf{p}_{yd} =
     \begin{bmatrix}
         \mathbb{E}\{y(n)d(n)\} \\
@@ -288,75 +251,70 @@ Já o vetor de correlação cruzada teórico pode ser descrito por
         1 \\
         0
     \end{bmatrix},
-\end{align}
-
-pois queremos que o sinal de saída tenha a maior correlação possivel com o sinal desejado de um mesmo instante mas continue sendo independente de um sinal de um instante temporal diferente.
-Desse modo, podemos obter o equalizador ótimo segundo o critério de Wiener como
-
-\begin{align}
-    \mathbf{w}_{\text{opt}} = \mathbf{R}^{-1}_{y} \mathbf{p}_{yd} = \begin{bmatrix}
+\end{align*}
+buscando obter a maior correlação possivel com o sinal desejado, sem que haja dependência de amostras em instantes diferentes. Por fim, temos que os coeficientes ótimos (Wiener) do equalizador são:
+\begin{align*}
+    \mathbf{w}_{\text{opt}} &= \mathbf{R}^{-1}_{y} \mathbf{p}_{yd} \\
+    &= \begin{bmatrix}
+        0.35 &  -0.16 \\
+        -0.16 & 0.35
+    \end{bmatrix} 
+    \begin{bmatrix}
+        1 \\
+        0
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
         0.35 \\
         -0.16
-    \end{bmatrix}.
-\end{align}
-
-Por fim, abaixo segue o traçado para os zeros das funções de transferência tanto do canal quanto do filtro ótimo em azul e em vermelho, respectivamente.
+    \end{bmatrix} 
+\end{align*}
 
 \begin{figure}[!htp]
     \centering
     \includegraphics[width=0.8\textwidth]{fig/hw3p4-zeros.pdf}
     \caption{Zeros do canal e do equalizador no plano-z.}
+    \label{fig:hw3p4-zeros}
 \end{figure}
 
+Levando em consideração todas as informações obtidas, é possível calculcar o diagram de zeros do filtro e do canal na Fig.~\ref{fig:hw3p4-zeros}.
 
-\subsubsection{Filtro de Erro de Predição Direta de Passo Unitário}
-    
+\subsubsection*{Filtro de Erro de Predição Direta de Passo Unitário}
+O filtro de predição direta de passo unitário é dado por:
+\begin{align*}
+    \hat{x}(n) &= \sum^{M + k - 1}_{i = k} w_{f,i} x(n - i) \\
+    &= \sum^{2}_{i = 1} w_{f,i} x(n - i) \\
+    &= \mathbf{w}^{\text{T}}_{f} \mathbf{x}(n - 1),
+\end{align*}
 
-De forma semelhante ao abordado anteriormente temos que o filtro de predição direta de passo unitário é dado por
-
-\begin{align}
-    \hat{x}(n) &= \sum^{M + k - 1}_{i = k} w_{f,i} x(n - i) = \sum^{2}_{i = 1} w_{f,i} x(n - i) = \mathbf{w}^{\text{T}}_{f} \mathbf{x}(n - 1),
-\end{align}
-
-onde o erro quadrático médio é dado por
-
-\begin{align}
-    \mathbb{E}\{e^{2}(n)\} = \mathbb{E}\{(x(n) - \hat{x}(n) )^{2}\} = \mathbf{r}_{x}(0) - 2 \mathbf{w}^{\text{T}}_{f} \mathbf{r}_{x,f} + \mathbf{w}^{\text{T}}_{f} \mathbf{R}_{x} \mathbf{w}_{f},
-\end{align}
-
-onde a solução ótima será dada por
-
-\begin{align}
-    \mathbf{w}_{f,\text{opt}} = \mathbf{R}^{-1}_{x} \mathbf{r}_{x,f}.
-\end{align}
+Tendo que o erro quadrático médio (MSE) é:
+\begin{align*}
+    \mathbb{E}\{e^{2}(n)\} &= \mathbb{E}\{(x(n) - \hat{x}(n) )^{2}\} \\
+    &= \mathbf{r}_{x}(0) - 2 \mathbf{w}^{\text{T}}_{f} \mathbf{r}_{x,f} + \mathbf{w}^{\text{T}}_{f} \mathbf{R}_{x} \mathbf{w}_{f}
+\end{align*}
+E a solução ótima é: $ \mathbf{w}_{f,\text{opt}} = \mathbf{R}^{-1}_{x} \mathbf{r}_{x,f} $.
 
 Teremos assim que a mesma matriz de autocorrelação e o vetor de correlação cruzada serão definidos por
-
-\begin{align}
-    \mathbf{R}_{y} &=
-    \begin{bmatrix}
-        3.56 & 1.60 \\
-        1.60 & 3.56
-    \end{bmatrix}, \\
+\begin{align*}
     \mathbf{r}_{y,f} &= 
     \begin{bmatrix}
         r_{y}(1) \\
         r_{y}(2)
-    \end{bmatrix} =
+    \end{bmatrix} \\
+    & =
     \begin{bmatrix}
         \mathbb{E}\{y(n) y(n - 1)\} \\
         \mathbb{E}\{y(n) y(n - 2)\}
-    \end{bmatrix} = 
+    \end{bmatrix} \\
+    & = 
     \begin{bmatrix}
         1.60 \\
         0
     \end{bmatrix}.
-\end{align}
+\end{align*}
 
-Por essa razão temos
-
-\begin{align}
-    \mathbf{w}_{f,\text{opt}} = 
+Logo, os coeficientes do filtro são:
+\begin{align*}
+    \mathbf{w}_{f,\text{opt}} &= 
     \begin{bmatrix}
         0.35 & -0.16 \\
         -0.16 & 0.35
@@ -364,26 +322,22 @@ Por essa razão temos
     \begin{bmatrix}
         1.60 \\
         0
-    \end{bmatrix} =
+    \end{bmatrix} \\ 
+    &=
     \begin{bmatrix}
         0.56 \\
         -0.26
     \end{bmatrix}.
-\end{align}
+\end{align*}
 
-Em seguida, podemos obter os zeros do filtro como
+Por fim, podemos verificar o ponto de zero do filtro, como antecipado no Fig.~\ref{fig:hw3p4-zeros}, $ W(z) = 0.56 - 0.26 z^{-1}$:
+\begin{align*}
+    0.56 - 0.26 z^{-1} &= 0 \\
+    z &= 0.45
+\end{align*}
 
-\begin{align}
-    W(z) &= 0.56 - 0.26 z^{-1}, \\
-    0 &= 0.56 - 0.26 z^{-1}, \\
-    z &= 0.45,
-\end{align}
+\subsubsection*{Curvas de MSE e de Nível dos algoritmos}
 
-que é o mesmo zero do equalizador definido anteriormente.
-
-
-\subsubsection{Curvas de MSE e de Nível dos algoritmos}
-\todo[inline, color=green!30]{Ok}
 Como apresentado anteriormente, na seção 2, questão 5, o conceito de superfície de erro utilizado para traçar as curvas de nível e MSE é baseado respectivamente nas funções $J(w) = \sigma^{2}_{d} - 2\mathbf{w}^{\top}\mathbf{p}_{\mathbf{X} d} + w^{\top}\mathbf{R}_{X}\mathbf{w} $ e $J(w) = \mathbb{E}\{e^{2}(n)\}$.
 
 \begin{figure}[!htp]
@@ -415,246 +369,154 @@ Como apresentado anteriormente, na seção 2, questão 5, o conceito de superfí
 \end{figure}
 
 
-As Figuras \ref{fig:hw3p4-dga}, \ref{fig:hw3p4-newton}, \ref{fig:hw3p4-lms} e \ref{fig:hw3p4-nlms} apresentam
-o comportamento do erro quadrático médio (MSE) e as curvas de convergência sobre a superfície MSE para cada  algoritmos implementado. A ordem de $M = 2$ foi utilizada para todos os filtros, consequentemente o vetor de pesos na atualização possui apenas 2 coeficientes atualizados por iteração. O desempenho médio de todos é muito semelhante, com certa vantagem para o NLMS.
+As Figuras \ref{fig:hw3p4-dga}, \ref{fig:hw3p4-newton}, \ref{fig:hw3p4-lms} e \ref{fig:hw3p4-nlms} apresentam o comportamento do erro quadrático médio (MSE) e as curvas de convergência sobre a superfície MSE para cada algoritmo implementado. A ordem de $M = 2$ foi utilizada para todos os filtros, consequentemente o vetor de pesos na atualização possui apenas 2 coeficientes atualizados por iteração. O desempenho médio é semelhante, com certa vantagem para o NLMS.
 
 Para os métodos determinísticos, é possível observar que há convergência organizada e suave. Isso é esperado, dado que o algoritmo utiliza o conhecimento dos coeficientes ideais do filtro. Enquanto para os métodos estocásticos, é visível algumas regiões de desordem na convergência, isso é dado como consequência da utilização das aproximações estatísticas instantâneas do sinal para o cálculo dos coeficientes. Ao comparar o LMS e sua versão normalizada, o primeiro apresenta uma maior estabilidade de convergência, enquanto o segundo apresentar uma numvem de pontos bem menos densa em torno da solução de Wiener, além de pontos que aparentemente se afastam da solução, consequência das iterações iniciais.
 
-\clearpage 
+\subsubsection*{Número de condicionamento}
+O número de condicionamento consiste no quociente entre o maior $\lambda_{\max}$ e menor $\lambda_{\min}$ autovalor da matrix $\mathbf{R}_{x}$.
 
+A partir da equação $\lambda^{2} - 7.12 \lambda + 10.11 = 0$, obtém-se as raízes do polinômio e consequentemente os autovalores e autovetores da matriz.
 
-\subsubsection{Número de condicionamento}
-    
+Utilizando o MATLAB para calcular o quociente entre autovalores máximo e mínimo, obtemos que:
+\begin{align*}
+    \mathbb{C} (\mathbf{R}_{x}) = \frac{5.160}{1.960} = 2.633
+\end{align*}
 
-        
-        O número de condicionamento pode ser prontamente obtido pela expressão
+\subsubsection*{Modelo de canal para número de condicionamento menor/maior que 5}
 
-        \begin{align}
-            \mathbb{C} (\mathbf{R}_{x}) = \frac{\lambda_{\text{max}}}{\lambda_{\text{min}}},
-        \end{align}
-    
-        onde $\lambda_{\text{max}}$ e $\lambda_{\text{min}}$ são os autovalores máximo e mínimo da matriz de autocorrelação, respectivamente. Por meio de um software
-        matemático foi possível obter os seguinte autovalores para a matriz de autocorrelação teórica
-
-        \begin{align}
-            \mathbb{C} (\mathbf{R}_{x}) = \frac{5.16}{1.96} = 2.63,
-        \end{align}
-
-        onde talvez seja importante ressaltar que também poderiamos ter obtido os autovalores resolvendo a equação do polinômio
-        característico da matriz de autocorrelação que é dada por
-
-        \begin{align}
-            \lambda^{2} - 7.12 \lambda + 10.11 = 0. 
-        \end{align}
-
-
-\subsubsection{Modelo de canal para número de condicionamento menor/maior que 5}
-Comente os resultados.
-
-Inicialmente podemos escrever a matriz de correlação contabilizando a contribuição dos coeficientes do canal para os elementos individuais
-
-\begin{align}
+Definindo uma função de transferência do canal: $H(z) = a_{0} + a_{1}z^{-1}$, pode-se obter a matriz de autocorrelação, visando obter o polinômio característico: $\lambda^{2} + b \lambda + c = 0$.
+\begin{align*}
     \mathbf{R}_{y} =
     \begin{bmatrix}
         a_{0} + a^{2}_{1} & a_{1}\\
         a_{1} & a_{0} + a^{2}_{1}
     \end{bmatrix},
-\end{align}
+\end{align*}
 
-onde a função de transferência do canal seria dada por $H(z) = a_{0} + a_{1}z^{-1}$. A partir dessa matriz de autocorrelação genérica podemos então 
-definir o seguinte polinômio característico
+Reorganizando a equação característica obtida a partir da matriz, tem-se que:
+\begin{align*}
+    &\lambda^{2} \overbrace{- 2 (a_{0} + a^{2}_{1})}^{b} \lambda + \overbrace{(a_{0} + a^{2}_{1})^{2} - a^{2}_{1}}^{c} = 0 \\
+    &\lambda^{2} + b \lambda + c = 0
+\end{align*}
 
-\begin{align}
-    &(\lambda - a_{0} + a^{2}_{1})^{2} - a^{2}_{1} = 0, \\
-    &\lambda^{2} \underbrace{- 2 (a_{0} + a^{2}_{1})}_{b} \lambda + \underbrace{(a_{0} + a^{2}_{1})^{2} - a^{2}_{1}}_{c} = 0, \\
-    &\lambda^{2} + b \lambda + c = 0,
-\end{align}
+A solução de equação de 2º grau pode ser obtida através equação de Bháskara, de modo que:
 
-onde sabemos que a solução é facilmente obtida pela fórmula de Bháskara. A partir disso podemos definir o número de condicionamento como
+\begin{align*}
+    \mathbb{C} (\mathbf{R}_{x}) &= \frac{\lambda_{\text{max}}}{\lambda_{\text{min}}} \\
+     &= \frac{2 (a_{0} + a^{2}_{1}) + \sqrt{4 (a_{0} + a^{2}_{1})^{2} - 4 (a_{0} + a^{2}_{1})^{2} + 4 a^{2}_{1}}}{2 (a_{0} + a^{2}_{1}) - \sqrt{4 (a_{0} + a^{2}_{1})^{2} - 4 (a_{0} + a^{2}_{1})^{2} + 4 a^{2}_{1}}} \\
+     &= \frac{a_{0} + a^{2}_{1} + a_{1}}{a_{0} + a^{2}_{1} - a_{1}}
+\end{align*}
 
-\begin{align}
-    \mathbb{C} (\mathbf{R}_{x}) &= \frac{\lambda_{\text{max}}}{\lambda_{\text{min}}}, \\
-    \mathbb{C} (\mathbf{R}_{x}) &= \frac{- b + \sqrt{b^{2} - 4c}}{- b - \sqrt{b^{2} - 4c}}, \\
-    \mathbb{C} (\mathbf{R}_{x}) &= \frac{2 (a_{0} + a^{2}_{1}) + \sqrt{4 (a_{0} + a^{2}_{1})^{2} - 4 (a_{0} + a^{2}_{1})^{2} + 4 a^{2}_{1}}}{2 (a_{0} + a^{2}_{1}) - \sqrt{4 (a_{0} + a^{2}_{1})^{2} - 4 (a_{0} + a^{2}_{1})^{2} + 4 a^{2}_{1}}}, \\
-    \mathbb{C} (\mathbf{R}_{x}) &= \frac{2 (a_{0} + a^{2}_{1}) + 2a_{1}}{2 (a_{0} + a^{2}_{1}) - 2a_{1}}, \\
-    \mathbb{C} (\mathbf{R}_{x}) &= \frac{a_{0} + a^{2}_{1} + a_{1}}{a_{0} + a^{2}_{1} - a_{1}},
-\end{align}
+As relações acima permitem estabelecer as inequações que limitam o número de condicionamento: $ 5 (a_{0} + a^{2}_{1} - a_{1}) \leq a_{0} + a^{2}_{1} + a_{1} \leq 5 (a_{0} + a^{2}_{1} - a_{1})$.
 
-assim temos agora uma fórmula para o número de condicionamento da matriz de autocorrelação com base nos coeﬁcientes de canal. A partir disso basta que as seguintes inequações sejam atendidas para que
-obtenhamos um número de condicionamento maior ou menor do que o requerido
-
-\begin{align}
-    a_{0} + a^{2}_{1} + a_{1} &\geq 5 (a_{0} + a^{2}_{1} - a_{1}), \\
-    a_{0} + a^{2}_{1} + a_{1} &\leq 5 (a_{0} + a^{2}_{1} - a_{1}).
-\end{align}
-
-\clearpage
+% \clearpage
 
 
 \subsection{Identificação de Sistemas} % <-----------------------------------------------------------------------------
-\todo[inline, color=yellow!30]{Organizar}
 
-    
-\begin{align}
-    H(z) = \frac{1 - z^{-12}}{1 - z^{-1}}
-\end{align}
+\subsubsection*{Limite Superior para $\mu$}
 
-\begin{enumerate}
+Para definir o limite superior do fator de aprendizado, i.e, assegurar estabilidade, é necessário obter $\lambda_{\max}$ de $R_X$. 
 
-    \item Calcule o limite superior para $\mu$ (ou seja $\mu_{\text{max}}$) para garantir a estabilidade do algoritmo.
+Para isso é necessário desenvolver as equações que caracterizam o sistema, função de transferência e a representação da saída no tempo, respectivamente:
+\begin{align*}
+    H(z) &= \frac{1 - z^{-12}}{1 - z^{-1}} \\
+    &= \frac{(1 - z^{-1})(\sum_{k= 0}^{11} z^{-k})}{1 - z^{-1}} \\
+    &= \sum_{k = 0}^{11} z^{-k}
+\end{align*}
+\begin{align*}
+    y(n) = \sum_{k = 0}^{11} x(n-k)
+\end{align*}
 
-        \textcolor{red}{Solução:}
+Tendo essas informações, é possível estimar a $R_X$ utilizando o MATLAB, mostrada na Tabela ~\ref{tab:rxx}.
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{llllllllllll}
+    11.9509 & 10.9518 & 9.9530  & 8.9546  & 7.9567  & 6.9589  & $\dots$ & 0.9785  \\
+    10.9518 & 11.9509 & 10.9518 & 9.9530  & 8.9546  & 7.9567  & $\dots$ & 1.9749  \\
+    9.9530  & 10.9518 & 11.9509 & 10.9518 & 9.9530  & 8.9546  & $\dots$ & 2.9716  \\
+    8.9546  & 9.9530  & 10.9518 & 11.9509 & 10.9518 & 9.9530  & $\dots$ & 3.9684  \\
+    7.9567  & 8.9546  & 9.9530  & 10.9518 & 11.9509 & 10.9518 & $\dots$ & 4.9654  \\
+    6.9589  & 7.9567  & 8.9546  & 9.9530  & 10.9518 & 11.9509 & $\dots$ & 5.9620  \\
+    5.9620  & 6.9589  & 7.9567  & 8.9546  & 9.9530  & 10.9518 & $\dots$ & 6.9589  \\
+    4.9654  & 5.9620  & 6.9589  & 7.9567  & 8.9546  & 9.9530  & $\dots$ & 7.9567  \\
+    3.9684  & 4.9654  & 5.9620  & 6.9589  & 7.9567  & 8.9546  & $\dots$ & 8.9546  \\
+    2.9716  & 3.9684  & 4.9654  & 5.9620  & 6.9589  & 7.9567  & $\dots$ & 9.9530  \\
+    1.9749  & 2.9716  & 3.9684  & 4.9654  & 5.9620  & 6.9589  & $\dots$ & 10.9518 \\
+    0.9785  & 1.9749  & 2.9716  & 3.9684  & 4.9654  & 5.9620  & $\dots$ & 11.9509
+    \end{tabular}
+    \caption{Matriz de autocorrelação $R_X$, com simulação de Monte Carlo, utilizando 10000 iterações.}
+    \label{tab:rxx}
+\end{table}
 
-        Para garantirmos a estabilidade do algoritmo precisamos apenas obter o valor numérico do maior autovalor definido pela matriz de autocorrelação do problema.
-        Desse modo, podemos simplificar a função de transferência por meio da seguinte manipulação algébrica
+De acordo com o autovalor máximo, obtido no MATLAB, temos o seguinte intervalo de convergência:
+\begin{align*}
+    0 < \mu < \frac{1}{97}
+\end{align*}
 
-        \begin{align*}
-            H(z) &= \frac{1 - z^{-12}}{1 - z^{-1}}, \\
-            H(z) &= \frac{(1 - z^{-1})(1 + z^{-1} + z^{-2} + z^{-3} + z^{-4} + z^{-5} + z^{-6} + z^{-7} + z^{-8} + z^{-9} + z^{-10} + z^{-11})}{1 - z^{-1}}, \\
-            H(z) &= 1 + z^{-1} + z^{-2} + z^{-3} + z^{-4} + z^{-5} + z^{-6} + z^{-7} + z^{-8} + z^{-9} + z^{-10} + z^{-11},
-        \end{align*}
-
-        e tomando a transformada z inversa da função de transferência chega-se a seguinte saída de um sinal transmitido por esse canal
-
-        \begin{align*}
-            y(n) &= x(n) + x(n-1) + x(n-2) + x(n-3) + x(n-4) + x(n-5) + x(n-6) + x(n-7) \\
-            &+ x(n-8) + x(n-9) + x(n-10) - x(n-11), 
-        \end{align*}
-
-        Em sequência é possível utilizar um software matemático para obter uma estimação para a matriz de autocorrelação
-
-        \begin{figure}[!htp]
-            \centering
-            % \includegraphics[width=1\textwidth]{figs/Rxx.png}
-            \includegraphics[width=0.3\textwidth]{example-grid-100x100pt}
-        \caption{Matriz de autocorrelação estimada após 10000 realizações para retirada do comportamento médio}
-        \label{fig:rxx}
-        \end{figure}
-
-        onde a análise de autovalores de $\mathbf{R}_{xx}$ resulta no seguinte intervalo de convergência para o passo de 
-        aprendizado
-
-        \begin{align}
-            0 < \mu < \frac{1}{\lambda_{\text{max}}} = \frac{1}{97} \approx 0.01,
-        \end{align}
-
-        e assim $\mu_{\text{max}} \approx 0.01$.
-
-    \item Execute o algoritmo para $\frac{\mu_{\text{max}}}{2}$, $\frac{\mu_{\text{max}}}{10}$ e $\frac{\mu_{\text{max}}}{50}$. Comente sobre o comportamento da convergência de cada caso.
-
-        \textcolor{red}{Solução:}
+\subsubsection*{O algoritmo para $\frac{\mu_{\text{max}}}{2}$, $\frac{\mu_{\text{max}}}{10}$ e $\frac{\mu_{\text{max}}}{50}$} 
 
 
-        Nas Figuras \ref{fig:mu_2}, \ref{fig:mu_10} e \ref{fig:mu_50} podemos verificar o comportamento da convergência do algoritmo para esse problema. A príncipio é possível 
-        confirmar que existe uma diminuta piora quanto ao desempenho dos algoritmos a medida que o passo de aprendizado descrece. Isso pode ser explicado pois a medida que 
-        $\mu$ fica menor a flexibilidade de adaptação do algoritmo é reduzida. Assim, para passos de aprendizado muito pequenos é mais difícil para o filtro conseguir acompanhar
-        as mudanças no canal provocadas pelo impacto de componentes ruidosas e pela resposta em frequência do canal. 
+As Figuras~\ref{fig:mu_2}, \ref{fig:mu_10} e \ref{fig:mu_50} mostram o desempenho de cada filtro, de acordo com os parâmetros, e o apresentam o comportamento dos coeficientes na convergência do algoritmo. 
 
-        \begin{figure}[!htp]
-            \centering
-            % \includegraphics[width=0.75\textwidth]{figs/L3Q5_mu_2.png}
-            \includegraphics[width=0.5\textwidth]{example-image}
-            \caption{$\text{Amostras} = 1000$, $M = 15$, $\mu = \frac{\mu_{\text{max}}}{2}$}
-            \label{fig:mu_2}
-        \end{figure}
-    
-        \begin{figure}[!htp]
-            \centering
-            % \includegraphics[width=0.75\textwidth]{figs/L3Q5_mu_10.png}
-            \includegraphics[width=0.5\textwidth]{example-image}
-            \caption{$\text{Amostras} = 1000$, $M = 15$, $\mu = \frac{\mu_{\text{max}}}{10}$}
-            \label{fig:mu_10}
-        \end{figure}
-    
-        \begin{figure}[!htp]
-            \centering
-            % \includegraphics[width=0.75\textwidth]{figs/L3Q5_mu_50.png}
-            \includegraphics[width=0.5\textwidth]{example-image}
-            \caption{$\text{Amostras} = 1000$, $M = 15$, $\mu = \frac{\mu_{\text{max}}}{50}$}
-            \label{fig:mu_50}
-        \end{figure}
-        
-        \clearpage
-
-
-        \item Meça o desajuste (misadjustment) em cada exemplo e comparar com os resultados obtidos pela solução teórica (Eq. (3.50) do livro texto)					
-
-        \textcolor{red}{Solução:}
-
-        O desajuste pode ser aproximado por
-
-        \begin{align}
-            M = \frac{\xi_{\text{excesso}}}{\xi_{\text{min}}} &\approx \frac{\mu \text{tr}(\mathbf{R}_{x})}{1 - \mu \text{tr}(\mathbf{R}_{x})},
-        \end{align}
-
-        e a partir dessa expressão foi possivel obter a seguinte tabela
-
-        \begin{table}[!htp]
-            \centering
-            \begin{tabular}{|l|l|l|}
-                \hline
-                & Empírico & Téorico \\ \hline
-                $\frac{\mu_{\text{max}}}{2}$  & $ -1.3865 $ &  $ -1.3846 $ \\ \hline
-                $\frac{\mu_{\text{max}}}{10}$ & $ +2.5392 $ & $ +2.5714 $ \\ \hline
-                $\frac{\mu_{\text{max}}}{50}$ & $ +0.1675 $ & $ +0.1682 $ \\ \hline
-            \end{tabular}
-        \end{table}
-
-        Os resultados foram obtidos por uso de software matemático e os códigos estão disponíveis juntamente com este relatório.
-
-    \item Mostre o gráﬁco da resposta em frequência do ﬁltro FIR em qualquer uma das iterações após a convergência ser obtida e compare com o sistema desconhecido.
-
-        \textcolor{red}{Solução:}
-
-        A resposta em frequência do filtro está disponível nas Figuras \ref{fig:filter_response_2}, \ref{fig:filter_response_10} e \ref{fig:filter_response_50} para os casos $\frac{\mu_{\text{max}}}{2}$, $\frac{\mu_{\text{max}}}{10}$ e $\frac{\mu_{\text{max}}}{50}$, respectivamente. 
-        É possível ver que a resposta em frequência do filtro tende a se aproximar da resposta em frequência do sistema quanto maior o passo de aprendizado, pois quanto maior $\mu$ mais facilidade tem o filtro em acompanhar as variações do canal. 
-        No caso extremo onde temos um passo de aprendizado $\frac{\mu_{\text{max}}}{50}$ é possível verificar que a resposta em frequência do filtro é uma versão consideravelmente amortecida da resposta original do canal. 
-        Ademais, na Figura \ref{fig:L3Q5_t} vemos a evolução temporal do filtro para as primeiras 100 amostras quando temos a resposta em frequência dada na Figura \ref{fig:filter_response_2}.
-
-\end{enumerate}
-
-
+A primeira vista, o rastreio do resposta em frequência é o que deixa mais evidente a relação entre a diminuição do $\mu$ e a piora do desempenho. Isso se dá, pois ao passo que o $\mu$ reduz-se, a flexibilidade de adaptação diminui concomitantemente, tornando mais difícil do filtro acompanhar mudanças no canal.
 
 \begin{figure}[!htp]
     \centering
-    % \includegraphics[width=0.75\textwidth]{figs/L3Q5_filter_response_2.png}
-    \includegraphics[width=0.5\textwidth]{example-image}
-    \caption{$\text{Amostras} = 1000$, $M = 15$, $\mu = \frac{\mu_{\text{max}}}{2}$}
-    \label{fig:filter_response_2}
+    \includegraphics[width=0.9\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw3p5b-mu02.pdf}
+    \caption{$\text{Amostras} = 5000$, $M = 15$, $\mu = \frac{\mu_{\text{max}}}{2}$}
+    \label{fig:mu_2}
 \end{figure}
 
 \begin{figure}[!htp]
     \centering
-    % \includegraphics[width=0.75\textwidth]{figs/L3Q5_filter_response_10.png}
-    \includegraphics[width=0.5\textwidth]{example-image}
-    \caption{$\text{Amostras} = 1000$, $M = 15$, $\mu = \frac{\mu_{\text{max}}}{10}$}
-    \label{fig:filter_response_10}
+    \includegraphics[width=0.9\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw3p5b-mu10.pdf}
+    \caption{$\text{Amostras} = 5000$, $M = 15$, $\mu = \frac{\mu_{\text{max}}}{10}$}
+    \label{fig:mu_10}
 \end{figure}
 
 \begin{figure}[!htp]
     \centering
-    % \includegraphics[width=0.75\textwidth]{figs/L3Q5_filter_response_50.png}
-    \includegraphics[width=0.5\textwidth]{example-image}
-    \caption{$\text{Amostras} = 1000$, $M = 15$, $\mu = \frac{\mu_{\text{max}}}{50}$}
-    \label{fig:L3Q5_t}
+    \includegraphics[width=0.9\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw3p5b-mu50.pdf}
+    \caption{$\text{Amostras} = 5000$, $M = 15$, $\mu = \frac{\mu_{\text{max}}}{50}$}
+    \label{fig:mu_50}
 \end{figure}
 
-\begin{figure}[!htp]
+\clearpage
+
+\subsubsection*{Meça o desajuste (misadjustment)}
+Para calcular o desajuste, podemos utilizar:
+\begin{align*}
+    M &= \frac{\xi_{\text{exc}}}{\xi_{\text{min}}} \\
+    &\approx \frac{\mu \text{trace}(\mathbf{R}_{x})}{1 - \mu \text{trace}(\mathbf{R}_{x})}
+\end{align*}
+
+Utilizando o MATLAB, foi possível calcular o desajuste a partir dessa expressão foi possivel obter a Tabela~\ref{tab:desajuste}.
+
+\begin{table}[!htp]
     \centering
-    % \includegraphics[width=0.75\textwidth]{figs/L3Q5_t.png}
-    \includegraphics[width=0.5\textwidth]{example-image}
-    \caption{$\text{Amostras} = 1000$, $M = 15$, $\mu = \frac{\mu_{\text{max}}}{2}$}
-    \label{fig:filter_response_50}
-\end{figure}
+    \begin{tabular}{|l|l|l|l|}
+        \hline
+        & $ \mu_{\text{max}}/2$ & $\mu_{\text{max}}/10$ & $\mu_{\text{max}}/50$ \\ \hline
+        Téorico & -1.3846  & 2.5714 & 0.1682 \\ \hline
+        Empírico & -1.3868 & 2.5342 & 0.1674 \\ \hline
+    \end{tabular}
+    \caption{Comparativo entre os valores de desajuste teóricos e empíricos.}
+    \label{tab:desajuste}
+\end{table}
+
+\subsubsection*{Resposta em frequência do ﬁltro FIR}
+Já apresentado anteriormente nesta seção, a resposta em frequência do filtro é apresentada nas Figuras~\ref{fig:mu_2}, \ref{fig:mu_10} e \ref{fig:mu_50}. A resposta se assemelha muito do sistema que se deseja estimar para o caso de $\mu/2$. Pois o sistema tem mais adaptabilidade para seguir as mudanças do canal. Entretanto, se esse valor diminui, a identificação piora, tendo uma versão atenuadas do sistema em questão. Já para a análise no domínio do tempo, apenas o sinal do primeiro caso se assemelha, os outros dois sinais são bastante degradados e quase não se pode ver relação entre o original e o estimado.
 
 
 \subsection{Equalização Adaptativa} % <-----------------------------------------------------------------------------
 \todo[inline, color=yellow!30]{Organizar}
 
     
-\begin{align}
+\begin{align*}
     H(z) = 0.5 + 1.2z^{-1} + 1.5z^{-2} + z^{-3},
-\end{align}
+\end{align*}
 
 e deseja-se projetar um equalizar para o mesmo. A estrutura do equalizador é mostrada na Figura abaixo. Os símbolos $s(n)$ são transmitidos através de um canal e corrompidos por ruído aditivo gaussiano branco complexo $v(n)$. O sinal recebido $x(n)$ é processado pelo equalizador FIR para gerar estimativas $\overset{\sim}{s}(n - \delta)$, as quais são passados por um dispositivo decisor gerando  símbolos $\hat{s}(n - \delta)$. O equalizador possui dois modos de operação: um modo de treinamento durante o qual uma versão atrasada e  replicada da sequência de entrada é usada como o sinal de referência (desejado) e um modo dirigido por decisão no qual a saída do dispositivo de decisão substitui a sequência de referência. O sinal de entrada $s(n)$ é escolhido de uma constelação QAM (por exemplo, 4-QAM, 16-QAM, 64-QAM ou 256-QAM).
 
