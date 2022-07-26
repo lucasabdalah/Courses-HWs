@@ -97,7 +97,7 @@ Finalmente, de acordo com a expressão anterior, temos que para garantir estabil
 \clearpage
 
 \subsubsection*{Erro em excesso em média quadrática}
-\todo[inline, color=yellow!30]{Organizar}
+% \todo[inline, color=yellow!30]{Organizar}
 
 % O erro em excesso é normalmente ocasionado pelos termos ruidosos presentes no gradiente, impedindo que os coeficientes convirjam de forma exata para a solução ótima. 
 % Podemos iniciar essa análise escrevendo a equação para o erro de estimação para um determinado instante $n$ como se segue
@@ -197,7 +197,7 @@ Finalmente, de acordo com a expressão anterior, temos que para garantir estabil
 %     \xi_{\text{excesso}} &= \underset{n \rightarrow \infty}{\text{lim}} \Delta \xi(n) \approx \mu \sigma^{2}_{z} \text{tr}(\mathbf{R}_{x}).
 % \end{align*}
 
-\clearpage
+% \clearpage
 
 
 \subsection{Algoritmo LMS Normalizado} % <-----------------------------------------------------------------------------
@@ -511,128 +511,89 @@ Já apresentado anteriormente nesta seção, a resposta em frequência do filtro
 
 
 \subsection{Equalização Adaptativa} % <-----------------------------------------------------------------------------
+
+
+\subsubsection*{Treine o ﬁltro adaptativo NLMS}
+
+A evolução temporal do MSE apresenta comportamento similar aos problemas anteriores, com MSE tendo variação considerável até mesmo após a convergência, Figura~\ref{fig:hw3p6a-MSE}. Já na Figura~\ref{fig:hw3p6a-evolution}, observa-se a evolução temporal em quatro janelas de transmissão, permitindo a visualização dos símbolos enviados originalmente e de suas respectivas estimações.  Nos dois gráficos superiores, há a adaptação inicial do filtro, onde ainda há certa dificuldade para acompanhar a variação do canal. nas primeiras amostras. Nos dois inferiores, há janelas com etapas mais avançadas da adaptação, onde pode-se visulizar uma capacidade levemente superior de acompanhar o canal.
+
+Além disso, é possível ver na figura~\ref{fig:hw3p6a-QAM} o impacto no filtro da aplicação da filtragem a um sinal de modução 16-QAM. A estimação visivelmente separa o sinal transmitido em diferentes regiões de decisão, que bastaria aplicar um decisor para reconstrução do sinal original modulado.
+
+
+\clearpage
+
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw3p6a-MSE.pdf}
+    \caption{Curva de MSE para: $\text{Amostras} = 5000$, $M = 15$, $\mu = 0.4$.}
+    \label{fig:hw3p6a-MSE}
+\end{figure}
+
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw3p6a-evolution.pdf}
+    \caption{Evolução temporal: $\text{Amostras} = 5000$, $M = 15$, $\mu = 0.4$.}
+    \label{fig:hw3p6a-evolution}
+\end{figure}
+
+\clearpage
+
+
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw3p6a-QAM.pdf}
+    \caption{Esquema de Transmissão: $\text{Amostras} = 5000$, $M = 15$, $\mu = 0.4$.}
+    \label{fig:hw3p6a-QAM}
+\end{figure}
+
+% \clearpage
+
+\subsubsection*{Treine o ﬁltro adaptativo LMS}
+A variação do treino adaptativo de acordo com o número de amostras disposto na Figura~\ref{fig:hw3p6b-evolutionSamples}. Apenas por inspeção visual é uma tarefa complexa indicar comparações. Aparentemente, as variações entre as etapas diversas são bem sutis.
+
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw3p6b-evolutionSamples.pdf}
+    \caption{Evolução temporal de acordo com o tamanho da janela de treinamento: $\text{Amostras} = 5000$, $M = 15$, $\mu = 0.001$}
+    \label{fig:hw3p6b-evolutionSamples}
+\end{figure}
+
+\clearpage
+
+\subsubsection*{Dados transmitidos foram gerados de uma constelação 256-QAM}
+
 \todo[inline, color=yellow!30]{Organizar}
 
+A evolução temporal do MSE apresenta comportamento similar ao do primeiro problema. Entretanto, é notável que a média para a constelação 256-QAM é muito maior, o que segue o resultado esperado instintivamente, já que o espaço entre os símbolos é menor, provocando maior dificuldade da identificação do símbolo original. Além disso, o MSE apresenta variação considerável até mesmo após a convergência, Figura~\ref{fig:hw3p6c-MSE}. Já na Figura~\ref{fig:hw3p6c-evolution}, observa-se a evolução temporal em duas janelas de transmissão, permitindo a visualização dos símbolos enviados originalmente e de suas respectivas estimações.  No gráfico superior, há a adaptação inicial do filtro, onde ainda há certa dificuldade para acompanhar a variação do canal. nas primeiras amostras. Já no inferior, há uma etapas mais avançada da adaptação, onde pode-se visulizar uma capacidade levemente superior de acompanhar o canal.
+
+Métricas de SER ou BER podem ajudar a identificar melhor problemas de adaptação do filtro para esse tipo de exercício.
     
-\begin{align*}
-    H(z) = 0.5 + 1.2z^{-1} + 1.5z^{-2} + z^{-3},
-\end{align*}
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw3p6c-MSE.pdf}
+    \caption{Curva MSE para: $\text{Amostras} = 5000$, $M = 15$, $\mu = 0.4$.}
+    \label{fig:hw3p6c-MSE}
+\end{figure}
 
-e deseja-se projetar um equalizar para o mesmo. A estrutura do equalizador é mostrada na Figura abaixo. Os símbolos $s(n)$ são transmitidos através de um canal e corrompidos por ruído aditivo gaussiano branco complexo $v(n)$. O sinal recebido $x(n)$ é processado pelo equalizador FIR para gerar estimativas $\overset{\sim}{s}(n - \delta)$, as quais são passados por um dispositivo decisor gerando  símbolos $\hat{s}(n - \delta)$. O equalizador possui dois modos de operação: um modo de treinamento durante o qual uma versão atrasada e  replicada da sequência de entrada é usada como o sinal de referência (desejado) e um modo dirigido por decisão no qual a saída do dispositivo de decisão substitui a sequência de referência. O sinal de entrada $s(n)$ é escolhido de uma constelação QAM (por exemplo, 4-QAM, 16-QAM, 64-QAM ou 256-QAM).
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw3p6c-evolution.pdf}
+    \caption{Evolução temporal: $\text{Amostras} = 5000$, $M = 15$, $\mu = 0.4$.}
+    \label{fig:hw3p6c-evolution}
+\end{figure}
 
+\clearpage
 
+\subsubsection*{Curvas de taxa de erro de símbolo (SER) versus SNR}
+A Figura~\ref{fig:hw3p6d-SER} permite avaliar o real desempenho do filtro quando associado a um equalizador que desconhece o sinal verdadeiro.
 
-\begin{enumerate}
+Como esperado, é possível visualizar que ao passo que a ordem da modulação aumenta, o desempenho piora vertiginosamente. Isso está relacionado com o que já foi apresentado em seções anteriores, fenômeno decorrente da proximidade dos símbolos das constelações digitais, o que acarreta interferências de ruído do canal, aumentando a frequência dos erros de decisão.
+
+Além disso, pode-se relacionar com o fator do treinamento, que utilizada uma constelação com apenas 4 símbolos e ao efetuar transmissões com esquema de modulação com até 64 vezes mais símbulos, apresenta um filtro de comprimento pequeno para compensar essa discrepância entre treino e transmissão.
     
-    \item Faça um programa que treine o ﬁltro adaptativo com 500 símbolos de uma constelação 4-QAM, seguindo de uma operação dirigida por decisão de 5000 símbolos de uma constelação 16-QAM. Escolha a variância do ruído $\sigma^{2}_{v}$ de maneira que ela promova uma relação sinal ruído de 30 db na entrada do equalizador. Note que os símbolos escolhidos não têm variância unitária. Por esta razão, a a variância do ruído necessita ser ajustada adequadamente para cada uma das diferentes modulações (constelações) QAM para fornecer o nível de SNR desejado. Escolha $\delta = 15$ e o comprimento do equalizador M = 15. Mostre os gráﬁcos da evolução temporal de $s(n)$, $x(n)$ e $\overset{\sim}{s}(n - \delta)$. Use o LMS-normalizado com um fator de passo de $\mu = 0.4$.
-                
-        \textcolor{red}{Solução:}
-
-        Os resultados estão nas Figuras \ref{fig:L3Q6A1} e \ref{fig:L3Q6A2}. A evolução temporal do MSE apresenta comportamento similar aos resultados apresentados anteriormente com
-        o MSE possuindo uma grande variação mesmo após a convergência. Por fim, também é possível ver na figura seguinte o impacto no filtro na filtragem de um sinal modulado por 16-QAM. É visível 
-        que a estimação conseguiu separar o sinal transmitido em diferentes regiões de decisão e assim seria necessário ao fim desse processo passar esse sinal filtrado por um decisor para que fosse
-        obtida uma aproximação do sinal originalmente trnasmitido. Ademais, foi implementado um simples processo de aprendizado utilizando algumas amostras de sinais 4-QAM para o treinamento do filtro com
-        o objetivo de facilitar ou acelerar a convergência quando o sinal 16-QAM fosse filtrado. 
-        
-        Além disso, na Figura \ref{fig:L3Q6A3} é possível acompanhar a evolução temporal do sinal filtrado e do sinal 
-        original para dois momentos distintos. No primeiro, temos a adaptação do filtro para as primeiras 100 amostras e previsivelmente confirmamos que o filtro possuí ainda dificuldades em acompanhar o canal 
-        nas primeiras amostras. Já no segundo momento temos as últimas 100 amostras do filtro e podemos entender a partir disso que o filtro agora tem capacidade de acompanhar o canal de forma mais eficiente, embora
-        ainda existam momentos onde erros ocorrem. Esses erros podem ser ocasionados pelas interferências ruidosas que provocam erros de detecção na hora de avaliar as constelações aproximadas que saem do processo de filtragem.
-
-        \begin{figure}[!htp]
-            \centering
-            % \includegraphics[width=0.75\textwidth]{figs/L3Q6_A_mse.png}
-            \includegraphics[width=0.5\textwidth]{example-image}
-            \caption{$\text{Amostras} = 5000$, $M = 15$, $\mu = 0.4$}
-            \label{fig:L3Q6A1}
-        \end{figure}
-        
-        \begin{figure}[!htp]
-            \centering
-            % \includegraphics[width=0.75\textwidth]{figs/L3Q6_A_c.png}
-            \includegraphics[width=0.5\textwidth]{example-image}
-            \caption{$\text{Amostras} = 5000$, $M = 15$, $\mu = 0.4$}
-            \label{fig:L3Q6A2}
-        \end{figure}
-        
-        \begin{figure}[!htp]
-            \centering
-            % \includegraphics[width=0.75\textwidth]{figs/L3Q6_A_t.png}
-            \includegraphics[width=0.5\textwidth]{example-image}
-            \caption{$\text{Amostras} = 5000$, $M = 15$, $\mu = 0.4$}
-            \label{fig:L3Q6A3}
-        \end{figure}
-        
-        \clearpage
-
-    \item Para os mesmos parâmetros do item (a), plote e compare os gráﬁcos de evolução que seriam resultante se o equalizador fosse treinado com 150, 300 e 500 iterações. Use o LMS com um
-    $\mu = 0.001$.
-    
-        \textcolor{red}{Solução:}
-
-        O resultado está na Figura \ref{fig:L3Q6B}. Particularmente não pude distinguir notáveis diferenças de desempenho ao considerar diferentes tamanhos de sequências de treinamento.
-
-            
-    \begin{figure}[!htp]
-        \centering
-        % \includegraphics[width=0.75\textwidth]{figs/L3Q6_B_t.png}
-        \includegraphics[width=0.5\textwidth]{example-image}
-        \caption{$\text{Amostras} = 5000$, $M = 15$, $\mu = 0.001$}
-        \label{fig:L3Q6B}
-    \end{figure}
-
-    \item Assuma agora que os dados transmitidos foram gerados de uma constelação 256-QAM ao invés de 16-QAM. Plote os gráﬁcos da evolução do sinal na saída do equalizador quando treinado
-    usando o LMS-normalizado e 500 símbolos de treinamento.					
-    
-        \textcolor{red}{Solução:}
-
-        Os resultados estão nas Figuras \ref{fig:L3Q6C1} e \ref{fig:L3Q6C2}. É possível verificar na primeira figura que a evolução do MSE aconteceu apesar de uma considerável variação ao final
-        da convergência. Já em relação a figura seguinte, onde transmitimos um sinal 256-QAM e utilizamos um filtro treinado por um sinal 4-QAM, é possível verificar que inicialmente o filtro demonstrou dificuldade em acompanhar
-        a evolução do canal. Por fim, em um segundo momento é apresentado a evolução temporal considerando as ultimas amostras do sinal e aqui podemos visualizar que, embora ainda existam uma quantidade considerável de erros por se 
-        tratar de uma modulação de ordem elevada, o filtro consegue se aproximar com um pouco mais de facilidade do sinal original. 
-        
-        Adicionalmente, para termos uma melhor interpretação do desempenho desse filtro seria necessário utilizar 
-        uma métrica como a SER ou BER e comparar o impacto de diferentes modulações no desempenho do algoritmo de filtragem. Isso se deve pois quando utilizamos um decisor o símbolo filtrado pode ser alocado para uma região da constelação
-        da modulação a qual não pertence. Entretanto, tais erros de decisão so são aparente quando utilizamos uma métrica capaz de capturar tal fenômeno.
-        
-        
-    \begin{figure}[!htp]
-        \centering
-        % \includegraphics[width=0.75\textwidth]{figs/L3Q6_C_mse.png}
-        \includegraphics[width=0.5\textwidth]{example-image}
-        \caption{$\text{Amostras} = 5000$, $M = 15$, $\mu = 0.4$}
-        \label{fig:L3Q6C1}
-    \end{figure}
-
-    \begin{figure}[!htp]
-        \centering
-        % \includegraphics[width=0.75\textwidth]{figs/L3Q6_C_t.png}
-        \includegraphics[width=0.5\textwidth]{example-image}
-        \caption{$\text{Amostras} = 5000$, $M = 15$, $\mu = 0.4$}
-        \label{fig:L3Q6C2}
-    \end{figure}
-
-    \item Gerar as curvas de taxa de erro de símbolo (SER, do inglês Symbol Error Rate) versus SNR na entrada do equalizador para símbolos de constelações 4, 16, 64 e 256-QAM. Faça SNR variar
-    de 5dB a 30dB.
-    
-        \textcolor{red}{Solução:}
-
-        Os resultados estão na Figura \ref{fig:L3Q6D}. Assim, podemos analisar o real desempenho do filtro quando associado a um equalizador que desconhece o sinal verdadeiro. 
-        É possível verificar que a medida que a ordem de modulação aumenta o desempenho sofre uma considerável piora. Existem duas principais razões para explicar esse comportamento. A primeira vem justamente 
-        do tamanho das constelações digitais que a medida que a ordem aumenta tem uma menor regiao de decisão associada aos seus símbolos. Desse modo, o sinal transmitido fica sujeito a interferências de componentes 
-        ruidosas do canal pois as divisórias entre as diversas regiões de decisão dos símbolos da modulação ficam menores e erros de decisão irão acontecer com maior frequência A segunda razão poderia ser explicada pelo 
-        fato do filtro ter sido inicialmente treinado utilizando símbolos modulados com 4-QAM, mas provavelmente isso é insuficiente quando a ordem de modulação do sinal transmitido cresce.
-        Ademais, vale ressaltar que não houve erros para SNR $= 30$ dB quando se transmitiu sinais 4-QAM, entretanto como foram utilizados apenas 1000 realizações de Monte Carlo não foi
-        possível capturar erros para esse ponto específico de SNR.
-
-        
-    \begin{figure}[!htp]
-        \centering
-        % \includegraphics[width=0.75\textwidth]{figs/L3Q6_D_ser.png}
-        \includegraphics[width=0.5\textwidth]{example-image}
-        \caption{$\text{Amostras} = 5000$, $M = 15$, $\mu = 0.4$}
-        \label{fig:L3Q6D}
-    \end{figure}
-
-
-\end{enumerate}
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{C:/Users/lucasabdalah-dell/Documents/GitHub/Courses-HWs/Master/TIP7188-FILTRAGEM_ADAPTATIVA/homework/code/figures/hw3p6d-SER.pdf}
+    \caption{SER vs SNR (dB) para 1000 realizações de Monte Carlo: $\text{Amostras} = 5000$, $M = 15$, $\mu = 0.4$}
+    \label{fig:hw3p6d-SER}
+\end{figure}
