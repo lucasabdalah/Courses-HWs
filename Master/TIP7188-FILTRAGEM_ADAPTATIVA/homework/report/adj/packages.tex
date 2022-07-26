@@ -9,8 +9,14 @@
 \usepackage{csquotes} % When using babel or polyglossia with biblatex, loading csquotes is recommended to ensure that quoted texts are typeset according to the rules of your main language.
 % \usepackage[ruled,vlined]{algorithm2e} % Algorithm
 \usepackage{pdfpages} % Include full PDF file
-\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
-% \usepackage[]{hyperref}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref} % \usepackage[]{hyperref}
 
 
 % References
@@ -18,6 +24,7 @@
 \addbibresource{refs.bib}
 
 \numberwithin{equation}{section}
+\numberwithin{figure}{section}
 
 \hypersetup{
     pdftitle={Filtragem Adaptativa Hw},

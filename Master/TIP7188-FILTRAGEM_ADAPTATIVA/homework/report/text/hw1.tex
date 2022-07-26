@@ -1,25 +1,319 @@
-\section{Lista 1: Estatísticas de Segunda Ordem}
+\section{Lista 1: Estatísticas de Segunda Ordem} % <-----------------------------------------------------------------------------
 
-\subsection{Média e Autocorrelação}
+
+\subsection{Média e Autocorrelação} % <-----------------------------------------------------------------------------
+Para obter a média, basta a expressão de acordo com o operador esperança $\mathbb{E}\{ \cdot \}$, dado que as variáveis aleatórias tem mesma média, resume-se a expressão:
+				
+\begin{align*}
+    \mathbb{E}\{ x(n)\} &= \mathbb{E}\{ v(n) + 3v(n-1)\} \\
+    &= \mu + 3\mu \\
+    &= 4\mu
+\end{align*}
+
+Já a variância, é obtida aplicando o mesmo operador, "abrindo" o termo ao quadrado, reorganizando em função do termo $\sigma^{2}$ e sabendo que $v(n)$ e $v(n-1)$ são descorrelacionadas:
+
+\begin{align*}
+    \mathbb{E}\{[(x(n) - \mu_{X})]^2\} &= \mathbb{E}\{[v(n) - 3v(n-1) - \mu_{X}]^{2}\} \\
+    &= \mathbb{E}\{[v(n) - 3v(n-1) - 4\mu]^{2}\} \\
+    &= \mathbb{E}\{[v(n) - \mu + 3v(n-1) -3\mu]^{2}\} \\
+    &= \sigma^{2} + 9\sigma^{2} + \mathbb{E}\{6[v(n) - \mu][v(n-1) - \mu]\} \\
+    &= 10\sigma^{2}
+\end{align*}
+
+
+Para afirmar que o processo apresentado é estacionário em sentido amplo, abrevidado em inglês para \textbf{WSS}, as estatísticas de primeira e de segunda ordem devem ser independentes ao deslocamento no tempo. Isto pode ser observado, assumindo novamente que $x(n)$ e $x(n+\tau)$, via função de correlação, dada por:
+
+\begin{align*} 
+    \mathbb{E}\{x(n)x(n+\tau)\} &= \mathbb{E}\{[v(n) + 3v(n-1)][v(n+\tau) + 3v(n-1 +\tau)]\}, \\
+    &= \mathbb{E}\{ v(n)v(n+\tau) + 3v(n)v(n-1 +\tau) + 3v(n-1)v(n+\tau) + 9v(n-1)v(n-1+\tau) \} \\
+    &= \mathbb{E}\{\mu^{2} + 3\mu^{2} + 3\mu^{2} + 9\mu^{2}\} \\
+    &= 16\mu^{2}
+\end{align*}
+
+Visto que os pré-requisitos são cumpridos, pode-se concluir que o processo é de fato WSS. Entretanto, para afirmar algo além disso é necessário conhecer os movimentos de ordem superior do caso estudado.
+
+
+\subsection{Processos Estacionários} % <-----------------------------------------------------------------------------
+    
+\textbf{Funções de autocorrelação de $x$ e de $y$}
+
+Primeiramente, é conveniente definir o processo de ruído branco, visto que este possui propriedades bastante conveniente para a solução do problema. O processo desta natureza tem média nula e tem todas as suas amostras independentes entre si. Isto permite que seja obtida a média de novos processos resultantes da mistura linear desses ruídos.
+
+Para $x(n)$, obtém-se a média dado:
+\begin{align*}
+    \mathbb{E}\{x(n)\} &= \mathbb{E}\{v_{1}(n) + 3v_{2}(n-1)\} \\
+    & = \mu_{1} + 3\mu_{2} \\
+    & = 0 
+\end{align*}
+
+Enquanto para a variânciam, tem-se que (semelhante ao exercício 1.1):
+
+\begin{align*}
+    \mathbb{E}\{[x(n) - \mu]^{2}\} &= \mathbb{E}\{[x(n) - 0]^{2}\}\\
+    &= \mathbb{E}\{[v_{1}(n) + 3v_{2}(n-1)]^{2}\} \\
+    &= \mathbb{E}\{ [v^{2}_{1}(n)] + 6[v_{1}(n)v_{2}(n-1)] + 9[v^{2}_{2}(n-1)]\} \\
+    &= 1 \sigma^{2}_{1} + 9 \sigma^{2}_{2} \\
+    &= 5
+\end{align*}
+
+O mesmo procedimento é aplicado para $y(n)$:
+
+\begin{align*}
+    \mathbb{E}\{y(n)\} &= \mathbb{E}\{v_{2}(n+1) + 3v_{1}(n-1)\} \\
+    &= \mu_{2} + 3\mu_{1} \\
+    &= 0
+\end{align*}
+
+\begin{align*}
+    \mathbb{E}\{[y(n) - \mu]^{2}\} &= \mathbb{E}\{[y(n) - 0]^{2}\} \\
+    &= \mathbb{E}\{[v_{2}(n+1) + 3v_{1}(n-1)]^{2}\} \\
+    &= \mathbb{E}\{ [v^{2}_{2}(n)] + 6[v_{2}(n+1)v_{1}(n-1)] + 9[v^{1}_{2}(n-1)]\} \\
+    &= 9 \sigma^{2}_{1} + 1 \sigma^{2}_{2} \\
+    &= 5
+\end{align*}
+
+Para função de autocorrelação de $x(n)$, sabe-se que as amostras são descorrelacionadas e o processo é de média nula, então o produto de diversos termos igual a zero também é zero. Temos que:
+
+\begin{align*}
+    r_{x}(\tau) &= \mathbb{E}\{x(n)x(n + \tau)\} = \mathbb{E}\{[v_{1}(n) + 3v_{2}(n-1)][v_{1}(n + \tau) + 3v_{2}(n-1 + \tau)]\}, \\
+    &= \mathbb{E}\{v_{1}(n)v_{1}(n + \tau) + 3v_{1}(n)v_{2}(n-1 + \tau) + 3v_{2}(n-1)v_{1}(n + \tau) + 9v_{2}(n-1)v_{2}(n-1 + \tau) \}\\
+    &= \vdots \quad \text{(Mesmo passo a passo do problema 1.1)} \\
+    &= 0
+\end{align*}
+
+Para $y(n)$, o processo é o mesmo, consquentemente  $r_{y}(\tau) = 0$.
+
+Finalmente, observa-se que estatísticas de primeira e de segunda ordem são independentes do tempo para ambos, i.e, os dois processos são \textbf{WSS}.
+
+
+\textbf{Função de correlação cruzada}
+
+Para obter a função de correlação cruzada, basta aplicar as premissas utilizadas anteriormente: I) Processo de ruído branco é descorrelacionado; II) Média nula.
+\begin{align*}
+    r_{x,y}(n_{1},n_{0}) &= \mathbb{E}\{[x(n_{1})y^{*}(n_{0})]\} \\
+    & = \mathbb{E}\{[v_{1}(n_{1}) + 3v_{2}(n_{1}-1)][v_{2}(n_{0}+1) + 3v_{1}(n_{0}-1)]^{*}\}, \\
+    &= \mathbb{E}\{v_{1}(n_{1})v^{*}_{2}(n_{0}+1) + 3v_{1}(n_{1})v^{*}_{1}(n_{0}-1) + 3v_{2}(n_{1}-1)v^{*}_{2}(n_{0}+1) + 9v_{2}(n_{1}-1)v^{*}_{1}(n_{0}-1)\} \\
+    &= 0
+\end{align*}
+
+Esta função também é igual a zero, $r_{x,y}(n_{1},n_{0}) = 0$. Isto implica que os processos são conjuntamente estacionários, pois há independência do tempo da função, e por partir de processos de ruído branco, processos WSS individualmente, isto sustenta os desenvolvimento acima.
+
+
+\subsection{Matriz de Autocorrelação} % <-----------------------------------------------------------------------------
+
+\textbf{Um vetor aleatório bidimensional}
+
+Para garantir a existência da matriz de correlação, deve-se corresponder as seguintes premissas: I) $\mathbf{R_{x}} = \mathbf{R^{H}_{x}}$; II) $\mathbf{a^{H}} \mathbf{R_{xa}} \geq 0$; III) $\mathbf{Ax} = \lambda \mathbf{x}, \forall \lambda \geq 0 | \mathbf{x} \in \mathbb{R}$.
+
 \todo[inline, color=yellow!30]{Organizar}
 
+Desse modo, considerando um vetor aleatório bidimensional descrito por $\mathbf{X} = (x_{1},x_{2})$ podemos então
 
-\subsection{Processos Escationários}
+\begin{align*}
+    \mathbf{R} &= \left[ 
+    \begin{matrix}
+        \mathbb{E}\{[x^{2}_{1}]\} & \mathbb{E}\{[x_{1}x^{*}_{2}]\} \\
+        \mathbb{E}\{[x_{2}x^{*}_{1}]\} & \mathbb{E}\{[x^{2}_{2}]\} \\
+    \end{matrix} \right], \\
+    \mathbf{R}^{\text{H}} &= \left[ 
+    \begin{matrix}
+        \mathbb{E}\{[x^{2}_{1}]\} & \mathbb{E}\{[x_{2}x^{*}_{1}]\} \\
+        \mathbb{E}\{[x_{1}x^{*}_{2}]\} & \mathbb{E}\{[x^{2}_{2}]\} \\
+    \end{matrix} \right].
+\end{align*}
+
+Inicialmente, podemos garantir a simetria quanto ao hermitiano se fizermos 
+
+\begin{align}
+    &\mathbb{E}\{[x_{1}x^{*}_{2}]\} \overset{\Delta}{=} \mathbb{E}\{[x_{2}x^{*}_{1}]\},
+    &\mathbb{E}\{[x_{2}x^{*}_{1}]\} \overset{\Delta}{=} \mathbb{E}\{[x_{1}x^{*}_{2}]\}.
+\end{align}
+
+Entretanto, sabemos que o operador esperança é linear tornando assim as expressões acima equivalentes. Em continuidade do problema, podemos 
+considerar que a restrição as quais os autovalores estão submetidos pode ser facilmente atingida ao garantirmos que o determinante da matriz 
+de correlação seja maior que a nulidade
+
+\begin{align}
+    &\mathbb{E}\{[x^{2}_{1}]\} \mathbb{E}\{[x^{2}_{1}]\} - \mathbb{E}\{[x_{1}x_{2}]\} \mathbb{E}\{[x_{2}x_{1}]\} > 0, \\
+    &\mathbb{E}\{[x_{1}^{2}]\} \mathbb{E}\{[x^{2}_{2}]\} > \mathbb{E}\{[x_{1}x_{2}]\} \mathbb{E}\{[x_{2}x_{1}]\}.
+\end{align}
+
+\todo[inline, color=red!30]{item} Um processo estocástico estacionário escalar?
+
+
+
+Considerando um processo estocástico estacionário escalar do tipo $\mathbf{X}_{t} = x(t)$ e uma versão atrasada desse
+processo definida por $\mathbf{X}_{t + \tau} = x(t + \tau)$ temos que a matriz de correlação pode ser escrita da seguinte forma
+
+\begin{align}
+    \mathbf{R} &= \left[ 
+    \begin{matrix}
+        \mathbb{E}\{[x^{2}(t)_{1}]\} & \mathbb{E}\{[x(t)x^{*}(t + \tau)]\} \\
+        \mathbb{E}\{[x(t + \tau)x^{*}(t)]\} & \mathbb{E}\{[x^{2}(t + \tau)]\} \\
+    \end{matrix} \right], \\
+    \mathbf{R}^{\text{H}} &= \left[ 
+    \begin{matrix}
+        \mathbb{E}\{[x^{2}(t)_{1}]\} & \mathbb{E}\{[x(t + \tau)x^{*}(t)]\} \\
+        \mathbb{E}\{[x(t)x^{*}(t + \tau)]\} & \mathbb{E}\{[x^{2}(t + \tau)]\} \\
+    \end{matrix} \right].
+\end{align}
+
+
+Em sequência, podemos garantir a simetria quanto ao hermitiano se fizermos 
+
+\begin{align}
+    &\mathbb{E}\{[x(t)x^{*}(t + \tau)]\} \overset{\Delta}{=} \mathbb{E}\{[x(t + \tau)x^{*}(t)]\}, \\
+    &\mathbb{E}\{[x(t + \tau)x^{*}(t)]\} \overset{\Delta}{=} \mathbb{E}\{[x(t)x^{*}(t + \tau)]\},
+\end{align}
+
+mas, mais uma vez, considerando que o operador esperança é linear então as duas expressões são equivalentes. Já considerando a
+restrição imposta aos autovalores da matriz temos novamente
+
+\begin{align}
+    &\mathbb{E}\{[x^{2}(t)]\} \mathbb{E}\{[x^{2}(t + \tau)]\} > \mathbb{E}\{[x(t)x^{*}(t + \tau)]]\}  \mathbb{E}\{[x(t + \tau)]x^{*}(t)]\}.
+\end{align}
+    
+
+\subsection{Matriz Definida Positiva} % <-----------------------------------------------------------------------------
 \todo[inline, color=yellow!30]{Organizar}
 
+\begin{align}
+    \mathbb{E}\left\{\mathbf{x}^H \mathbf{R}_{\mathbf{x}}^{-1} \mathbf{x} \right\} = N
+\end{align}
 
-\subsection{Matriz de Autocorrelação}
+
+
+Inicialmente podemos escrever a expressão regular para a matriz de autocorrelação e supondo que de fato existe uma inversa bem definida 
+para a matriz de autocorrelação
+
+\begin{align}
+    \mathbb{E}\{\mathbf{x} \mathbf{x}^{\text{H}}\} = \mathbf{R}_{x}, \\
+    \mathbb{E}\{\mathbf{x} \mathbf{x}^{\text{H}}\}\mathbf{R}^{-1}_{x} = \mathbf{R}_{x}\mathbf{R}^{-1}_{x}, \\
+    \mathbb{E}\{\mathbf{x} \mathbf{x}^{\text{H}}\mathbf{R}^{-1}_{x}\} = \mathbf{I}_{N}, \\
+\end{align}
+
+Desse modo, podemos aplicar o operador traço de matriz e por meio da propriedade de permutação cíclica desse operador chegamos ao seguinte resultado
+
+\begin{align}
+    \text{Tr}\{\mathbb{E}\{\mathbf{x} \mathbf{x}^{\text{H}}\mathbf{R}^{-1}_{x}\}\} = \text{Tr}\{\mathbf{I}_{N}\}, \\
+    \text{Tr}\{\mathbb{E}\{\mathbf{x}^{\text{H}}\mathbf{R}^{-1}_{x} \mathbf{x}\}\} = \text{Tr}\{\mathbf{I}_{N}\}, \\
+    \text{Tr}\{\mathbb{E}\{\mathbf{x}^{\text{H}}\mathbf{R}^{-1}_{x} \mathbf{x}\}\} = N,
+\end{align}
+
+onde a ultima expressão se justifica pois temos uma matriz identidade de ordem $N$ no lado direito. Desse modo, seu traço é dado por $\sum^{N}_{i = 1} 1 = N$.
+
+
+\subsection{Covariância e correlação} % <-----------------------------------------------------------------------------
 \todo[inline, color=yellow!30]{Organizar}
+ 
+\todo[inline, color=red!30]{item} $\mathbf{R}_\mathbf{x} = \mathbf{C}_\mathbf{x} + {\mathbf{\mu}}_{\mathbf{x}}{\mathbf{\mu}}_{\mathbf{x}}^H$    
+    
+\begin{align}
+    &C_{X} = \mathbb{E}\{[(x - \mu)(x - \mu)^{H}]\} = \mathbb{E}\{[xx^{H} -x\mu^{H} - \mu x^{H} + \mu \mu^{H}]\}, \\
+    &C_{X} = \mathbb{E}\{[xx^{H}]\} -\mathbb{E}\{[x\mu^{H}]\} - \mathbb{E}\{[\mu x^{H}]\} + \mathbb{E}\{[\mu \mu^{H}]\}.
+\end{align}
 
 
-\subsection{Matriz Definida Positiva}
+Considerando a matriz de correlação pode ser escrita por $R_{X} = \mathbb{E}\{[xx^{H}]\}$ e que o valor médio de um escalar é o próprio escalar temos
+
+\begin{align}
+    &C_{X} = R_{X} - \mathbb{E}\{[x\mu^{H}]\} - \mathbb{E}\{[\mu x^{H}]\} + \mu \mu^{H}, \\
+    &C_{X} = R_{X} - \mu^{H}\mathbb{E}\{[x]\} - \mu \mathbb{E}\{[x^{H}]\} + \mu \mu^{H}, \\
+    &C_{X} = R_{X} - \mu \mu^{H} - \mu \mu^{H} + \mu \mu^{H}, \\
+    &C_{X} = R_{X} - \mu \mu^{H}, \\
+    &R_{X} = C_{X} + \mu \mu^{H}.
+\end{align}
+
+\todo[inline, color=red!30]{item} $\mathbf{C}_{\mathbf{x} + \mathbf{y}} = \mathbf{C}_{\mathbf{x}} +
+\mathbf{C}_{\mathbf{y}}$, para $\mathbf{x}$ e $\mathbf{y}$ descorrelacionados
+
+
+
+\begin{align}
+    &\mathbf{C}_{\mathbf{x} + \mathbf{y}} = \mathbf{C}_{\mathbf{x}} + \mathbf{C}_{\mathbf{xy}} + \mathbf{C}_{\mathbf{yx}} + \mathbf{C}_{\mathbf{y}}.
+\end{align}
+
+Onde os termos de correlação cruzada $\mathbf{C}_{\mathbf{xy}}$ e $\mathbf{C}_{\mathbf{yx}}$ podem ser obtidos  da seguinte maneira
+
+\begin{align}
+    &\mathbf{C_{xy}} = \mathbb{E}\{[x - \mu_{x}][y - \mu_{y}]\}, \\
+    &\mathbf{C_{xy}} = \mathbb{E}\{[xy]\} - \mathbb{E}\{[x\mu_{y}]\} - \mathbb{E}\{[\mu_{x} y]\} + \mathbb{E}\{[\mu_{x} \mu_{y}]\}, \\
+    &\mathbf{C_{xy}} = \mathbb{E}\{[xy]\} - \mu_{y} \mu_{x} - \mu_{x} \mu_{y} + \mu_{x} \mu_{y}, \\
+    &\mathbf{C_{xy}} = \mathbb{E}\{[xy]\} + \mu_{x} \mu_{y}, \\
+    &\mathbf{C_{xy}} = \mu_{x} \mu_{y}, \\
+\end{align}
+
+\begin{align}
+    &\mathbf{C_{yx}} = \mathbb{E}\{[y - \mu_{y}][x - \mu_{x}]\}, \\
+    &\mathbf{C_{yx}} = \mathbb{E}\{[yx]\} - \mathbb{E}\{[y\mu_{x}]\} - \mathbb{E}\{[\mu_{y} x]\} + \mathbb{E}\{[\mu_{y} \mu_{x}]\}, \\
+    &\mathbf{C_{yx}} = \mathbb{E}\{[yx]\} - \mu_{y} \mu_{x} - \mu_{x} \mu_{y} + \mu_{y} \mu_{x}, \\
+    &\mathbf{C_{yx}} = \mathbb{E}\{[yx]\} - \mu_{x} \mu_{y}, \\
+    &\mathbf{C_{yx}} = - \mu_{x} \mu_{y}.
+\end{align}
+
+Portanto, é possível afirmar que a soma dos termos de correlação cruzada é nula e que a correlação da soma de dois vetores descorrelacionados é de fato 
+dada por $\mathbf{C}_{\mathbf{x} + \mathbf{y}} = \mathbf{C}_{\mathbf{x}} + \mathbf{C}_{\mathbf{y}}$
+
+\begin{align}
+    &\mathbf{C_{xy}} + \mathbf{C_{yx}}  = \mu_{x} \mu_{y} - \mu_{x} \mu_{y}, \\
+    &\mathbf{C_{xy}} + \mathbf{C_{yx}}  = 0.
+\end{align}
+
+
+\subsection{Função de autocorrelação} % <-----------------------------------------------------------------------------
 \todo[inline, color=yellow!30]{Organizar}
+\begin{align}
+    x(n) = v_1(n) + 2v_1(n + 1) + 3v_2(n-1) ?
+\end{align}
+
+Este é um processo WSS? Justifique.
 
 
-\subsection{Covariância e correlação}
-\todo[inline, color=yellow!30]{Organizar}
+
+Para simplificar o desenvolvimento iremos considerar que os processos possuem media nula e são descorrelacionados
+
+\begin{align*}
+    r_{x} &= \mathbb{E}\{x(n) x^{*}(n)\}, \\
+    r_{x} &= \mathbb{E}\{[v_{1}(n) + 2v_{1}(n+1) + 3v_{2}(n-1)] [v_{1}(n) + 2v_{1}(n+1) + 3v_{2}(n-1)]^{*}(n)\}, \\
+    r_{x} &= \mathbb{E}\{[v_{1}(n)v^{*}_{1}(n) + 2v_{1}(n)v^{*}_{1}(n+1) + 3v_{1}(n)v^{*}_{2}(n-1) + 2v_{1}(n + 1)v^{*}_{1}(n) + 4v_{1}(n+1)v^{*}_{1}(n+1) \\
+   &+6v_{1}(n+1)v^{*}_{2}(n-1)] + 3v_{2}(n-1)v^{*}_{1}(n) +  6v_{2}(n-1)v^{*}_{1}(n+1) + 9v_{2}(n-1)v^{*}_{2}(n-1)\}, \\
+    r_{x} &= r_{v}(n,n) + 2r_{v}(n,n+1) + 0 + 2r_{v}(n+1,n) + 4r_{v}(n+1,n+1) + 0 + 0 + 0 + 9r_{v}(n-1,n-1), \\
+    r_{x} &= r_{v}(n,n) + 2r_{v}(n,n+1) + 2r_{v}(n+1,n) + 4r_{v}(n+1,n+1) + 9r_{v}(n-1,n-1).
+\end{align*}
+
+Após uma breve análise na expressão $r_{v}(n_{1},n_{0})$ é possível verificar que determinados termos anulam-se ao considerar um único momento temporal devido a presença da função degrau unitário, permitindo a seguinte simplificação:
+
+\begin{align}
+    &r_{x} = 2r_{v}(n,n+1) + 2r_{v}(n+1,n), \\
+    &r_{x} = \delta(n - n - 1) + \delta(n + 1 - n).
+\end{align}
+
+Onde a generalização pode ser descrita por:
+
+\begin{align}
+    &r_{x}(n_{1}, n_{2})= \delta(n_{1} - n_{2}) + \delta(n_{2} - n_{1}).  
+\end{align}
+
+Uma vez que a correlação é dependente apenas de um deslocamento temporal, então podemos classificar esse processo como WSS.
+
+\todo[inline, color=red!30]{item} Encontre a a matrix de correlação de um vetor aleatório consistindo de oito amostras consecutivas de
+$x(n)$.
 
 
-\subsection{Função de autocorrelação}
-\todo[inline, color=yellow!30]{Organizar}
+
+\begin{align}
+    \mathbf{R}_{\mathbf{x}} = \left[
+    \begin{matrix}
+        2 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+        0 & 2 & 0 & 0 & 0 & 0 & 0 & 0\\
+        0 & 0 & 2 & 0 & 0 & 0 & 0 & 0\\
+        0 & 0 & 0 & 2 & 0 & 0 & 0 & 0\\
+        0 & 0 & 0 & 0 & 2 & 0 & 0 & 0\\
+        0 & 0 & 0 & 0 & 0 & 2 & 0 & 0\\
+        0 & 0 & 0 & 0 & 0 & 0 & 2 & 0\\
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 2
+    \end{matrix}
+    \right]
+\end{align}
+Para chegar a esse resultado foi utilizado a expressão para a correlação obtida no item anterior. Uma vez que a função delta de dirac terá um valor não nulo apenas quando o argumento for zero, isso irá acontecer apenas quando os momentos $n_{1}$ e $n_{2}$ forem iguais e isso irá acontecer apenas com os elementos da diagonal principal.
 
