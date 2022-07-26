@@ -100,97 +100,78 @@ Esta função também é igual a zero, $r_{x,y}(n_{1},n_{0}) = 0$. Isto implica 
 
 
 \subsection{Matriz de Autocorrelação} % <-----------------------------------------------------------------------------
+
+\textbf{Um vetor aleatório bidimensional}
+
+Para garantir a existência da matriz de correlação, deve-se corresponder as seguintes premissas: I) $\mathbf{R_{x}} = \mathbf{R^{H}_{x}}$; II) $\mathbf{a^{H}} \mathbf{R_{xa}} \geq 0$; III) $\mathbf{Ax} = \lambda \mathbf{x}, \forall \lambda \geq 0 | \mathbf{x} \in \mathbb{R}$.
+
 \todo[inline, color=yellow!30]{Organizar}
-\begin{align}
-    \mathbf{R} = \left[
+
+Desse modo, considerando um vetor aleatório bidimensional descrito por $\mathbf{X} = (x_{1},x_{2})$ podemos então
+
+\begin{align*}
+    \mathbf{R} &= \left[ 
     \begin{matrix}
-        a & b  \\
-        c & d  \\
-    \end{matrix} \right]
+        \mathbb{E}\{[x^{2}_{1}]\} & \mathbb{E}\{[x_{1}x^{*}_{2}]\} \\
+        \mathbb{E}\{[x_{2}x^{*}_{1}]\} & \mathbb{E}\{[x^{2}_{2}]\} \\
+    \end{matrix} \right], \\
+    \mathbf{R}^{\text{H}} &= \left[ 
+    \begin{matrix}
+        \mathbb{E}\{[x^{2}_{1}]\} & \mathbb{E}\{[x_{2}x^{*}_{1}]\} \\
+        \mathbb{E}\{[x_{1}x^{*}_{2}]\} & \mathbb{E}\{[x^{2}_{2}]\} \\
+    \end{matrix} \right].
+\end{align*}
+
+Inicialmente, podemos garantir a simetria quanto ao hermitiano se fizermos 
+
+\begin{align}
+    &\mathbb{E}\{[x_{1}x^{*}_{2}]\} \overset{\Delta}{=} \mathbb{E}\{[x_{2}x^{*}_{1}]\},
+    &\mathbb{E}\{[x_{2}x^{*}_{1}]\} \overset{\Delta}{=} \mathbb{E}\{[x_{1}x^{*}_{2}]\}.
 \end{align}
 
-devem satisfazer tal que $\mathbf{R}$ seja uma matriz de autocorrelação válida de
+Entretanto, sabemos que o operador esperança é linear tornando assim as expressões acima equivalentes. Em continuidade do problema, podemos 
+considerar que a restrição as quais os autovalores estão submetidos pode ser facilmente atingida ao garantirmos que o determinante da matriz 
+de correlação seja maior que a nulidade
+
+\begin{align}
+    &\mathbb{E}\{[x^{2}_{1}]\} \mathbb{E}\{[x^{2}_{1}]\} - \mathbb{E}\{[x_{1}x_{2}]\} \mathbb{E}\{[x_{2}x_{1}]\} > 0, \\
+    &\mathbb{E}\{[x_{1}^{2}]\} \mathbb{E}\{[x^{2}_{2}]\} > \mathbb{E}\{[x_{1}x_{2}]\} \mathbb{E}\{[x_{2}x_{1}]\}.
+\end{align}
+
+\todo[inline, color=red!30]{item} Um processo estocástico estacionário escalar?
 
 
-    
-    \todo[inline, color=red!30]{item} Um vetor aleatório bidimensional?
-    
-        \textcolor{red}{Solução:}
-        
-        Em suma, precisamos estar atentos às seguintes propriedades para garantir que temos em mãos uma matriz de autocorrelação válida
-        
-        
-        - $\mathbf{R_{x}} = \mathbf{R^{H}_{x}}$
-        
-        - $\mathbf{a^{H}} \mathbf{R_{xa}} \geq 0$
-        
-        - $\mathbf{Ax} = \lambda \mathbf{x}, \forall \lambda \geq 0 \text{ and } \mathbf{x} \in \mathbb{R}$
-        
-        Desse modo, considerando um vetor aleatório bidimensional descrito por $\mathbf{X} = (x_{1},x_{2})$ podemos então
-        
-        \begin{align}
-            \mathbf{R} &= \left[ 
-            \begin{matrix}
-                \mathbb{E}\{[x^{2}_{1}]\} & \mathbb{E}\{[x_{1}x^{*}_{2}]\} \\
-                \mathbb{E}\{[x_{2}x^{*}_{1}]\} & \mathbb{E}\{[x^{2}_{2}]\} \\
-            \end{matrix} \right], \\
-            \mathbf{R}^{\text{H}} &= \left[ 
-            \begin{matrix}
-                \mathbb{E}\{[x^{2}_{1}]\} & \mathbb{E}\{[x_{2}x^{*}_{1}]\} \\
-                \mathbb{E}\{[x_{1}x^{*}_{2}]\} & \mathbb{E}\{[x^{2}_{2}]\} \\
-            \end{matrix} \right].
-        \end{align}
-        
-        Inicialmente, podemos garantir a simetria quanto ao hermitiano se fizermos 
-        
-        \begin{align}
-            &\mathbb{E}\{[x_{1}x^{*}_{2}]\} \overset{\Delta}{=} \mathbb{E}\{[x_{2}x^{*}_{1}]\},
-            &\mathbb{E}\{[x_{2}x^{*}_{1}]\} \overset{\Delta}{=} \mathbb{E}\{[x_{1}x^{*}_{2}]\}.
-        \end{align}
-        
-        Entretanto, sabemos que o operador esperança é linear tornando assim as expressões acima equivalentes. Em continuidade do problema, podemos 
-        considerar que a restrição as quais os autovalores estão submetidos pode ser facilmente atingida ao garantirmos que o determinante da matriz 
-        de correlação seja maior que a nulidade
-        
-        \begin{align}
-            &\mathbb{E}\{[x^{2}_{1}]\} \mathbb{E}\{[x^{2}_{1}]\} - \mathbb{E}\{[x_{1}x_{2}]\} \mathbb{E}\{[x_{2}x_{1}]\} > 0, \\
-            &\mathbb{E}\{[x_{1}^{2}]\} \mathbb{E}\{[x^{2}_{2}]\} > \mathbb{E}\{[x_{1}x_{2}]\} \mathbb{E}\{[x_{2}x_{1}]\}.
-        \end{align}
 
-    \todo[inline, color=red!30]{item} Um processo estocástico estacionário escalar?
-    
-        \textcolor{red}{Solução:}
-        
-        Considerando um processo estocástico estacionário escalar do tipo $\mathbf{X}_{t} = x(t)$ e uma versão atrasada desse
-        processo definida por $\mathbf{X}_{t + \tau} = x(t + \tau)$ temos que a matriz de correlação pode ser escrita da seguinte forma
-        
-        \begin{align}
-            \mathbf{R} &= \left[ 
-            \begin{matrix}
-                \mathbb{E}\{[x^{2}(t)_{1}]\} & \mathbb{E}\{[x(t)x^{*}(t + \tau)]\} \\
-                \mathbb{E}\{[x(t + \tau)x^{*}(t)]\} & \mathbb{E}\{[x^{2}(t + \tau)]\} \\
-            \end{matrix} \right], \\
-            \mathbf{R}^{\text{H}} &= \left[ 
-            \begin{matrix}
-                \mathbb{E}\{[x^{2}(t)_{1}]\} & \mathbb{E}\{[x(t + \tau)x^{*}(t)]\} \\
-                \mathbb{E}\{[x(t)x^{*}(t + \tau)]\} & \mathbb{E}\{[x^{2}(t + \tau)]\} \\
-            \end{matrix} \right].
-        \end{align}
-        
-        
-        Em sequência, podemos garantir a simetria quanto ao hermitiano se fizermos 
-        
-        \begin{align}
-            &\mathbb{E}\{[x(t)x^{*}(t + \tau)]\} \overset{\Delta}{=} \mathbb{E}\{[x(t + \tau)x^{*}(t)]\}, \\
-            &\mathbb{E}\{[x(t + \tau)x^{*}(t)]\} \overset{\Delta}{=} \mathbb{E}\{[x(t)x^{*}(t + \tau)]\},
-        \end{align}
-        
-        mas, mais uma vez, considerando que o operador esperança é linear então as duas expressões são equivalentes. Já considerando a
-        restrição imposta aos autovalores da matriz temos novamente
-        
-        \begin{align}
-            &\mathbb{E}\{[x^{2}(t)]\} \mathbb{E}\{[x^{2}(t + \tau)]\} > \mathbb{E}\{[x(t)x^{*}(t + \tau)]]\}  \mathbb{E}\{[x(t + \tau)]x^{*}(t)]\}.
-        \end{align}
+Considerando um processo estocástico estacionário escalar do tipo $\mathbf{X}_{t} = x(t)$ e uma versão atrasada desse
+processo definida por $\mathbf{X}_{t + \tau} = x(t + \tau)$ temos que a matriz de correlação pode ser escrita da seguinte forma
+
+\begin{align}
+    \mathbf{R} &= \left[ 
+    \begin{matrix}
+        \mathbb{E}\{[x^{2}(t)_{1}]\} & \mathbb{E}\{[x(t)x^{*}(t + \tau)]\} \\
+        \mathbb{E}\{[x(t + \tau)x^{*}(t)]\} & \mathbb{E}\{[x^{2}(t + \tau)]\} \\
+    \end{matrix} \right], \\
+    \mathbf{R}^{\text{H}} &= \left[ 
+    \begin{matrix}
+        \mathbb{E}\{[x^{2}(t)_{1}]\} & \mathbb{E}\{[x(t + \tau)x^{*}(t)]\} \\
+        \mathbb{E}\{[x(t)x^{*}(t + \tau)]\} & \mathbb{E}\{[x^{2}(t + \tau)]\} \\
+    \end{matrix} \right].
+\end{align}
+
+
+Em sequência, podemos garantir a simetria quanto ao hermitiano se fizermos 
+
+\begin{align}
+    &\mathbb{E}\{[x(t)x^{*}(t + \tau)]\} \overset{\Delta}{=} \mathbb{E}\{[x(t + \tau)x^{*}(t)]\}, \\
+    &\mathbb{E}\{[x(t + \tau)x^{*}(t)]\} \overset{\Delta}{=} \mathbb{E}\{[x(t)x^{*}(t + \tau)]\},
+\end{align}
+
+mas, mais uma vez, considerando que o operador esperança é linear então as duas expressões são equivalentes. Já considerando a
+restrição imposta aos autovalores da matriz temos novamente
+
+\begin{align}
+    &\mathbb{E}\{[x^{2}(t)]\} \mathbb{E}\{[x^{2}(t + \tau)]\} > \mathbb{E}\{[x(t)x^{*}(t + \tau)]]\}  \mathbb{E}\{[x(t + \tau)]x^{*}(t)]\}.
+\end{align}
     
 
 \subsection{Matriz Definida Positiva} % <-----------------------------------------------------------------------------
@@ -200,7 +181,7 @@ devem satisfazer tal que $\mathbf{R}$ seja uma matriz de autocorrelação válid
     \mathbb{E}\left\{\mathbf{x}^H \mathbf{R}_{\mathbf{x}}^{-1} \mathbf{x} \right\} = N
 \end{align}
 
-\textcolor{red}{Solução:}
+
 
 Inicialmente podemos escrever a expressão regular para a matriz de autocorrelação e supondo que de fato existe uma inversa bem definida 
 para a matriz de autocorrelação
@@ -225,63 +206,59 @@ onde a ultima expressão se justifica pois temos uma matriz identidade de ordem 
 \subsection{Covariância e correlação} % <-----------------------------------------------------------------------------
 \todo[inline, color=yellow!30]{Organizar}
  
+\todo[inline, color=red!30]{item} $\mathbf{R}_\mathbf{x} = \mathbf{C}_\mathbf{x} + {\mathbf{\mu}}_{\mathbf{x}}{\mathbf{\mu}}_{\mathbf{x}}^H$    
+    
+\begin{align}
+    &C_{X} = \mathbb{E}\{[(x - \mu)(x - \mu)^{H}]\} = \mathbb{E}\{[xx^{H} -x\mu^{H} - \mu x^{H} + \mu \mu^{H}]\}, \\
+    &C_{X} = \mathbb{E}\{[xx^{H}]\} -\mathbb{E}\{[x\mu^{H}]\} - \mathbb{E}\{[\mu x^{H}]\} + \mathbb{E}\{[\mu \mu^{H}]\}.
+\end{align}
 
-            
-    \todo[inline, color=red!30]{item} $\mathbf{R}_\mathbf{x} = \mathbf{C}_\mathbf{x} + {\mathbf{\mu}}_{\mathbf{x}}{\mathbf{\mu}}_{\mathbf{x}}^H$
-    
-        \textcolor{red}{Solução:}
-        
-        \begin{align}
-            &C_{X} = \mathbb{E}\{[(x - \mu)(x - \mu)^{H}]\} = \mathbb{E}\{[xx^{H} -x\mu^{H} - \mu x^{H} + \mu \mu^{H}]\}, \\
-            &C_{X} = \mathbb{E}\{[xx^{H}]\} -\mathbb{E}\{[x\mu^{H}]\} - \mathbb{E}\{[\mu x^{H}]\} + \mathbb{E}\{[\mu \mu^{H}]\}.
-        \end{align}
-        
-        
-        Considerando a matriz de correlação pode ser escrita por $R_{X} = \mathbb{E}\{[xx^{H}]\}$ e que o valor médio de um escalar é o próprio escalar temos
-        
-        \begin{align}
-            &C_{X} = R_{X} - \mathbb{E}\{[x\mu^{H}]\} - \mathbb{E}\{[\mu x^{H}]\} + \mu \mu^{H}, \\
-            &C_{X} = R_{X} - \mu^{H}\mathbb{E}\{[x]\} - \mu \mathbb{E}\{[x^{H}]\} + \mu \mu^{H}, \\
-            &C_{X} = R_{X} - \mu \mu^{H} - \mu \mu^{H} + \mu \mu^{H}, \\
-            &C_{X} = R_{X} - \mu \mu^{H}, \\
-            &R_{X} = C_{X} + \mu \mu^{H}.
-        \end{align}
-    
-    \todo[inline, color=red!30]{item} $\mathbf{C}_{\mathbf{x} + \mathbf{y}} = \mathbf{C}_{\mathbf{x}} +
-    \mathbf{C}_{\mathbf{y}}$, para $\mathbf{x}$ e $\mathbf{y}$ descorrelacionados
-    
-        \textcolor{red}{Solução:}
-        
-        \begin{align}
-            &\mathbf{C}_{\mathbf{x} + \mathbf{y}} = \mathbf{C}_{\mathbf{x}} + \mathbf{C}_{\mathbf{xy}} + \mathbf{C}_{\mathbf{yx}} + \mathbf{C}_{\mathbf{y}}.
-        \end{align}
-        
-        Onde os termos de correlação cruzada $\mathbf{C}_{\mathbf{xy}}$ e $\mathbf{C}_{\mathbf{yx}}$ podem ser obtidos  da seguinte maneira
-        
-        \begin{align}
-            &\mathbf{C_{xy}} = \mathbb{E}\{[x - \mu_{x}][y - \mu_{y}]\}, \\
-            &\mathbf{C_{xy}} = \mathbb{E}\{[xy]\} - \mathbb{E}\{[x\mu_{y}]\} - \mathbb{E}\{[\mu_{x} y]\} + \mathbb{E}\{[\mu_{x} \mu_{y}]\}, \\
-            &\mathbf{C_{xy}} = \mathbb{E}\{[xy]\} - \mu_{y} \mu_{x} - \mu_{x} \mu_{y} + \mu_{x} \mu_{y}, \\
-            &\mathbf{C_{xy}} = \mathbb{E}\{[xy]\} + \mu_{x} \mu_{y}, \\
-            &\mathbf{C_{xy}} = \mu_{x} \mu_{y}, \\
-        \end{align}
-        
-        \begin{align}
-            &\mathbf{C_{yx}} = \mathbb{E}\{[y - \mu_{y}][x - \mu_{x}]\}, \\
-            &\mathbf{C_{yx}} = \mathbb{E}\{[yx]\} - \mathbb{E}\{[y\mu_{x}]\} - \mathbb{E}\{[\mu_{y} x]\} + \mathbb{E}\{[\mu_{y} \mu_{x}]\}, \\
-            &\mathbf{C_{yx}} = \mathbb{E}\{[yx]\} - \mu_{y} \mu_{x} - \mu_{x} \mu_{y} + \mu_{y} \mu_{x}, \\
-            &\mathbf{C_{yx}} = \mathbb{E}\{[yx]\} - \mu_{x} \mu_{y}, \\
-            &\mathbf{C_{yx}} = - \mu_{x} \mu_{y}.
-        \end{align}
-        
-        Portanto, é possível afirmar que a soma dos termos de correlação cruzada é nula e que a correlação da soma de dois vetores descorrelacionados é de fato 
-        dada por $\mathbf{C}_{\mathbf{x} + \mathbf{y}} = \mathbf{C}_{\mathbf{x}} + \mathbf{C}_{\mathbf{y}}$
-        
-        \begin{align}
-            &\mathbf{C_{xy}} + \mathbf{C_{yx}}  = \mu_{x} \mu_{y} - \mu_{x} \mu_{y}, \\
-            &\mathbf{C_{xy}} + \mathbf{C_{yx}}  = 0.
-        \end{align}
-    
+
+Considerando a matriz de correlação pode ser escrita por $R_{X} = \mathbb{E}\{[xx^{H}]\}$ e que o valor médio de um escalar é o próprio escalar temos
+
+\begin{align}
+    &C_{X} = R_{X} - \mathbb{E}\{[x\mu^{H}]\} - \mathbb{E}\{[\mu x^{H}]\} + \mu \mu^{H}, \\
+    &C_{X} = R_{X} - \mu^{H}\mathbb{E}\{[x]\} - \mu \mathbb{E}\{[x^{H}]\} + \mu \mu^{H}, \\
+    &C_{X} = R_{X} - \mu \mu^{H} - \mu \mu^{H} + \mu \mu^{H}, \\
+    &C_{X} = R_{X} - \mu \mu^{H}, \\
+    &R_{X} = C_{X} + \mu \mu^{H}.
+\end{align}
+
+\todo[inline, color=red!30]{item} $\mathbf{C}_{\mathbf{x} + \mathbf{y}} = \mathbf{C}_{\mathbf{x}} +
+\mathbf{C}_{\mathbf{y}}$, para $\mathbf{x}$ e $\mathbf{y}$ descorrelacionados
+
+
+
+\begin{align}
+    &\mathbf{C}_{\mathbf{x} + \mathbf{y}} = \mathbf{C}_{\mathbf{x}} + \mathbf{C}_{\mathbf{xy}} + \mathbf{C}_{\mathbf{yx}} + \mathbf{C}_{\mathbf{y}}.
+\end{align}
+
+Onde os termos de correlação cruzada $\mathbf{C}_{\mathbf{xy}}$ e $\mathbf{C}_{\mathbf{yx}}$ podem ser obtidos  da seguinte maneira
+
+\begin{align}
+    &\mathbf{C_{xy}} = \mathbb{E}\{[x - \mu_{x}][y - \mu_{y}]\}, \\
+    &\mathbf{C_{xy}} = \mathbb{E}\{[xy]\} - \mathbb{E}\{[x\mu_{y}]\} - \mathbb{E}\{[\mu_{x} y]\} + \mathbb{E}\{[\mu_{x} \mu_{y}]\}, \\
+    &\mathbf{C_{xy}} = \mathbb{E}\{[xy]\} - \mu_{y} \mu_{x} - \mu_{x} \mu_{y} + \mu_{x} \mu_{y}, \\
+    &\mathbf{C_{xy}} = \mathbb{E}\{[xy]\} + \mu_{x} \mu_{y}, \\
+    &\mathbf{C_{xy}} = \mu_{x} \mu_{y}, \\
+\end{align}
+
+\begin{align}
+    &\mathbf{C_{yx}} = \mathbb{E}\{[y - \mu_{y}][x - \mu_{x}]\}, \\
+    &\mathbf{C_{yx}} = \mathbb{E}\{[yx]\} - \mathbb{E}\{[y\mu_{x}]\} - \mathbb{E}\{[\mu_{y} x]\} + \mathbb{E}\{[\mu_{y} \mu_{x}]\}, \\
+    &\mathbf{C_{yx}} = \mathbb{E}\{[yx]\} - \mu_{y} \mu_{x} - \mu_{x} \mu_{y} + \mu_{y} \mu_{x}, \\
+    &\mathbf{C_{yx}} = \mathbb{E}\{[yx]\} - \mu_{x} \mu_{y}, \\
+    &\mathbf{C_{yx}} = - \mu_{x} \mu_{y}.
+\end{align}
+
+Portanto, é possível afirmar que a soma dos termos de correlação cruzada é nula e que a correlação da soma de dois vetores descorrelacionados é de fato 
+dada por $\mathbf{C}_{\mathbf{x} + \mathbf{y}} = \mathbf{C}_{\mathbf{x}} + \mathbf{C}_{\mathbf{y}}$
+
+\begin{align}
+    &\mathbf{C_{xy}} + \mathbf{C_{yx}}  = \mu_{x} \mu_{y} - \mu_{x} \mu_{y}, \\
+    &\mathbf{C_{xy}} + \mathbf{C_{yx}}  = 0.
+\end{align}
+
 
 \subsection{Função de autocorrelação} % <-----------------------------------------------------------------------------
 \todo[inline, color=yellow!30]{Organizar}
@@ -291,7 +268,7 @@ onde a ultima expressão se justifica pois temos uma matriz identidade de ordem 
 
 Este é um processo WSS? Justifique.
 
-\textcolor{red}{Solução:}
+
 
 Para simplificar o desenvolvimento iremos considerar que os processos possuem media nula e são descorrelacionados
 
@@ -322,7 +299,7 @@ Uma vez que a correlação é dependente apenas de um deslocamento temporal, ent
 \todo[inline, color=red!30]{item} Encontre a a matrix de correlação de um vetor aleatório consistindo de oito amostras consecutivas de
 $x(n)$.
 
-\textcolor{red}{Solução:}
+
 
 \begin{align}
     \mathbf{R}_{\mathbf{x}} = \left[
