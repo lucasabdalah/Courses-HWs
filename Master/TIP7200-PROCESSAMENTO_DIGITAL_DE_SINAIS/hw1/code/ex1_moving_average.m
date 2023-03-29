@@ -193,9 +193,9 @@ text(0.25, 0.15, sprintf("$L = %g$", Lw_cantina(3)), "HorizontalAlignment", "cen
 
 
 %% Save results
-savefig_tight(figure(1), '../figures/synthetic', 'both');
-savefig_tight(figure(2), '../figures/fala_sino', 'both');
-savefig_tight(figure(3), '../figures/cantina', 'both');
+savefig_tight(figure(1), '../figures/ex1_synthetic', 'both');
+savefig_tight(figure(2), '../figures/ex1_fala_sino', 'both');
+savefig_tight(figure(3), '../figures/ex1_cantina', 'both');
 
 
 %% Local Functions
