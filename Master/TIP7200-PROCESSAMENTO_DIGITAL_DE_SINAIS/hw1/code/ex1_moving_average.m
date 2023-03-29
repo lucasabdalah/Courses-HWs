@@ -2,7 +2,7 @@
 % Authour: Lucas Abdalah
 % ----------------------------
 % 
-% moving_average.m
+% ex1_moving_average.m
 % 2023/03/24 - v1
 % 
 
