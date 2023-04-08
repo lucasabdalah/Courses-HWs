@@ -39,6 +39,8 @@ grid on;
 N_fala = length(x_fala);
 t_fala = linspace(0, N_fala/Fs_fala, N_fala);
 y_fala = backwardDifference(x_fala);
+filename = ("../audio/ex2_y_fala_L_.wav");
+audiowrite(filename, y_fala, Fs_fala);
 
 figure(2);
 plot(t_fala, x_fala, 'Color', 'black', 'LineStyle', ':', 'LineWidth', 1.0);
@@ -58,6 +60,8 @@ axis tight
 N_cantina = length(x_cantina);
 t_cantina = linspace(0, N_cantina/Fs_cantina, N_cantina);
 y_cantina = backwardDifference(x_cantina);
+filename = ("../audio/ex2_y_cantina_L_.wav");
+audiowrite(filename, y_cantina, Fs_cantina);
 
 figure(3);
 plot(t_cantina, x_cantina, 'Color', 'black', 'LineStyle', ':', 'LineWidth', 1.0);
@@ -73,9 +77,9 @@ axis tight
 
 
 %% Save results
-savefig_tight(figure(1), '../figures/ex2_synthetic', 'both');
-savefig_tight(figure(2), '../figures/ex2_fala_sino', 'both');
-savefig_tight(figure(3), '../figures/ex2_cantina', 'both');
+% savefig_tight(figure(1), '../figures/ex2_synthetic', 'both');
+% savefig_tight(figure(2), '../figures/ex2_fala_sino', 'both');
+% savefig_tight(figure(3), '../figures/ex2_cantina', 'both');
 
 
 %% Local Functions

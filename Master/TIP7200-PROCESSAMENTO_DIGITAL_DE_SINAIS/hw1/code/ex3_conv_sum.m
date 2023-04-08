@@ -13,22 +13,22 @@ close all;
 
 %% Synthetic signal Input
 x = [1, 2, -1, 2, 1, 1, -2, 1];
-% n = 1:length(x);
+n = 1:length(x);
 h = [1 0.5 0 -0.25]; % LTI system h[n] 
 y_matlab = conv(x, h, "same");
 y = conv_sum(x, h);
 
 figure(1);
-stem(x, 'Color', 'black', 'LineStyle', ':', 'LineWidth', 1.5);
+stem(n, x, 'Color', 'black', 'LineStyle', ':', 'LineWidth', 1.5);
 hold on;
-plot(y, ...
+plot(n, y(3:10), ...
   'Color', 'red',...        
   'LineStyle', '-',...
   'LineWidth', 1.5,...
   'Marker', 'v',...
   'MarkerFaceColor', 'red',...
   'MarkerSize', 5);
-plot(y_matlab,...
+plot(n, y_matlab,...
   'Color', 'blue',...        
   'LineStyle', '--',...
   'LineWidth', 1.5,...
@@ -43,17 +43,22 @@ ylabel("Amplitude");
 grid on;
 
 
-%% Audio Signal Input 1
+% %% Audio Signal Input 1
 pause()
 [x_fala, Fs_fala] = audioread("fala_sino.wav");
 N_fala = length(x_fala);
 t_fala = linspace(0, N_fala/Fs_fala, N_fala);
 y_fala = conv_sum(x_fala, h);
+y_fala = transpose(y_fala(3:end-1));
+window = 1:250;
+
+filename = ("../audio/ex3_y_fala.wav");
+audiowrite(filename, y_fala, Fs_fala);
 
 figure(2);
-plot(t_fala, x_fala, 'Color', 'black', 'LineStyle', '-', 'LineWidth', 1.5);
+plot(t_fala(window), x_fala(window), 'Color', 'black', 'LineStyle', '-', 'LineWidth', 1.5);
 hold on;
-plot(t_fala, y_fala, 'Color', 'red', 'LineStyle', '--', 'LineWidth', 0.5);
+plot(t_fala(window), y_fala(window), 'Color', 'red', 'LineStyle', '--', 'LineWidth', 0.25);
 hold off;
 legend("x", "y", 'Location', 'northeastoutside','Orientation', 'Horizontal','Position', [0.5 0.47 0.0 1], 'Units','normalized');
 legend boxoff
@@ -69,11 +74,16 @@ x_cantina = x_cantina.';
 N_cantina = length(x_cantina);
 t_cantina = linspace(0, N_cantina/Fs_cantina, N_cantina);
 y_cantina = conv_sum(x_cantina, h);
+y_cantina = transpose(y_cantina(3:end-1));
+window = 1:250;
+
+filename = ("../audio/ex3_y_cantina.wav");
+audiowrite(filename, y_cantina, Fs_cantina);
 
 figure(3);
-plot(t_cantina, x_cantina, 'Color', 'black', 'LineStyle', '-', 'LineWidth', 1.5);
+plot(t_cantina(window), x_cantina(window), 'Color', 'black', 'LineStyle', '-', 'LineWidth', 1.5);
 hold on;
-plot(t_cantina, y_cantina, 'Color', 'red', 'LineStyle', '--', 'LineWidth', 0.5);
+plot(t_cantina(window), y_cantina(window), 'Color', 'red', 'LineStyle', '--', 'LineWidth', 0.5);
 hold off;
 legend("x", "y", 'Location', 'northeastoutside','Orientation', 'Horizontal','Position', [0.5 0.47 0.0 1], 'Units','normalized');
 legend boxoff
@@ -84,14 +94,13 @@ axis tight
 
 
 %% Save results
-% savefig_tight(figure(1), '../figures/ex2_synthetic', 'both');
-% savefig_tight(figure(2), '../figures/ex2_fala_sino', 'both');
-% savefig_tight(figure(3), '../figures/ex2_cantina', 'both');
+% savefig_tight(figure(1), '../figures/ex3_synthetic', 'both');
+% savefig_tight(figure(2), '../figures/ex3_fala_sino', 'both');
+% savefig_tight(figure(3), '../figures/ex3_cantina', 'both');
 
 
 %% Local Functions
 function y = conv_sum(x, h)
-% function y = conv_sum(x, h, option)
 
   % Check if x and h are row vectors
   x = checkTranspose(x);
@@ -100,41 +109,15 @@ function y = conv_sum(x, h)
   % Compute the length of the input and filter sequences
   Nx = length(x);
   Nh = length(h);
-  % if isempty(option)
-  %   option = ""
-  % switch option
-  % case 'full'
-    y = zeros(1, Nx + Nh - 1);
 
-    for n = 1:Nx
-        for k = 1:Nh
-            y(n+k-1) = y(n+k-1) + x(n)*h(k);
-        end
-    end
+  y = zeros(1, Nx + Nh - 1);
+
+  for n = 1:Nx
+      for k = 1:Nh
+          y(n+k-1) = y(n+k-1) + x(n)*h(k);
+      end
+  end
   
-  % case 'same'
-
-  % % Compute the length of the convolution and its starting index
-  % Ny = Nx + Nh - 1;
-  % y_shift = floor((Nh - 1) / 2) + 1;
-  % x_pad = [zeros(1, y_shift-1), x, zeros(1, Ny-Nx-y_shift+1)]; % Pad the input sequence with zeros to ensure proper alignment
-
-  % y = zeros(1, Ny);
-
-  % for n = 1:Ny
-  %     for k = 1:Nh
-  %         if n-k+1 > 0 && n-k+1 <= Nx
-  %              y(n) = y(n) + x_pad(n-k+1) * h(k); % Compute the convolution sum using a for loop
-  %         end
-  %     end
-  % end
-
-  % y = y(y_shift:y_shift+Nx-1); % Extract the central part of the convolution that is the same size as x
-
-  % otherwise
-  %   error("")
-  % end
-
 end
 
 

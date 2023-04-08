@@ -82,6 +82,8 @@ y_fala = zeros(length(Lw_fala), N_fala);
 for i = 1:length(Lw_fala)
   disp(i);
   y_fala(i,:) = ma(x_fala, Lw_fala(i));
+  filename = ("../audio/ex1_y_fala_L_" + num2str(Lw_fala(i)) + ".wav");
+  audiowrite(filename, y_fala(i, :), Fs_fala)
   %sound(y_fala(i,:), Fs_fala);
   pause();
 end
@@ -140,6 +142,8 @@ y_cantina = zeros(length(Lw_cantina), N_cantina);
 for i = 1:length(Lw_cantina)
   disp(i)
   y_cantina(i,:) = ma(x_cantina, Lw_cantina(i));
+  filename = ("../audio/ex1_y_cantina_L_" + num2str(Lw_cantina(i)) + ".wav");
+  audiowrite(filename, y_cantina(i, :), Fs_cantina)
   %sound(y_cantina(i,:), Fs_cantina)
   pause()
 end
@@ -193,9 +197,9 @@ text(0.25, 0.15, sprintf("$L = %g$", Lw_cantina(3)), "HorizontalAlignment", "cen
 
 
 %% Save results
-savefig_tight(figure(1), '../figures/ex1_synthetic', 'both');
-savefig_tight(figure(2), '../figures/ex1_fala_sino', 'both');
-savefig_tight(figure(3), '../figures/ex1_cantina', 'both');
+% savefig_tight(figure(1), '../figures/ex1_synthetic', 'both');
+% savefig_tight(figure(2), '../figures/ex1_fala_sino', 'both');
+% savefig_tight(figure(3), '../figures/ex1_cantina', 'both');
 
 
 %% Local Functions
