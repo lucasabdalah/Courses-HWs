@@ -23,7 +23,7 @@ Exemplo:
 ![Imagem](dogs4.jpg "Title")
 ![Histograma de Imagem](output.png "Title")
 
-1. **Formato**: Escreva um resumo conciso das suas descobertas sobre o Rec. 601, elecando fontes e destacando os pontos-chave e sua relevância. O plot das imagens e os respectivos histogramas pode ser enviado no mesmo PDF, ou em arquivo separado. (A implementação pode ser na linguagem de programação de sua preferência). 
+1. **Formato**: Escreva um resumo conciso das suas descobertas sobre o Rec. 601, elencando fontes e destacando os pontos-chave e sua relevância. O plot das imagens e os respectivos histogramas pode ser enviado no mesmo PDF, ou em arquivo separado. (A implementação pode ser na linguagem de programação de sua preferência). 
 
 2. **Entrega**: Envie seu resumo em formato de documento PDF para [lucas.abdalah@gtel.ufc.br](mailto:lucas.abdalah@gtel.ufc.br) até domingo, 17/03/2024 (23h59).
 
