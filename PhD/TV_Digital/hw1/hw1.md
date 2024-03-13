@@ -1,5 +1,6 @@
-## Tarefa de Casa: Pesquisa sobre Rec. 601 (ITU-R BT.601)
-TI0073 – TV Digital
+# TV Digital - TI0073
+
+## Tarefa 1: Pesquisa sobre ITU-R BT.601 e Histogramas
 
 ### Objetivo
 O objetivo desta tarefa é familiarizar-se com o padrão Rec. 601 (ITU-R BT.601) utilizado em sistemas de televisão de definição padrão (SDTV) e com as ferramentas de histograma.
@@ -14,19 +15,17 @@ O objetivo desta tarefa é familiarizar-se com o padrão Rec. 601 (ITU-R BT.601)
     - Em que contexto o Rec. 601 é amplamente utilizado e por que é importante?
   
 2. **Histograma RGB**
-    - Plotar histogram das seguintes imagens 
+    - Plotar histogram das 4 imagens do [Repositório](https://github.com/lucasabdalah/Courses-HWs/tree/master/PhD/TV_Digital/hw1);
+    - Explicar como funciona o histogram;
+    - Descrever por que o histograma da imagem apresenta o comportamento do gráfico obtido.
 
-
+Exemplo:
 ![Imagem](dogs4.jpg "Title")
 ![Histograma de Imagem](output.png "Title")
 
-1. **Formato**: Escreva um resumo conciso (cerca de 300 palavras) das suas descobertas sobre o Rec. 601, destacando os pontos-chave e sua relevância.
+1. **Formato**: Escreva um resumo conciso das suas descobertas sobre o Rec. 601, elecando fontes e destacando os pontos-chave e sua relevância. O plot das imagens e os respectivos histogramas pode ser enviado no mesmo PDF, ou em arquivo separado. (A implementação pode ser na linguagem de programação de sua preferência). 
 
 2. **Entrega**: Envie seu resumo em formato de documento PDF para [lucas.abdalah@gtel.ufc.br](mailto:lucas.abdalah@gtel.ufc.br) até domingo, 17/03/2024 (23h59).
-
-### Recursos:
-- [Artigo da Wikipedia sobre Rec. 601](https://en.wikipedia.org/wiki/Rec._601)
-- [Documento ITU-R BT.601 (Rec. 601)](https://www.itu.int/rec/R-REC-BT.601)
 
 ### Observações:
 - Certifique-se de citar todas as fontes utilizadas na sua pesquisa.
